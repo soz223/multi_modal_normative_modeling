@@ -1,3 +1,4 @@
+conda init bash
 
 conda activate rop
 
