@@ -2,6 +2,7 @@
 /data
 
 # ignore outputs, where the data and some of the experiment results is stored
+/outputs
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
