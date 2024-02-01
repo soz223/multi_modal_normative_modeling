@@ -1,0 +1,200 @@
+Experiment settings: AE
+AUC-ROC: $ 67.83 \pm 1.05 $ 
+Accuracy: $ 59.49 \pm 3.86 $ 
+Sensitivity: $ 77.31 \pm 6.35 $ 
+Specificity: $ 53.41 \pm 7.20 $ 
+
+
+
+Experiment settings: AE
+AUC-ROC: $ 50.00 \pm 0.00 $ 
+Accuracy: $ 50.00 \pm 0.00 $ 
+Sensitivity: $ 0.00 \pm 0.00 $ 
+Specificity: $ 100.00 \pm 0.00 $ 
+
+
+
+Experiment settings: AE
+AUC-ROC: $ 54.53 \pm 0.27 $ 
+Accuracy: $ 53.98 \pm 0.93 $ 
+Sensitivity: $ 54.40 \pm 6.93 $ 
+Specificity: $ 53.41 \pm 7.20 $ 
+
+
+
+Experiment settings: AE
+AUC-ROC: $ 54.53 \pm 0.27 $ 
+Accuracy: $ 53.98 \pm 0.93 $ 
+Sensitivity: $ 54.40 \pm 6.93 $ 
+Specificity: $ 53.41 \pm 7.20 $ 
+
+
+
+Experiment settings: AE
+AUC-ROC: $ 73.09 \pm 1.83 $ 
+Accuracy: $ 79.15 \pm 4.74 $ 
+Sensitivity: $ 82.60 \pm 6.71 $ 
+Specificity: $ 60.26 \pm 7.58 $ 
+
+
+
+Experiment settings: AE
+AUC-ROC: $ 59.80 \pm 1.16 $ 
+Accuracy: $ 62.91 \pm 5.57 $ 
+Sensitivity: $ 63.28 \pm 6.72 $ 
+Specificity: $ 58.95 \pm 7.55 $ 
+
+
+
+Experiment settings: AE
+AUC-ROC: $ 73.09 \pm 1.83 $ 
+Accuracy: $ 79.15 \pm 4.74 $ 
+Sensitivity: $ 82.60 \pm 6.71 $ 
+Specificity: $ 60.26 \pm 7.58 $ 
+
+
+
+Experiment settings: AE
+AUC-ROC: $ 73.09 \pm 1.83 $ 
+Accuracy: $ 79.15 \pm 4.74 $ 
+Sensitivity: $ 82.60 \pm 6.71 $ 
+Specificity: $ 60.26 \pm 7.58 $ 
+
+
+
+Experiment settings: AE
+AUC-ROC: $ 73.09 \pm 1.83 $ 
+Accuracy: $ 76.62 \pm 3.42 $ 
+Sensitivity: $ 82.60 \pm 6.71 $ 
+Specificity: $ 60.26 \pm 7.58 $ 
+
+
+
+Experiment settings: AE
+AUC-ROC: $ 73.09 \pm 1.83 $ 
+Accuracy: $ 79.15 \pm 4.74 $ 
+Sensitivity: $ 82.60 \pm 6.71 $ 
+Specificity: $ 60.26 \pm 7.58 $ 
+
+
+
+Experiment settings: AE
+AUC-ROC: $ 73.09 \pm 1.83 $ 
+Accuracy: $ 79.15 \pm 4.74 $ 
+Sensitivity: $ 82.60 \pm 6.71 $ 
+Specificity: $ 60.26 \pm 7.58 $ 
+
+
+
+Experiment settings: AE
+AUC-ROC: $ 59.80 \pm 1.16 $ 
+Accuracy: $ 62.91 \pm 5.57 $ 
+Sensitivity: $ 63.28 \pm 6.72 $ 
+Specificity: $ 58.95 \pm 7.55 $ 
+
+
+
+Experiment settings: AE
+AUC-ROC: $ 59.80 \pm 1.16 $ 
+Accuracy: $ 62.91 \pm 5.57 $ 
+Sensitivity: $ 63.28 \pm 6.72 $ 
+Specificity: $ 58.95 \pm 7.55 $ 
+
+
+
+Experiment settings: AE
+AUC-ROC: $ 73.09 \pm 1.83 $ 
+Accuracy: $ 79.15 \pm 4.74 $ 
+Sensitivity: $ 82.60 \pm 6.71 $ 
+Specificity: $ 60.26 \pm 7.58 $ 
+
+
+
+Experiment settings: AE
+AUC-ROC: $ 59.80 \pm 1.16 $ 
+Accuracy: $ 62.91 \pm 5.57 $ 
+Sensitivity: $ 63.28 \pm 6.72 $ 
+Specificity: $ 58.95 \pm 7.55 $ 
+
+
+
+Experiment settings: AE
+AUC-ROC: $ 55.27 \pm 0.98 $ 
+Accuracy: $ 56.65 \pm 8.85 $ 
+Sensitivity: $ 56.52 \pm 10.00 $ 
+Specificity: $ 58.68 \pm 9.99 $ 
+
+
+
+Experiment settings: AE
+AUC-ROC: $ 55.27 \pm 0.98 $ 
+Accuracy: $ 56.65 \pm 8.85 $ 
+Sensitivity: $ 56.52 \pm 10.00 $ 
+Specificity: $ 58.68 \pm 9.99 $ 
+
+
+
+Experiment settings: AE
+AUC-ROC: $ 73.09 \pm 1.83 $ 
+Accuracy: $ 79.15 \pm 4.74 $ 
+Sensitivity: $ 82.60 \pm 6.71 $ 
+Specificity: $ 60.26 \pm 7.58 $ 
+
+
+
+Experiment settings: AE
+AUC-ROC: $ 73.09 \pm 1.83 $ 
+Accuracy: $ 79.15 \pm 4.74 $ 
+Sensitivity: $ 82.60 \pm 6.71 $ 
+Specificity: $ 60.26 \pm 7.58 $ 
+
+
+
+Experiment settings: AE
+AUC-ROC: $ 73.09 \pm 1.83 $ 
+Accuracy: $ 79.15 \pm 4.74 $ 
+Sensitivity: $ 82.60 \pm 6.71 $ 
+Specificity: $ 60.26 \pm 7.58 $ 
+
+
+
+Experiment settings: AE
+AUC-ROC: $ 73.09 \pm 1.83 $ 
+Accuracy: $ 9.31 \pm 1.17 $ 
+Sensitivity: $ nan \pm nan $ 
+Specificity: $ 60.26 \pm 7.58 $ 
+
+
+
+Experiment settings: AE
+AUC-ROC: $ 73.09 \pm 1.83 $ 
+Accuracy: $ 79.15 \pm 4.74 $ 
+Sensitivity: $ 82.60 \pm 6.71 $ 
+Specificity: $ 60.26 \pm 7.58 $ 
+
+
+
+Experiment settings: AE
+AUC-ROC: $ 73.09 \pm 1.83 $ 
+Accuracy: $ 79.15 \pm 4.74 $ 
+Sensitivity: $ 82.60 \pm 6.71 $ 
+Specificity: $ 60.26 \pm 7.58 $ 
+
+
+
+Experiment settings: AE
+AUC-ROC: $ 59.80 \pm 1.16 $ 
+Accuracy: $ 62.91 \pm 5.57 $ 
+Sensitivity: $ 63.28 \pm 6.72 $ 
+Specificity: $ 58.95 \pm 7.55 $ 
+
+
+
+Experiment settings: AE
+AUC-ROC: $ 59.80 \pm 1.16 $ 
+Accuracy: $ 62.91 \pm 5.57 $ 
+Sensitivity: $ 63.28 \pm 6.72 $ 
+Specificity: $ 58.95 \pm 7.55 $ 
+
+
+
