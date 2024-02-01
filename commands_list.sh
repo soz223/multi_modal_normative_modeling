@@ -3,18 +3,17 @@
 ./bootstrap_create_ids.py
 
 
-# aae code
-for dataset in "av45" "fdg" "vbm" "snp"
-do
-    echo "Processing dataset: $dataset"
+# # aae code
+# for dataset in "av45" "fdg" "vbm" "snp"
+# do
+#     echo "Processing dataset: $dataset"
 
-    ./bootstrap_train_aae_supervised_new.py -D "$dataset" 
+#     ./bootstrap_train_aae_supervised_new.py -D "$dataset" 
 
-    ./bootstrap_test_aae_supervised_new.py -D "$dataset"
+#     ./bootstrap_test_aae_supervised_new.py -D "$dataset"
 
-    ./bootstrap_aae_new_group_analysis_1x1.py -D "$dataset" -L 0
-
-done
+#     ./bootstrap_aae_new_group_analysis_1x1.py -D "$dataset" -L 0
+# done
 
 # # vae code
 # for dataset in "av45" "fdg" "vbm" "snp"
