@@ -3,20 +3,48 @@
 ./bootstrap_create_ids.py
 
 
+# aae code
 for dataset in "av45" "fdg" "vbm" "snp"
 do
     echo "Processing dataset: $dataset"
 
-    ./bootstrap_train_cvae_supervised.py -D "$dataset" 
+    ./bootstrap_train_aae_supervised_new.py -D "$dataset" 
 
-    ./bootstrap_test_cvae_supervised.py -D "$dataset"
+    ./bootstrap_test_aae_supervised_new.py -D "$dataset"
 
-    ./bootstrap_cvae_group_analysis_1x1.py -D "$dataset" -L 0
+    ./bootstrap_aae_new_group_analysis_1x1.py -D "$dataset" -L 0
 
 done
 
+# # vae code
+# for dataset in "av45" "fdg" "vbm" "snp"
+# do
+#     echo "Processing dataset: $dataset"
+
+#     ./bootstrap_train_vae_supervised.py -D "$dataset" 
+
+#     ./bootstrap_test_vae_supervised.py -D "$dataset"
+
+#     ./bootstrap_vae_group_analysis_1x1.py -D "$dataset" -L 0
+
+# done
 
 
+# # cvae code
+# for dataset in "av45" "fdg" "vbm" "snp"
+# do
+#     echo "Processing dataset: $dataset"
+
+#     ./bootstrap_train_cvae_supervised.py -D "$dataset" 
+
+#     ./bootstrap_test_cvae_supervised.py -D "$dataset"
+
+#     ./bootstrap_cvae_group_analysis_1x1.py -D "$dataset" -L 0
+
+# done
+
+
+# # ae code
 # for dataset in "av45" "fdg" "vbm" "snp"
 # do
 #     echo "Processing dataset: $dataset"
