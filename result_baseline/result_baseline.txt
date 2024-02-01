@@ -478,3 +478,11 @@ Specificity: $ 42.23 \pm 9.98 $
 
 
 
+Experiment settings: AAE. Dataset av45
+AUC-ROC: $ 65.80 \pm 2.67 $ 
+Accuracy: $ 73.38 \pm 3.36 $ 
+Sensitivity: $ 82.12 \pm 7.15 $ 
+Specificity: $ 49.47 \pm 9.10 $ 
+
+
+
