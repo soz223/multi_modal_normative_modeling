@@ -262,3 +262,19 @@ Specificity: $ 55.26 \pm 25.94 $
 
 
 
+Experiment settings: CVAE
+AUC-ROC: $ 60.84 \pm 2.44 $ 
+Accuracy: $ 53.79 \pm 5.28 $ 
+Sensitivity: $ 72.88 \pm 12.27 $ 
+Specificity: $ 47.28 \pm 10.75 $ 
+
+
+
+Experiment settings: CVAE. Dataset av45
+AUC-ROC: $ 60.84 \pm 2.44 $ 
+Accuracy: $ 53.79 \pm 5.28 $ 
+Sensitivity: $ 72.88 \pm 12.27 $ 
+Specificity: $ 47.28 \pm 10.75 $ 
+
+
+

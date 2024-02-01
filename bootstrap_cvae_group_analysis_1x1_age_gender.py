@@ -194,6 +194,7 @@ def main(dataset_name, comb_label, hz_para_list):
 
     # save auc roc and accuracy to txt file in result_focal folder
     with open(os.path.join(result_focal_dir, 'result_focal_main_2.txt'), 'a') as f:
+        f.write('Experiment settings: FAAE. Dataset {}\n'.format(dataset_name))
         f.write('auc_roc: mean and std\n' + str(np.mean(auc_roc_list)) + ' ' + str(np.std(auc_roc_list)) + '\n')
         f.write('accuracy: mean and std\n' + str(np.mean(accuracy_list)) + ' ' + str(np.std(accuracy_list)) + '\n')
         # f.write('accuracy_in_hc: mean and std\n' + str(np.mean(accuracy_in_hc_list)) + ' ' + str(np.std(accuracy_in_hc_list)) + '\n')
