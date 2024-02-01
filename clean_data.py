@@ -8,8 +8,8 @@ PROJECT_ROOT = Path.cwd()
 def main():
     """Clean ADNI scanner 1 data."""
     # ----------------------------------------------------------------------------------------
-    participants_path = PROJECT_ROOT / 'data' / '[02]-imaging' / 'AV45' / 'AV45_cov.csv'
-    ids_path = PROJECT_ROOT / 'data' / '[02]-imaging' / 'AV45' / 'AV45_pheno_AAL.csv'
+    participants_path = PROJECT_ROOT / 'data' / 'y.csv'
+    ids_path = PROJECT_ROOT / 'data' / 'av45.csv'
 
     output_ids_filename = 'cleaned_ids.csv'
     # ----------------------------------------------------------------------------------------

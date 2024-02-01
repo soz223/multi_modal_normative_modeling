@@ -20,10 +20,14 @@ def main(dataset_name):
     # ----------------------------------------------------------------------------
     n_bootstrap = 10
     model_name = 'supervised_ae'
-    dataset_name = 'ADNI'
+    dataset_name = 'av45'
 
-    participants_path = PROJECT_ROOT / 'data' / '[02]-imaging' / 'AV45' / 'AV45_cov.csv'
-    freesurfer_path = PROJECT_ROOT / 'data' / '[02]-imaging' / 'AV45' / 'AV45_pheno_AAL.csv'
+    # participants_path = PROJECT_ROOT / 'data' / '[02]-imaging' / 'AV45' / 'AV45_cov.csv'
+    # freesurfer_path = PROJECT_ROOT / 'data' / '[02]-imaging' / 'AV45' / 'AV45_pheno_AAL.csv'
+
+    participants_path = PROJECT_ROOT / 'data' / 'y.csv'
+    freesurfer_path = PROJECT_ROOT / 'data' / 'av45.csv'
+
 
     # ----------------------------------------------------------------------------
     # Create directories structure
@@ -49,14 +53,15 @@ def main(dataset_name):
         # ----------------------------------------------------------------------------
         # Loading data
         clinical_df = load_dataset(participants_path, ids_path, freesurfer_path)
-        #print(COLUMNS_NAME)
+        
         x_dataset = clinical_df[COLUMNS_NAME].values
 
-        tiv = clinical_df['EstimatedTotalIntraCranialVol'].values
+        tiv = clinical_df['PTEDUCAT'].values
         tiv = tiv[:, np.newaxis]
 
         x_dataset = (np.true_divide(x_dataset, tiv)).astype('float32')
         # ----------------------------------------------------------------------------
+        # print(bootstrap_model_dir)
         encoder = keras.models.load_model(bootstrap_model_dir / 'encoder.h5', compile=False)
         decoder = keras.models.load_model(bootstrap_model_dir / 'decoder.h5', compile=False)
 
@@ -65,21 +70,21 @@ def main(dataset_name):
         enc_age = joblib.load(bootstrap_model_dir / 'age_encoder.joblib')
         enc_gender = joblib.load(bootstrap_model_dir / 'gender_encoder.joblib')
         
-        age = clinical_df['Age'].values[:, np.newaxis].astype('float32')
+        age = clinical_df['AGE'].values[:, np.newaxis].astype('float32')
         #print(age, age.shape)
         one_hot_age2 = enc_age.transform(age)
         #print(one_hot_age, one_hot_age.shape)
         
         bin_labels = list(range(0,10))  
-        age_bins_test, bin_edges = pd.cut(clinical_df['Age'], 10, retbins=True, labels=bin_labels)
-        #age_bins_train, bin_edges = pd.cut(train_covariates['Age'], 10, retbins=True, labels=bin_labels)
-        #age_bins_test = pd.cut(test_covariates['Age'], retbins=True, labels=bin_labels)
+        age_bins_test, bin_edges = pd.cut(clinical_df['AGE'], 10, retbins=True, labels=bin_labels)
+        #age_bins_train, bin_edges = pd.cut(train_covariates['AGE'], 10, retbins=True, labels=bin_labels)
+        #age_bins_test = pd.cut(test_covariates['AGE'], retbins=True, labels=bin_labels)
         #age_bins_train.fillna(0, inplace=True)
         age_bins_test.fillna(0,inplace = True)
         one_hot_age = np.eye(10)[age_bins_test.values]
         
         
-        gender = clinical_df['Gender'].values[:, np.newaxis].astype('float32')
+        gender = clinical_df['PTGENDER'].values[:, np.newaxis].astype('float32')
         one_hot_gender = enc_gender.transform(gender)
         
 
@@ -99,17 +104,16 @@ def main(dataset_name):
         #tmp = copy.copy(COLUMNS_NAME)
         #tmp.extend(extended)
         #print(COLUMNS_NAME)
-        #print("aaaaaaaaaaaaaa")
         normalized_df = pd.DataFrame(columns=['participant_id'] + COLUMNS_NAME)
         normalized_df['participant_id'] = clinical_df['participant_id']
         normalized_df[COLUMNS_NAME] = x_normalized
         normalized_df.to_csv(output_dataset_dir / 'normalized.csv', index=False)
 
         # ----------------------------------------------------------------------------
-        #age = clinical_df['Age'].values[:, np.newaxis].astype('float32')
+        #age = clinical_df['AGE'].values[:, np.newaxis].astype('float32')
         #one_hot_age = enc_age.transform(age)
 
-        #gender = clinical_df['Gender'].values[:, np.newaxis].astype('float32')
+        #gender = clinical_df['PTGENDER'].values[:, np.newaxis].astype('float32')
         #one_hot_gender = enc_gender.transform(gender)
 
         #y_data = np.concatenate((one_hot_age, one_hot_gender), axis=1).astype('float32')

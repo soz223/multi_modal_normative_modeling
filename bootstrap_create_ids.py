@@ -15,7 +15,7 @@ def main():
     """Creates the csv files with the ids of the subjects used to train the normative model."""
     # ----------------------------------------------------------------------------------------
     n_bootstrap = 10
-    ids_path = PROJECT_ROOT / 'outputs' / 'cleaned_ids.csv'
+    ids_path = PROJECT_ROOT / 'outputs' / 'train_ids.csv'
     # ----------------------------------------------------------------------------------------
     # Create experiment's output directory
     outputs_dir = PROJECT_ROOT / 'outputs'

@@ -11,7 +11,7 @@ import tensorflow as tf
 import pandas as pd
 import os
 import argparse
-from utils import COLUMNS_NAME_AV45, load_dataset
+from utils import COLUMNS_NAME, load_dataset
 from models import make_encoder_model_v111, make_decoder_model_v1, make_discriminator_model_v1
 
 PROJECT_ROOT = Path.cwd()
@@ -26,8 +26,9 @@ def main():
     n_bootstrap = 10
     model_name = 'supervised_ae'
 
-    participants_path = PROJECT_ROOT / 'data' / '[02]-imaging' / 'AV45' / 'AV45_cov.csv'
-    freesurfer_path = PROJECT_ROOT / 'data' / '[02]-imaging' / 'AV45' / 'AV45_pheno_AAL.csv'
+    participants_path = PROJECT_ROOT / 'data' / 'y.csv'
+    freesurfer_path = PROJECT_ROOT / 'data' / 'av45.csv'
+
     # ----------------------------------------------------------------------------
     bootstrap_dir = PROJECT_ROOT / 'outputs' / 'bootstrap_analysis'
     ids_dir = bootstrap_dir / 'ids'
@@ -54,9 +55,8 @@ def main():
         dataset_df = load_dataset(participants_path, ids_path, freesurfer_path)
 
         # ----------------------------------------------------------------------------
-
-        dataset_df = dataset_df.loc[dataset_df['DIA'] == 'CN']      
-        x_data = dataset_df[COLUMNS_NAME_AV45].values
+        dataset_df = dataset_df.loc[dataset_df['DIA'] == 2]      
+        x_data = dataset_df[COLUMNS_NAME].values
         
 
         tiv = dataset_df['PTEDUCAT'].values
