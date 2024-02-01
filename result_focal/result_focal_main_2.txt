@@ -1,0 +1,228 @@
+experiment settings
+args.alpha_focal: 0.0
+args.gamma_focal: 1.0
+args.lambda_reg: 0.0
+experiment done (under regularization loss)
+auc_roc: mean and std
+0.5527395964691048 0.04384423444014269
+accuracy: mean and std
+0.5342298288508557 0.12221637696089917
+sensitivity: mean and std
+0.614423076923077 0.2120819068357803
+specificity: mean and std
+0.5068852459016393 0.23347485502292611
+
+
+
+auc_roc: mean and std
+0.5585526315789473 0.06582413054776712
+accuracy: mean and std
+0.5866197183098592 0.10722047801873558
+sensitivity: mean and std
+0.5913461538461539 0.23137940166486923
+specificity: mean and std
+0.5736842105263158 0.24680787553038644
+
+
+
+auc_roc: mean and std
+0.5585526315789473 0.06582413054776712
+accuracy: mean and std
+0.5866197183098592 0.10722047801873558
+sensitivity: mean and std
+0.5913461538461539 0.23137940166486923
+specificity: mean and std
+0.5736842105263158 0.24680787553038644
+
+
+
+experiment settings
+experiment settings
+auc_roc: mean and std
+0.5585526315789473 0.06582413054776712
+accuracy: mean and std
+0.5866197183098592 0.10722047801873558
+sensitivity: mean and std
+0.5913461538461539 0.23137940166486923
+specificity: mean and std
+0.5736842105263158 0.24680787553038644
+
+
+
+experiment settings
+experiment settings
+auc_roc: mean and std
+0.5275303643724696 0.08644680196835025
+accuracy: mean and std
+0.5612676056338028 0.15123803052344933
+sensitivity: mean and std
+0.5548076923076922 0.3024814166134007
+specificity: mean and std
+0.5789473684210527 0.295159471427578
+
+
+
+experiment settings
+experiment settings
+auc_roc: mean and std
+0.5585526315789473 0.06582413054776712
+accuracy: mean and std
+0.5866197183098592 0.10722047801873558
+sensitivity: mean and std
+0.5913461538461539 0.23137940166486923
+specificity: mean and std
+0.5736842105263158 0.24680787553038644
+
+
+
+experiment settings
+experiment settings
+auc_roc: mean and std
+0.5275303643724696 0.08644680196835025
+accuracy: mean and std
+0.5612676056338028 0.15123803052344933
+sensitivity: mean and std
+0.5548076923076922 0.3024814166134007
+specificity: mean and std
+0.5789473684210527 0.295159471427578
+
+
+
+experiment settings
+experiment settings
+args.dataset: av45
+args.alpha_focal: 0.0
+args.gamma_focal: 1.0
+args.lambda_reg: 0.0
+experiment done (under regularization loss)
+auc_roc: mean and std
+0.5585526315789473 0.06582413054776712
+accuracy: mean and std
+0.5866197183098592 0.10722047801873558
+sensitivity: mean and std
+0.5913461538461539 0.23137940166486923
+specificity: mean and std
+0.5736842105263158 0.24680787553038644
+
+
+
+experiment settings
+args.dataset: fdg
+args.alpha_focal: 0.0
+args.gamma_focal: 1.0
+args.lambda_reg: 0.0
+experiment done (under regularization loss)
+experiment settings
+args.dataset: av45
+args.alpha_focal: 0.2
+args.gamma_focal: 15.0
+args.lambda_reg: 0.0
+experiment done (under regularization loss)
+auc_roc: mean and std
+0.5275303643724696 0.08644680196835025
+accuracy: mean and std
+0.5612676056338028 0.15123803052344933
+sensitivity: mean and std
+0.5548076923076922 0.3024814166134007
+specificity: mean and std
+0.5789473684210527 0.295159471427578
+
+
+
+experiment settings
+args.dataset: fdg
+args.alpha_focal: 0.2
+args.gamma_focal: 15.0
+args.lambda_reg: 0.0
+experiment done (under regularization loss)
+experiment settings
+args.dataset: av45
+args.alpha_focal: 0.0
+args.gamma_focal: 1.0
+args.lambda_reg: 0.0
+experiment done (under regularization loss)
+auc_roc: mean and std
+0.5585526315789473 0.06582413054776712
+accuracy: mean and std
+0.5866197183098592 0.10722047801873558
+sensitivity: mean and std
+0.5913461538461539 0.23137940166486923
+specificity: mean and std
+0.5736842105263158 0.24680787553038644
+
+
+
+experiment settings
+args.dataset: fdg
+args.alpha_focal: 0.0
+args.gamma_focal: 1.0
+args.lambda_reg: 0.0
+experiment done (under regularization loss)
+auc_roc: mean and std
+0.5389423076923077 0.02775579044811188
+accuracy: mean and std
+0.6197183098591549 0.10850556505217694
+sensitivity: mean and std
+0.675 0.22777707621642732
+specificity: mean and std
+0.46842105263157896 0.22600958477456726
+
+
+
+experiment settings
+args.dataset: av45
+args.alpha_focal: 0.2
+args.gamma_focal: 15.0
+args.lambda_reg: 0.0
+experiment done (under regularization loss)
+auc_roc: mean and std
+0.5275303643724696 0.08644680196835025
+accuracy: mean and std
+0.5612676056338028 0.15123803052344933
+sensitivity: mean and std
+0.5548076923076922 0.3024814166134007
+specificity: mean and std
+0.5789473684210527 0.295159471427578
+
+
+
+experiment settings
+args.dataset: fdg
+args.alpha_focal: 0.2
+args.gamma_focal: 15.0
+args.lambda_reg: 0.0
+experiment done (under regularization loss)
+auc_roc: mean and std
+0.5332236842105263 0.04092359637294509
+accuracy: mean and std
+0.6295774647887324 0.12467772381031397
+sensitivity: mean and std
+0.7009615384615385 0.24692824401495206
+specificity: mean and std
+0.4342105263157895 0.21451807742045007
+
+
+
+experiment settings
+args.dataset: snp
+args.alpha_focal: 0.0
+args.gamma_focal: 1.0
+args.lambda_reg: 0.0
+experiment done (under regularization loss)
+experiment settings
+args.dataset: snp
+args.alpha_focal: 0.0
+args.gamma_focal: 1.0
+args.lambda_reg: 0.0
+experiment done (under regularization loss)
+auc_roc: mean and std
+0.5518471659919029 0.030555750224218355
+accuracy: mean and std
+0.5788732394366196 0.09277617777675749
+sensitivity: mean and std
+0.5846153846153845 0.19563468249286178
+specificity: mean and std
+0.5631578947368421 0.19309406660888567
+
+
+

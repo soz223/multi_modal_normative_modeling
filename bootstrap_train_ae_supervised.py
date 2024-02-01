@@ -11,13 +11,14 @@ import tensorflow as tf
 import pandas as pd
 import os
 import argparse
-from utils import COLUMNS_NAME, load_dataset
+from utils import COLUMNS_NAME, load_dataset, COLUMNS_NAME_SNP
 from models import make_encoder_model_v111, make_decoder_model_v1, make_discriminator_model_v1
+import argparse
 
 PROJECT_ROOT = Path.cwd()
 
 
-def main():
+def main(dataset_name):
     """Train the normative method on the bootstrapped samples.
 
     The script also the scaler and the demographic data encoder.
@@ -27,7 +28,7 @@ def main():
     model_name = 'supervised_ae'
 
     participants_path = PROJECT_ROOT / 'data' / 'y.csv'
-    freesurfer_path = PROJECT_ROOT / 'data' / 'av45.csv'
+    freesurfer_path = PROJECT_ROOT / 'data' / (dataset_name + '.csv')
 
     # ----------------------------------------------------------------------------
     bootstrap_dir = PROJECT_ROOT / 'outputs' / 'bootstrap_analysis'
@@ -240,4 +241,14 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    argparse.ArgumentParser()
+    # add dataset_name to parse
+    parser = argparse.ArgumentParser(description='Train the supervised adversarial autoencoder.')
+    parser.add_argument('-D', '--dataset_name',
+                    dest='dataset_name',
+                    help='Dataset to use for training test and evaluation.',
+                    type=str)
+    args = parser.parse_args()
+    if args.dataset_name == 'snp':
+        COLUMNS_NAME = COLUMNS_NAME_SNP
+    main(args.dataset_name)

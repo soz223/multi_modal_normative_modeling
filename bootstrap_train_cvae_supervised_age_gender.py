@@ -8,7 +8,7 @@ from sklearn.preprocessing import RobustScaler
 import numpy as np
 from sklearn.preprocessing import RobustScaler, OneHotEncoder
 
-from utils import COLUMNS_NAME, load_dataset
+from utils import COLUMNS_NAME, load_dataset, COLUMNS_NAME_SNP
 from utils_vae import plot_losses, MyDataset_labels, Logger
 import torch
 from cVAE import cVAE
@@ -26,7 +26,7 @@ result_focal_dir =  './result_focal'
 
 EPOCHES = 200
 
-def main(comb_label, hz_para_list, alpha_focal, gamma_focal, lambda_reg):
+def main(comb_label, hz_para_list, alpha_focal, gamma_focal, lambda_reg, dataset_name):
     #Train the normative method on the bootstrapped samples.
 
     # ----------------------------------------------------------------------------
@@ -37,7 +37,8 @@ def main(comb_label, hz_para_list, alpha_focal, gamma_focal, lambda_reg):
 
     # Set the path of the participants file
     participants_path = PROJECT_ROOT / 'data' / 'y.csv'
-    freesurfer_path = PROJECT_ROOT / 'data' / 'av45.csv'
+    # dataset_name to str
+    freesurfer_path = PROJECT_ROOT / 'data' / (dataset_name + '.csv')
 
     # ----------------------------------------------------------------------------
     # Set the path of the bootstrap directory
@@ -102,7 +103,9 @@ def main(comb_label, hz_para_list, alpha_focal, gamma_focal, lambda_reg):
         # Replace any values of 0 in the diagnosis column with 0
         train_covariates.DIA[train_covariates.DIA == 0] = 0  
         # Add the TIV as a new column named 'ICV'
-        train_covariates['ICV'] = tiv
+        train_covariates = train_covariates.copy()
+        train_covariates['ICV'] = tiv       
+
         
         # Set the labels for the age bins to be integers from 0 to 9
         bin_labels = list(range(0,10))  
@@ -116,9 +119,9 @@ def main(comb_label, hz_para_list, alpha_focal, gamma_focal, lambda_reg):
         # Convert the age bin labels to one-hot encoding
         one_hot_age_train = np.eye(10)[age_bins_train.values]  
         # Set the labels for the ICV bins to be integers from 0 to 9
-        bin_labels3 = list(range(0,10)) 
+        bin_labels3 = list(range(0,3)) 
         # Bin the ICVs into 10 bins of equal size and return the bin labels and edges
-        ICV_bins_train, bin_edges = pd.qcut(train_covariates['ICV'], q=10,  retbins=True, labels=bin_labels3)  
+        ICV_bins_train, bin_edges = pd.qcut(train_covariates['ICV'], q=3,  retbins=True, labels=bin_labels3, duplicates='drop')  
         # Replace any missing values in the ICV bins with 0
         ICV_bins_train.fillna(0, inplace = True)  
         # Convert the ICV bin labels to one-hot encoding
@@ -142,7 +145,7 @@ def main(comb_label, hz_para_list, alpha_focal, gamma_focal, lambda_reg):
         if use_cuda:
             torch.cuda.manual_seed(random_seed)
         # Set the device to be CUDA if available, otherwise set it to CPU
-        DEVICE = torch.device("cuda" if use_cuda else "cpu")
+        DEVICE = torch.device("cuda:1" if use_cuda else "cpu")
         # Get the number of features
         input_dim = train_data.shape[1]
         # If the combination label is 1, concatenate the one-hot encoded age and gender covariates
@@ -352,6 +355,7 @@ def main(comb_label, hz_para_list, alpha_focal, gamma_focal, lambda_reg):
 if __name__ == "__main__":
     # Parse command line arguments
     parser = argparse.ArgumentParser()
+    
     parser.add_argument('-L', '--comb_label',
                         dest='comb_label',
                         help='Combination label to perform group analysis.',
@@ -363,6 +367,12 @@ if __name__ == "__main__":
                         type=int)
     
     # add parameter called alpha_focal gamma_focal 
+
+    parser.add_argument('-D', '--dataset_name',
+                        dest='dataset_name',
+                        help='Dataset to use for training test and evaluation.',
+                        type=str)
+
     parser.add_argument('-A', '--alpha_focal',
                         dest='alpha_focal',
                         help='alpha_focal for focal loss.',
@@ -386,13 +396,18 @@ if __name__ == "__main__":
     print('args.alpha_focal: ', args.alpha_focal)
     print('args.gamma_focal: ', args.gamma_focal)
     print('args.lambda_reg: ', args.lambda_reg)
+    print('args.dataset: ', args.dataset_name)
+
+    if args.dataset_name == 'snp':
+        COLUMNS_NAME = COLUMNS_NAME_SNP
 
 
-    main(a, b, args.alpha_focal, args.gamma_focal, args.lambda_reg)
+    main(a, b, args.alpha_focal, args.gamma_focal, args.lambda_reg, args.dataset_name)
 
 
     with open(result_focal_dir + '/result_focal_main_2.txt', 'a') as f:
         f.write('experiment settings\n')
+        f.write('args.dataset: ' + str(args.dataset_name) + '\n')
         f.write('args.alpha_focal: ' + str(args.alpha_focal) + '\n')
         f.write('args.gamma_focal: ' + str(args.gamma_focal) + '\n')
         f.write('args.lambda_reg: ' + str(args.lambda_reg) + '\n')

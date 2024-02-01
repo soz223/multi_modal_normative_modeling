@@ -18,7 +18,7 @@ from scipy import stats
 from sklearn.metrics import roc_curve, auc
 from tqdm import tqdm
 
-from utils import COLUMNS_NAME, load_dataset, cliff_delta
+from utils import COLUMNS_NAME, load_dataset, cliff_delta, COLUMNS_NAME_SNP
 
 PROJECT_ROOT = Path.cwd()
 
@@ -93,8 +93,8 @@ def main(dataset_name, comb_label):
     # ----------------------------------------------------------------------------
     n_bootstrap = 10
 
-    disease_label = 1
-    mci_label = 1
+    disease_label = 0
+    mci_label = 0
     hc_label = 2
     
 
@@ -103,8 +103,7 @@ def main(dataset_name, comb_label):
     # participants_path = PROJECT_ROOT / 'data' / dataset_name / 'participants.tsv'
     # freesurfer_path = PROJECT_ROOT / 'data' / dataset_name / 'freesurferData.csv'
     participants_path = PROJECT_ROOT / 'data' / 'y.csv'
-    freesurfer_path = PROJECT_ROOT / 'data' / 'av45.csv'
-
+    freesurfer_path = PROJECT_ROOT / 'data' / (dataset_name + '.csv')
     
 
     # ----------------------------------------------------------------------------
@@ -173,7 +172,8 @@ def main(dataset_name, comb_label):
     specificity_list = np.array(specificity_list)
 
     with open(result_baseline + 'result_baseline.txt', 'a') as f:
-        f.write('Experiment settings: AE\n')
+        # f.write('Experiment settings: AE with dataset {dataset_name}\n')
+        f.write('Experiment settings: AE with dataset {}\n'.format(dataset_name))
         f.write('AUC-ROC: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(auc_roc_list) * 100, np.std(auc_roc_list) * 100))
         f.write('Accuracy: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(accuracy_list) * 100, np.std(accuracy_list) * 100))
         f.write('Sensitivity: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(sensitivity_list) * 100, np.std(sensitivity_list) * 100))
@@ -283,5 +283,6 @@ if __name__ == "__main__":
                         help='List of paras to perform the analysis.',
                         type=int)
     args = parser.parse_args()
-
+    if args.dataset_name == 'snp':
+        COLUMNS_NAME = COLUMNS_NAME_SNP
     main(args.dataset_name, args.comb_label)

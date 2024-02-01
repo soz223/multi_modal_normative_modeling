@@ -10,7 +10,7 @@ import tensorflow as tf
 from tensorflow import keras
 from tqdm import tqdm
 import copy
-from utils import COLUMNS_NAME, load_dataset
+from utils import COLUMNS_NAME, load_dataset, COLUMNS_NAME_SNP
 
 PROJECT_ROOT = Path.cwd()
 
@@ -20,13 +20,12 @@ def main(dataset_name):
     # ----------------------------------------------------------------------------
     n_bootstrap = 10
     model_name = 'supervised_ae'
-    dataset_name = 'av45'
 
     # participants_path = PROJECT_ROOT / 'data' / '[02]-imaging' / 'AV45' / 'AV45_cov.csv'
     # freesurfer_path = PROJECT_ROOT / 'data' / '[02]-imaging' / 'AV45' / 'AV45_pheno_AAL.csv'
 
     participants_path = PROJECT_ROOT / 'data' / 'y.csv'
-    freesurfer_path = PROJECT_ROOT / 'data' / 'av45.csv'
+    freesurfer_path = PROJECT_ROOT / 'data' / (dataset_name + '.csv')
 
 
     # ----------------------------------------------------------------------------
@@ -159,5 +158,6 @@ if __name__ == "__main__":
                         dest='dataset_name',
                         help='Dataset name to calculate deviations.')
     args = parser.parse_args()
-
+    if args.dataset_name == 'snp':
+        COLUMNS_NAME = COLUMNS_NAME_SNP
     main(args.dataset_name)

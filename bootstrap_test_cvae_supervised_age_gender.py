@@ -14,7 +14,7 @@ import torch
 
 from tqdm import tqdm
 import copy
-from utils import COLUMNS_NAME, load_dataset
+from utils import COLUMNS_NAME, load_dataset, COLUMNS_NAME_SNP 
 from os.path import join, exists
 from VAE import VAE
 from sklearn.preprocessing import RobustScaler, OneHotEncoder
@@ -22,16 +22,15 @@ from utils_vae import plot_losses, MyDataset_labels, Logger, reconstruction_devi
 
 PROJECT_ROOT = Path.cwd()
 
-c = np.load("hc_var.npy")
 def main(dataset_name, comb_label):
     """Make predictions using trained normative models."""
     # ----------------------------------------------------------------------------
     n_bootstrap = 10
     model_name = 'supervised_cvae_age_gender'
-    dataset_name = 'ADNI'
 
-    participants_path = PROJECT_ROOT / 'data' / dataset_name / 'participants.tsv'
-    freesurfer_path = PROJECT_ROOT / 'data' / dataset_name / 'freesurferData.csv'
+    participants_path = PROJECT_ROOT / 'data' / 'y.csv'
+    freesurfer_path = PROJECT_ROOT / 'data' / (dataset_name + '.csv')
+
 
     # ----------------------------------------------------------------------------
     # Create directories structure
@@ -41,8 +40,8 @@ def main(dataset_name, comb_label):
     ids_path = outputs_dir / (dataset_name + '_homogeneous_ids.csv')
 
     #============================================================================
-    participants_train = PROJECT_ROOT / 'data' / 'BIOBANK' / 'participants.tsv'
-    freesurfer_train = PROJECT_ROOT / 'data' / 'BIOBANK' / 'freesurferData.csv'
+    participants_train = PROJECT_ROOT / 'data' / 'y.csv'
+    freesurfer_train = PROJECT_ROOT / 'data' / (dataset_name + '.csv')
     # ----------------------------------------------------------------------------
    # bootstrap_dir = PROJECT_ROOT / 'outputs' / 'bootstrap_analysis'
     ids_dir = bootstrap_dir / 'ids'
@@ -73,11 +72,11 @@ def main(dataset_name, comb_label):
 
         # ----------------------------------------------------------------------------
 
-        dataset_df = dataset_df.loc[dataset_df['Diagnosis'] == 1]      
+        dataset_df = dataset_df.loc[dataset_df['DIA'] == 2]      
         train_data = dataset_df[COLUMNS_NAME].values
         
 
-        tiv = dataset_df['EstimatedTotalIntraCranialVol'].values
+        tiv = dataset_df['PTEDUCAT'].values
         tiv = tiv[:, np.newaxis]
 
         train_data = (np.true_divide(train_data, tiv)).astype('float32')
@@ -85,8 +84,8 @@ def main(dataset_name, comb_label):
         scaler = RobustScaler()
         train_data = pd.DataFrame(scaler.fit_transform(train_data))     
         
-        train_covariates = dataset_df[['Diagnosis','Age','Gender']]
-        train_covariates.Diagnosis[train_covariates.Diagnosis == 0] = 0       #
+        train_covariates = dataset_df[['DIA','AGE','PTGENDER']]
+        train_covariates.DIA[train_covariates.DIA == 0] = 0       #
         #train_covariates['ICV'] =tiv  #        
         #=============================================================================
         bootstrap_model_dir = model_dir / '{:03d}'.format(i_bootstrap)
@@ -100,7 +99,7 @@ def main(dataset_name, comb_label):
         #print(COLUMNS_NAME)
         test_data = clinical_df[COLUMNS_NAME].values
 
-        tiv = clinical_df['EstimatedTotalIntraCranialVol'].values
+        tiv = clinical_df['PTEDUCAT'].values
         tiv = tiv[:, np.newaxis]
 
         test_data = (np.true_divide(test_data, tiv)).astype('float32')
@@ -108,50 +107,50 @@ def main(dataset_name, comb_label):
         scaler = RobustScaler()
         test_data = pd.DataFrame(scaler.fit_transform(test_data))  
 
-        test_covariates = clinical_df[['Diagnosis','Age','Gender']]
-        test_covariates.Diagnosis[test_covariates.Diagnosis == 0] = 0       #
+        test_covariates = clinical_df[['DIA','AGE','PTGENDER']]
+        test_covariates.DIA[test_covariates.DIA == 0] = 0       #
         test_covariates['ICV'] =tiv  #   
         
         bin_labels = list(range(0,10))  
-        age_bins_test, bin_edges = pd.cut(test_covariates['Age'], 10, retbins=True, labels=bin_labels)
-        #age_bins_train, bin_edges = pd.cut(train_covariates['Age'], 10, retbins=True, labels=bin_labels)
-        #age_bins_test = pd.cut(test_covariates['Age'], retbins=True, labels=bin_labels)
+        age_bins_test, bin_edges = pd.cut(test_covariates['AGE'], 10, retbins=True, labels=bin_labels)
+        #age_bins_train, bin_edges = pd.cut(train_covariates['AGE'], 10, retbins=True, labels=bin_labels)
+        #age_bins_test = pd.cut(test_covariates['AGE'], retbins=True, labels=bin_labels)
         #age_bins_train.fillna(0, inplace=True)
         age_bins_test.fillna(0,inplace = True)
         one_hot_age_test = np.eye(10)[age_bins_test.values]
         #one_hot_age_train = np.eye(10)[age_bins_train.values]
 
         #bin_labels2 = list(range(0,2))
-        #gender_bins_train, bin_edges2 = pd.cut(train_covariates['Gender'], 2,  retbins=True, labels=bin_labels2)
-        #gender_bins_test = pd.cut(test_covariates['Gender'], bins=bin_edges2, labels=bin_labels2)
+        #gender_bins_train, bin_edges2 = pd.cut(train_covariates['PTGENDER'], 2,  retbins=True, labels=bin_labels2)
+        #gender_bins_test = pd.cut(test_covariates['PTGENDER'], bins=bin_edges2, labels=bin_labels2)
         #gender_bins_train.fillna(0, inplace=True)
         #gender_bins_test.fillna(0,inplace = True)        
         #one_hot_gender_test = np.eye(2)[gender_bins_test.values]
         #one_hot_gender_train = np.eye(2)[gender_bins_train.values]
         
-        bin_labels3 = list(range(0,10))
-        ICV_bins_test, bin_edges = pd.qcut(test_covariates['ICV'], q=10,  retbins=True, labels=bin_labels3)
+        bin_labels3 = list(range(0,5))
+        ICV_bins_test, bin_edges = pd.qcut(test_covariates['ICV'], q=5,  retbins=True, labels=bin_labels3, duplicates='drop')
         #ICV_bins_test = pd.cut(test_covariates['ICV'], bins=bin_edges, labels=bin_labels)
         #one_hot_ICV_test = np.eye(10)[ICV_bins_test.values]
         ICV_bins_test.fillna(0, inplace = True)
         one_hot_ICV_test = np.eye(10)[ICV_bins_test.values]
         
-        gender = test_covariates['Gender'].values[:, np.newaxis].astype('float32')
+        gender = test_covariates['PTGENDER'].values[:, np.newaxis].astype('float32')
         enc_gender = OneHotEncoder(sparse=False)
         one_hot_gender_test = enc_gender.fit_transform(gender)
         
-        #age = test_covariates['Age'].values[:, np.newaxis].astype('float32')
+        #age = test_covariates['AGE'].values[:, np.newaxis].astype('float32')
         #enc_age = OneHotEncoder(sparse=False)
         #enc_age = OneHotEncoder(handle_unknown = "ignore",sparse=False)
         #one_hot_age_test = enc_age.fit_transform(age)
         
-        #age_train = train_covariates['Age'].values[:, np.newaxis].astype('float32')
-        #age_test = test_covariates['Age'].values[:, np.newaxis].astype('float32')
+        #age_train = train_covariates['AGE'].values[:, np.newaxis].astype('float32')
+        #age_test = test_covariates['AGE'].values[:, np.newaxis].astype('float32')
         #enc_age = OneHotEncoder(sparse=False)
         #enc_age = OneHotEncoder(handle_unknown = "ignore",sparse=False)
         #one_hot_age = enc_age.fit_transform(age)
 
-        #gender = dataset_df['Gender'].values[:, np.newaxis].astype('float32')
+        #gender = dataset_df['PTGENDER'].values[:, np.newaxis].astype('float32')
         #enc_gender = OneHotEncoder(sparse=False)
         #one_hot_gender = enc_gender.fit_transform(gender)
 
@@ -165,13 +164,13 @@ def main(dataset_name, comb_label):
         #enc_age = joblib.load(bootstrap_model_dir / 'age_encoder.joblib')
         #enc_gender = joblib.load(bootstrap_model_dir / 'gender_encoder.joblib')
         
-        #age = clinical_df['Age'].values[:, np.newaxis].astype('float32')
+        #age = clinical_df['AGE'].values[:, np.newaxis].astype('float32')
         #print(age, age.shape)
         #one_hot_age = enc_age.transform(age)
         #print(one_hot_age, one_hot_age.shape)
         
         
-        #gender = clinical_df['Gender'].values[:, np.newaxis].astype('float32')
+        #gender = clinical_df['PTGENDER'].values[:, np.newaxis].astype('float32')
         #one_hot_gender = enc_gender.transform(gender)
         
 
@@ -198,7 +197,7 @@ def main(dataset_name, comb_label):
         use_cuda = torch.cuda.is_available()
         if use_cuda:
             torch.cuda.manual_seed(42)
-        DEVICE = torch.device("cuda" if use_cuda else "cpu")
+        DEVICE = torch.device("cuda:1" if use_cuda else "cpu")
      
 
         input_dim = train_data.shape[1]
@@ -253,7 +252,7 @@ def main(dataset_name, comb_label):
         
         #reconstruction_error = np.mean(np.divide((abs(test_data - mean_list)), np.sqrt(variance_list**2 + c**2)),axis=1)
     
-        output_data = pd.DataFrame(clinical_df.Diagnosis.values, columns=['Diagnosis'])
+        output_data = pd.DataFrame(clinical_df.DIA.values, columns=['DIA'])
         output_data['reconstruction_deviation'] = reconstruction_deviation(test_data.to_numpy(), test_prediction)
         #output_data['latent_deviation'] = latent_deviation(train_latent, test_latent, test_var)
         #deviation = separate_latent_deviation(train_latent, test_latent, test_var)
@@ -265,10 +264,10 @@ def main(dataset_name, comb_label):
         normalized_df.to_csv(output_dataset_dir / 'normalized.csv', index=False)
 
         # ----------------------------------------------------------------------------
-        #age = clinical_df['Age'].values[:, np.newaxis].astype('float32')
+        #age = clinical_df['AGE'].values[:, np.newaxis].astype('float32')
         #one_hot_age = enc_age.transform(age)
 
-        #gender = clinical_df['Gender'].values[:, np.newaxis].astype('float32')
+        #gender = clinical_df['PTGENDER'].values[:, np.newaxis].astype('float32')
         #one_hot_gender = enc_gender.transform(gender)
 
         #y_data = np.concatenate((one_hot_age, one_hot_gender), axis=1).astype('float32')
@@ -321,5 +320,7 @@ if __name__ == "__main__":
                         help='Combination label to perform group analysis.',
                         type=int)
     args = parser.parse_args()
+    if args.dataset_name == 'snp':
+        COLUMNS_NAME = COLUMNS_NAME_SNP
 
     main(args.dataset_name, args.comb_label)

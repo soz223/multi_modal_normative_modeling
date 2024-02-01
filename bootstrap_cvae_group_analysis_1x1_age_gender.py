@@ -19,7 +19,7 @@ from scipy import stats
 from sklearn.metrics import roc_curve, auc
 from tqdm import tqdm
 import os
-from utils import COLUMNS_NAME, load_dataset, cliff_delta
+from utils import COLUMNS_NAME, load_dataset, cliff_delta, COLUMNS_NAME_SNP
 from scipy import interp
 from numpy import linspace
 
@@ -30,8 +30,8 @@ def compute_brain_regions_deviations(diff_df, clinical_df, disease_label, hc_lab
     """ Calculate the Cliff's delta effect size between groups."""
     region_df = pd.DataFrame(columns=['regions', 'pvalue', 'effect_size'])
 
-    diff_hc = diff_df.loc[clinical_df['Diagnosis'] == disease_label]
-    diff_patient = diff_df.loc[clinical_df['Diagnosis'] == hc_label]
+    diff_hc = diff_df.loc[clinical_df['DIA'] == disease_label]
+    diff_patient = diff_df.loc[clinical_df['DIA'] == hc_label]
 
     for region in COLUMNS_NAME:
         _, pvalue = stats.mannwhitneyu(diff_hc[region], diff_patient[region])
@@ -42,10 +42,10 @@ def compute_brain_regions_deviations(diff_df, clinical_df, disease_label, hc_lab
 
     return region_df
 
-def compute_classification_performance(reconstruction_error_df, clinical_df, disease_label, hc_label=1):
+def compute_classification_performance(reconstruction_error_df, clinical_df, disease_label, hc_label=2):
     """ Calculate the AUCs and accuracy of the normative model."""
-    error_hc = reconstruction_error_df.loc[clinical_df['Diagnosis'] == hc_label]['Reconstruction error']
-    error_patient = reconstruction_error_df.loc[clinical_df['Diagnosis'] == disease_label]['Reconstruction error']
+    error_hc = reconstruction_error_df.loc[clinical_df['DIA'] == hc_label]['Reconstruction error']
+    error_patient = reconstruction_error_df.loc[clinical_df['DIA'] == disease_label]['Reconstruction error']
 
     labels = list(np.zeros_like(error_hc)) + list(np.ones_like(error_patient))
     predictions = list(error_hc) + list(error_patient)
@@ -112,15 +112,14 @@ def main(dataset_name, comb_label, hz_para_list):
     # ----------------------------------------------------------------------------
     n_bootstrap = 10
 
-    dataset_name = 'ADNI'
     disease_label = 0
 
     model_name = 'supervised_cvae_age_gender'
 
-    participants_path = PROJECT_ROOT / 'data' / dataset_name / 'participants.tsv'
-    freesurfer_path = PROJECT_ROOT / 'data' / dataset_name / 'freesurferData.csv'
+    participants_path = PROJECT_ROOT / 'data' / 'y.csv'
+    freesurfer_path = PROJECT_ROOT / 'data' / (dataset_name + '.csv')
 
-    hc_label = 1
+    hc_label = 2
 
     # ----------------------------------------------------------------------------
     bootstrap_dir = PROJECT_ROOT / 'outputs' / 'bootstrap_analysis'
@@ -336,5 +335,7 @@ if __name__ == "__main__":
                         help='List of paras to perform the analysis.',
                         type=int)
     args = parser.parse_args()
+    if args.dataset_name == 'snp':
+        COLUMNS_NAME = COLUMNS_NAME_SNP
 
     main(args.dataset_name, args.comb_label, args.hz_para_list)

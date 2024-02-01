@@ -198,3 +198,67 @@ Specificity: $ 58.95 \pm 7.55 $
 
 
 
+Experiment settings: AE
+AUC-ROC: $ 52.05 \pm 2.19 $ 
+Accuracy: $ 60.54 \pm 20.42 $ 
+Sensitivity: $ 61.18 \pm 23.18 $ 
+Specificity: $ 50.26 \pm 23.93 $ 
+
+
+
+Experiment settings: AE with dataset snp
+AUC-ROC: $ 52.05 \pm 2.19 $ 
+Accuracy: $ 60.54 \pm 20.42 $ 
+Sensitivity: $ 61.18 \pm 23.18 $ 
+Specificity: $ 50.26 \pm 23.93 $ 
+
+
+
+Experiment settings: AE with dataset av45
+AUC-ROC: $ 55.36 \pm 0.92 $ 
+Accuracy: $ 56.77 \pm 8.47 $ 
+Sensitivity: $ 56.66 \pm 9.57 $ 
+Specificity: $ 58.68 \pm 9.71 $ 
+
+
+
+Experiment settings: AE with dataset fdg
+AUC-ROC: $ 59.81 \pm 1.37 $ 
+Accuracy: $ 36.85 \pm 7.73 $ 
+Sensitivity: $ 33.70 \pm 8.64 $ 
+Specificity: $ 87.37 \pm 7.33 $ 
+
+
+
+Experiment settings: AE with dataset snp
+AUC-ROC: $ 52.05 \pm 2.19 $ 
+Accuracy: $ 60.54 \pm 20.42 $ 
+Sensitivity: $ 61.18 \pm 23.18 $ 
+Specificity: $ 50.26 \pm 23.93 $ 
+
+
+
+Experiment settings: AE with dataset av45
+AUC-ROC: $ 73.20 \pm 1.83 $ 
+Accuracy: $ 79.55 \pm 4.04 $ 
+Sensitivity: $ 83.08 \pm 5.77 $ 
+Specificity: $ 60.26 \pm 7.20 $ 
+
+
+
+Experiment settings: AE with dataset fdg
+AUC-ROC: $ 87.20 \pm 0.94 $ 
+Accuracy: $ 78.01 \pm 4.19 $ 
+Sensitivity: $ 76.83 \pm 5.43 $ 
+Specificity: $ 84.47 \pm 3.80 $ 
+
+
+
+Experiment settings: AE with dataset snp
+AUC-ROC: $ 55.87 \pm 3.45 $ 
+Accuracy: $ 60.16 \pm 15.01 $ 
+Sensitivity: $ 61.06 \pm 22.43 $ 
+Specificity: $ 55.26 \pm 25.94 $ 
+
+
+

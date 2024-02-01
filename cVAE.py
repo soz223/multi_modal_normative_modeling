@@ -9,7 +9,7 @@ from torch.nn import Parameter
 def compute_ll(x, x_recon):
     return x_recon.log_prob(x).sum(1, keepdims=True).mean(0)
 
-DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+DEVICE = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
 
 class FocalLoss(nn.Module):
     def __init__(self, alpha_focal, gamma_focal, logits=True, reduction='mean'):
