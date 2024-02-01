@@ -27,6 +27,7 @@ result_focal_dir =  './result_focal'
 EPOCHES = 200
 
 def main(comb_label, hz_para_list, alpha_focal, gamma_focal, lambda_reg, dataset_name):
+    print('comb_label: ', comb_label)   
     #Train the normative method on the bootstrapped samples.
 
     # ----------------------------------------------------------------------------
@@ -162,15 +163,16 @@ def main(comb_label, hz_para_list, alpha_focal, gamma_focal, lambda_reg, dataset
             one_hot_covariates_train = np.concatenate((one_hot_age_train, one_hot_gender_train,one_hot_ICV_train), axis=1).astype('float32')  
         # Get the number of covariates
         c_dim = one_hot_covariates_train.shape[1]
+
         # Initialize a dataset object using the feature and covariate arrays
         train_dataset = MyDataset_labels(train_data.to_numpy(), one_hot_covariates_train)    
         # Initialize a data loader object to generate batches of the training data
         generator_train = torch.utils.data.DataLoader(train_dataset, batch_size, shuffle=False)
-        # Get the sizes of the hidden layers for the encoder and decoder
-        h_dim = [hz_para_list[0], hz_para_list[1]]
+        # Get the sizes of the hidden layers for the encoder and decoder, first n-1 elements of hz_para_list
+        h_dim = hz_para_list[:-1]
         # Get the size of the latent space
-        z_dim = hz_para_list[2]
-
+        # last element of hz_para_list is z_dim
+        z_dim = hz_para_list[-1]
        
         # Training loop
         # Initialize the global step counter
@@ -404,7 +406,7 @@ if __name__ == "__main__":
         COLUMNS_NAME = COLUMNS_NAME_VBM
 
 
-    main(a, b, args.alpha_focal, args.gamma_focal, args.lambda_reg, args.dataset_name)
+    main(args.comb_label, args.hz_para_list, args.alpha_focal, args.gamma_focal, args.lambda_reg, args.dataset_name)
 
 
     with open(result_focal_dir + '/result_focal_main_2.txt', 'a') as f:

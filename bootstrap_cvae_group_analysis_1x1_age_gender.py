@@ -201,6 +201,7 @@ def main(dataset_name, comb_label, hz_para_list):
         # f.write('accuracy_in_ad: mean and std\n' + str(np.mean(accuracy_in_ad_list)) + ' ' + str(np.std(accuracy_in_ad_list)) + '\n')
         f.write('sensitivity: mean and std\n' + str(np.mean(recall_list)) + ' ' + str(np.std(recall_list)) + '\n')
         f.write('specificity: mean and std\n' + str(np.mean(specificity_list)) + ' ' + str(np.std(specificity_list)) + '\n')
+        f.write('hz_para_list: ' + str(hz_para_list) + '\n')
         f.write('\n\n\n')
 
     # ----------------------------------------------------------------------------

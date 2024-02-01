@@ -229,8 +229,8 @@ def main(dataset_name, comb_label):
             print('firstly train model ')
             
         
-            
         
+            
         test_latent, test_var = model.pred_latent(test_data, one_hot_covariates_test, DEVICE)
         #train_latent, _ = model.pred_latent(train_data, one_hot_covariates_train, DEVICE)
         test_prediction = model.pred_recon(test_data, one_hot_covariates_test, DEVICE)

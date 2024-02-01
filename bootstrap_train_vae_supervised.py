@@ -105,7 +105,7 @@ def main(comb_label, hz_para_list, dataset_name):
         use_cuda =  torch.cuda.is_available()
         if use_cuda:
             torch.cuda.manual_seed(42)
-        DEVICE = torch.device("cuda" if use_cuda else "cpu")
+        DEVICE = torch.device("cuda:1" if use_cuda else "cpu")
         input_dim = x_data_normalized.shape[1]
     
         train_dataset = MyDataset(x_data_normalized)
