@@ -10,7 +10,7 @@ import tensorflow as tf
 from tensorflow import keras
 from tqdm import tqdm
 import copy
-from utils import COLUMNS_NAME, load_dataset, COLUMNS_NAME_SNP
+from utils import COLUMNS_NAME, load_dataset, COLUMNS_NAME_SNP, COLUMNS_NAME_VBM
 
 PROJECT_ROOT = Path.cwd()
 
@@ -160,4 +160,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
     if args.dataset_name == 'snp':
         COLUMNS_NAME = COLUMNS_NAME_SNP
+    elif args.dataset_name == 'vbm':
+        COLUMNS_NAME = COLUMNS_NAME_VBM
     main(args.dataset_name)

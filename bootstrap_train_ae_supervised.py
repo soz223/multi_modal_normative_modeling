@@ -11,7 +11,7 @@ import tensorflow as tf
 import pandas as pd
 import os
 import argparse
-from utils import COLUMNS_NAME, load_dataset, COLUMNS_NAME_SNP
+from utils import COLUMNS_NAME, load_dataset, COLUMNS_NAME_SNP, COLUMNS_NAME_VBM
 from models import make_encoder_model_v111, make_decoder_model_v1, make_discriminator_model_v1
 import argparse
 
@@ -251,4 +251,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
     if args.dataset_name == 'snp':
         COLUMNS_NAME = COLUMNS_NAME_SNP
+    elif args.dataset_name == 'vbm':
+        COLUMNS_NAME = COLUMNS_NAME_VBM
     main(args.dataset_name)

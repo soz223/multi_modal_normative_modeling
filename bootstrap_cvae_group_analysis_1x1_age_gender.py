@@ -19,7 +19,7 @@ from scipy import stats
 from sklearn.metrics import roc_curve, auc
 from tqdm import tqdm
 import os
-from utils import COLUMNS_NAME, load_dataset, cliff_delta, COLUMNS_NAME_SNP
+from utils import COLUMNS_NAME, load_dataset, cliff_delta, COLUMNS_NAME_SNP, COLUMNS_NAME_VBM
 from scipy import interp
 from numpy import linspace
 
@@ -338,5 +338,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     if args.dataset_name == 'snp':
         COLUMNS_NAME = COLUMNS_NAME_SNP
+    elif args.dataset_name == 'vbm':
+        COLUMNS_NAME = COLUMNS_NAME_VBM
 
     main(args.dataset_name, args.comb_label, args.hz_para_list)

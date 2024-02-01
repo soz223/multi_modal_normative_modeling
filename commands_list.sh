@@ -7,13 +7,27 @@ for dataset in "av45" "fdg" "vbm" "snp"
 do
     echo "Processing dataset: $dataset"
 
-    ./bootstrap_train_ae_supervised.py -D "$dataset" 
+    ./bootstrap_train_cvae_supervised.py -D "$dataset" 
 
-    ./bootstrap_test_ae_supervised.py -D "$dataset"
+    ./bootstrap_test_cvae_supervised.py -D "$dataset"
 
-    ./bootstrap_ae_group_analysis_1x1.py -D "$dataset" -L 0
+    ./bootstrap_cvae_group_analysis_1x1.py -D "$dataset" -L 0
 
 done
+
+
+
+# for dataset in "av45" "fdg" "vbm" "snp"
+# do
+#     echo "Processing dataset: $dataset"
+
+#     ./bootstrap_train_ae_supervised.py -D "$dataset" 
+
+#     ./bootstrap_test_ae_supervised.py -D "$dataset"
+
+#     ./bootstrap_ae_group_analysis_1x1.py -D "$dataset" -L 0
+
+# done
 
 
 

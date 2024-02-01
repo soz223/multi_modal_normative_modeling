@@ -19,7 +19,7 @@ from VAE import VAE
 from sklearn.preprocessing import RobustScaler
 from utils_vae import plot_losses, MyDataset_labels, Logger, reconstruction_deviation, latent_deviation, separate_latent_deviation, latent_pvalues, reconstruction_deviation_seperate_roi
 import argparse
-from utils import COLUMNS_NAME, load_dataset, COLUMNS_NAME_SNP
+from utils import COLUMNS_NAME, load_dataset, COLUMNS_NAME_SNP, COLUMNS_NAME_VBM
 
 PROJECT_ROOT = Path.cwd()
 
@@ -310,5 +310,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     if args.dataset_name == 'snp':
         COLUMNS_NAME = COLUMNS_NAME_SNP
+    elif args.dataset_name == 'vbm':
+        COLUMNS_NAME = COLUMNS_NAME_VBM
 
     main(args.dataset_name)

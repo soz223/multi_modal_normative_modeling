@@ -278,3 +278,59 @@ Specificity: $ 47.28 \pm 10.75 $
 
 
 
+Experiment settings: CVAE. Dataset av45
+AUC-ROC: $ 60.84 \pm 2.44 $ 
+Accuracy: $ 53.79 \pm 5.28 $ 
+Sensitivity: $ 72.88 \pm 12.27 $ 
+Specificity: $ 47.28 \pm 10.75 $ 
+
+
+
+Experiment settings: CVAE. Dataset fdg
+AUC-ROC: $ 69.18 \pm 1.37 $ 
+Accuracy: $ 64.11 \pm 5.40 $ 
+Sensitivity: $ 68.75 \pm 10.22 $ 
+Specificity: $ 62.52 \pm 10.61 $ 
+
+
+
+Experiment settings: CVAE. Dataset snp
+AUC-ROC: $ 52.19 \pm 1.38 $ 
+Accuracy: $ 51.34 \pm 8.63 $ 
+Sensitivity: $ 60.67 \pm 18.31 $ 
+Specificity: $ 48.16 \pm 17.70 $ 
+
+
+
+Experiment settings: CVAE. Dataset av45
+AUC-ROC: $ 60.84 \pm 2.44 $ 
+Accuracy: $ 53.79 \pm 5.28 $ 
+Sensitivity: $ 72.88 \pm 12.27 $ 
+Specificity: $ 47.28 \pm 10.75 $ 
+
+
+
+Experiment settings: CVAE. Dataset fdg
+AUC-ROC: $ 69.18 \pm 1.37 $ 
+Accuracy: $ 64.11 \pm 5.40 $ 
+Sensitivity: $ 68.75 \pm 10.22 $ 
+Specificity: $ 62.52 \pm 10.61 $ 
+
+
+
+Experiment settings: CVAE. Dataset vbm
+AUC-ROC: $ 58.81 \pm 1.61 $ 
+Accuracy: $ 48.68 \pm 5.39 $ 
+Sensitivity: $ 82.40 \pm 11.80 $ 
+Specificity: $ 37.18 \pm 11.15 $ 
+
+
+
+Experiment settings: CVAE. Dataset snp
+AUC-ROC: $ 52.19 \pm 1.38 $ 
+Accuracy: $ 51.34 \pm 8.63 $ 
+Sensitivity: $ 60.67 \pm 18.31 $ 
+Specificity: $ 48.16 \pm 17.70 $ 
+
+
+

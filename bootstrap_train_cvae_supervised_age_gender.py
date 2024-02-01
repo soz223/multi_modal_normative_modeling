@@ -8,7 +8,7 @@ from sklearn.preprocessing import RobustScaler
 import numpy as np
 from sklearn.preprocessing import RobustScaler, OneHotEncoder
 
-from utils import COLUMNS_NAME, load_dataset, COLUMNS_NAME_SNP
+from utils import COLUMNS_NAME, load_dataset, COLUMNS_NAME_SNP, COLUMNS_NAME_VBM
 from utils_vae import plot_losses, MyDataset_labels, Logger
 import torch
 from cVAE import cVAE
@@ -400,6 +400,8 @@ if __name__ == "__main__":
 
     if args.dataset_name == 'snp':
         COLUMNS_NAME = COLUMNS_NAME_SNP
+    elif args.dataset_name == 'vbm':
+        COLUMNS_NAME = COLUMNS_NAME_VBM
 
 
     main(a, b, args.alpha_focal, args.gamma_focal, args.lambda_reg, args.dataset_name)
