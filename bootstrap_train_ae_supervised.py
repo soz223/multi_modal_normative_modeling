@@ -18,7 +18,7 @@ import argparse
 PROJECT_ROOT = Path.cwd()
 
 
-def main(dataset_name):
+def main(dataset_name, hz_para_list, base_lr=0.0001, max_lr=0.005):
     """Train the normative method on the bootstrapped samples.
 
     The script also the scaler and the demographic data encoder.
@@ -101,8 +101,11 @@ def main(dataset_name):
         # Create models
         n_features = x_data_normalized.shape[1]
         n_labels = y_data.shape[1]
-        h_dim = [100, 100]
-        z_dim = 10
+
+
+        h_dim = hz_para_list[:-1]
+        z_dim = hz_para_list[-1]
+
 
         encoder = make_encoder_model_v111(n_features, h_dim, z_dim)
         decoder = make_decoder_model_v1(z_dim, n_features, h_dim) 
@@ -124,8 +127,8 @@ def main(dataset_name):
 
         # -------------------------------------------------------------------------------------------------------------
         # Define optimizers
-        base_lr = 0.0001
-        max_lr = 0.005
+        # base_lr = 0.0001
+        # max_lr = 0.005
 
         step_size = 2 * np.ceil(n_samples / batch_size)
 
@@ -248,9 +251,24 @@ if __name__ == "__main__":
                     dest='dataset_name',
                     help='Dataset to use for training test and evaluation.',
                     type=str)
+    parser.add_argument('-H', '--hz_para_list',
+                        dest='hz_para_list',
+                        nargs='+',
+                        help='List of paras to perform the analysis.',
+                        type=int)
+    # add base_lr to parse
+    # add max_lr to parse
+    parser.add_argument('-B', '--base_lr',
+                        dest='base_lr',
+                        help='Base learning rate.',
+                        type=float)
+    parser.add_argument('-M', '--max_lr',
+                        dest='max_lr',
+                        help='Max learning rate.',
+                        type=float)
     args = parser.parse_args()
     if args.dataset_name == 'snp':
         COLUMNS_NAME = COLUMNS_NAME_SNP
     elif args.dataset_name == 'vbm':
         COLUMNS_NAME = COLUMNS_NAME_VBM
-    main(args.dataset_name)
+    main(args.dataset_name, args.hz_para_list, args.base_lr, args.max_lr)
