@@ -72971,3 +72971,364 @@ hz_para_list: [10, 10]
 
 
 
+experiment settings
+args.dataset: av45
+args.alpha_focal: 0.01
+args.gamma_focal: 1.0
+args.lambda_reg: 0.0
+experiment done (under regularization loss)
+Experiment settings: FAAE. Dataset av45
+auc_roc: mean and std
+0.5797064777327935 0.05448104255099199
+accuracy: mean and std
+0.5845070422535211 0.09084234082589915
+sensitivity: mean and std
+0.5682692307692306 0.16970268553941611
+specificity: mean and std
+0.6289473684210527 0.1467326511521121
+hz_para_list: [90, 90, 90, 10]
+
+
+
+experiment settings
+args.dataset: fdg
+args.alpha_focal: 0.01
+args.gamma_focal: 1.0
+args.lambda_reg: 0.0
+experiment done (under regularization loss)
+Experiment settings: FAAE. Dataset fdg
+auc_roc: mean and std
+0.6542004048582996 0.040039160500902254
+accuracy: mean and std
+0.7021126760563381 0.03713745598150763
+sensitivity: mean and std
+0.7375 0.06648536120408664
+specificity: mean and std
+0.6052631578947368 0.06962503450169975
+hz_para_list: [90, 90, 90, 10]
+
+
+
+experiment settings
+args.dataset: vbm
+args.alpha_focal: 0.01
+args.gamma_focal: 1.0
+args.lambda_reg: 0.0
+experiment done (under regularization loss)
+Experiment settings: FAAE. Dataset vbm
+auc_roc: mean and std
+0.5534412955465587 0.03319097379604787
+accuracy: mean and std
+0.6633802816901408 0.09250851759815791
+sensitivity: mean and std
+0.7644230769230769 0.20961758996722732
+specificity: mean and std
+0.38684210526315793 0.23539028709277224
+hz_para_list: [90, 90, 90, 10]
+
+
+
+experiment settings
+args.dataset: snp
+args.alpha_focal: 0.01
+args.gamma_focal: 1.0
+args.lambda_reg: 0.0
+experiment done (under regularization loss)
+Experiment settings: FAAE. Dataset snp
+auc_roc: mean and std
+0.5540232793522268 0.014625090176623176
+accuracy: mean and std
+0.597887323943662 0.06852731468954411
+sensitivity: mean and std
+0.6250000000000001 0.13973770865065346
+specificity: mean and std
+0.5236842105263158 0.13338237786814935
+hz_para_list: [90, 90, 90, 10]
+
+
+
+experiment settings
+args.dataset: av45
+args.alpha_focal: 0.01
+args.gamma_focal: 1.0
+args.lambda_reg: 0.0
+experiment done (under regularization loss)
+Experiment settings: FAAE. Dataset av45
+auc_roc: mean and std
+0.5980263157894736 0.03842243110883196
+accuracy: mean and std
+0.6309859154929578 0.05885234483317232
+sensitivity: mean and std
+0.6519230769230769 0.11120640226769969
+specificity: mean and std
+0.5736842105263158 0.1102754044197735
+hz_para_list: [100, 100, 10]
+
+
+
+experiment settings
+args.dataset: fdg
+args.alpha_focal: 0.01
+args.gamma_focal: 1.0
+args.lambda_reg: 0.0
+experiment done (under regularization loss)
+Experiment settings: FAAE. Dataset fdg
+auc_roc: mean and std
+0.6637145748987855 0.042090692793923905
+accuracy: mean and std
+0.7098591549295774 0.027778990032839474
+sensitivity: mean and std
+0.7615384615384615 0.07192924695871171
+specificity: mean and std
+0.5684210526315789 0.11780541729262839
+hz_para_list: [100, 100, 10]
+
+
+
+experiment settings
+args.dataset: vbm
+args.alpha_focal: 0.01
+args.gamma_focal: 1.0
+args.lambda_reg: 0.0
+experiment done (under regularization loss)
+Experiment settings: FAAE. Dataset vbm
+auc_roc: mean and std
+0.5665485829959515 0.02303493409922693
+accuracy: mean and std
+0.6246478873239436 0.09252191899729209
+sensitivity: mean and std
+0.6711538461538462 0.19821690348807885
+specificity: mean and std
+0.4973684210526315 0.19918462600175008
+hz_para_list: [100, 100, 10]
+
+
+
+experiment settings
+args.dataset: snp
+args.alpha_focal: 0.01
+args.gamma_focal: 1.0
+args.lambda_reg: 0.0
+experiment done (under regularization loss)
+Experiment settings: FAAE. Dataset snp
+auc_roc: mean and std
+0.5477985829959514 0.024390520694608685
+accuracy: mean and std
+0.6105633802816901 0.09073582250805386
+sensitivity: mean and std
+0.6576923076923077 0.20361924962185685
+specificity: mean and std
+0.48157894736842105 0.22547272593044188
+hz_para_list: [100, 100, 10]
+
+
+
+experiment settings
+args.dataset: av45
+args.alpha_focal: 0.01
+args.gamma_focal: 1.0
+args.lambda_reg: 0.0
+experiment done (under regularization loss)
+Experiment settings: FAAE. Dataset av45
+auc_roc: mean and std
+0.5000759109311741 0.09017226373549242
+accuracy: mean and std
+0.4556338028169014 0.14252693011628137
+sensitivity: mean and std
+0.325 0.2586091611386806
+specificity: mean and std
+0.8131578947368421 0.1828710700325441
+hz_para_list: [300, 300, 30]
+
+
+
+experiment settings
+args.dataset: fdg
+args.alpha_focal: 0.01
+args.gamma_focal: 1.0
+args.lambda_reg: 0.0
+experiment done (under regularization loss)
+Experiment settings: FAAE. Dataset fdg
+auc_roc: mean and std
+0.6479251012145749 0.026601387411645038
+accuracy: mean and std
+0.7147887323943662 0.03860414105257956
+sensitivity: mean and std
+0.7721153846153845 0.07498150659569963
+specificity: mean and std
+0.5578947368421052 0.06636589585746575
+hz_para_list: [300, 300, 30]
+
+
+
+experiment settings
+args.dataset: vbm
+args.alpha_focal: 0.01
+args.gamma_focal: 1.0
+args.lambda_reg: 0.0
+experiment done (under regularization loss)
+Experiment settings: FAAE. Dataset vbm
+auc_roc: mean and std
+0.5553643724696355 0.03382819893312708
+accuracy: mean and std
+0.6267605633802817 0.055091851311571675
+sensitivity: mean and std
+0.6798076923076923 0.11792476415070755
+specificity: mean and std
+0.48157894736842105 0.12623352584433112
+hz_para_list: [300, 300, 30]
+
+
+
+experiment settings
+args.dataset: snp
+args.alpha_focal: 0.01
+args.gamma_focal: 1.0
+args.lambda_reg: 0.0
+experiment done (under regularization loss)
+Experiment settings: FAAE. Dataset snp
+auc_roc: mean and std
+0.5626012145748989 0.022545305164626876
+accuracy: mean and std
+0.5253521126760563 0.09139749060793026
+sensitivity: mean and std
+0.46634615384615385 0.19260793869240508
+specificity: mean and std
+0.6868421052631579 0.18772954554749272
+hz_para_list: [300, 300, 30]
+
+
+
+experiment settings
+args.dataset: av45
+args.alpha_focal: 0.01
+args.gamma_focal: 1.0
+args.lambda_reg: 0.0
+experiment done (under regularization loss)
+Experiment settings: FAAE. Dataset av45
+auc_roc: mean and std
+0.5818066801619433 0.073521699579184
+accuracy: mean and std
+0.5690140845070423 0.11570746140023028
+sensitivity: mean and std
+0.5201923076923076 0.19304905177320228
+specificity: mean and std
+0.7026315789473684 0.10595169546945998
+hz_para_list: [200, 200, 10]
+
+
+
+experiment settings
+args.dataset: fdg
+args.alpha_focal: 0.01
+args.gamma_focal: 1.0
+args.lambda_reg: 0.0
+experiment done (under regularization loss)
+Experiment settings: FAAE. Dataset fdg
+auc_roc: mean and std
+0.6903846153846154 0.041752576341696206
+accuracy: mean and std
+0.7112676056338028 0.04189992895955921
+sensitivity: mean and std
+0.739423076923077 0.09454910905803734
+specificity: mean and std
+0.6342105263157894 0.11853795399531795
+hz_para_list: [200, 200, 10]
+
+
+
+experiment settings
+args.dataset: vbm
+args.alpha_focal: 0.01
+args.gamma_focal: 1.0
+args.lambda_reg: 0.0
+experiment done (under regularization loss)
+Experiment settings: FAAE. Dataset vbm
+auc_roc: mean and std
+0.5676872469635627 0.019256139375413855
+accuracy: mean and std
+0.6063380281690142 0.11051851606125766
+sensitivity: mean and std
+0.6326923076923078 0.23825207922374544
+specificity: mean and std
+0.5342105263157894 0.24206235317678948
+hz_para_list: [200, 200, 10]
+
+
+
+experiment settings
+args.dataset: snp
+args.alpha_focal: 0.01
+args.gamma_focal: 1.0
+args.lambda_reg: 0.0
+experiment done (under regularization loss)
+Experiment settings: FAAE. Dataset snp
+auc_roc: mean and std
+0.544331983805668 0.02210380096675217
+accuracy: mean and std
+0.5464788732394368 0.09682522390026599
+sensitivity: mean and std
+0.5182692307692307 0.20262925964407344
+specificity: mean and std
+0.6236842105263158 0.19553534724484128
+hz_para_list: [200, 200, 10]
+
+
+
+experiment settings
+args.dataset: av45
+args.alpha_focal: 0.01
+args.gamma_focal: 1.0
+args.lambda_reg: 0.0
+experiment done (under regularization loss)
+Experiment settings: FAAE. Dataset av45
+auc_roc: mean and std
+0.6008603238866397 0.024667665603689767
+accuracy: mean and std
+0.6612676056338028 0.047288090039998704
+sensitivity: mean and std
+0.7134615384615384 0.09526512366539104
+specificity: mean and std
+0.5184210526315789 0.09989606787422269
+hz_para_list: [20, 10]
+
+
+
+experiment settings
+args.dataset: fdg
+args.alpha_focal: 0.01
+args.gamma_focal: 1.0
+args.lambda_reg: 0.0
+experiment done (under regularization loss)
+Experiment settings: FAAE. Dataset fdg
+auc_roc: mean and std
+0.7445597165991902 0.018687130634690685
+accuracy: mean and std
+0.6704225352112676 0.029341784022534734
+sensitivity: mean and std
+0.6240384615384615 0.06926414793635385
+specificity: mean and std
+0.7973684210526315 0.09119854447980766
+hz_para_list: [20, 10]
+
+
+
+experiment settings
+args.dataset: vbm
+args.alpha_focal: 0.01
+args.gamma_focal: 1.0
+args.lambda_reg: 0.0
+experiment done (under regularization loss)
+Experiment settings: FAAE. Dataset vbm
+auc_roc: mean and std
+0.6025556680161943 0.0205676913370706
+accuracy: mean and std
+0.6154929577464789 0.0841070345173725
+sensitivity: mean and std
+0.6403846153846154 0.17573808847158026
+specificity: mean and std
+0.5473684210526316 0.17127515889761033
+hz_para_list: [20, 10]
+
+
+

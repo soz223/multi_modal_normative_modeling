@@ -17,8 +17,11 @@ import argparse
 
 PROJECT_ROOT = Path.cwd()
 
+# define device as cuda:1
+os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 
-def main(dataset_name, hz_para_list, base_lr=0.0001, max_lr=0.005):
+
+def main(dataset_name, hz_para_list=[100, 100, 10], base_lr=0.0001, max_lr=0.005):
     """Train the normative method on the bootstrapped samples.
 
     The script also the scaler and the demographic data encoder.
@@ -54,6 +57,7 @@ def main(dataset_name, hz_para_list, base_lr=0.0001, max_lr=0.005):
         # ----------------------------------------------------------------------------
         # Loading data
         dataset_df = load_dataset(participants_path, ids_path, freesurfer_path)
+
 
         # ----------------------------------------------------------------------------
         dataset_df = dataset_df.loc[dataset_df['DIA'] == 2]      

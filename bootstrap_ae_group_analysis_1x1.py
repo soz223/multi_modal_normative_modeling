@@ -88,7 +88,7 @@ def compute_classification_performance(reconstruction_error_df, clinical_df, dis
 
 
 
-def main(dataset_name, comb_label):
+def main(dataset_name, comb_label, hz_para_list):
     """Perform the group analysis."""
     # ----------------------------------------------------------------------------
     n_bootstrap = 10
@@ -178,6 +178,7 @@ def main(dataset_name, comb_label):
         f.write('Accuracy: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(accuracy_list) * 100, np.std(accuracy_list) * 100))
         f.write('Sensitivity: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(sensitivity_list) * 100, np.std(sensitivity_list) * 100))
         f.write('Specificity: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(specificity_list) * 100, np.std(specificity_list) * 100))
+        f.write('hz_para_list: ' + str(hz_para_list) + '\n')
         f.write('\n\n\n')
 
 
@@ -287,4 +288,4 @@ if __name__ == "__main__":
         COLUMNS_NAME = COLUMNS_NAME_SNP
     elif args.dataset_name == 'vbm':
         COLUMNS_NAME = COLUMNS_NAME_VBM
-    main(args.dataset_name, args.comb_label)
+    main(args.dataset_name, args.comb_label, args.hz_para_list)
