@@ -26,7 +26,7 @@ from numpy import linspace
 PROJECT_ROOT = Path.cwd()
 result_focal_dir = './result_focal'
 
-def compute_brain_regions_deviations(diff_df, clinical_df, disease_label, hc_label=1):
+def compute_brain_regions_deviations(diff_df, clinical_df, hc_label, disease_label):
     """ Calculate the Cliff's delta effect size between groups."""
     region_df = pd.DataFrame(columns=['regions', 'pvalue', 'effect_size'])
 
@@ -160,7 +160,7 @@ def main(dataset_name, comb_label, hz_para_list, hc_label, disease_label):
         # ----------------------------------------------------------------------------
         # Compute effect size of the brain regions for the bootstrap iteration
         diff_df = np.abs(normalized_df - reconstruction_df)
-        region_df = compute_brain_regions_deviations(diff_df, clinical_df, disease_label)
+        region_df = compute_brain_regions_deviations(diff_df, clinical_df, hc_label, disease_label)
         effect_size_list.append(region_df['effect_size'].values)
         region_df.to_csv(analysis_dir / 'regions_analysis.csv', index=False)
 

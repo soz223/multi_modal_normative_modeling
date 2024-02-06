@@ -25,14 +25,11 @@ PROJECT_ROOT = Path.cwd()
 result_baseline = './result_baseline/'
 
 
-def compute_brain_regions_deviations(diff_df, clinical_df, disease_label, mci_label, hc_label):
+def compute_brain_regions_deviations(diff_df, clinical_df, hc_label, disease_label):
     """ Calculate the Cliff's delta effect size between groups."""
     region_df = pd.DataFrame(columns=['regions', 'pvalue', 'effect_size'])
 
     diff_hc = diff_df.loc[clinical_df['DIA'] == disease_label]
-    # add mci label in to the hc group
-    diff_hc = diff_hc.append(diff_df.loc[clinical_df['DIA'] == mci_label])
-
 
     diff_patient = diff_df.loc[clinical_df['DIA'] == hc_label]
 
@@ -45,7 +42,7 @@ def compute_brain_regions_deviations(diff_df, clinical_df, disease_label, mci_la
 
 
 
-def compute_classification_performance(reconstruction_error_df, clinical_df, disease_label, hc_label):
+def compute_classification_performance(reconstruction_error_df, clinical_df, hc_label, disease_label):
     """ Calculate the AUCs and accuracy of the normative model."""
     error_hc = reconstruction_error_df.loc[clinical_df['DIA'] == hc_label]['Reconstruction error']
     error_patient = reconstruction_error_df.loc[clinical_df['DIA'] == disease_label]['Reconstruction error']
@@ -91,14 +88,10 @@ def compute_classification_performance(reconstruction_error_df, clinical_df, dis
 
 
 
-def main(dataset_name, comb_label, hz_para_list):
+def main(dataset_name, comb_label, hz_para_list, hc_label, disease_label):
     """Perform the group analysis."""
     # ----------------------------------------------------------------------------
     n_bootstrap = 10
-
-    disease_label = 0
-    mci_label = 0
-    hc_label = 2
     
 
     model_name = 'supervised_ae'
@@ -145,7 +138,7 @@ def main(dataset_name, comb_label, hz_para_list):
         # Compute effect size of the brain regions for the bootstrap iteration
         diff_df = np.abs(normalized_df - reconstruction_df)
         # region_df = compute_brain_regions_deviations(diff_df, clinical_df, disease_label, hc_label)
-        region_df = compute_brain_regions_deviations(diff_df, clinical_df, disease_label, mci_label, hc_label)
+        region_df = compute_brain_regions_deviations(diff_df, clinical_df, hc_label, disease_label)
         effect_size_list.append(region_df['effect_size'].values)
         region_df.to_csv(analysis_dir / 'regions_analysis.csv', index=False)
 
@@ -153,7 +146,7 @@ def main(dataset_name, comb_label, hz_para_list):
         # Compute AUC-ROC for the bootstrap iteration
         # roc_auc, tpr,  = compute_classification_performance(reconstruction_error_df, clinical_df, disease_label)
         # roc_auc, tpr, accuracy, accuracy_in_hc, accuracy_in_ad, recall, specificity = compute_classification_performance(reconstruction_error_df, clinical_df, disease_label, hc_label)
-        roc_auc, tpr, accuracy, accuracy_in_hc, accuracy_in_ad, recall, specificity, significance_ratio = compute_classification_performance(reconstruction_error_df, clinical_df, disease_label, hc_label)
+        roc_auc, tpr, accuracy, accuracy_in_hc, accuracy_in_ad, recall, specificity, significance_ratio = compute_classification_performance(reconstruction_error_df, clinical_df, hc_label, disease_label)
         auc_roc_list.append(roc_auc)
         tpr_list.append(tpr)
         accuracy_list.append(accuracy)
@@ -294,4 +287,58 @@ if __name__ == "__main__":
         COLUMNS_NAME = COLUMNS_NAME_SNP
     elif args.dataset_name == 'vbm':
         COLUMNS_NAME = COLUMNS_NAME_VBM
-    main(args.dataset_name, args.comb_label, args.hz_para_list)
+
+    mean_auc_roc_list = []
+    std_auc_roc_list = []
+    mean_accuracy_list = []
+    std_accuracy_list = []
+    mean_accuracy_in_hc_list = []
+    std_accuracy_in_hc_list = []
+    mean_accuracy_in_ad_list = []
+    std_accuracy_in_ad_list = []
+    mean_recall_list = []
+    std_recall_list = []
+    mean_specificity_list = []
+    std_specificity_list = []
+    mean_significance_ratio_list = []
+    std_significance_ratio_list = []
+
+    hc_patient_comb_list = [[2, 0], [2, 1], [1, 0]]
+    
+    
+    for hc_patient_comb in hc_patient_comb_list:
+
+        mean_auc_roc, std_auc_roc, \
+        mean_accuracy, std_accuracy, \
+        mean_accuracy_in_hc, std_accuracy_in_hc, \
+        mean_accuracy_in_ad, std_accuracy_in_ad, \
+        mean_recall, std_recall, \
+        mean_specificity, std_specificity, \
+        mean_significance_ratio, std_significance_ratio = main(args.dataset_name, args.comb_label, args.hz_para_list, hc_patient_comb[0], hc_patient_comb[1])
+
+
+        mean_auc_roc_list.append(mean_auc_roc)
+        std_auc_roc_list.append(std_auc_roc)
+        mean_accuracy_list.append(mean_accuracy)
+        std_accuracy_list.append(std_accuracy)
+        mean_accuracy_in_hc_list.append(mean_accuracy_in_hc)
+        std_accuracy_in_hc_list.append(std_accuracy_in_hc)
+        mean_accuracy_in_ad_list.append(mean_accuracy_in_ad)
+        std_accuracy_in_ad_list.append(std_accuracy_in_ad)
+        mean_recall_list.append(mean_recall)
+        std_recall_list.append(std_recall)
+        mean_specificity_list.append(mean_specificity)
+        std_specificity_list.append(std_specificity)
+        mean_significance_ratio_list.append(mean_significance_ratio)
+        std_significance_ratio_list.append(std_significance_ratio)
+
+    with open(os.path.join(result_baseline, 'result_4.txt'), 'a') as f:
+        f.write('Experiment settings: FAAE. Average Report. Dataset {}\n'.format(args.dataset_name))
+        f.write('auc_roc: mean\n' + str(np.mean(mean_auc_roc_list)) + '\n')
+        f.write('accuracy: mean\n' + str(np.mean(mean_accuracy_list)) + '\n')
+        f.write('sensitivity: mean\n' + str(np.mean(mean_recall_list)) + '\n')
+        f.write('specificity: mean\n' + str(np.mean(mean_specificity_list)) + '\n')
+        f.write('significance_ratio: mean\n' + str(np.mean(mean_significance_ratio_list)) + '\n')
+        f.write('hz_para_list: ' + str(args.hz_para_list) + '\n')
+        f.write('\n\n\n')
+
