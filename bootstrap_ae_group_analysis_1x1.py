@@ -45,13 +45,10 @@ def compute_brain_regions_deviations(diff_df, clinical_df, disease_label, mci_la
 
 
 
-def compute_classification_performance(reconstruction_error_df, clinical_df, disease_label, mci_label, hc_label):
+def compute_classification_performance(reconstruction_error_df, clinical_df, disease_label, hc_label):
     """ Calculate the AUCs and accuracy of the normative model."""
     error_hc = reconstruction_error_df.loc[clinical_df['DIA'] == hc_label]['Reconstruction error']
-    error_ad = reconstruction_error_df.loc[clinical_df['DIA'] == disease_label]['Reconstruction error']
-    error_mci = reconstruction_error_df.loc[clinical_df['DIA'] == mci_label]['Reconstruction error']
-    
-    error_patient = error_ad.append(error_mci)
+    error_patient = reconstruction_error_df.loc[clinical_df['DIA'] == disease_label]['Reconstruction error']
 
     labels = list(np.zeros_like(error_hc)) + list(np.ones_like(error_patient))
 
@@ -80,11 +77,17 @@ def compute_classification_performance(reconstruction_error_df, clinical_df, dis
 
     recall = TP / (TP + FN)
     specificity = TN / (TN + FP)
+    significance_ratio = recall / (1 - specificity) 
+
+
+    # significance ratio
+    # print('Significance ratio:', (TP + TN) / (TP + TN + FP + FN))
+
 
     # print('Recall (Sensitivity):', recall)
     # print('Specificity:', specificity)
 
-    return roc_auc, tpr, accuracy, accuracy_in_hc, accuracy_in_ad, recall, specificity
+    return roc_auc, tpr, accuracy, accuracy_in_hc, accuracy_in_ad, recall, specificity, significance_ratio
 
 
 
@@ -121,6 +124,7 @@ def main(dataset_name, comb_label, hz_para_list):
     sensitivity_list = []
     specificity_list = []
     effect_size_list = []
+    significance_ratio_list = []
 
     for i_bootstrap in tqdm(range(n_bootstrap)):
         bootstrap_model_dir = model_dir / '{:03d}'.format(i_bootstrap)
@@ -149,12 +153,13 @@ def main(dataset_name, comb_label, hz_para_list):
         # Compute AUC-ROC for the bootstrap iteration
         # roc_auc, tpr,  = compute_classification_performance(reconstruction_error_df, clinical_df, disease_label)
         # roc_auc, tpr, accuracy, accuracy_in_hc, accuracy_in_ad, recall, specificity = compute_classification_performance(reconstruction_error_df, clinical_df, disease_label, hc_label)
-        roc_auc, tpr, accuracy, accuracy_in_hc, accuracy_in_ad, recall, specificity = compute_classification_performance(reconstruction_error_df, clinical_df, disease_label, mci_label, hc_label)
+        roc_auc, tpr, accuracy, accuracy_in_hc, accuracy_in_ad, recall, specificity, significance_ratio = compute_classification_performance(reconstruction_error_df, clinical_df, disease_label, hc_label)
         auc_roc_list.append(roc_auc)
         tpr_list.append(tpr)
         accuracy_list.append(accuracy)
         sensitivity_list.append(recall)
         specificity_list.append(specificity)
+        significance_ratio_list.append(significance_ratio)
 
     (bootstrap_dir / dataset_name).mkdir(exist_ok=True)
     comparison_dir = bootstrap_dir / dataset_name / ('{:02d}_vs_{:02d}'.format(hc_label, disease_label))
@@ -178,6 +183,7 @@ def main(dataset_name, comb_label, hz_para_list):
         f.write('Accuracy: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(accuracy_list) * 100, np.std(accuracy_list) * 100))
         f.write('Sensitivity: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(sensitivity_list) * 100, np.std(sensitivity_list) * 100))
         f.write('Specificity: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(specificity_list) * 100, np.std(specificity_list) * 100))
+        f.write('Significance ratio: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(significance_ratio_list), np.std(significance_ratio_list)))
         f.write('hz_para_list: ' + str(hz_para_list) + '\n')
         f.write('\n\n\n')
 

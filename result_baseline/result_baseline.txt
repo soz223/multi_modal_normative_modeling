@@ -683,3 +683,69 @@ hz_para_list: [10, 10, 5]
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Experiment settings: AE with dataset vbm
+AUC-ROC: $ 66.16 \pm 1.31 $ 
+Accuracy: $ 67.89 \pm 7.88 $ 
+Sensitivity: $ 72.69 \pm 15.80 $ 
+Specificity: $ 54.74 \pm 14.26 $ 
+Significance ratio: $ 1.70 \pm 0.34 $ 
+hz_para_list: [64, 32, 16, 10]
+
+
+
+Experiment settings: AE with dataset av45
+AUC-ROC: $ 71.89 \pm 1.64 $ 
+Accuracy: $ 75.70 \pm 2.56 $ 
+Sensitivity: $ 81.83 \pm 6.54 $ 
+Specificity: $ 58.95 \pm 9.06 $ 
+Significance ratio: $ 2.05 \pm 0.24 $ 
+hz_para_list: [10, 10, 5]
+
+
+
+
