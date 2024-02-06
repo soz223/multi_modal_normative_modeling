@@ -21,7 +21,7 @@ PROJECT_ROOT = Path.cwd()
 os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 
 
-def main(dataset_name, hz_para_list=[100, 100, 10], base_lr=0.0001, max_lr=0.005):
+def main(dataset_name, hz_para_list, base_lr=0.0001, max_lr=0.005):
     """Train the normative method on the bootstrapped samples.
 
     The script also the scaler and the demographic data encoder.
@@ -109,6 +109,9 @@ def main(dataset_name, hz_para_list=[100, 100, 10], base_lr=0.0001, max_lr=0.005
 
         h_dim = hz_para_list[:-1]
         z_dim = hz_para_list[-1]
+
+        print('h_dim:', h_dim)  
+        print('z_dim:', z_dim)
 
 
         encoder = make_encoder_model_v111(n_features, h_dim, z_dim)
