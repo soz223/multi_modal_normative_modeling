@@ -853,3 +853,33 @@ hz_para_list: [20, 10]
 
 
 
+Experiment settings: FAAE. Average Report. Dataset fdg
+auc_roc: mean
+0.6515449879427447
+accuracy: mean
+0.5896450857231609
+sensitivity: mean
+0.5870271122320302
+specificity: mean
+0.6970146678170837
+significance_ratio: mean
+2.1693590796839857
+hz_para_list: [20, 10]
+
+
+
+Experiment settings: FAAE. Average Report. Dataset vbm
+auc_roc: mean
+0.5603354461184487
+accuracy: mean
+0.5088650827841824
+sensitivity: mean
+0.5978079024800337
+specificity: mean
+0.5521656600517687
+significance_ratio: mean
+1.5703894887682373
+hz_para_list: [20, 10]
+
+
+

@@ -1,0 +1,15 @@
+Experiment settings: FAAE. Average Report. Dataset av45
+auc_roc: mean
+0.6524699121700847
+accuracy: mean
+0.6508878027407998
+sensitivity: mean
+0.752331862126944
+specificity: mean
+0.5498907103825137
+significance_ratio: mean
+1.7065293345727068
+hz_para_list: [90, 90, 90, 10]
+
+
+

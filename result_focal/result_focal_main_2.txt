@@ -110519,3 +110519,105 @@ hz_para_list: [20, 10]
 
 
 
+experiment settings
+args.dataset: fdg
+args.alpha_focal: 0.01
+args.gamma_focal: 5.0
+args.lambda_reg: 0.0
+experiment done (under regularization loss)
+Experiment settings: FAAE. HC_vs_AD. Dataset fdg
+auc_roc: mean and std
+0.7320850202429151 0.025407630459910513
+accuracy: mean and std
+0.6866197183098591 0.05206030867120063
+sensitivity: mean and std
+0.6663461538461537 0.10750756819375513
+specificity: mean and std
+0.7421052631578947 0.10901218514319987
+significance_ratio: mean and std
+3.0062643819855355 1.1998975442359787
+hz_para_list: [20, 10]
+
+
+
+Experiment settings: FAAE. HC_vs_MCI. Dataset fdg
+auc_roc: mean and std
+0.5291199309749783 0.012589928479891169
+accuracy: mean and std
+0.44344023323615167 0.10229414617893025
+sensitivity: mean and std
+0.4081967213114754 0.1304015669550698
+specificity: mean and std
+0.7263157894736842 0.12686285045467316
+significance_ratio: mean and std
+1.5810325503276321 0.2616096587535232
+hz_para_list: [20, 10]
+
+
+
+Experiment settings: FAAE. MCI_vs_AD. Dataset fdg
+auc_roc: mean and std
+0.6934300126103404 0.014106387875085884
+accuracy: mean and std
+0.6388753056234718 0.05490127360705042
+sensitivity: mean and std
+0.6865384615384615 0.09929485110327374
+specificity: mean and std
+0.6226229508196722 0.1058610286037746
+significance_ratio: mean and std
+1.92078030673879 0.38192472476569256
+hz_para_list: [20, 10]
+
+
+
+experiment settings
+args.dataset: vbm
+args.alpha_focal: 0.01
+args.gamma_focal: 5.0
+args.lambda_reg: 0.0
+experiment done (under regularization loss)
+Experiment settings: FAAE. HC_vs_AD. Dataset vbm
+auc_roc: mean and std
+0.5927125506072874 0.029144525501651013
+accuracy: mean and std
+0.6591549295774648 0.07085780973580433
+sensitivity: mean and std
+0.7384615384615384 0.1592674613986015
+specificity: mean and std
+0.44210526315789467 0.17840475007029782
+significance_ratio: mean and std
+1.370704757168119 0.172945033687801
+hz_para_list: [20, 10]
+
+
+
+Experiment settings: FAAE. HC_vs_MCI. Dataset vbm
+auc_roc: mean and std
+0.5088265746333046 0.01266696423255437
+accuracy: mean and std
+0.3603498542274053 0.1616286142895255
+sensitivity: mean and std
+0.3068852459016394 0.20699511254903674
+specificity: mean and std
+0.7894736842105263 0.20384122874775878
+significance_ratio: mean and std
+2.03040334867695 1.122413331577087
+hz_para_list: [20, 10]
+
+
+
+Experiment settings: FAAE. MCI_vs_AD. Dataset vbm
+auc_roc: mean and std
+0.5794672131147541 0.016581195489693935
+accuracy: mean and std
+0.5070904645476773 0.046186330328091434
+sensitivity: mean and std
+0.7480769230769231 0.08224386453978114
+specificity: mean and std
+0.4249180327868853 0.08899933417431945
+significance_ratio: mean and std
+1.3100603604596424 0.06537087650988295
+hz_para_list: [20, 10]
+
+
+
