@@ -838,3 +838,18 @@ hz_para_list: [200, 200, 10]
 
 
 
+Experiment settings: FAAE. Average Report. Dataset av45
+auc_roc: mean
+0.5693055739917259
+accuracy: mean
+0.5417028776454278
+sensitivity: mean
+0.6569493484657419
+specificity: mean
+0.5220793787748059
+significance_ratio: mean
+1.4133837711061579
+hz_para_list: [20, 10]
+
+
+
