@@ -13,3 +13,468 @@ hz_para_list: [90, 90, 90, 10]
 
 
 
+Experiment settings: FAAE. Average Report. Dataset vbm
+auc_roc: mean
+0.6319376230614367
+accuracy: mean
+0.6157927539623583
+sensitivity: mean
+0.7102480033627575
+specificity: mean
+0.519979867702042
+significance_ratio: mean
+1.5888229787477262
+hz_para_list: [200, 200, 10]
+
+
+
+Experiment settings: FAAE. Average Report. Dataset snp
+auc_roc: mean
+0.5382871230724984
+accuracy: mean
+0.504471040604186
+sensitivity: mean
+0.5335750315258512
+specificity: mean
+0.5879810181190682
+significance_ratio: mean
+inf
+hz_para_list: [200, 200, 10]
+
+
+
+Experiment settings: FAAE. Average Report. Dataset av45
+auc_roc: mean
+0.6485629466162254
+accuracy: mean
+0.6339719888781987
+sensitivity: mean
+0.7392675493905001
+specificity: mean
+0.5521052631578948
+significance_ratio: mean
+1.689270650852307
+hz_para_list: [20, 10]
+
+
+
+Experiment settings: FAAE. Average Report. Dataset fdg
+auc_roc: mean
+0.7336531824517157
+accuracy: mean
+0.6060501090136113
+sensitivity: mean
+0.6076208490962589
+specificity: mean
+0.7852574058096059
+significance_ratio: mean
+3.4129349791200503
+hz_para_list: [20, 10]
+
+
+
+Experiment settings: FAAE. Average Report. Dataset vbm
+auc_roc: mean
+0.6089913386871972
+accuracy: mean
+0.5572088737203421
+sensitivity: mean
+0.6330653635981505
+specificity: mean
+0.571196433707219
+significance_ratio: mean
+1.6894578558554045
+hz_para_list: [20, 10]
+
+
+
+Experiment settings: FAAE. Average Report. Dataset snp
+auc_roc: mean
+0.5430805457843854
+accuracy: mean
+0.6012568349571507
+sensitivity: mean
+0.6364407313997478
+specificity: mean
+0.4914150129421915
+significance_ratio: mean
+1.2902299199763176
+hz_para_list: [20, 10]
+
+
+
+Experiment settings: FAAE. Average Report. Dataset av45
+auc_roc: mean
+0.6539640439370811
+accuracy: mean
+0.6023544875192308
+sensitivity: mean
+0.6994577553593947
+specificity: mean
+0.590589588725913
+significance_ratio: mean
+1.7415361856789453
+hz_para_list: [10, 10]
+
+
+
+Experiment settings: FAAE. Average Report. Dataset fdg
+auc_roc: mean
+0.7224366717550496
+accuracy: mean
+0.6062626545159887
+sensitivity: mean
+0.6008112652374947
+specificity: mean
+0.7665976416450965
+significance_ratio: mean
+3.023754250057077
+hz_para_list: [10, 10]
+
+
+
+Experiment settings: FAAE. Average Report. Dataset vbm
+auc_roc: mean
+0.5923499203557444
+accuracy: mean
+0.5011885694688062
+sensitivity: mean
+0.5388892391761244
+specificity: mean
+0.6400287604256543
+significance_ratio: mean
+inf
+hz_para_list: [10, 10]
+
+
+
+Experiment settings: FAAE. Average Report. Dataset snp
+auc_roc: mean
+0.5415824871131171
+accuracy: mean
+0.5883615165035084
+sensitivity: mean
+0.6585634720470787
+specificity: mean
+0.4698907103825136
+significance_ratio: mean
+1.2685883106968863
+hz_para_list: [10, 10]
+
+
+
+Experiment settings: FAAE. Average Report. Dataset av45
+auc_roc: mean
+0.6466697362890201
+accuracy: mean
+0.6408580652452546
+sensitivity: mean
+0.7494525010508618
+specificity: mean
+0.5359792924935289
+significance_ratio: mean
+1.6536209933476853
+hz_para_list: [20, 20]
+
+
+
+Experiment settings: FAAE. Average Report. Dataset fdg
+auc_roc: mean
+0.7360667352492202
+accuracy: mean
+0.6269722153421837
+sensitivity: mean
+0.6229287515762926
+specificity: mean
+0.7764567155593903
+significance_ratio: mean
+3.4736729865256657
+hz_para_list: [20, 20]
+
+
+
+Experiment settings: FAAE. Average Report. Dataset vbm
+auc_roc: mean
+0.6072756963341518
+accuracy: mean
+0.5301690170295094
+sensitivity: mean
+0.6169283312316098
+specificity: mean
+0.5843025596778834
+significance_ratio: mean
+inf
+hz_para_list: [20, 20]
+
+
+
+Experiment settings: FAAE. Average Report. Dataset snp
+auc_roc: mean
+0.5501122762770735
+accuracy: mean
+0.5329947383852373
+sensitivity: mean
+0.5802269861286254
+specificity: mean
+0.5601322979580098
+significance_ratio: mean
+1.3994988736972849
+hz_para_list: [20, 20]
+
+
+
+Experiment settings: FAAE. Average Report. Dataset av45
+auc_roc: mean
+0.6577663657883676
+accuracy: mean
+0.5931343445467309
+sensitivity: mean
+0.6770344682639764
+specificity: mean
+0.6027437446074201
+significance_ratio: mean
+1.7248658093262206
+hz_para_list: [10, 10, 10]
+
+
+
+Experiment settings: FAAE. Average Report. Dataset fdg
+auc_roc: mean
+0.7134999225680847
+accuracy: mean
+0.629965458804086
+sensitivity: mean
+0.6494630096679277
+specificity: mean
+0.6992924935289042
+significance_ratio: mean
+2.342334329903276
+hz_para_list: [10, 10, 10]
+
+
+
+Experiment settings: FAAE. Average Report. Dataset vbm
+auc_roc: mean
+0.5860388597597398
+accuracy: mean
+0.48153265517292504
+sensitivity: mean
+0.5128919714165615
+specificity: mean
+0.6640379637618636
+significance_ratio: mean
+inf
+hz_para_list: [10, 10, 10]
+
+
+
+Experiment settings: FAAE. Average Report. Dataset snp
+auc_roc: mean
+0.5409856529722794
+accuracy: mean
+0.5409163260922084
+sensitivity: mean
+0.6129665825977301
+specificity: mean
+0.522668967500719
+significance_ratio: mean
+1.327614789720904
+hz_para_list: [10, 10, 10]
+
+
+
+Experiment settings: FAAE. Average Report. Dataset av45
+auc_roc: mean
+0.6481128183004801
+accuracy: mean
+0.6167241494306223
+sensitivity: mean
+0.7202732240437159
+specificity: mean
+0.576019557089445
+significance_ratio: mean
+1.7479567041791162
+hz_para_list: [20, 20, 20]
+
+
+
+Experiment settings: FAAE. Average Report. Dataset fdg
+auc_roc: mean
+0.7304921904382646
+accuracy: mean
+0.6064249107572267
+sensitivity: mean
+0.6014155107187894
+specificity: mean
+0.7850244463618061
+significance_ratio: mean
+inf
+hz_para_list: [20, 20, 20]
+
+
+
+Experiment settings: FAAE. Average Report. Dataset vbm
+auc_roc: mean
+0.5952587055596115
+accuracy: mean
+0.49916535622430097
+sensitivity: mean
+0.5555170239596469
+specificity: mean
+0.626896750071901
+significance_ratio: mean
+inf
+hz_para_list: [20, 20, 20]
+
+
+
+Experiment settings: FAAE. Average Report. Dataset snp
+auc_roc: mean
+0.5409593537753591
+accuracy: mean
+0.5808970533946657
+sensitivity: mean
+0.631686633039092
+specificity: mean
+0.5029680759275237
+significance_ratio: mean
+inf
+hz_para_list: [20, 20, 20]
+
+
+
+Experiment settings: FAAE. Average Report. Dataset av45
+auc_roc: mean
+0.6575606457821729
+accuracy: mean
+0.6105336909770919
+sensitivity: mean
+0.7077585119798234
+specificity: mean
+0.5791918320391142
+significance_ratio: mean
+1.7218061526824044
+hz_para_list: [20, 10, 10]
+
+
+
+Experiment settings: FAAE. Average Report. Dataset fdg
+auc_roc: mean
+0.7242421627840091
+accuracy: mean
+0.6117876813297328
+sensitivity: mean
+0.6128100042034469
+specificity: mean
+0.7667184354328445
+significance_ratio: mean
+3.1474831174559466
+hz_para_list: [20, 10, 10]
+
+
+
+Experiment settings: FAAE. Average Report. Dataset vbm
+auc_roc: mean
+0.5906335313378023
+accuracy: mean
+0.4906428792805733
+sensitivity: mean
+0.5605306851618326
+specificity: mean
+0.6202559677883231
+significance_ratio: mean
+inf
+hz_para_list: [20, 10, 10]
+
+
+
+Experiment settings: FAAE. Average Report. Dataset snp
+auc_roc: mean
+0.5391794152784231
+accuracy: mean
+0.5775509183370603
+sensitivity: mean
+0.6403299705758722
+specificity: mean
+0.49280989358642513
+significance_ratio: mean
+inf
+hz_para_list: [20, 10, 10]
+
+
+
+Experiment settings: FAAE. Average Report. Dataset av45
+auc_roc: mean
+0.6828989348739004
+accuracy: mean
+0.6329733677598507
+sensitivity: mean
+0.7371132828919714
+specificity: mean
+0.570981062527583
+significance_ratio: mean
+1.8970791786270216
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: FAAE. Average Report. Dataset av45
+auc_roc: mean
+0.6828989348739004
+accuracy: mean
+0.6329733677598507
+sensitivity: mean
+0.7371132828919714
+specificity: mean
+0.570981062527583
+significance_ratio: mean
+1.8970791786270216
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: FAAE. Average Report. Dataset fdg
+auc_roc: mean
+0.7483141010124816
+accuracy: mean
+0.6694819087719899
+sensitivity: mean
+0.7154875998318623
+specificity: mean
+0.6915256663498913
+significance_ratio: mean
+2.6393651837160554
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: FAAE. Average Report. Dataset vbm
+auc_roc: mean
+0.6152005534442756
+accuracy: mean
+0.5754657663653453
+sensitivity: mean
+0.6703667507356034
+specificity: mean
+0.5381239792617577
+significance_ratio: mean
+1.4900249790712785
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: FAAE. Average Report. Dataset snp
+auc_roc: mean
+0.5384509057592483
+accuracy: mean
+0.5378674836161667
+sensitivity: mean
+0.6002038671710803
+specificity: mean
+0.5085781399237773
+significance_ratio: mean
+1.3315558649273787
+hz_para_list: [110, 110, 10]
+
+
+

@@ -102,6 +102,7 @@ def main(dataset_name, comb_label, hz_para_list):
     # ----------------------------------------------------------------------------
     clinical_df = load_dataset(participants_path, ids_path, freesurfer_path)
     clinical_df = clinical_df.set_index('participant_id')
+    ids_dir = bootstrap_dir / 'ids'
 
     tpr_list = []
     auc_roc_list = []
@@ -118,6 +119,13 @@ def main(dataset_name, comb_label, hz_para_list):
 
         analysis_dir = output_dataset_dir / '{:02d}_vs_{:02d}'.format(hc_label, disease_label)
         analysis_dir.mkdir(exist_ok=True)
+        
+        test_ids_filename = 'cleaned_bootstrap_test_{:03d}.csv'.format(i_bootstrap)
+        ids_path = ids_dir / test_ids_filename
+
+        # ----------------------------------------------------------------------------
+        clinical_df = load_dataset(participants_path, ids_path, freesurfer_path)
+        clinical_df = clinical_df.set_index('participant_id')
 
         # ----------------------------------------------------------------------------
         normalized_df = pd.read_csv(output_dataset_dir / 'normalized.csv', index_col='participant_id')

@@ -142,6 +142,156 @@ class Discriminator(nn.Module):
     
     
 
+
+
+class mmcVAE(nn.Module):
+    def __init__(self, 
+                input_dim, 
+                hidden_dim, 
+                latent_dim,
+                c_dim, 
+                learning_rate=0.0001, 
+                non_linear=False):
+        
+        super().__init__()
+        self.input_dim = input_dim
+        self.hidden_dim = hidden_dim + [latent_dim]
+        self.latent_dim = latent_dim
+        self.c_dim = c_dim
+        self.learning_rate = learning_rate
+        self.encoder = Encoder(input_dim=input_dim, hidden_dim=self.hidden_dim, c_dim=c_dim, non_linear=non_linear)
+        self.decoder = Decoder(input_dim=input_dim, hidden_dim=self.hidden_dim, c_dim=c_dim, non_linear=non_linear) 
+        self.discriminator = Discriminator(input_dim=input_dim, hidden_dim=self.hidden_dim, c_dim=c_dim, non_linear=non_linear) 
+        self.optimizer1 = optim.Adam(list(self.encoder.parameters()) + list(self.decoder.parameters()), lr=self.learning_rate) 
+        self.optimizer2 = optim.Adam(list(self.discriminator.parameters()), lr=self.learning_rate) 
+        self.optimizer3 = optim.Adam(list(self.encoder.parameters()), lr=self.learning_rate) 
+    
+    def encode(self, x, c):
+        return self.encoder(x, c)
+
+    def reparameterise(self, mu, logvar):
+        std = torch.exp(0.5*logvar)
+        eps = torch.randn_like(mu)
+        return mu + eps*std
+
+    def decode(self, z, c):
+        return self.decoder(z, c)
+    
+    def discriminat(self, z):
+        return self.discriminator(z)
+
+    def calc_kl(self, mu, logvar):
+        return -0.5*torch.sum(1 + logvar - mu.pow(2) - logvar.exp(), dim=1).mean(0)
+    
+    def calc_ll(self, x, x_recon):
+        return compute_ll(x, x_recon)
+
+    def forward(self, x, c):
+        self.zero_grad()
+        mu, logvar = self.encode(x, c)
+        z = self.reparameterise(mu, logvar)
+        x_recon = self.decode(z, c)
+        fwd_rtn = {'x_recon': x_recon,
+                    'mu': mu,
+                    'logvar': logvar}
+        return fwd_rtn
+    
+    def forward2(self, x, c, z_dim):
+        self.zero_grad()
+        mu, logvar = self.encode(x, c)
+        z = self.reparameterise(mu, logvar)
+        dc_fake = self.discriminat(z)
+        real_distribution = torch.normal(mean=0.0,std=1.0,size=(x.shape[0],z_dim)).to(DEVICE)
+        dc_real = self.discriminat(real_distribution)
+        fwd_rtn = {'dc_fake': dc_fake,
+                   'dc_real': dc_real}
+        return fwd_rtn
+    
+    def forward3(self, x, c):
+        self.zero_grad()
+        mu, logvar = self.encode(x, c)
+        z = self.reparameterise(mu, logvar)
+        dc_fake = self.discriminat(z)
+        fwd_rtn = {'dc_fake': dc_fake}
+        return fwd_rtn
+
+    def sample_from_normal(self, normal):
+        return normal.loc
+
+    def loss_function(self, x, fwd_rtn):
+        x_recon = fwd_rtn['x_recon']
+        mu = fwd_rtn['mu']
+        logvar = fwd_rtn['logvar']
+
+        kl = self.calc_kl(mu, logvar)
+        recon = self.calc_ll(x, x_recon)
+
+        total = kl - recon
+        losses = {'total': total,
+                'kl': kl,
+                'll': recon}
+    
+        return losses
+
+    # focal loss only for the discriminator
+    def loss_function2(self, x, fwd_rtn, alpha_focal, gamma_focal, lambda_reg=0, logits=True, reduction='mean'):
+        if alpha_focal == 0:
+            loss = nn.BCEWithLogitsLoss()
+        else:
+            loss = FocalLoss(alpha_focal=alpha_focal, gamma_focal=gamma_focal, logits=True, reduction='mean')  # logits=True because we are applying it before the sigmoid activation
+        real_output = fwd_rtn['dc_real']
+        fake_output = fwd_rtn['dc_fake']
+
+        # print('alpha_focal: ', alpha_focal)
+        # print('gamma_focal: ', gamma_focal)
+
+        loss_real = loss(real_output, torch.ones_like(real_output))
+        # print('loss_real: ', loss_real)
+        loss_fake = loss(fake_output, torch.zeros_like(fake_output))
+        # print('loss_fake: ', loss_fake)
+        dc_loss = loss_real + loss_fake  # 0*loss_real because we don't want to train the discriminator on real data
+        if alpha_focal == 0:
+            dc_loss = 0*loss_real + loss_fake
+        # dc_loss = 0
+        losses = {'dc_loss':dc_loss}     
+        return losses
+
+    def loss_function3(self, x, fwd_rtn):
+        loss = nn.BCEWithLogitsLoss()
+        fake_output = fwd_rtn['dc_fake']    
+        gen_loss = loss(fake_output, torch.ones_like(fake_output))
+        losses = {'gen_loss':gen_loss}     
+        return losses
+    
+    
+    def pred_latent(self, x, c, DEVICE):
+        x = torch.FloatTensor(x.to_numpy()).to(DEVICE)
+        c = torch.LongTensor(c).to(DEVICE)
+        with torch.no_grad():
+            mu, logvar = self.encode(x, c)   
+        latent = mu.cpu().detach().numpy()
+        latent_var = logvar.exp().cpu().detach().numpy()
+        return latent, latent_var
+
+    def pred_recon(self, x, c,  DEVICE):
+        x = torch.FloatTensor(x.to_numpy()).to(DEVICE)
+        c = torch.LongTensor(c).to(DEVICE)
+        with torch.no_grad():
+            mu, _ = self.encode(x, c)
+            x_pred = self.decode(mu, c).loc.cpu().detach().numpy()
+        return x_pred
+    
+    def pred_recon_tensor(self, x,c, test_latent, test_var, DEVICE):
+        x = torch.FloatTensor(x.numpy()).to(DEVICE)
+        c = torch.LongTensor(c).to(DEVICE)
+        with torch.no_grad():
+            x_pred = self.decode(torch.from_numpy(test_latent),c).loc.cpu().detach().numpy()
+        return x_pred
+
+
+
+
+
 class cVAE(nn.Module):
     def __init__(self, 
                 input_dim, 
@@ -325,3 +475,4 @@ class cVAE(nn.Module):
         with torch.no_grad():
             x_pred = self.decode(torch.from_numpy(test_latent),c).loc.cpu().detach().numpy()
         return x_pred
+    

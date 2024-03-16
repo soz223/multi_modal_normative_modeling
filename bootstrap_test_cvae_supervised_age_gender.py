@@ -95,6 +95,8 @@ def main(dataset_name, comb_label):
 
         # ----------------------------------------------------------------------------
         # Loading data
+        test_ids_filename = 'cleaned_bootstrap_test_{:03d}.csv'.format(i_bootstrap)
+        ids_path = ids_dir / test_ids_filename
         clinical_df = load_dataset(participants_path, ids_path, freesurfer_path)
         #print(COLUMNS_NAME)
         test_data = clinical_df[COLUMNS_NAME].values

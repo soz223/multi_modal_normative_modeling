@@ -34,7 +34,7 @@ def main(dataset_name, comb_label):
     bootstrap_dir = outputs_dir / 'bootstrap_analysis'
     model_dir = bootstrap_dir / model_name
     ids_path = outputs_dir / (dataset_name + '_homogeneous_ids.csv')
-
+    
     # ----------------------------------------------------------------------------
     # Set random seed
     random_seed = 42
@@ -53,6 +53,9 @@ def main(dataset_name, comb_label):
 
         # ----------------------------------------------------------------------------
         # Loading data
+        ids_dir = bootstrap_dir / 'ids'
+        test_ids_filename = 'cleaned_bootstrap_test_{:03d}.csv'.format(i_bootstrap)
+        ids_path = ids_dir / test_ids_filename
         clinical_df = load_dataset(participants_path, ids_path, freesurfer_path)
         #print(COLUMNS_NAME)
         x_dataset = clinical_df[COLUMNS_NAME].values

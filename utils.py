@@ -63,6 +63,8 @@ def load_demographic_data(demographic_path, ids_path):
 
     else:
         ids_df['participant_id'] = ids_df['IID']
+        # print('ids_df:', ids_df)
+        # print('demographic_df:', demographic_df)
         dataset_df = pd.merge(ids_df, demographic_df, on='IID')
 
     return dataset_df

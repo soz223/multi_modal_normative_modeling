@@ -104,11 +104,12 @@ def main(dataset_name, disease_label):
     # ----------------------------------------------------------------------------
     bootstrap_dir = PROJECT_ROOT / 'outputs' / 'bootstrap_analysis'
     model_dir = bootstrap_dir / model_name
-    ids_path = PROJECT_ROOT / 'outputs' / (dataset_name + '_homogeneous_ids.csv')
+    # ids_path = PROJECT_ROOT / 'outputs' / (dataset_name + '_homogeneous_ids.csv')
 
-    # ----------------------------------------------------------------------------
-    clinical_df = load_dataset(participants_path, ids_path, freesurfer_path)
-    clinical_df = clinical_df.set_index('participant_id')
+    # # ----------------------------------------------------------------------------
+    # clinical_df = load_dataset(participants_path, ids_path, freesurfer_path)
+    # clinical_df = clinical_df.set_index('participant_id')
+    ids_dir = bootstrap_dir / 'ids'
 
     tpr_list = []
     auc_roc_list = []
@@ -125,7 +126,12 @@ def main(dataset_name, disease_label):
 
         analysis_dir = output_dataset_dir / '{:02d}_vs_{:02d}'.format(hc_label, disease_label)
         analysis_dir.mkdir(exist_ok=True)
+        test_ids_filename = 'cleaned_bootstrap_test_{:03d}.csv'.format(i_bootstrap)
+        ids_path = ids_dir / test_ids_filename
 
+        # ----------------------------------------------------------------------------
+        clinical_df = load_dataset(participants_path, ids_path, freesurfer_path)
+        clinical_df = clinical_df.set_index('participant_id')
         # ----------------------------------------------------------------------------
         normalized_df = pd.read_csv(output_dataset_dir / 'normalized.csv', index_col='participant_id')
         reconstruction_df = pd.read_csv(output_dataset_dir / 'reconstruction.csv', index_col='participant_id')
