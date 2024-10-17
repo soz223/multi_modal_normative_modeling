@@ -8,7 +8,7 @@ from sklearn.preprocessing import RobustScaler
 import numpy as np
 from sklearn.preprocessing import RobustScaler, OneHotEncoder
 
-from utils import COLUMNS_NAME, load_dataset, COLUMNS_NAME_SNP, COLUMNS_NAME_VBM
+from utils import COLUMNS_HCP, COLUMNS_NAME, load_dataset, COLUMNS_NAME_SNP, COLUMNS_NAME_VBM
 from utils_vae import plot_losses, MyDataset_labels, Logger
 import torch
 from cVAE import cVAE

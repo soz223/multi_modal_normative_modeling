@@ -10,7 +10,7 @@ import tensorflow as tf
 from tensorflow import keras
 from tqdm import tqdm
 import copy
-from utils import COLUMNS_NAME, load_dataset, COLUMNS_NAME_SNP, COLUMNS_NAME_VBM
+from utils import COLUMNS_HCP, COLUMNS_NAME, load_dataset, COLUMNS_NAME_SNP, COLUMNS_NAME_VBM
 
 PROJECT_ROOT = Path.cwd()
 

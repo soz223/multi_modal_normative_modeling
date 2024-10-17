@@ -10,19 +10,21 @@ References:
 """
 import argparse
 from pathlib import Path
-import os
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy import stats
 from sklearn.metrics import roc_curve, auc
 from tqdm import tqdm
+from numpy import interp, linspace
 
-from utils import COLUMNS_NAME, load_dataset, COLUMNS_NAME_SNP, COLUMNS_NAME_VBM, cliff_delta
+from utils import COLUMNS_HCP, COLUMNS_NAME, load_dataset, cliff_delta, COLUMNS_NAME_SNP, COLUMNS_NAME_VBM, COLUMNS_3MODALITIES
+
+import os
 
 PROJECT_ROOT = Path.cwd()
 result_baseline = './result_baseline/'
-
 
 def compute_brain_regions_deviations(diff_df, clinical_df, disease_label, hc_label=1):
     """ Calculate the Cliff's delta effect size between groups."""
@@ -31,7 +33,9 @@ def compute_brain_regions_deviations(diff_df, clinical_df, disease_label, hc_lab
     diff_hc = diff_df.loc[clinical_df['DIA'] == disease_label]
     diff_patient = diff_df.loc[clinical_df['DIA'] == hc_label]
 
-    for region in COLUMNS_NAME:
+    columns_name = diff_df.columns
+
+    for region in columns_name:
         _, pvalue = stats.mannwhitneyu(diff_hc[region], diff_patient[region])
         effect_size = cliff_delta(diff_hc[region].values, diff_patient[region].values)
 
@@ -39,8 +43,6 @@ def compute_brain_regions_deviations(diff_df, clinical_df, disease_label, hc_lab
                                      ignore_index=True)
 
     return region_df
-
-
 
 def compute_classification_performance(reconstruction_error_df, clinical_df, disease_label, hc_label=1):
     """ Calculate the AUCs and accuracy of the normative model."""
@@ -72,36 +74,26 @@ def compute_classification_performance(reconstruction_error_df, clinical_df, dis
     recall = TP / (TP + FN)
     specificity = TN / (TN + FP)
 
-    # print('Recall (Sensitivity):', recall)
-    # print('Specificity:', specificity)
+    fixed_points = 100
+    base_fpr = linspace(0, 1, fixed_points)
+    interp_tpr = interp(base_fpr, fpr, tpr)
+    interp_tpr[0] = 0.0  # Ensuring that the curve starts at 0
 
-    return roc_auc, tpr, accuracy, accuracy_in_hc, accuracy_in_ad, recall, specificity
+    return roc_auc, interp_tpr, accuracy, accuracy_in_hc, accuracy_in_ad, recall, specificity
 
-
-
-def main(dataset_name, comb_label, hz_para_list):
+def main(dataset_name, dataset_resourse, epochs, hc_label, disease_label):
     """Perform the group analysis."""
     # ----------------------------------------------------------------------------
     n_bootstrap = 10
 
-    disease_label = 0
-
     model_name = 'supervised_vae'
 
-    participants_path = PROJECT_ROOT / 'data' / 'y.csv'
-    # dataset_name to str
-    freesurfer_path = PROJECT_ROOT / 'data' / (dataset_name + '.csv')
-
-    hc_label = 1
+    participants_path = PROJECT_ROOT / 'data' / dataset_resourse / 'y.csv'
+    freesurfer_path = PROJECT_ROOT / 'data' / dataset_resourse / (dataset_name + '.csv')
 
     # ----------------------------------------------------------------------------
     bootstrap_dir = PROJECT_ROOT / 'outputs' / 'bootstrap_analysis'
     model_dir = bootstrap_dir / model_name
-    ids_path = PROJECT_ROOT / 'outputs' / (dataset_name + '_homogeneous_ids.csv')
-
-    # ----------------------------------------------------------------------------
-    clinical_df = load_dataset(participants_path, ids_path, freesurfer_path)
-    clinical_df = clinical_df.set_index('participant_id')
     ids_dir = bootstrap_dir / 'ids'
 
     tpr_list = []
@@ -110,6 +102,9 @@ def main(dataset_name, comb_label, hz_para_list):
     recall_list = []
     specificity_list = []
     effect_size_list = []
+    significance_ratio_list = []
+    accuracy_in_hc_list = []
+    accuracy_in_ad_list = []
 
     for i_bootstrap in tqdm(range(n_bootstrap)):
         bootstrap_model_dir = model_dir / '{:03d}'.format(i_bootstrap)
@@ -119,14 +114,12 @@ def main(dataset_name, comb_label, hz_para_list):
 
         analysis_dir = output_dataset_dir / '{:02d}_vs_{:02d}'.format(hc_label, disease_label)
         analysis_dir.mkdir(exist_ok=True)
-        
         test_ids_filename = 'cleaned_bootstrap_test_{:03d}.csv'.format(i_bootstrap)
         ids_path = ids_dir / test_ids_filename
 
         # ----------------------------------------------------------------------------
         clinical_df = load_dataset(participants_path, ids_path, freesurfer_path)
         clinical_df = clinical_df.set_index('participant_id')
-
         # ----------------------------------------------------------------------------
         normalized_df = pd.read_csv(output_dataset_dir / 'normalized.csv', index_col='participant_id')
         reconstruction_df = pd.read_csv(output_dataset_dir / 'reconstruction.csv', index_col='participant_id')
@@ -141,15 +134,27 @@ def main(dataset_name, comb_label, hz_para_list):
         region_df.to_csv(analysis_dir / 'regions_analysis.csv', index=False)
 
         # ----------------------------------------------------------------------------
-        # Compute AUC-ROC for the bootstrap iteration
-        # roc_auc, tpr = compute_classification_performance(reconstruction_error_df, clinical_df, disease_label)
+        # Compute ROC-AUC for the bootstrap iteration
         roc_auc, tpr, accuracy, accuracy_in_hc, accuracy_in_ad, recall, specificity = compute_classification_performance(
-            reconstruction_error_df, clinical_df, disease_label)
+            reconstruction_error_df, clinical_df, disease_label, hc_label)
+
         auc_roc_list.append(roc_auc)
         accuracy_list.append(accuracy)
         recall_list.append(recall)
         specificity_list.append(specificity)
         tpr_list.append(tpr)
+
+    if dataset_resourse == 'ADNI':
+        if dataset_name == 'av45' or dataset_name == 'fdg':
+            columns_name = COLUMNS_NAME
+        elif dataset_name == 'snp':
+            columns_name = COLUMNS_NAME_SNP
+        elif dataset_name == 'vbm':
+            columns_name = COLUMNS_NAME_VBM
+        elif dataset_name == '3modalities':
+            columns_name = COLUMNS_3MODALITIES
+    elif dataset_resourse == 'HCP':
+        columns_name = [(lambda x: dataset_name + '_'+ str(x))(y) for y in list(range(132))]
 
     (bootstrap_dir / dataset_name).mkdir(exist_ok=True)
     comparison_dir = bootstrap_dir / dataset_name / ('{:02d}_vs_{:02d}'.format(hc_label, disease_label))
@@ -157,38 +162,35 @@ def main(dataset_name, comb_label, hz_para_list):
 
     # ----------------------------------------------------------------------------
     # Save regions effect sizes
-    effect_size_df = pd.DataFrame(columns=COLUMNS_NAME, data=np.array(effect_size_list))
+    effect_size_df = pd.DataFrame(columns=columns_name, data=np.array(effect_size_list))
     effect_size_df.to_csv(comparison_dir / 'effect_size.csv')
 
     # Save AUC bootstrap values
-# =============================================================================
-#     if os.path.exists(comparison_dir/'auc_rocs_mean_std_{:02d}.csv'.format(comb_label)):
-#         auc_rocs_mean_std_list = []
-#         auc_rocs_mean_std_list.append([comb_label,hz_para_list[0], hz_para_list[1], hz_para_list[2],np.mean(auc_roc_list),np.std(auc_roc_list)])
-#         auc_rocs_COL_NAME = ['Comb_Type', 'H_DIM1','H_DIM2','Z_DIM','Mean','Std']
-#         auc_rocs_mean_std_df = pd.DataFrame(columns=auc_rocs_COL_NAME, data=np.array(auc_rocs_mean_std_list))
-#         auc_rocs_mean_std_df.to_csv(comparison_dir/'cvae_auc_rocs_mean_std_{:02d}.csv'.format(comb_label),mode='a',header=False)   
-#             
-#     else:
-#         auc_rocs_mean_std_list = []
-#         auc_rocs_mean_std_list.append([comb_label,hz_para_list[0], hz_para_list[1], hz_para_list[2],np.mean(auc_roc_list),np.std(auc_roc_list)])
-#         auc_rocs_COL_NAME = ['Comb_Type', 'H_DIM1','H_DIM2','Z_DIM','Mean','Std']
-#         auc_rocs_mean_std_df = pd.DataFrame(columns=auc_rocs_COL_NAME, data=np.array(auc_rocs_mean_std_list))
-#         auc_rocs_mean_std_df.to_csv(comparison_dir/'cvae_auc_rocs_mean_std_{:02d}.csv'.format(comb_label))   
-# =============================================================================
     auc_roc_list = np.array(auc_roc_list)
     accuracy_list = np.array(accuracy_list)
     sensitivity_list = np.array(recall_list)
     specificity_list = np.array(specificity_list)
 
+    if dataset_resourse == 'ADNI':
+        if hc_label == 2 and disease_label == 0:
+            compare_name = 'HC_vs_AD'
+        elif hc_label == 2 and disease_label == 1:
+            compare_name = 'HC_vs_MCI'
+        elif hc_label == 1 and disease_label == 0:
+            compare_name = 'MCI_vs_AD'
+    elif dataset_resourse == 'HCP':
+        compare_name = 'HC_vs_Patient'
+
     with open(result_baseline + 'result_baseline.txt', 'a') as f:
-        f.write('Experiment settings: VAE. Dataset {}\n'.format(dataset_name))
-        f.write('AUC-ROC: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(auc_roc_list) * 100, np.std(auc_roc_list) * 100))
+        f.write('Experiment settings: VAE. {}. Epochs {}. Dataset {} Dataset_resourse {}\n'.format(compare_name, epochs, dataset_name, dataset_resourse))
+        f.write('ROC-AUC: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(auc_roc_list) * 100, np.std(auc_roc_list) * 100))
         f.write('Accuracy: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(accuracy_list) * 100, np.std(accuracy_list) * 100))
         f.write('Sensitivity: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(sensitivity_list) * 100, np.std(sensitivity_list) * 100))
         f.write('Specificity: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(specificity_list) * 100, np.std(specificity_list) * 100))
-        f.write('\n\n\n')    #np.savetxt("vae_auc_and_std.csv", np.concatenate((auc_roc_list, [np.std(auc_roc_list)])), delimiter=",")
-    auc_roc_df = pd.DataFrame(columns=['AUC-ROC'], data=auc_roc_list)
+        f.write('\n\n\n')
+
+    np.savetxt("vae_auc_and_std.csv", np.concatenate((auc_roc_list, [np.std(auc_roc_list)])), delimiter=",")
+    auc_roc_df = pd.DataFrame(columns=['ROC-AUC'], data=auc_roc_list)
     auc_roc_df.to_csv(comparison_dir / 'auc_rocs.csv', index=False)
 
     # ----------------------------------------------------------------------------
@@ -197,11 +199,10 @@ def main(dataset_name, comb_label, hz_para_list):
     mean_tprs = tpr_list.mean(axis=0)
     tprs_upper = np.percentile(tpr_list, 97.5, axis=0)
     tprs_lower = np.percentile(tpr_list, 2.5, axis=0)
-    #plt.figure(figsize=(16, 20))
     plt.plot(np.linspace(0, 1, 100),
              mean_tprs,
              'b', lw=2,
-             label='ROC curve (AUC = {:0.3f} ; std = {:0.3f} ;95% CI [{:0.3f}, {:0.3f}])'.format(np.mean(auc_roc_list),np.std(auc_roc_list),
+             label='ROC curve (AUC = {:0.3f} ; 95% CI [{:0.3f}, {:0.3f}])'.format(np.mean(auc_roc_list),
                                                                                   np.percentile(auc_roc_list, 2.5),
                                                                                   np.percentile(auc_roc_list, 97.5)))
     plt.fill_between(np.linspace(0, 1, 100),
@@ -214,10 +215,16 @@ def main(dataset_name, comb_label, hz_para_list):
     plt.ylabel('True Positive Rate')
     plt.xlabel('False Positive Rate')
     plt.legend(loc='lower right')
-    plt.savefig(comparison_dir / 'AUC-ROC.pdf', format='pdf')
+    plt.savefig(comparison_dir / 'ROC-AUC.pdf', format='pdf')
     plt.show()
-    #plt.close()
-    #plt.clf()
+
+    return np.mean(auc_roc_list), np.std(auc_roc_list), \
+              np.mean(accuracy_list), np.std(accuracy_list), \
+                np.mean(accuracy_in_hc_list), np.std(accuracy_in_hc_list), \
+                np.mean(accuracy_in_ad_list), np.std(accuracy_in_ad_list), \
+                np.mean(recall_list), np.std(recall_list), \
+                np.mean(specificity_list), np.std(specificity_list), \
+                np.mean(significance_ratio_list), np.std(significance_ratio_list)
 
     # --------------------------------------------------------------------------------------------
     # Create figure for supplementary materials
@@ -236,12 +243,10 @@ def main(dataset_name, comb_label, hz_para_list):
     plt.tight_layout()
     plt.savefig(comparison_dir / 'Regions.pdf', format='pdf')
     plt.show()
-    #plt.close()
-    #plt.clf()
 
     # --------------------------------------------------------------------------------------------
     # Create Figure 4 of the paper
-    effect_size_sig_df = effect_size_df.reindex(abs(effect_size_df.mean()).sort_values().index, axis=1)
+    effect_size_sig_df = effect_size_df.reindex(effect_size_df.mean().sort_values().index, axis=1)
     lower_bound = np.percentile(effect_size_sig_df, 2.5, axis=0)
     higher_bound = np.percentile(effect_size_sig_df, 97.5, axis=0)
 
@@ -253,10 +258,10 @@ def main(dataset_name, comb_label, hz_para_list):
 
     plt.figure()
     plt.hlines(range(n_regions),
-               abs(np.percentile(effect_size_sig_df, 2.5, axis=0)),
-               abs(np.percentile(effect_size_sig_df, 97.5, axis=0)))
+               np.percentile(effect_size_sig_df, 2.5, axis=0),
+               np.percentile(effect_size_sig_df, 97.5, axis=0))
 
-    plt.plot(abs(effect_size_sig_df.mean().values), range(n_regions), 's', color='k')
+    plt.plot(effect_size_sig_df.mean().values, range(n_regions), 's', color='k')
     plt.axvline(0, ls='--')
     plt.yticks(np.arange(n_regions), effect_size_sig_df.columns)
     plt.xlabel('Effect size')
@@ -264,32 +269,82 @@ def main(dataset_name, comb_label, hz_para_list):
     plt.tight_layout()
     plt.savefig(comparison_dir / 'Significant_regions.pdf', format='pdf')
     plt.show()
-    #plt.close()
-    #plt.clf()
-    save = np.concatenate(([effect_size_sig_df.columns],
-                           [abs(effect_size_sig_df.mean().values)],
-                           [abs(np.percentile(effect_size_sig_df, 2.5, axis=0))],
-                           [abs(np.percentile(effect_size_sig_df, 97.5, axis=0))]))
-    np.savetxt("vae_effect_size.csv", save, fmt='%s', delimiter=",")
 
+    save = np.concatenate(([effect_size_sig_df.columns],
+                           [effect_size_sig_df.mean().values],
+                           [np.percentile(effect_size_sig_df, 2.5, axis=0)],
+                           [np.percentile(effect_size_sig_df, 97.5, axis=0)]))
+    np.savetxt("vae_effect_size.csv", save, fmt='%s', delimiter=",")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('-D', '--dataset_name',
                         dest='dataset_name',
                         help='Dataset name to perform group analysis.')
-    parser.add_argument('-L', '--comb_label',
-                        dest='comb_label',
-                        help='Combination label to perform group analysis.',
+    parser.add_argument('-R', '--dataset_resourse',
+                        dest='dataset_resourse',
+                        help='Dataset resourse to perform group analysis.',
+                        type=str)
+    parser.add_argument('-E', '--epochs',
+                        dest='epochs',
+                        help='Number of epochs to train the model.',
                         type=int)
-    parser.add_argument('-H', '--hz_para_list',
-                        dest='hz_para_list',
-                        nargs='+',
-                        help='List of paras to perform the analysis.',
-                        type=int)
+
     args = parser.parse_args()
-    if args.dataset_name == 'snp':
-        COLUMNS_NAME = COLUMNS_NAME_SNP
-    elif args.dataset_name == 'vbm':
-        COLUMNS_NAME = COLUMNS_NAME_VBM
-    main(args.dataset_name, args.comb_label, args.hz_para_list)
+
+    if args.dataset_name is None:
+        args.dataset_name = 'av45'
+    if args.dataset_resourse is None:
+        args.dataset_resourse = 'ADNI'
+
+    mean_auc_roc_list = []
+    std_auc_roc_list = []
+    mean_accuracy_list = []
+    std_accuracy_list = []
+    mean_accuracy_in_hc_list = []
+    std_accuracy_in_hc_list = []
+    mean_accuracy_in_ad_list = []
+    std_accuracy_in_ad_list = []
+    mean_recall_list = []
+    std_recall_list = []
+    mean_specificity_list = []
+    std_specificity_list = []
+    mean_significance_ratio_list = []
+    std_significance_ratio_list = []
+
+    if args.dataset_resourse == 'ADNI':
+        hc_patient_comb_list = [[2, 0], [2, 1], [1, 0]]
+    elif args.dataset_resourse == 'HCP':
+        hc_patient_comb_list = [[1, 0]]
+
+    for hc_patient_comb in hc_patient_comb_list:
+        mean_auc_roc, std_auc_roc, \
+        mean_accuracy, std_accuracy, \
+        mean_accuracy_in_hc, std_accuracy_in_hc, \
+        mean_accuracy_in_ad, std_accuracy_in_ad, \
+        mean_recall, std_recall, \
+        mean_specificity, std_specificity, \
+        mean_significance_ratio, std_significance_ratio = main(args.dataset_name, args.dataset_resourse, args.epochs, hc_patient_comb[0], hc_patient_comb[1])
+
+        mean_auc_roc_list.append(mean_auc_roc)
+        std_auc_roc_list.append(std_auc_roc)
+        mean_accuracy_list.append(mean_accuracy)
+        std_accuracy_list.append(std_accuracy)
+        mean_accuracy_in_hc_list.append(mean_accuracy_in_hc)
+        std_accuracy_in_hc_list.append(std_accuracy_in_hc)
+        mean_accuracy_in_ad_list.append(mean_accuracy_in_ad)
+        std_accuracy_in_ad_list.append(std_accuracy_in_ad)
+        mean_recall_list.append(mean_recall)
+        std_recall_list.append(std_recall)
+        mean_specificity_list.append(mean_specificity)
+        std_specificity_list.append(std_specificity)
+        mean_significance_ratio_list.append(mean_significance_ratio)
+        std_significance_ratio_list.append(std_significance_ratio)
+
+    with open(os.path.join(result_baseline, 'result_4.txt'), 'a') as f:
+        f.write('Experiment settings: VAE. Average Report. Dataset {} Epochs {}\n'.format(args.dataset_name, args.epochs))
+        f.write('ROC-AUC: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(mean_auc_roc_list) * 100, np.mean(std_auc_roc_list) * 100))
+        f.write('Accuracy: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(mean_accuracy_list) * 100, np.mean(std_accuracy_list) * 100))
+        f.write('Sensitivity: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(mean_recall_list) * 100, np.mean(std_recall_list) * 100))
+        f.write('Specificity: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(mean_specificity_list) * 100, np.mean(std_specificity_list) * 100))
+        f.write('\n\n\n')

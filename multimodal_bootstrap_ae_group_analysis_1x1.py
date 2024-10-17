@@ -18,7 +18,7 @@ from scipy import stats
 from sklearn.metrics import roc_curve, auc
 from tqdm import tqdm
 
-from utils import COLUMNS_NAME, load_dataset, cliff_delta, COLUMNS_NAME_SNP, COLUMNS_NAME_VBM
+from utils import COLUMNS_HCP, COLUMNS_NAME, load_dataset, cliff_delta, COLUMNS_NAME_SNP, COLUMNS_NAME_VBM, COLUMNS_3MODALITIES
 
 PROJECT_ROOT = Path.cwd()
 
@@ -88,7 +88,7 @@ def compute_classification_performance(reconstruction_error_df, clinical_df, hc_
 
 
 
-def main(dataset_name, comb_label, hz_para_list, hc_label, disease_label):
+def main(dataset_resourse, comb_label, hz_para_list, hc_label, disease_label):
     """Perform the group analysis."""
     # ----------------------------------------------------------------------------
     n_bootstrap = 10
@@ -96,11 +96,9 @@ def main(dataset_name, comb_label, hz_para_list, hc_label, disease_label):
 
     model_name = 'supervised_ae'
 
-    # participants_path = PROJECT_ROOT / 'data' / dataset_name / 'participants.tsv'
-    # freesurfer_path = PROJECT_ROOT / 'data' / dataset_name / 'freesurferData.csv'
-    participants_path = PROJECT_ROOT / 'data' / 'y.csv'
-    freesurfer_path = PROJECT_ROOT / 'data' / (dataset_name + '.csv')
-    
+    # participants_path = PROJECT_ROOT / 'data' /  'HCP' / dataset_name / 'participants.tsv'
+    # freesurfer_path = PROJECT_ROOT / 'data' /  'HCP' / dataset_name / 'freesurferData.csv'
+  
 
     # ----------------------------------------------------------------------------
     bootstrap_dir = PROJECT_ROOT / 'outputs' / 'bootstrap_analysis'
@@ -123,37 +121,80 @@ def main(dataset_name, comb_label, hz_para_list, hc_label, disease_label):
     for i_bootstrap in tqdm(range(n_bootstrap)):
         bootstrap_model_dir = model_dir / '{:03d}'.format(i_bootstrap)
 
-        output_dataset_dir = bootstrap_model_dir / dataset_name
-        output_dataset_dir.mkdir(exist_ok=True)
-
-        analysis_dir = output_dataset_dir / '{:02d}_vs_{:02d}'.format(hc_label, disease_label)
-        analysis_dir.mkdir(exist_ok=True)
-        test_ids_filename = 'cleaned_bootstrap_test_{:03d}.csv'.format(i_bootstrap)
-        ids_path = ids_dir / test_ids_filename
 
         # ----------------------------------------------------------------------------
-        clinical_df = load_dataset(participants_path, ids_path, freesurfer_path)
-        clinical_df = clinical_df.set_index('participant_id')
 
-        # ----------------------------------------------------------------------------
-        normalized_df = pd.read_csv(output_dataset_dir / 'normalized.csv', index_col='participant_id')
-        reconstruction_df = pd.read_csv(output_dataset_dir / 'reconstruction.csv', index_col='participant_id')
-        reconstruction_error_df = pd.read_csv(output_dataset_dir / 'reconstruction_error.csv',
-                                              index_col='participant_id')
+        if dataset_resourse == 'ADNI':
+            dataset_names = ['av45', 'fdg', 'vbm']
+            # dataset_names = ['av45', 'fdg', 'vbm', '3modalities']
+        elif dataset_resourse == 'HCP':
+            dataset_names = ['T1_volume', 'mean_T1_intensity', 'mean_FA', 'mean_MD', 'mean_L1', 'mean_L2', 'mean_L3', 'min_BOLD', '25_percentile_BOLD', '50_percentile_BOLD', '75_percentile_BOLD', 'max_BOLD']
+        else:
+            raise ValueError('Unknown dataset resource')
 
-        # ----------------------------------------------------------------------------
-        # Compute effect size of the brain regions for the bootstrap iteration
-        diff_df = np.abs(normalized_df - reconstruction_df)
-        # region_df = compute_brain_regions_deviations(diff_df, clinical_df, disease_label, hc_label)
-        region_df = compute_brain_regions_deviations(diff_df, clinical_df, hc_label, disease_label)
-        effect_size_list.append(region_df['effect_size'].values)
-        region_df.to_csv(analysis_dir / 'regions_analysis.csv', index=False)
 
-        # ----------------------------------------------------------------------------
-        # Compute AUC-ROC for the bootstrap iteration
-        # roc_auc, tpr,  = compute_classification_performance(reconstruction_error_df, clinical_df, disease_label)
-        # roc_auc, tpr, accuracy, accuracy_in_hc, accuracy_in_ad, recall, specificity = compute_classification_performance(reconstruction_error_df, clinical_df, disease_label, hc_label)
-        roc_auc, tpr, accuracy, accuracy_in_hc, accuracy_in_ad, recall, specificity, significance_ratio = compute_classification_performance(reconstruction_error_df, clinical_df, hc_label, disease_label)
+
+        reconstruction_error_df_list = []
+        for i_dataset, dataset_name in enumerate(dataset_names):
+
+            output_dataset_dir = bootstrap_model_dir / dataset_name
+            output_dataset_dir.mkdir(exist_ok=True)
+
+            analysis_dir = output_dataset_dir / '{:02d}_vs_{:02d}'.format(hc_label, disease_label)
+            analysis_dir.mkdir(exist_ok=True)
+            test_ids_filename = 'cleaned_bootstrap_test_{:03d}.csv'.format(i_bootstrap)
+            ids_path = ids_dir / test_ids_filename
+            participants_path = PROJECT_ROOT / 'data'  / dataset_resourse / 'y.csv'
+            freesurfer_path = PROJECT_ROOT / 'data' / dataset_resourse  / (dataset_name + '.csv')
+
+            # ----------------------------------------------------------------------------
+            clinical_df = load_dataset(participants_path, ids_path, freesurfer_path)
+            clinical_df = clinical_df.set_index('participant_id')
+
+
+
+            if dataset_resourse == 'ADNI':
+                dataset_name = dataset_names[i_dataset]
+                if dataset_name == 'av45' or dataset_name == 'fdg':
+                    columns_name = COLUMNS_NAME
+                elif dataset_name == 'snp':
+                    columns_name = COLUMNS_NAME_SNP
+                elif dataset_name == 'vbm':
+                    columns_name = COLUMNS_NAME_VBM
+                elif dataset_name == '3modalities':
+                    columns_name = COLUMNS_3MODALITIES
+            elif dataset_resourse == 'HCP':
+                columns_name = [(lambda x: dataset_name + '_'+ str(x))(y) for y in list(range(132))]
+            output_dataset_dir = bootstrap_model_dir / dataset_name
+            output_dataset_dir.mkdir(exist_ok=True)
+
+
+            normalized_df = pd.read_csv(output_dataset_dir / 'normalized_{}.csv'.format(dataset_name), index_col='participant_id')
+            reconstruction_df = pd.read_csv(output_dataset_dir / 'reconstruction_{}.csv'.format(dataset_name), index_col='participant_id')
+            reconstruction_error_df = pd.read_csv(output_dataset_dir / 'reconstruction_error_{}.csv'.format(dataset_name), index_col='participant_id')
+            reconstruction_error_df_list.append(reconstruction_error_df)
+
+        # for each reconstruction error df, compute a averaged reconstruction error
+        reconstruction_error_df_averaged = reconstruction_error_df_list[0]
+        for i in range(1, len(reconstruction_error_df_list)):
+            reconstruction_error_df_averaged += reconstruction_error_df_list[i]
+        reconstruction_error_df_averaged /= len(reconstruction_error_df_list)
+
+                
+        
+
+        
+        # normalized_df = pd.read_csv(output_dataset_dir / 'normalized.csv', index_col='participant_id')
+        # reconstruction_df = pd.read_csv(output_dataset_dir / 'reconstruction.csv', index_col='participant_id')
+        # reconstruction_error_df = pd.read_csv(output_dataset_dir / 'reconstruction_error.csv',
+        #                                       index_col='participant_id')
+
+        # diff_df = np.abs(normalized_df - reconstruction_df)
+        # region_df = compute_brain_regions_deviations(diff_df, clinical_df, hc_label, disease_label)
+        # effect_size_list.append(region_df['effect_size'].values)
+        # region_df.to_csv(analysis_dir / 'regions_analysis.csv', index=False)
+
+        roc_auc, tpr, accuracy, accuracy_in_hc, accuracy_in_ad, recall, specificity, significance_ratio = compute_classification_performance(reconstruction_error_df_averaged, clinical_df, hc_label, disease_label)
         auc_roc_list.append(roc_auc)
         tpr_list.append(tpr)
         accuracy_list.append(accuracy)
@@ -165,10 +206,10 @@ def main(dataset_name, comb_label, hz_para_list, hc_label, disease_label):
     comparison_dir = bootstrap_dir / dataset_name / ('{:02d}_vs_{:02d}'.format(hc_label, disease_label))
     comparison_dir.mkdir(exist_ok=True)
 
-    # ----------------------------------------------------------------------------
-    # Save regions effect sizes
-    effect_size_df = pd.DataFrame(columns=COLUMNS_NAME, data=np.array(effect_size_list))
-    effect_size_df.to_csv(comparison_dir / 'effect_size.csv')
+    # # ----------------------------------------------------------------------------
+    # # Save regions effect sizes
+    # effect_size_df = pd.DataFrame(columns=COLUMNS_NAME, data=np.array(effect_size_list))
+    # effect_size_df.to_csv(comparison_dir / 'effect_size.csv')
 
     # Save AUC bootstrap values
     auc_roc_list = np.array(auc_roc_list)
@@ -178,18 +219,21 @@ def main(dataset_name, comb_label, hz_para_list, hc_label, disease_label):
     accuracy_in_hc_list = [0]
     accuracy_in_ad_list = [0]
 
-    if hc_label == 2 and disease_label == 0:
-        compare_name = 'HC_vs_AD'
-    elif hc_label == 2 and disease_label == 1:
-        compare_name = 'HC_vs_MCI'
-    elif hc_label == 1 and disease_label == 0:
-        compare_name = 'MCI_vs_AD'
+    if dataset_resourse == 'ADNI':
+        if hc_label == 2 and disease_label == 0:
+            compare_name = 'HC_vs_AD'
+        elif hc_label == 2 and disease_label == 1:
+            compare_name = 'HC_vs_MCI'
+        elif hc_label == 1 and disease_label == 0:
+            compare_name = 'MCI_vs_AD'
+    elif dataset_resourse == 'HCP':
+        compare_name = 'HC_vs_Patient'
 
 
     with open(result_baseline + 'result_baseline.txt', 'a') as f:
         # f.write('Experiment settings: AE with dataset {dataset_name}\n')
-        f.write('Experiment settings: AE. {}. Dataset {}\n'.format(compare_name, dataset_name))
-        f.write('AUC-ROC: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(auc_roc_list) * 100, np.std(auc_roc_list) * 100))
+        f.write('Experiment settings: AE. {}. Dataset_resource {}\n'.format(compare_name, dataset_resourse))
+        f.write('ROC-AUC: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(auc_roc_list) * 100, np.std(auc_roc_list) * 100))
         f.write('Accuracy: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(accuracy_list) * 100, np.std(accuracy_list) * 100))
         f.write('Sensitivity: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(sensitivity_list) * 100, np.std(sensitivity_list) * 100))
         f.write('Specificity: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(specificity_list) * 100, np.std(specificity_list) * 100))
@@ -205,99 +249,12 @@ def main(dataset_name, comb_label, hz_para_list, hc_label, disease_label):
                 np.mean(specificity_list), np.std(specificity_list), \
                 np.mean(significance_ratio_list), np.std(significance_ratio_list)
 
-
-    # #np.savetxt("ae_auc_and_std.csv", np.concatenate((auc_roc_list, [np.std(auc_roc_list)])), delimiter=",")
-    # auc_roc_df = pd.DataFrame(columns=['AUC-ROC'], data=auc_roc_list)
-    # auc_roc_df.to_csv(comparison_dir / 'auc_rocs.csv', index=False)
-
-    # # ----------------------------------------------------------------------------
-    # # Create Figure 3 of the paper
-    # tpr_list = np.array(tpr_list)
-    # mean_tprs = tpr_list.mean(axis=0)
-    # tprs_upper = np.percentile(tpr_list, 97.5, axis=0)
-    # tprs_lower = np.percentile(tpr_list, 2.5, axis=0)
-    # #plt.figure(figsize=(16, 20))
-    # plt.plot(np.linspace(0, 1, 100),
-    #          mean_tprs,
-    #          'b', lw=2,
-    #          label='ROC curve (AUC = {:0.3f} ; std = {:0.3f} ;95% CI [{:0.3f}, {:0.3f}])'.format(np.mean(auc_roc_list), np.std(auc_roc_list),
-    #                                                                               np.percentile(auc_roc_list, 2.5),
-    #                                                                               np.percentile(auc_roc_list, 97.5)))
-    # plt.fill_between(np.linspace(0, 1, 100),
-    #                  tprs_lower, tprs_upper,
-    #                  color='grey', alpha=0.2)
-
-    # plt.plot([0, 1], [0, 1], 'r--')
-    # plt.xlim([0, 1])
-    # plt.ylim([0, 1.05])
-    # plt.ylabel('True Positive Rate')
-    # plt.xlabel('False Positive Rate')
-    # plt.legend(loc='lower right')
-    # plt.savefig(comparison_dir / 'AUC-ROC.pdf', format='pdf')
-    # plt.show()
-    # #plt.close()
-    # #plt.clf()
-
-    # # --------------------------------------------------------------------------------------------
-    # # Create figure for supplementary materials
-    # effect_size_df = effect_size_df.reindex(effect_size_df.mean().sort_values().index, axis=1)
-
-    # plt.figure(figsize=(16, 20))
-    # plt.hlines(range(100),
-    #            np.percentile(effect_size_df, 2.5, axis=0),
-    #            np.percentile(effect_size_df, 97.5, axis=0))
-
-    # plt.plot(effect_size_df.mean().values, range(100), 's', color='k')
-    # plt.axvline(0, ls='--')
-    # plt.yticks(np.arange(100), effect_size_df.columns)
-    # plt.xlabel('Effect size')
-    # plt.ylabel('Brain regions')
-    # plt.tight_layout()
-    # plt.savefig(comparison_dir / 'Regions.pdf', format='pdf')
-    # plt.show()
-    # #plt.close()
-    # #plt.clf()
-
-    # # --------------------------------------------------------------------------------------------
-    # # Create Figure 4 of the paper
-    # effect_size_sig_df = effect_size_df.reindex(effect_size_df.mean().sort_values().index, axis=1)
-    # lower_bound = np.percentile(effect_size_sig_df, 2.5, axis=0)
-    # higher_bound = np.percentile(effect_size_sig_df, 97.5, axis=0)
-
-    # for i, column in enumerate(effect_size_sig_df.columns):
-    #     if (lower_bound[i] < 0) & (higher_bound[i] > 0):
-    #         effect_size_sig_df = effect_size_sig_df.drop(columns=column)
-
-    # n_regions = len(effect_size_sig_df.columns)
-
-    # plt.figure()
-    # plt.hlines(range(n_regions),
-    #            np.percentile(effect_size_sig_df, 2.5, axis=0),
-    #            np.percentile(effect_size_sig_df, 97.5, axis=0))
-
-    # plt.plot(effect_size_sig_df.mean().values, range(n_regions), 's', color='k')
-    # plt.axvline(0, ls='--')
-    # plt.yticks(np.arange(n_regions), effect_size_sig_df.columns)
-    # plt.xlabel('Effect size')
-    # plt.ylabel('Brain regions')
-    # plt.tight_layout()
-    # plt.savefig(comparison_dir / 'Significant_regions.pdf', format='pdf')
-    # plt.show()
-    
-    # save = np.concatenate(([effect_size_sig_df.columns],
-    #                        [abs(effect_size_sig_df.mean().values)],
-    #                        [abs(np.percentile(effect_size_sig_df, 2.5, axis=0))],
-    #                        [abs(np.percentile(effect_size_sig_df, 97.5, axis=0))]))
-    # np.savetxt("ae_effect_size.csv", save, fmt='%s', delimiter=",")
-    # #plt.close()
-    # #plt.clf()
-
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('-D', '--dataset_name',
-                        dest='dataset_name',
-                        help='Dataset name to perform group analysis.')
+    parser.add_argument('-R', '--dataset_resourse',
+                        dest='dataset_resourse',
+                        help='Dataset to use for training test and evaluation.',
+                        type=str)
     parser.add_argument('-L', '--comb_label',
                         dest='comb_label',
                         help='Combination label to perform group analysis.',
@@ -308,10 +265,14 @@ if __name__ == "__main__":
                         help='List of paras to perform the analysis.',
                         type=int)
     args = parser.parse_args()
-    if args.dataset_name == 'snp':
-        COLUMNS_NAME = COLUMNS_NAME_SNP
-    elif args.dataset_name == 'vbm':
-        COLUMNS_NAME = COLUMNS_NAME_VBM
+
+    if args.dataset_resourse == None:
+        args.dataset_resourse = 'ADNI'
+    if args.comb_label == None:
+        args.comb_label = 0
+    if args.hz_para_list == None:
+        args.hz_para_list = [110, 110, 10]
+
 
     mean_auc_roc_list = []
     std_auc_roc_list = []
@@ -328,7 +289,11 @@ if __name__ == "__main__":
     mean_significance_ratio_list = []
     std_significance_ratio_list = []
 
-    hc_patient_comb_list = [[2, 0], [2, 1], [1, 0]]
+    if args.dataset_resourse == 'ADNI':
+
+        hc_patient_comb_list = [[2, 0], [2, 1], [1, 0]]
+    elif args.dataset_resourse == 'HCP':
+        hc_patient_comb_list = [[1, 0]]
     
     
     for hc_patient_comb in hc_patient_comb_list:
@@ -339,7 +304,7 @@ if __name__ == "__main__":
         mean_accuracy_in_ad, std_accuracy_in_ad, \
         mean_recall, std_recall, \
         mean_specificity, std_specificity, \
-        mean_significance_ratio, std_significance_ratio = main(args.dataset_name, args.comb_label, args.hz_para_list, hc_patient_comb[0], hc_patient_comb[1])
+        mean_significance_ratio, std_significance_ratio = main(args.dataset_resourse, args.comb_label, args.hz_para_list, hc_patient_comb[0], hc_patient_comb[1])
 
 
         mean_auc_roc_list.append(mean_auc_roc)
@@ -358,12 +323,21 @@ if __name__ == "__main__":
         std_significance_ratio_list.append(std_significance_ratio)
 
     with open(os.path.join(result_baseline, 'result_4.txt'), 'a') as f:
-        f.write('Experiment settings: FAAE. Average Report. Dataset {}\n'.format(args.dataset_name))
-        f.write('auc_roc: mean\n' + str(np.mean(mean_auc_roc_list)) + '\n')
-        f.write('accuracy: mean\n' + str(np.mean(mean_accuracy_list)) + '\n')
-        f.write('sensitivity: mean\n' + str(np.mean(mean_recall_list)) + '\n')
-        f.write('specificity: mean\n' + str(np.mean(mean_specificity_list)) + '\n')
-        f.write('significance_ratio: mean\n' + str(np.mean(mean_significance_ratio_list)) + '\n')
+        # f.write('Experiment settings: AE with dataset {dataset_name}\n')
+        # f.write('Experiment settings: AE. {}. Multimodal\n'.format(compare_name))
+        # f.write('ROC-AUC: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(auc_roc_list) * 100, np.std(auc_roc_list) * 100))
+        # f.write('Accuracy: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(accuracy_list) * 100, np.std(accuracy_list) * 100))
+        # f.write('Sensitivity: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(sensitivity_list) * 100, np.std(sensitivity_list) * 100))
+        # f.write('Specificity: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(specificity_list) * 100, np.std(specificity_list) * 100))
+        # f.write('Significance ratio: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(significance_ratio_list), np.std(significance_ratio_list)))
+        # f.write('hz_para_list: ' + str(hz_para_list) + '\n')
+        # f.write('\n\n\n')
+        f.write('Experiment settings: AE. Multimodal\n')
+        f.write('ROC-AUC: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(mean_auc_roc_list) * 100, np.mean(std_auc_roc_list) * 100))
+        f.write('Accuracy: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(mean_accuracy_list) * 100, np.mean(std_accuracy_list) * 100))
+        f.write('Sensitivity: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(mean_recall_list) * 100, np.mean(std_recall_list) * 100))
+        f.write('Specificity: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(mean_specificity_list) * 100, np.mean(std_specificity_list) * 100))
+        f.write('Significance ratio: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(mean_significance_ratio_list), np.mean(std_significance_ratio_list)))
         f.write('hz_para_list: ' + str(args.hz_para_list) + '\n')
         f.write('\n\n\n')
 

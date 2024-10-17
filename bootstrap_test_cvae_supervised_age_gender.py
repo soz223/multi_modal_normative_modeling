@@ -14,7 +14,7 @@ import torch
 
 from tqdm import tqdm
 import copy
-from utils import COLUMNS_NAME, load_dataset, COLUMNS_NAME_SNP , COLUMNS_NAME_VBM
+from utils import COLUMNS_HCP, COLUMNS_NAME, load_dataset, COLUMNS_NAME_SNP , COLUMNS_NAME_VBM, COLUMNS_3MODALITIES
 from os.path import join, exists
 from VAE import VAE
 from sklearn.preprocessing import RobustScaler, OneHotEncoder
@@ -72,7 +72,15 @@ def main(dataset_name, comb_label):
 
         # ----------------------------------------------------------------------------
 
-        dataset_df = dataset_df.loc[dataset_df['DIA'] == 2]      
+        if dataset_resourse == 'ADNI':
+            hc_label = 2
+        elif dataset_resourse == 'HCP':
+            hc_label = 1
+        else:
+            raise ValueError('Unknown dataset resource')
+
+
+        dataset_df = dataset_df.loc[dataset_df['DIA'] == hc_label]      
         train_data = dataset_df[COLUMNS_NAME].values
         
 
@@ -306,6 +314,7 @@ def main(dataset_name, comb_label):
         reconstruction_error_df.to_csv(output_dataset_dir / 'reconstruction_error.csv', index=False)
     
     boostrap_error_mean = np.array(boostrap_error_mean)
+    print('boostrap_error_mean:', boostrap_error_mean)
     boostrap_mean = np.mean(boostrap_error_mean)
     bootsrao_var = np.std(boostrap_error_mean)
     boostrap_list = np.array([boostrap_mean, bootsrao_var])
@@ -326,5 +335,7 @@ if __name__ == "__main__":
         COLUMNS_NAME = COLUMNS_NAME_SNP
     elif args.dataset_name == 'vbm':
         COLUMNS_NAME = COLUMNS_NAME_VBM
+    elif args.dataset_name == '3modalities':
+        COLUMNS_NAME = COLUMNS_3MODALITIES
 
     main(args.dataset_name, args.comb_label)

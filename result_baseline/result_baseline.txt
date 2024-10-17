@@ -1,2033 +1,65 @@
-Experiment settings: AE with dataset av45
-AUC-ROC: $ 73.20 \pm 1.83 $ 
-Accuracy: $ 79.55 \pm 4.04 $ 
-Sensitivity: $ 83.08 \pm 5.77 $ 
-Specificity: $ 60.26 \pm 7.20 $ 
+Experiment settings: AE. HC_vs_AD. Multimodal
+ROC-AUC: $ 82.74 \pm 2.27 $ 
+Accuracy: $ 78.76 \pm 2.10 $ 
+Sensitivity: $ 84.04 \pm 3.45 $ 
+Specificity: $ 72.46 \pm 4.53 $ 
+Significance ratio: $ 3.14 \pm 0.54 $ 
+hz_para_list: [110, 110, 10]
 
 
 
-Experiment settings: AE with dataset fdg
-AUC-ROC: $ 87.20 \pm 0.94 $ 
-Accuracy: $ 78.01 \pm 4.19 $ 
-Sensitivity: $ 76.83 \pm 5.43 $ 
-Specificity: $ 84.47 \pm 3.80 $ 
+Experiment settings: AE. HC_vs_MCI. Multimodal
+ROC-AUC: $ 59.68 \pm 2.77 $ 
+Accuracy: $ 54.67 \pm 4.80 $ 
+Sensitivity: $ 51.08 \pm 8.22 $ 
+Specificity: $ 67.18 \pm 8.43 $ 
+Significance ratio: $ 1.62 \pm 0.26 $ 
+hz_para_list: [110, 110, 10]
 
 
 
-Experiment settings: AE with dataset vbm
-AUC-ROC: $ 68.42 \pm 1.33 $ 
-Accuracy: $ 77.44 \pm 7.97 $ 
-Sensitivity: $ 82.60 \pm 11.31 $ 
-Specificity: $ 49.21 \pm 10.98 $ 
+Experiment settings: AE. MCI_vs_AD. Multimodal
+ROC-AUC: $ 73.95 \pm 0.64 $ 
+Accuracy: $ 64.13 \pm 1.19 $ 
+Sensitivity: $ 83.56 \pm 2.90 $ 
+Specificity: $ 57.51 \pm 2.40 $ 
+Significance ratio: $ 1.97 \pm 0.06 $ 
+hz_para_list: [110, 110, 10]
 
 
 
-Experiment settings: AE with dataset snp
-AUC-ROC: $ 55.87 \pm 3.45 $ 
-Accuracy: $ 60.16 \pm 15.01 $ 
-Sensitivity: $ 61.06 \pm 22.43 $ 
-Specificity: $ 55.26 \pm 25.94 $ 
+Experiment settings: AE. HC_vs_AD. Multimodal
+ROC-AUC: $ 61.68 \pm 2.92 $ 
+Accuracy: $ 65.95 \pm 1.13 $ 
+Sensitivity: $ 87.69 \pm 7.50 $ 
+Specificity: $ 39.70 \pm 8.38 $ 
+Significance ratio: $ 1.47 \pm 0.11 $ 
+hz_para_list: [110, 110, 10]
 
 
 
-Experiment settings: AAE. Dataset av45
-AUC-ROC: $ 65.80 \pm 2.67 $ 
-Accuracy: $ 73.38 \pm 3.36 $ 
-Sensitivity: $ 82.12 \pm 7.15 $ 
-Specificity: $ 49.47 \pm 9.10 $ 
+Experiment settings: AE. HC_vs_MCI. Multimodal
+ROC-AUC: $ 54.70 \pm 3.00 $ 
+Accuracy: $ 60.87 \pm 12.79 $ 
+Sensitivity: $ 64.95 \pm 22.03 $ 
+Specificity: $ 47.08 \pm 21.11 $ 
+Significance ratio: $ 1.30 \pm 0.19 $ 
+hz_para_list: [110, 110, 10]
 
 
 
-Experiment settings: AAE. Dataset fdg
-AUC-ROC: $ 66.23 \pm 2.01 $ 
-Accuracy: $ 73.59 \pm 2.23 $ 
-Sensitivity: $ 81.44 \pm 3.65 $ 
-Specificity: $ 52.11 \pm 4.21 $ 
-
-
-
-Experiment settings: AAE. Dataset vbm
-AUC-ROC: $ 60.57 \pm 4.16 $ 
-Accuracy: $ 60.77 \pm 5.99 $ 
-Sensitivity: $ 59.42 \pm 11.09 $ 
-Specificity: $ 64.47 \pm 10.93 $ 
-
-
-
-Experiment settings: AAE. Dataset snp
-AUC-ROC: $ 50.48 \pm 2.56 $ 
-Accuracy: $ 55.49 \pm 13.88 $ 
-Sensitivity: $ 56.44 \pm 29.14 $ 
-Specificity: $ 52.89 \pm 28.21 $ 
-
-
-
-
-
-
-
-
-
-
-
-
-Experiment settings: AE with dataset av45
-AUC-ROC: $ 73.92 \pm 1.07 $ 
-Accuracy: $ 76.34 \pm 4.33 $ 
-Sensitivity: $ 78.65 \pm 5.99 $ 
-Specificity: $ 63.68 \pm 5.24 $ 
-hz_para_list: [200, 200, 20]
-
-
-
-Experiment settings: AE with dataset fdg
-AUC-ROC: $ 86.86 \pm 1.33 $ 
-Accuracy: $ 82.36 \pm 3.41 $ 
-Sensitivity: $ 83.56 \pm 4.54 $ 
-Specificity: $ 75.79 \pm 4.53 $ 
-hz_para_list: [200, 200, 20]
-
-
-
-Experiment settings: AE with dataset vbm
-AUC-ROC: $ 70.88 \pm 1.08 $ 
-Accuracy: $ 77.52 \pm 4.24 $ 
-Sensitivity: $ 81.92 \pm 6.12 $ 
-Specificity: $ 53.42 \pm 6.56 $ 
-hz_para_list: [200, 200, 20]
-
-
-
-Experiment settings: AE with dataset snp
-AUC-ROC: $ 56.82 \pm 3.47 $ 
-Accuracy: $ 51.34 \pm 13.06 $ 
-Sensitivity: $ 47.79 \pm 17.72 $ 
-Specificity: $ 70.79 \pm 13.75 $ 
-hz_para_list: [200, 200, 20]
-
-
-
-Experiment settings: AE with dataset av45
-AUC-ROC: $ 72.39 \pm 1.07 $ 
-Accuracy: $ 76.63 \pm 4.18 $ 
-Sensitivity: $ 78.75 \pm 5.61 $ 
-Specificity: $ 65.00 \pm 4.86 $ 
-hz_para_list: [100, 100, 100, 10]
-
-
-
-Experiment settings: AE with dataset fdg
-AUC-ROC: $ 86.95 \pm 0.93 $ 
-Accuracy: $ 77.76 \pm 4.41 $ 
-Sensitivity: $ 76.63 \pm 6.17 $ 
-Specificity: $ 83.95 \pm 5.94 $ 
-hz_para_list: [100, 100, 100, 10]
-
-
-
-Experiment settings: AE with dataset vbm
-AUC-ROC: $ 66.71 \pm 2.30 $ 
-Accuracy: $ 79.92 \pm 6.25 $ 
-Sensitivity: $ 86.63 \pm 9.26 $ 
-Specificity: $ 43.16 \pm 10.60 $ 
-hz_para_list: [100, 100, 100, 10]
-
-
-
-Experiment settings: AE with dataset snp
-AUC-ROC: $ 54.33 \pm 3.26 $ 
-Accuracy: $ 63.09 \pm 13.62 $ 
-Sensitivity: $ 65.87 \pm 20.11 $ 
-Specificity: $ 47.89 \pm 22.35 $ 
-hz_para_list: [100, 100, 100, 10]
-
-
-
-Experiment settings: AE with dataset av45
-AUC-ROC: $ 73.04 \pm 1.77 $ 
-Accuracy: $ 79.84 \pm 6.06 $ 
-Sensitivity: $ 83.27 \pm 8.88 $ 
-Specificity: $ 61.05 \pm 10.04 $ 
-hz_para_list: [90, 90, 10]
-
-
-
-Experiment settings: AE with dataset fdg
-AUC-ROC: $ 86.87 \pm 1.58 $ 
-Accuracy: $ 78.86 \pm 3.96 $ 
-Sensitivity: $ 78.17 \pm 5.32 $ 
-Specificity: $ 82.63 \pm 4.59 $ 
-hz_para_list: [90, 90, 10]
-
-
-
-Experiment settings: AE with dataset vbm
-AUC-ROC: $ 68.06 \pm 1.46 $ 
-Accuracy: $ 76.83 \pm 5.69 $ 
-Sensitivity: $ 81.73 \pm 8.36 $ 
-Specificity: $ 50.00 \pm 9.34 $ 
-hz_para_list: [90, 90, 10]
-
-
-
-Experiment settings: AE with dataset snp
-AUC-ROC: $ 55.56 \pm 3.43 $ 
-Accuracy: $ 54.23 \pm 13.13 $ 
-Sensitivity: $ 52.69 \pm 18.61 $ 
-Specificity: $ 62.63 \pm 17.57 $ 
-hz_para_list: [90, 90, 10]
-
-
-
-Experiment settings: AE with dataset av45
-AUC-ROC: $ 72.79 \pm 1.59 $ 
-Accuracy: $ 79.27 \pm 4.47 $ 
-Sensitivity: $ 82.69 \pm 6.08 $ 
-Specificity: $ 60.53 \pm 5.39 $ 
-hz_para_list: [90, 90, 90, 10]
-
-
-
-Experiment settings: AE with dataset fdg
-AUC-ROC: $ 86.90 \pm 1.12 $ 
-Accuracy: $ 77.72 \pm 4.45 $ 
-Sensitivity: $ 76.73 \pm 6.29 $ 
-Specificity: $ 83.16 \pm 6.47 $ 
-hz_para_list: [90, 90, 90, 10]
-
-
-
-Experiment settings: AE with dataset vbm
-AUC-ROC: $ 67.21 \pm 2.19 $ 
-Accuracy: $ 79.67 \pm 5.29 $ 
-Sensitivity: $ 86.44 \pm 8.03 $ 
-Specificity: $ 42.63 \pm 10.38 $ 
-hz_para_list: [90, 90, 90, 10]
-
-
-
-Experiment settings: AE with dataset snp
-AUC-ROC: $ 55.48 \pm 3.16 $ 
-Accuracy: $ 64.80 \pm 13.18 $ 
-Sensitivity: $ 67.88 \pm 18.91 $ 
-Specificity: $ 47.89 \pm 19.15 $ 
-hz_para_list: [90, 90, 90, 10]
-
-
-
-Experiment settings: AE with dataset av45
-AUC-ROC: $ 72.50 \pm 1.41 $ 
-Accuracy: $ 78.01 \pm 3.21 $ 
-Sensitivity: $ 81.35 \pm 4.77 $ 
-Specificity: $ 59.74 \pm 5.65 $ 
-hz_para_list: [90, 90, 90, 90, 90, 10]
-
-
-
-Experiment settings: AE with dataset fdg
-AUC-ROC: $ 83.11 \pm 1.91 $ 
-Accuracy: $ 76.26 \pm 3.94 $ 
-Sensitivity: $ 76.06 \pm 5.29 $ 
-Specificity: $ 77.37 \pm 5.91 $ 
-hz_para_list: [90, 90, 90, 90, 90, 10]
-
-
-
-Experiment settings: AE with dataset vbm
-AUC-ROC: $ 64.90 \pm 1.97 $ 
-Accuracy: $ 59.72 \pm 10.91 $ 
-Sensitivity: $ 58.27 \pm 15.31 $ 
-Specificity: $ 67.63 \pm 13.57 $ 
-hz_para_list: [90, 90, 90, 90, 90, 10]
-
-
-
-Experiment settings: AE with dataset snp
-AUC-ROC: $ 55.31 \pm 3.36 $ 
-Accuracy: $ 63.74 \pm 17.36 $ 
-Sensitivity: $ 66.35 \pm 25.11 $ 
-Specificity: $ 49.47 \pm 25.56 $ 
-hz_para_list: [90, 90, 90, 90, 90, 10]
-
-
-
-Experiment settings: AE with dataset av45
-AUC-ROC: $ 73.20 \pm 1.83 $ 
-Accuracy: $ 79.55 \pm 4.04 $ 
-Sensitivity: $ 83.08 \pm 5.77 $ 
-Specificity: $ 60.26 \pm 7.20 $ 
-hz_para_list: [100, 100, 10]
-
-
-
-Experiment settings: AE with dataset fdg
-AUC-ROC: $ 87.20 \pm 0.94 $ 
-Accuracy: $ 78.01 \pm 4.19 $ 
-Sensitivity: $ 76.83 \pm 5.43 $ 
-Specificity: $ 84.47 \pm 3.80 $ 
-hz_para_list: [100, 100, 10]
-
-
-
-Experiment settings: AE with dataset vbm
-AUC-ROC: $ 68.42 \pm 1.33 $ 
-Accuracy: $ 77.44 \pm 7.97 $ 
-Sensitivity: $ 82.60 \pm 11.31 $ 
-Specificity: $ 49.21 \pm 10.98 $ 
-hz_para_list: [100, 100, 10]
-
-
-
-Experiment settings: AE with dataset snp
-AUC-ROC: $ 55.87 \pm 3.45 $ 
-Accuracy: $ 60.16 \pm 15.01 $ 
-Sensitivity: $ 61.06 \pm 22.43 $ 
-Specificity: $ 55.26 \pm 25.94 $ 
-hz_para_list: [100, 100, 10]
-
-
-
-Experiment settings: AE with dataset av45
-AUC-ROC: $ 73.82 \pm 1.14 $ 
-Accuracy: $ 74.51 \pm 3.97 $ 
-Sensitivity: $ 75.87 \pm 5.81 $ 
-Specificity: $ 67.11 \pm 6.36 $ 
-hz_para_list: [300, 300, 30]
-
-
-
-Experiment settings: AE with dataset fdg
-AUC-ROC: $ 86.67 \pm 1.07 $ 
-Accuracy: $ 80.12 \pm 4.55 $ 
-Sensitivity: $ 80.00 \pm 6.06 $ 
-Specificity: $ 80.79 \pm 4.25 $ 
-hz_para_list: [300, 300, 30]
-
-
-
-Experiment settings: AE with dataset vbm
-AUC-ROC: $ 70.51 \pm 1.04 $ 
-Accuracy: $ 77.89 \pm 7.82 $ 
-Sensitivity: $ 82.98 \pm 11.18 $ 
-Specificity: $ 50.00 \pm 11.10 $ 
-hz_para_list: [300, 300, 30]
-
-
-
-Experiment settings: AE with dataset snp
-AUC-ROC: $ 57.67 \pm 3.57 $ 
-Accuracy: $ 58.13 \pm 10.94 $ 
-Sensitivity: $ 57.98 \pm 15.87 $ 
-Specificity: $ 58.95 \pm 17.22 $ 
-hz_para_list: [300, 300, 30]
-
-
-
-Experiment settings: AE with dataset av45
-AUC-ROC: $ 73.61 \pm 1.37 $ 
-Accuracy: $ 75.45 \pm 2.49 $ 
-Sensitivity: $ 77.21 \pm 3.62 $ 
-Specificity: $ 65.79 \pm 4.56 $ 
-hz_para_list: [200, 200, 10]
-
-
-
-Experiment settings: AE with dataset fdg
-AUC-ROC: $ 87.22 \pm 0.93 $ 
-Accuracy: $ 78.74 \pm 5.63 $ 
-Sensitivity: $ 77.98 \pm 7.82 $ 
-Specificity: $ 82.89 \pm 6.79 $ 
-hz_para_list: [200, 200, 10]
-
-
-
-Experiment settings: AE with dataset vbm
-AUC-ROC: $ 69.97 \pm 0.83 $ 
-Accuracy: $ 74.31 \pm 3.47 $ 
-Sensitivity: $ 77.98 \pm 5.00 $ 
-Specificity: $ 54.21 \pm 5.42 $ 
-hz_para_list: [200, 200, 10]
-
-
-
-Experiment settings: AE with dataset snp
-AUC-ROC: $ 55.83 \pm 4.29 $ 
-Accuracy: $ 54.80 \pm 9.99 $ 
-Sensitivity: $ 53.56 \pm 13.96 $ 
-Specificity: $ 61.58 \pm 12.90 $ 
-hz_para_list: [200, 200, 10]
-
-
-
-Experiment settings: AE with dataset av45
-AUC-ROC: $ 72.85 \pm 1.25 $ 
-Accuracy: $ 79.43 \pm 3.73 $ 
-Sensitivity: $ 83.27 \pm 5.59 $ 
-Specificity: $ 58.42 \pm 7.04 $ 
-hz_para_list: [64, 32, 16, 10]
-
-
-
-Experiment settings: AE with dataset fdg
-AUC-ROC: $ 84.78 \pm 1.77 $ 
-Accuracy: $ 75.28 \pm 4.59 $ 
-Sensitivity: $ 74.13 \pm 6.78 $ 
-Specificity: $ 81.58 \pm 9.04 $ 
-hz_para_list: [64, 32, 16, 10]
-
-
-
-Experiment settings: AE with dataset vbm
-AUC-ROC: $ 65.23 \pm 1.75 $ 
-Accuracy: $ 62.76 \pm 11.50 $ 
-Sensitivity: $ 62.69 \pm 16.17 $ 
-Specificity: $ 63.16 \pm 14.32 $ 
-hz_para_list: [64, 32, 16, 10]
-
-
-
-Experiment settings: AE with dataset snp
-AUC-ROC: $ 54.89 \pm 3.04 $ 
-Accuracy: $ 60.69 \pm 16.04 $ 
-Sensitivity: $ 62.21 \pm 22.78 $ 
-Specificity: $ 52.37 \pm 21.46 $ 
-hz_para_list: [64, 32, 16, 10]
-
-
-
-Experiment settings: AE with dataset av45
-AUC-ROC: $ 72.60 \pm 1.60 $ 
-Accuracy: $ 79.59 \pm 5.19 $ 
-Sensitivity: $ 83.37 \pm 7.58 $ 
-Specificity: $ 58.95 \pm 8.34 $ 
-hz_para_list: [20, 10]
-
-
-
-Experiment settings: AE with dataset fdg
-AUC-ROC: $ 85.32 \pm 1.02 $ 
-Accuracy: $ 74.76 \pm 3.97 $ 
-Sensitivity: $ 72.98 \pm 5.53 $ 
-Specificity: $ 84.47 \pm 5.32 $ 
-hz_para_list: [20, 10]
-
-
-
-Experiment settings: AE with dataset vbm
-AUC-ROC: $ 66.64 \pm 1.35 $ 
-Accuracy: $ 69.84 \pm 9.83 $ 
-Sensitivity: $ 72.40 \pm 14.01 $ 
-Specificity: $ 55.79 \pm 13.46 $ 
-hz_para_list: [20, 10]
-
-
-
-Experiment settings: AE with dataset snp
-AUC-ROC: $ 56.46 \pm 3.66 $ 
-Accuracy: $ 64.76 \pm 7.79 $ 
-Sensitivity: $ 67.50 \pm 11.47 $ 
-Specificity: $ 49.74 \pm 14.29 $ 
-hz_para_list: [20, 10]
-
-
-
-Experiment settings: AE with dataset av45
-AUC-ROC: $ 73.62 \pm 0.90 $ 
-Accuracy: $ 77.60 \pm 5.89 $ 
-Sensitivity: $ 80.58 \pm 8.36 $ 
-Specificity: $ 61.32 \pm 7.72 $ 
-hz_para_list: [10, 10]
-
-
-
-Experiment settings: AE with dataset fdg
-AUC-ROC: $ 83.98 \pm 1.11 $ 
-Accuracy: $ 73.13 \pm 3.80 $ 
-Sensitivity: $ 71.44 \pm 5.80 $ 
-Specificity: $ 82.37 \pm 7.90 $ 
-hz_para_list: [10, 10]
-
-
-
-Experiment settings: AE with dataset vbm
-AUC-ROC: $ 64.02 \pm 1.08 $ 
-Accuracy: $ 62.32 \pm 7.13 $ 
-Sensitivity: $ 62.79 \pm 10.41 $ 
-Specificity: $ 59.74 \pm 11.29 $ 
-hz_para_list: [10, 10]
-
-
-
-Experiment settings: AE with dataset snp
-AUC-ROC: $ 56.23 \pm 3.20 $ 
-Accuracy: $ 63.86 \pm 10.94 $ 
-Sensitivity: $ 66.35 \pm 14.96 $ 
-Specificity: $ 50.26 \pm 11.80 $ 
-hz_para_list: [10, 10]
-
-
-
-Experiment settings: AE with dataset av45
-AUC-ROC: $ 72.26 \pm 1.47 $ 
-Accuracy: $ 80.20 \pm 4.78 $ 
-Sensitivity: $ 84.52 \pm 6.76 $ 
-Specificity: $ 56.58 \pm 6.89 $ 
-hz_para_list: [20, 20]
-
-
-
-Experiment settings: AE with dataset fdg
-AUC-ROC: $ 85.74 \pm 1.00 $ 
-Accuracy: $ 76.26 \pm 5.84 $ 
-Sensitivity: $ 75.00 \pm 8.11 $ 
-Specificity: $ 83.16 \pm 6.88 $ 
-hz_para_list: [20, 20]
-
-
-
-Experiment settings: AE with dataset vbm
-AUC-ROC: $ 66.32 \pm 2.14 $ 
-Accuracy: $ 65.49 \pm 12.37 $ 
-Sensitivity: $ 66.35 \pm 17.46 $ 
-Specificity: $ 60.79 \pm 15.90 $ 
-hz_para_list: [20, 20]
-
-
-
-Experiment settings: AE with dataset snp
-AUC-ROC: $ 57.51 \pm 3.00 $ 
-Accuracy: $ 61.87 \pm 8.12 $ 
-Sensitivity: $ 62.88 \pm 11.82 $ 
-Specificity: $ 56.32 \pm 13.38 $ 
-hz_para_list: [20, 20]
-
-
-
-Experiment settings: AE with dataset av45
-AUC-ROC: $ 73.65 \pm 1.08 $ 
-Accuracy: $ 77.36 \pm 2.53 $ 
-Sensitivity: $ 80.19 \pm 3.73 $ 
-Specificity: $ 61.84 \pm 5.03 $ 
-hz_para_list: [50, 25, 12, 10]
-
-
-
-Experiment settings: AE with dataset fdg
-AUC-ROC: $ 83.69 \pm 1.19 $ 
-Accuracy: $ 74.84 \pm 5.37 $ 
-Sensitivity: $ 73.94 \pm 8.18 $ 
-Specificity: $ 79.74 \pm 10.53 $ 
-hz_para_list: [50, 25, 12, 10]
-
-
-
-Experiment settings: AE with dataset vbm
-AUC-ROC: $ 63.94 \pm 1.38 $ 
-Accuracy: $ 57.80 \pm 8.79 $ 
-Sensitivity: $ 55.96 \pm 12.78 $ 
-Specificity: $ 67.89 \pm 13.61 $ 
-hz_para_list: [50, 25, 12, 10]
-
-
-
-Experiment settings: AE with dataset snp
-AUC-ROC: $ 55.93 \pm 2.73 $ 
-Accuracy: $ 66.34 \pm 12.66 $ 
-Sensitivity: $ 70.00 \pm 18.11 $ 
-Specificity: $ 46.32 \pm 17.62 $ 
-hz_para_list: [50, 25, 12, 10]
-
-
-
-Experiment settings: AE with dataset av45
-AUC-ROC: $ 74.11 \pm 1.51 $ 
-Accuracy: $ 76.34 \pm 3.94 $ 
-Sensitivity: $ 79.13 \pm 5.71 $ 
-Specificity: $ 61.05 \pm 6.32 $ 
-hz_para_list: [10, 10, 10]
-
-
-
-Experiment settings: AE with dataset fdg
-AUC-ROC: $ 82.69 \pm 1.11 $ 
-Accuracy: $ 75.85 \pm 3.41 $ 
-Sensitivity: $ 76.15 \pm 4.92 $ 
-Specificity: $ 74.21 \pm 5.62 $ 
-hz_para_list: [10, 10, 10]
-
-
-
-Experiment settings: AE with dataset vbm
-AUC-ROC: $ 63.03 \pm 1.33 $ 
-Accuracy: $ 63.90 \pm 8.30 $ 
-Sensitivity: $ 64.90 \pm 12.10 $ 
-Specificity: $ 58.42 \pm 12.77 $ 
-hz_para_list: [10, 10, 10]
-
-
-
-Experiment settings: AE with dataset snp
-AUC-ROC: $ 56.05 \pm 3.42 $ 
-Accuracy: $ 62.32 \pm 7.11 $ 
-Sensitivity: $ 63.75 \pm 9.85 $ 
-Specificity: $ 54.47 \pm 9.78 $ 
-hz_para_list: [10, 10, 10]
-
-
-
-Experiment settings: AE with dataset av45
-AUC-ROC: $ 72.67 \pm 0.81 $ 
-Accuracy: $ 78.46 \pm 3.84 $ 
-Sensitivity: $ 81.54 \pm 5.64 $ 
-Specificity: $ 61.58 \pm 6.57 $ 
-hz_para_list: [20, 20, 20]
-
-
-
-Experiment settings: AE with dataset fdg
-AUC-ROC: $ 85.05 \pm 0.95 $ 
-Accuracy: $ 72.80 \pm 3.61 $ 
-Sensitivity: $ 70.48 \pm 4.88 $ 
-Specificity: $ 85.53 \pm 4.28 $ 
-hz_para_list: [20, 20, 20]
-
-
-
-Experiment settings: AE with dataset vbm
-AUC-ROC: $ 64.46 \pm 1.04 $ 
-Accuracy: $ 66.83 \pm 10.72 $ 
-Sensitivity: $ 69.04 \pm 15.67 $ 
-Specificity: $ 54.74 \pm 16.55 $ 
-hz_para_list: [20, 20, 20]
-
-
-
-Experiment settings: AE with dataset snp
-AUC-ROC: $ 56.09 \pm 3.65 $ 
-Accuracy: $ 65.12 \pm 7.50 $ 
-Sensitivity: $ 67.79 \pm 10.31 $ 
-Specificity: $ 50.53 \pm 9.76 $ 
-hz_para_list: [20, 20, 20]
-
-
-
-Experiment settings: AE with dataset av45
-AUC-ROC: $ 74.17 \pm 1.21 $ 
-Accuracy: $ 75.89 \pm 5.35 $ 
-Sensitivity: $ 78.17 \pm 7.52 $ 
-Specificity: $ 63.42 \pm 6.81 $ 
-hz_para_list: [20, 10, 10]
-
-
-
-Experiment settings: AE with dataset fdg
-AUC-ROC: $ 84.24 \pm 1.35 $ 
-Accuracy: $ 73.25 \pm 4.20 $ 
-Sensitivity: $ 71.25 \pm 5.50 $ 
-Specificity: $ 84.21 \pm 4.56 $ 
-hz_para_list: [20, 10, 10]
-
-
-
-Experiment settings: AE with dataset vbm
-AUC-ROC: $ 63.78 \pm 1.45 $ 
-Accuracy: $ 63.21 \pm 13.01 $ 
-Sensitivity: $ 63.85 \pm 18.89 $ 
-Specificity: $ 59.74 \pm 19.59 $ 
-hz_para_list: [20, 10, 10]
-
-
-
-Experiment settings: AE with dataset snp
-AUC-ROC: $ 55.72 \pm 2.88 $ 
-Accuracy: $ 59.76 \pm 14.29 $ 
-Sensitivity: $ 60.29 \pm 19.97 $ 
-Specificity: $ 56.84 \pm 17.30 $ 
-hz_para_list: [20, 10, 10]
-
-
-
-Experiment settings: AE with dataset av45
-AUC-ROC: $ 74.29 \pm 1.34 $ 
-Accuracy: $ 76.71 \pm 4.49 $ 
-Sensitivity: $ 79.13 \pm 6.22 $ 
-Specificity: $ 63.42 \pm 5.58 $ 
-hz_para_list: [10, 10, 5]
-
-
-
-Experiment settings: AE with dataset fdg
-AUC-ROC: $ 82.78 \pm 0.93 $ 
-Accuracy: $ 73.17 \pm 5.62 $ 
-Sensitivity: $ 72.21 \pm 8.13 $ 
-Specificity: $ 78.42 \pm 8.55 $ 
-hz_para_list: [10, 10, 5]
-
-
-
-Experiment settings: AE with dataset vbm
-AUC-ROC: $ 63.85 \pm 1.69 $ 
-Accuracy: $ 62.15 \pm 9.25 $ 
-Sensitivity: $ 62.21 \pm 13.48 $ 
-Specificity: $ 61.84 \pm 14.57 $ 
-hz_para_list: [10, 10, 5]
-
-
-
-Experiment settings: AE with dataset snp
-AUC-ROC: $ 56.53 \pm 2.98 $ 
-Accuracy: $ 66.87 \pm 5.92 $ 
-Sensitivity: $ 70.48 \pm 8.56 $ 
-Specificity: $ 47.11 \pm 10.29 $ 
-hz_para_list: [10, 10, 5]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Experiment settings: AE with dataset vbm
-AUC-ROC: $ 66.16 \pm 1.31 $ 
-Accuracy: $ 67.89 \pm 7.88 $ 
-Sensitivity: $ 72.69 \pm 15.80 $ 
-Specificity: $ 54.74 \pm 14.26 $ 
-Significance ratio: $ 1.70 \pm 0.34 $ 
-hz_para_list: [64, 32, 16, 10]
-
-
-
-Experiment settings: AE with dataset av45
-AUC-ROC: $ 71.89 \pm 1.64 $ 
-Accuracy: $ 75.70 \pm 2.56 $ 
-Sensitivity: $ 81.83 \pm 6.54 $ 
-Specificity: $ 58.95 \pm 9.06 $ 
-Significance ratio: $ 2.05 \pm 0.24 $ 
-hz_para_list: [10, 10, 5]
-
-
-
-
-Experiment settings: AE with dataset av45
-AUC-ROC: $ 69.67 \pm 6.61 $ 
-Accuracy: $ 71.27 \pm 13.20 $ 
-Sensitivity: $ 74.33 \pm 23.15 $ 
-Specificity: $ 62.89 \pm 15.32 $ 
-Significance ratio: $ inf \pm nan $ 
-hz_para_list: [90, 90, 90, 10]
-
-
-
-Experiment settings: AE with dataset fdg
-AUC-ROC: $ 73.50 \pm 4.39 $ 
-Accuracy: $ 68.52 \pm 4.55 $ 
-Sensitivity: $ 66.15 \pm 7.96 $ 
-Specificity: $ 75.00 \pm 8.34 $ 
-Significance ratio: $ 2.92 \pm 0.98 $ 
-hz_para_list: [90, 90, 90, 10]
-
-
-
-Experiment settings: AE with dataset vbm
-AUC-ROC: $ 43.25 \pm 3.19 $ 
-Accuracy: $ 41.34 \pm 16.30 $ 
-Sensitivity: $ 29.23 \pm 32.51 $ 
-Specificity: $ 74.47 \pm 28.17 $ 
-Significance ratio: $ 1.08 \pm 0.26 $ 
-hz_para_list: [90, 90, 90, 10]
-
-
-
-Experiment settings: AE with dataset snp
-AUC-ROC: $ 56.53 \pm 2.98 $ 
-Accuracy: $ 64.23 \pm 4.13 $ 
-Sensitivity: $ 70.48 \pm 8.56 $ 
-Specificity: $ 47.11 \pm 10.29 $ 
-Significance ratio: $ 1.36 \pm 0.16 $ 
-hz_para_list: [90, 90, 90, 10]
-
-
-
-Experiment settings: AE with dataset av45
-AUC-ROC: $ 69.67 \pm 6.61 $ 
-Accuracy: $ 71.27 \pm 13.20 $ 
-Sensitivity: $ 74.33 \pm 23.15 $ 
-Specificity: $ 62.89 \pm 15.32 $ 
-Significance ratio: $ inf \pm nan $ 
-hz_para_list: [100, 100, 10]
-
-
-
-Experiment settings: AE with dataset fdg
-AUC-ROC: $ 73.50 \pm 4.39 $ 
-Accuracy: $ 68.52 \pm 4.55 $ 
-Sensitivity: $ 66.15 \pm 7.96 $ 
-Specificity: $ 75.00 \pm 8.34 $ 
-Significance ratio: $ 2.92 \pm 0.98 $ 
-hz_para_list: [100, 100, 10]
-
-
-
-Experiment settings: AE with dataset vbm
-AUC-ROC: $ 43.25 \pm 3.19 $ 
-Accuracy: $ 41.34 \pm 16.30 $ 
-Sensitivity: $ 29.23 \pm 32.51 $ 
-Specificity: $ 74.47 \pm 28.17 $ 
-Significance ratio: $ 1.08 \pm 0.26 $ 
-hz_para_list: [100, 100, 10]
-
-
-
-Experiment settings: AE with dataset snp
-AUC-ROC: $ 56.53 \pm 2.98 $ 
-Accuracy: $ 64.23 \pm 4.13 $ 
-Sensitivity: $ 70.48 \pm 8.56 $ 
-Specificity: $ 47.11 \pm 10.29 $ 
-Significance ratio: $ 1.36 \pm 0.16 $ 
-hz_para_list: [100, 100, 10]
-
-
-
-Experiment settings: AE with dataset av45
-AUC-ROC: $ 69.67 \pm 6.61 $ 
-Accuracy: $ 71.27 \pm 13.20 $ 
-Sensitivity: $ 74.33 \pm 23.15 $ 
-Specificity: $ 62.89 \pm 15.32 $ 
-Significance ratio: $ inf \pm nan $ 
-hz_para_list: [300, 300, 30]
-
-
-
-Experiment settings: AE with dataset fdg
-AUC-ROC: $ 73.50 \pm 4.39 $ 
-Accuracy: $ 68.52 \pm 4.55 $ 
-Sensitivity: $ 66.15 \pm 7.96 $ 
-Specificity: $ 75.00 \pm 8.34 $ 
-Significance ratio: $ 2.92 \pm 0.98 $ 
-hz_para_list: [300, 300, 30]
-
-
-
-Experiment settings: AE with dataset vbm
-AUC-ROC: $ 43.25 \pm 3.19 $ 
-Accuracy: $ 41.34 \pm 16.30 $ 
-Sensitivity: $ 29.23 \pm 32.51 $ 
-Specificity: $ 74.47 \pm 28.17 $ 
-Significance ratio: $ 1.08 \pm 0.26 $ 
-hz_para_list: [300, 300, 30]
-
-
-
-Experiment settings: AE with dataset snp
-AUC-ROC: $ 56.53 \pm 2.98 $ 
-Accuracy: $ 64.23 \pm 4.13 $ 
-Sensitivity: $ 70.48 \pm 8.56 $ 
-Specificity: $ 47.11 \pm 10.29 $ 
-Significance ratio: $ 1.36 \pm 0.16 $ 
-hz_para_list: [300, 300, 30]
-
-
-
-Experiment settings: AE with dataset av45
-AUC-ROC: $ 69.67 \pm 6.61 $ 
-Accuracy: $ 71.27 \pm 13.20 $ 
-Sensitivity: $ 74.33 \pm 23.15 $ 
-Specificity: $ 62.89 \pm 15.32 $ 
-Significance ratio: $ inf \pm nan $ 
-hz_para_list: [200, 200, 10]
-
-
-
-Experiment settings: AE with dataset fdg
-AUC-ROC: $ 73.50 \pm 4.39 $ 
-Accuracy: $ 68.52 \pm 4.55 $ 
-Sensitivity: $ 66.15 \pm 7.96 $ 
-Specificity: $ 75.00 \pm 8.34 $ 
-Significance ratio: $ 2.92 \pm 0.98 $ 
-hz_para_list: [200, 200, 10]
-
-
-
-Experiment settings: AE with dataset vbm
-AUC-ROC: $ 43.25 \pm 3.19 $ 
-Accuracy: $ 41.34 \pm 16.30 $ 
-Sensitivity: $ 29.23 \pm 32.51 $ 
-Specificity: $ 74.47 \pm 28.17 $ 
-Significance ratio: $ 1.08 \pm 0.26 $ 
-hz_para_list: [200, 200, 10]
-
-
-
-Experiment settings: AE with dataset snp
-AUC-ROC: $ 56.53 \pm 2.98 $ 
-Accuracy: $ 64.23 \pm 4.13 $ 
-Sensitivity: $ 70.48 \pm 8.56 $ 
-Specificity: $ 47.11 \pm 10.29 $ 
-Significance ratio: $ 1.36 \pm 0.16 $ 
-hz_para_list: [200, 200, 10]
-
-
-
-Experiment settings: AE with dataset av45
-AUC-ROC: $ 69.67 \pm 6.61 $ 
-Accuracy: $ 71.27 \pm 13.20 $ 
-Sensitivity: $ 74.33 \pm 23.15 $ 
-Specificity: $ 62.89 \pm 15.32 $ 
-Significance ratio: $ inf \pm nan $ 
-hz_para_list: [20, 10]
-
-
-
-Experiment settings: AE with dataset fdg
-AUC-ROC: $ 73.50 \pm 4.39 $ 
-Accuracy: $ 68.52 \pm 4.55 $ 
-Sensitivity: $ 66.15 \pm 7.96 $ 
-Specificity: $ 75.00 \pm 8.34 $ 
-Significance ratio: $ 2.92 \pm 0.98 $ 
-hz_para_list: [20, 10]
-
-
-
-Experiment settings: AE with dataset vbm
-AUC-ROC: $ 43.25 \pm 3.19 $ 
-Accuracy: $ 41.34 \pm 16.30 $ 
-Sensitivity: $ 29.23 \pm 32.51 $ 
-Specificity: $ 74.47 \pm 28.17 $ 
-Significance ratio: $ 1.08 \pm 0.26 $ 
-hz_para_list: [20, 10]
-
-
-
-Experiment settings: AE with dataset snp
-AUC-ROC: $ 56.53 \pm 2.98 $ 
-Accuracy: $ 64.23 \pm 4.13 $ 
-Sensitivity: $ 70.48 \pm 8.56 $ 
-Specificity: $ 47.11 \pm 10.29 $ 
-Significance ratio: $ 1.36 \pm 0.16 $ 
-hz_para_list: [20, 10]
-
-
-
-Experiment settings: AE with dataset av45
-AUC-ROC: $ 69.67 \pm 6.61 $ 
-Accuracy: $ 71.27 \pm 13.20 $ 
-Sensitivity: $ 74.33 \pm 23.15 $ 
-Specificity: $ 62.89 \pm 15.32 $ 
-Significance ratio: $ inf \pm nan $ 
-hz_para_list: [10, 10]
-
-
-
-Experiment settings: AE with dataset fdg
-AUC-ROC: $ 73.50 \pm 4.39 $ 
-Accuracy: $ 68.52 \pm 4.55 $ 
-Sensitivity: $ 66.15 \pm 7.96 $ 
-Specificity: $ 75.00 \pm 8.34 $ 
-Significance ratio: $ 2.92 \pm 0.98 $ 
-hz_para_list: [10, 10]
-
-
-
-Experiment settings: AE with dataset vbm
-AUC-ROC: $ 43.25 \pm 3.19 $ 
-Accuracy: $ 41.34 \pm 16.30 $ 
-Sensitivity: $ 29.23 \pm 32.51 $ 
-Specificity: $ 74.47 \pm 28.17 $ 
-Significance ratio: $ 1.08 \pm 0.26 $ 
-hz_para_list: [10, 10]
-
-
-
-Experiment settings: AE with dataset snp
-AUC-ROC: $ 56.53 \pm 2.98 $ 
-Accuracy: $ 64.23 \pm 4.13 $ 
-Sensitivity: $ 70.48 \pm 8.56 $ 
-Specificity: $ 47.11 \pm 10.29 $ 
-Significance ratio: $ 1.36 \pm 0.16 $ 
-hz_para_list: [10, 10]
-
-
-
-Experiment settings: AE with dataset av45
-AUC-ROC: $ 69.67 \pm 6.61 $ 
-Accuracy: $ 71.27 \pm 13.20 $ 
-Sensitivity: $ 74.33 \pm 23.15 $ 
-Specificity: $ 62.89 \pm 15.32 $ 
-Significance ratio: $ inf \pm nan $ 
-hz_para_list: [20, 20]
-
-
-
-Experiment settings: AE with dataset fdg
-AUC-ROC: $ 73.50 \pm 4.39 $ 
-Accuracy: $ 68.52 \pm 4.55 $ 
-Sensitivity: $ 66.15 \pm 7.96 $ 
-Specificity: $ 75.00 \pm 8.34 $ 
-Significance ratio: $ 2.92 \pm 0.98 $ 
-hz_para_list: [20, 20]
-
-
-
-Experiment settings: AE with dataset vbm
-AUC-ROC: $ 43.25 \pm 3.19 $ 
-Accuracy: $ 41.34 \pm 16.30 $ 
-Sensitivity: $ 29.23 \pm 32.51 $ 
-Specificity: $ 74.47 \pm 28.17 $ 
-Significance ratio: $ 1.08 \pm 0.26 $ 
-hz_para_list: [20, 20]
-
-
-
-Experiment settings: AE with dataset snp
-AUC-ROC: $ 56.53 \pm 2.98 $ 
-Accuracy: $ 64.23 \pm 4.13 $ 
-Sensitivity: $ 70.48 \pm 8.56 $ 
-Specificity: $ 47.11 \pm 10.29 $ 
-Significance ratio: $ 1.36 \pm 0.16 $ 
-hz_para_list: [20, 20]
-
-
-
-Experiment settings: AE with dataset av45
-AUC-ROC: $ 69.67 \pm 6.61 $ 
-Accuracy: $ 71.27 \pm 13.20 $ 
-Sensitivity: $ 74.33 \pm 23.15 $ 
-Specificity: $ 62.89 \pm 15.32 $ 
-Significance ratio: $ inf \pm nan $ 
-hz_para_list: [10, 10, 10]
-
-
-
-Experiment settings: AE with dataset fdg
-AUC-ROC: $ 73.50 \pm 4.39 $ 
-Accuracy: $ 68.52 \pm 4.55 $ 
-Sensitivity: $ 66.15 \pm 7.96 $ 
-Specificity: $ 75.00 \pm 8.34 $ 
-Significance ratio: $ 2.92 \pm 0.98 $ 
-hz_para_list: [10, 10, 10]
-
-
-
-Experiment settings: AE with dataset vbm
-AUC-ROC: $ 43.25 \pm 3.19 $ 
-Accuracy: $ 41.34 \pm 16.30 $ 
-Sensitivity: $ 29.23 \pm 32.51 $ 
-Specificity: $ 74.47 \pm 28.17 $ 
-Significance ratio: $ 1.08 \pm 0.26 $ 
-hz_para_list: [10, 10, 10]
-
-
-
-Experiment settings: AE with dataset snp
-AUC-ROC: $ 56.53 \pm 2.98 $ 
-Accuracy: $ 64.23 \pm 4.13 $ 
-Sensitivity: $ 70.48 \pm 8.56 $ 
-Specificity: $ 47.11 \pm 10.29 $ 
-Significance ratio: $ 1.36 \pm 0.16 $ 
-hz_para_list: [10, 10, 10]
-
-
-
-Experiment settings: AE with dataset av45
-AUC-ROC: $ 69.67 \pm 6.61 $ 
-Accuracy: $ 71.27 \pm 13.20 $ 
-Sensitivity: $ 74.33 \pm 23.15 $ 
-Specificity: $ 62.89 \pm 15.32 $ 
-Significance ratio: $ inf \pm nan $ 
-hz_para_list: [20, 20, 20]
-
-
-
-Experiment settings: AE with dataset fdg
-AUC-ROC: $ 73.50 \pm 4.39 $ 
-Accuracy: $ 68.52 \pm 4.55 $ 
-Sensitivity: $ 66.15 \pm 7.96 $ 
-Specificity: $ 75.00 \pm 8.34 $ 
-Significance ratio: $ 2.92 \pm 0.98 $ 
-hz_para_list: [20, 20, 20]
-
-
-
-Experiment settings: AE with dataset vbm
-AUC-ROC: $ 43.25 \pm 3.19 $ 
-Accuracy: $ 41.34 \pm 16.30 $ 
-Sensitivity: $ 29.23 \pm 32.51 $ 
-Specificity: $ 74.47 \pm 28.17 $ 
-Significance ratio: $ 1.08 \pm 0.26 $ 
-hz_para_list: [20, 20, 20]
-
-
-
-Experiment settings: AE with dataset snp
-AUC-ROC: $ 56.53 \pm 2.98 $ 
-Accuracy: $ 64.23 \pm 4.13 $ 
-Sensitivity: $ 70.48 \pm 8.56 $ 
-Specificity: $ 47.11 \pm 10.29 $ 
-Significance ratio: $ 1.36 \pm 0.16 $ 
-hz_para_list: [20, 20, 20]
-
-
-
-Experiment settings: AE with dataset av45
-AUC-ROC: $ 69.67 \pm 6.61 $ 
-Accuracy: $ 71.27 \pm 13.20 $ 
-Sensitivity: $ 74.33 \pm 23.15 $ 
-Specificity: $ 62.89 \pm 15.32 $ 
-Significance ratio: $ inf \pm nan $ 
-hz_para_list: [20, 10, 10]
-
-
-
-Experiment settings: AE with dataset fdg
-AUC-ROC: $ 73.50 \pm 4.39 $ 
-Accuracy: $ 68.52 \pm 4.55 $ 
-Sensitivity: $ 66.15 \pm 7.96 $ 
-Specificity: $ 75.00 \pm 8.34 $ 
-Significance ratio: $ 2.92 \pm 0.98 $ 
-hz_para_list: [20, 10, 10]
-
-
-
-Experiment settings: AE with dataset vbm
-AUC-ROC: $ 43.25 \pm 3.19 $ 
-Accuracy: $ 41.34 \pm 16.30 $ 
-Sensitivity: $ 29.23 \pm 32.51 $ 
-Specificity: $ 74.47 \pm 28.17 $ 
-Significance ratio: $ 1.08 \pm 0.26 $ 
-hz_para_list: [20, 10, 10]
-
-
-
-Experiment settings: AE with dataset snp
-AUC-ROC: $ 56.53 \pm 2.98 $ 
-Accuracy: $ 64.23 \pm 4.13 $ 
-Sensitivity: $ 70.48 \pm 8.56 $ 
-Specificity: $ 47.11 \pm 10.29 $ 
-Significance ratio: $ 1.36 \pm 0.16 $ 
-hz_para_list: [20, 10, 10]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Experiment settings: AE. MCI_vs_AD. Multimodal
+ROC-AUC: $ 57.28 \pm 2.17 $ 
+Accuracy: $ 45.94 \pm 3.36 $ 
+Sensitivity: $ 86.83 \pm 4.17 $ 
+Specificity: $ 32.00 \pm 5.60 $ 
+Significance ratio: $ 1.28 \pm 0.06 $ 
+hz_para_list: [110, 110, 10]
 
 
 
 Experiment settings: AE. HC_vs_AD. Dataset av45
-AUC-ROC: $ 72.79 \pm 1.59 $ 
-Accuracy: $ 76.76 \pm 3.35 $ 
-Sensitivity: $ 82.69 \pm 6.08 $ 
-Specificity: $ 60.53 \pm 5.39 $ 
-Significance ratio: $ 2.12 \pm 0.19 $ 
-hz_para_list: [90, 90, 90, 10]
-
-
-
-Experiment settings: AE. HC_vs_MCI. Dataset av45
-AUC-ROC: $ 55.40 \pm 1.49 $ 
-Accuracy: $ 60.44 \pm 7.97 $ 
-Sensitivity: $ 61.18 \pm 9.99 $ 
-Specificity: $ 54.47 \pm 8.89 $ 
-Significance ratio: $ 1.36 \pm 0.11 $ 
-hz_para_list: [90, 90, 90, 10]
-
-
-
-Experiment settings: AE. MCI_vs_AD. Dataset av45
-AUC-ROC: $ 67.55 \pm 0.86 $ 
-Accuracy: $ 58.07 \pm 2.98 $ 
-Sensitivity: $ 81.83 \pm 5.98 $ 
-Specificity: $ 49.97 \pm 5.91 $ 
-Significance ratio: $ 1.64 \pm 0.08 $ 
-hz_para_list: [90, 90, 90, 10]
-
-
-
-Experiment settings: AE. HC_vs_AD. Dataset vbm
-AUC-ROC: $ 69.97 \pm 0.83 $ 
-Accuracy: $ 71.62 \pm 2.38 $ 
-Sensitivity: $ 77.98 \pm 5.00 $ 
-Specificity: $ 54.21 \pm 5.42 $ 
-Significance ratio: $ 1.72 \pm 0.12 $ 
-hz_para_list: [200, 200, 10]
-
-
-
-Experiment settings: AE. HC_vs_MCI. Dataset vbm
-AUC-ROC: $ 54.96 \pm 0.74 $ 
-Accuracy: $ 57.96 \pm 17.88 $ 
-Sensitivity: $ 58.46 \pm 22.92 $ 
-Specificity: $ 53.95 \pm 22.55 $ 
-Significance ratio: $ 1.57 \pm 0.71 $ 
-hz_para_list: [200, 200, 10]
-
-
-
-Experiment settings: AE. MCI_vs_AD. Dataset vbm
-AUC-ROC: $ 64.65 \pm 0.64 $ 
-Accuracy: $ 55.16 \pm 3.95 $ 
-Sensitivity: $ 76.63 \pm 7.64 $ 
-Specificity: $ 47.84 \pm 7.82 $ 
-Significance ratio: $ 1.48 \pm 0.07 $ 
-hz_para_list: [200, 200, 10]
-
-
-
-Experiment settings: AE. HC_vs_AD. Dataset snp
-AUC-ROC: $ 55.83 \pm 4.29 $ 
-Accuracy: $ 55.70 \pm 7.14 $ 
-Sensitivity: $ 53.56 \pm 13.96 $ 
-Specificity: $ 61.58 \pm 12.90 $ 
-Significance ratio: $ 1.44 \pm 0.20 $ 
-hz_para_list: [200, 200, 10]
-
-
-
-Experiment settings: AE. HC_vs_MCI. Dataset snp
-AUC-ROC: $ 52.25 \pm 3.70 $ 
-Accuracy: $ 44.78 \pm 20.54 $ 
-Sensitivity: $ 41.80 \pm 26.34 $ 
-Specificity: $ 68.68 \pm 26.25 $ 
-Significance ratio: $ inf \pm nan $ 
-hz_para_list: [200, 200, 10]
-
-
-
-Experiment settings: AE. MCI_vs_AD. Dataset snp
-AUC-ROC: $ 53.40 \pm 2.33 $ 
-Accuracy: $ 50.86 \pm 8.82 $ 
-Sensitivity: $ 64.71 \pm 19.54 $ 
-Specificity: $ 46.13 \pm 18.37 $ 
-Significance ratio: $ 1.22 \pm 0.08 $ 
-hz_para_list: [200, 200, 10]
-
-
-
-Experiment settings: AE. HC_vs_AD. Dataset av45
-AUC-ROC: $ 72.60 \pm 1.60 $ 
-Accuracy: $ 76.83 \pm 3.47 $ 
-Sensitivity: $ 83.37 \pm 7.58 $ 
-Specificity: $ 58.95 \pm 8.34 $ 
-Significance ratio: $ 2.09 \pm 0.29 $ 
-hz_para_list: [20, 10]
-
-
-
-Experiment settings: AE. HC_vs_MCI. Dataset av45
-AUC-ROC: $ 55.76 \pm 1.08 $ 
-Accuracy: $ 56.73 \pm 6.85 $ 
-Sensitivity: $ 56.49 \pm 8.74 $ 
-Specificity: $ 58.68 \pm 8.57 $ 
-Significance ratio: $ 1.39 \pm 0.12 $ 
-hz_para_list: [20, 10]
-
-
-
-Experiment settings: AE. MCI_vs_AD. Dataset av45
-AUC-ROC: $ 66.21 \pm 1.22 $ 
-Accuracy: $ 56.63 \pm 4.32 $ 
-Sensitivity: $ 81.92 \pm 7.32 $ 
-Specificity: $ 48.00 \pm 8.23 $ 
-Significance ratio: $ 1.59 \pm 0.11 $ 
-hz_para_list: [20, 10]
-
-
-
-Experiment settings: AE. HC_vs_AD. Dataset fdg
-AUC-ROC: $ 85.32 \pm 1.02 $ 
-Accuracy: $ 76.06 \pm 2.87 $ 
-Sensitivity: $ 72.98 \pm 5.53 $ 
-Specificity: $ 84.47 \pm 5.32 $ 
-Significance ratio: $ 5.24 \pm 1.75 $ 
-hz_para_list: [20, 10]
-
-
-
-Experiment settings: AE. HC_vs_MCI. Dataset fdg
-AUC-ROC: $ 57.87 \pm 1.64 $ 
-Accuracy: $ 37.96 \pm 7.27 $ 
-Sensitivity: $ 31.90 \pm 9.15 $ 
-Specificity: $ 86.58 \pm 8.19 $ 
-Significance ratio: $ 2.80 \pm 0.86 $ 
-hz_para_list: [20, 10]
-
-
-
-Experiment settings: AE. MCI_vs_AD. Dataset fdg
-AUC-ROC: $ 76.91 \pm 0.70 $ 
-Accuracy: $ 67.80 \pm 2.17 $ 
-Sensitivity: $ 77.40 \pm 3.95 $ 
-Specificity: $ 64.52 \pm 4.13 $ 
-Significance ratio: $ 2.20 \pm 0.15 $ 
-hz_para_list: [20, 10]
-
-
-
-Experiment settings: AE. HC_vs_AD. Dataset vbm
-AUC-ROC: $ 66.64 \pm 1.35 $ 
-Accuracy: $ 67.96 \pm 6.80 $ 
-Sensitivity: $ 72.40 \pm 14.01 $ 
-Specificity: $ 55.79 \pm 13.46 $ 
-Significance ratio: $ 1.75 \pm 0.37 $ 
-hz_para_list: [20, 10]
-
-
-
-Experiment settings: AE. HC_vs_MCI. Dataset vbm
-AUC-ROC: $ 53.17 \pm 0.86 $ 
-Accuracy: $ 45.07 \pm 18.56 $ 
-Sensitivity: $ 42.13 \pm 23.85 $ 
-Specificity: $ 68.68 \pm 23.96 $ 
-Significance ratio: $ 1.88 \pm 0.94 $ 
-hz_para_list: [20, 10]
-
-
-
-Experiment settings: AE. MCI_vs_AD. Dataset vbm
-AUC-ROC: $ 62.88 \pm 1.40 $ 
-Accuracy: $ 54.13 \pm 5.57 $ 
-Sensitivity: $ 75.38 \pm 10.93 $ 
-Specificity: $ 46.89 \pm 11.04 $ 
-Significance ratio: $ 1.44 \pm 0.11 $ 
-hz_para_list: [20, 10]
-
-
-
-Experiment settings: AE. HC_vs_AD. Dataset snp
-AUC-ROC: $ 56.46 \pm 3.66 $ 
-Accuracy: $ 62.75 \pm 5.26 $ 
-Sensitivity: $ 67.50 \pm 11.47 $ 
-Specificity: $ 49.74 \pm 14.29 $ 
-Significance ratio: $ 1.39 \pm 0.20 $ 
-hz_para_list: [20, 10]
-
-
-
-Experiment settings: AE. HC_vs_MCI. Dataset snp
-AUC-ROC: $ 51.85 \pm 2.73 $ 
-Accuracy: $ 63.50 \pm 15.58 $ 
-Sensitivity: $ 65.84 \pm 20.20 $ 
-Specificity: $ 44.74 \pm 21.95 $ 
-Significance ratio: $ 1.24 \pm 0.15 $ 
-hz_para_list: [20, 10]
-
-
-
-Experiment settings: AE. MCI_vs_AD. Dataset snp
-AUC-ROC: $ 54.61 \pm 1.97 $ 
-Accuracy: $ 54.13 \pm 5.19 $ 
-Sensitivity: $ 57.60 \pm 9.40 $ 
-Specificity: $ 52.95 \pm 9.92 $ 
-Significance ratio: $ 1.24 \pm 0.10 $ 
-hz_para_list: [20, 10]
-
-
-
-Experiment settings: AE. HC_vs_AD. Dataset av45
-AUC-ROC: $ 73.62 \pm 0.90 $ 
-Accuracy: $ 75.42 \pm 4.10 $ 
-Sensitivity: $ 80.58 \pm 8.36 $ 
-Specificity: $ 61.32 \pm 7.72 $ 
-Significance ratio: $ 2.13 \pm 0.23 $ 
-hz_para_list: [10, 10]
-
-
-
-Experiment settings: AE. HC_vs_MCI. Dataset av45
-AUC-ROC: $ 55.36 \pm 0.60 $ 
-Accuracy: $ 48.05 \pm 9.21 $ 
-Sensitivity: $ 45.61 \pm 11.83 $ 
-Specificity: $ 67.63 \pm 11.83 $ 
-Significance ratio: $ 1.47 \pm 0.17 $ 
-hz_para_list: [10, 10]
-
-
-
-Experiment settings: AE. MCI_vs_AD. Dataset av45
-AUC-ROC: $ 67.21 \pm 1.01 $ 
-Accuracy: $ 57.24 \pm 3.61 $ 
-Sensitivity: $ 83.65 \pm 6.51 $ 
-Specificity: $ 48.23 \pm 6.99 $ 
-Significance ratio: $ 1.63 \pm 0.10 $ 
-hz_para_list: [10, 10]
-
-
-
-Experiment settings: AE. HC_vs_AD. Dataset fdg
-AUC-ROC: $ 83.98 \pm 1.11 $ 
-Accuracy: $ 74.37 \pm 2.42 $ 
-Sensitivity: $ 71.44 \pm 5.80 $ 
-Specificity: $ 82.37 \pm 7.90 $ 
-Significance ratio: $ 4.71 \pm 1.55 $ 
-hz_para_list: [10, 10]
-
-
-
-Experiment settings: AE. HC_vs_MCI. Dataset fdg
-AUC-ROC: $ 56.04 \pm 1.30 $ 
-Accuracy: $ 38.98 \pm 9.31 $ 
-Sensitivity: $ 33.70 \pm 12.07 $ 
-Specificity: $ 81.32 \pm 13.13 $ 
-Significance ratio: $ 2.11 \pm 0.50 $ 
-hz_para_list: [10, 10]
-
-
-
-Experiment settings: AE. MCI_vs_AD. Dataset fdg
-AUC-ROC: $ 76.71 \pm 0.63 $ 
-Accuracy: $ 68.53 \pm 2.32 $ 
-Sensitivity: $ 75.10 \pm 5.40 $ 
-Specificity: $ 66.30 \pm 4.81 $ 
-Significance ratio: $ 2.25 \pm 0.18 $ 
-hz_para_list: [10, 10]
-
-
-
-Experiment settings: AE. HC_vs_AD. Dataset vbm
-AUC-ROC: $ 64.02 \pm 1.08 $ 
-Accuracy: $ 61.97 \pm 4.77 $ 
-Sensitivity: $ 62.79 \pm 10.41 $ 
-Specificity: $ 59.74 \pm 11.29 $ 
-Significance ratio: $ 1.62 \pm 0.25 $ 
-hz_para_list: [10, 10]
-
-
-
-Experiment settings: AE. HC_vs_MCI. Dataset vbm
-AUC-ROC: $ 51.89 \pm 0.62 $ 
-Accuracy: $ 33.32 \pm 17.29 $ 
-Sensitivity: $ 27.15 \pm 22.23 $ 
-Specificity: $ 82.89 \pm 22.40 $ 
-Significance ratio: $ inf \pm nan $ 
-hz_para_list: [10, 10]
-
-
-
-Experiment settings: AE. MCI_vs_AD. Dataset vbm
-AUC-ROC: $ 61.79 \pm 0.91 $ 
-Accuracy: $ 55.06 \pm 4.15 $ 
-Sensitivity: $ 71.73 \pm 8.33 $ 
-Specificity: $ 49.38 \pm 8.35 $ 
-Significance ratio: $ 1.43 \pm 0.07 $ 
-hz_para_list: [10, 10]
-
-
-
-Experiment settings: AE. HC_vs_AD. Dataset snp
-AUC-ROC: $ 56.23 \pm 3.20 $ 
-Accuracy: $ 62.04 \pm 8.03 $ 
-Sensitivity: $ 66.35 \pm 14.96 $ 
-Specificity: $ 50.26 \pm 11.80 $ 
-Significance ratio: $ 1.34 \pm 0.12 $ 
-hz_para_list: [10, 10]
-
-
-
-Experiment settings: AE. HC_vs_MCI. Dataset snp
-AUC-ROC: $ 52.00 \pm 2.14 $ 
-Accuracy: $ 63.59 \pm 12.47 $ 
-Sensitivity: $ 65.93 \pm 16.16 $ 
-Specificity: $ 44.74 \pm 17.61 $ 
-Significance ratio: $ 1.23 \pm 0.13 $ 
-hz_para_list: [10, 10]
-
-
-
-Experiment settings: AE. MCI_vs_AD. Dataset snp
-AUC-ROC: $ 54.24 \pm 1.55 $ 
-Accuracy: $ 50.88 \pm 8.52 $ 
-Sensitivity: $ 65.29 \pm 16.26 $ 
-Specificity: $ 45.97 \pm 16.84 $ 
-Significance ratio: $ 1.24 \pm 0.11 $ 
-hz_para_list: [10, 10]
-
-
-
-Experiment settings: AE. HC_vs_AD. Dataset av45
-AUC-ROC: $ 72.26 \pm 1.47 $ 
-Accuracy: $ 77.04 \pm 3.38 $ 
-Sensitivity: $ 84.52 \pm 6.76 $ 
-Specificity: $ 56.58 \pm 6.89 $ 
-Significance ratio: $ 1.97 \pm 0.19 $ 
-hz_para_list: [20, 20]
-
-
-
-Experiment settings: AE. HC_vs_MCI. Dataset av45
-AUC-ROC: $ 55.34 \pm 1.26 $ 
-Accuracy: $ 58.08 \pm 12.59 $ 
-Sensitivity: $ 58.39 \pm 16.09 $ 
-Specificity: $ 55.53 \pm 15.68 $ 
-Significance ratio: $ 1.38 \pm 0.21 $ 
-hz_para_list: [20, 20]
-
-
-
-Experiment settings: AE. MCI_vs_AD. Dataset av45
-AUC-ROC: $ 66.40 \pm 1.35 $ 
-Accuracy: $ 57.14 \pm 3.14 $ 
-Sensitivity: $ 81.92 \pm 4.92 $ 
-Specificity: $ 48.69 \pm 5.72 $ 
-Significance ratio: $ 1.61 \pm 0.10 $ 
-hz_para_list: [20, 20]
-
-
-
-Experiment settings: AE. HC_vs_AD. Dataset fdg
-AUC-ROC: $ 85.74 \pm 1.00 $ 
-Accuracy: $ 77.18 \pm 4.19 $ 
-Sensitivity: $ 75.00 \pm 8.11 $ 
-Specificity: $ 83.16 \pm 6.88 $ 
-Significance ratio: $ 5.30 \pm 2.35 $ 
-hz_para_list: [20, 20]
-
-
-
-Experiment settings: AE. HC_vs_MCI. Dataset fdg
-AUC-ROC: $ 57.99 \pm 1.04 $ 
-Accuracy: $ 41.69 \pm 9.21 $ 
-Sensitivity: $ 36.59 \pm 11.82 $ 
-Specificity: $ 82.63 \pm 11.84 $ 
-Significance ratio: $ 2.76 \pm 1.14 $ 
-hz_para_list: [20, 20]
-
-
-
-Experiment settings: AE. MCI_vs_AD. Dataset fdg
-AUC-ROC: $ 77.09 \pm 0.72 $ 
-Accuracy: $ 69.22 \pm 3.36 $ 
-Sensitivity: $ 75.29 \pm 5.93 $ 
-Specificity: $ 67.15 \pm 6.48 $ 
-Significance ratio: $ 2.36 \pm 0.36 $ 
-hz_para_list: [20, 20]
-
-
-
-Experiment settings: AE. HC_vs_AD. Dataset vbm
-AUC-ROC: $ 66.32 \pm 2.14 $ 
-Accuracy: $ 64.86 \pm 8.66 $ 
-Sensitivity: $ 66.35 \pm 17.46 $ 
-Specificity: $ 60.79 \pm 15.90 $ 
-Significance ratio: $ 1.83 \pm 0.40 $ 
-hz_para_list: [20, 20]
-
-
-
-Experiment settings: AE. HC_vs_MCI. Dataset vbm
-AUC-ROC: $ 53.26 \pm 1.38 $ 
-Accuracy: $ 42.94 \pm 14.94 $ 
-Sensitivity: $ 39.21 \pm 19.11 $ 
-Specificity: $ 72.89 \pm 18.68 $ 
-Significance ratio: $ inf \pm nan $ 
-hz_para_list: [20, 20]
-
-
-
-Experiment settings: AE. MCI_vs_AD. Dataset vbm
-AUC-ROC: $ 62.60 \pm 1.28 $ 
-Accuracy: $ 51.25 \pm 3.11 $ 
-Sensitivity: $ 79.52 \pm 7.60 $ 
-Specificity: $ 41.61 \pm 6.67 $ 
-Significance ratio: $ 1.37 \pm 0.04 $ 
-hz_para_list: [20, 20]
-
-
-
-Experiment settings: AE. HC_vs_AD. Dataset snp
-AUC-ROC: $ 57.51 \pm 3.00 $ 
-Accuracy: $ 61.13 \pm 5.51 $ 
-Sensitivity: $ 62.88 \pm 11.82 $ 
-Specificity: $ 56.32 \pm 13.38 $ 
-Significance ratio: $ 1.50 \pm 0.24 $ 
-hz_para_list: [20, 20]
-
-
-
-Experiment settings: AE. HC_vs_MCI. Dataset snp
-AUC-ROC: $ 52.43 \pm 2.25 $ 
-Accuracy: $ 47.84 \pm 14.60 $ 
-Sensitivity: $ 45.61 \pm 18.58 $ 
-Specificity: $ 65.79 \pm 17.73 $ 
-Significance ratio: $ 1.47 \pm 0.35 $ 
-hz_para_list: [20, 20]
-
-
-
-Experiment settings: AE. MCI_vs_AD. Dataset snp
-AUC-ROC: $ 55.10 \pm 1.87 $ 
-Accuracy: $ 50.93 \pm 4.50 $ 
-Sensitivity: $ 65.58 \pm 7.89 $ 
-Specificity: $ 45.93 \pm 8.57 $ 
-Significance ratio: $ 1.22 \pm 0.07 $ 
-hz_para_list: [20, 20]
-
-
-
-Experiment settings: AE. HC_vs_AD. Dataset av45
-AUC-ROC: $ 74.11 \pm 1.51 $ 
-Accuracy: $ 74.30 \pm 2.70 $ 
-Sensitivity: $ 79.13 \pm 5.71 $ 
-Specificity: $ 61.05 \pm 6.32 $ 
-Significance ratio: $ 2.07 \pm 0.22 $ 
-hz_para_list: [10, 10, 10]
-
-
-
-Experiment settings: AE. HC_vs_MCI. Dataset av45
-AUC-ROC: $ 55.28 \pm 0.95 $ 
-Accuracy: $ 45.92 \pm 7.07 $ 
-Sensitivity: $ 42.92 \pm 9.03 $ 
-Specificity: $ 70.00 \pm 8.82 $ 
-Significance ratio: $ 1.48 \pm 0.18 $ 
-hz_para_list: [10, 10, 10]
-
-
-
-Experiment settings: AE. MCI_vs_AD. Dataset av45
-AUC-ROC: $ 67.93 \pm 1.38 $ 
-Accuracy: $ 57.73 \pm 3.78 $ 
-Sensitivity: $ 81.06 \pm 5.85 $ 
-Specificity: $ 49.77 \pm 7.02 $ 
-Significance ratio: $ 1.63 \pm 0.11 $ 
-hz_para_list: [10, 10, 10]
-
-
-
-Experiment settings: AE. HC_vs_AD. Dataset fdg
-AUC-ROC: $ 82.69 \pm 1.11 $ 
-Accuracy: $ 75.63 \pm 2.36 $ 
-Sensitivity: $ 76.15 \pm 4.92 $ 
-Specificity: $ 74.21 \pm 5.62 $ 
-Significance ratio: $ 3.10 \pm 0.72 $ 
-hz_para_list: [10, 10, 10]
-
-
-
-Experiment settings: AE. HC_vs_MCI. Dataset fdg
-AUC-ROC: $ 55.19 \pm 0.99 $ 
-Accuracy: $ 45.95 \pm 12.29 $ 
-Sensitivity: $ 42.82 \pm 15.76 $ 
-Specificity: $ 71.05 \pm 15.79 $ 
-Significance ratio: $ 1.77 \pm 0.60 $ 
-hz_para_list: [10, 10, 10]
-
-
-
-Experiment settings: AE. MCI_vs_AD. Dataset fdg
-AUC-ROC: $ 76.17 \pm 0.83 $ 
-Accuracy: $ 67.41 \pm 2.33 $ 
-Sensitivity: $ 75.87 \pm 5.46 $ 
-Specificity: $ 64.52 \pm 4.86 $ 
-Significance ratio: $ 2.16 \pm 0.15 $ 
-hz_para_list: [10, 10, 10]
-
-
-
-Experiment settings: AE. HC_vs_AD. Dataset vbm
-AUC-ROC: $ 63.03 \pm 1.33 $ 
-Accuracy: $ 63.17 \pm 5.54 $ 
-Sensitivity: $ 64.90 \pm 12.10 $ 
-Specificity: $ 58.42 \pm 12.77 $ 
-Significance ratio: $ 1.63 \pm 0.22 $ 
-hz_para_list: [10, 10, 10]
-
-
-
-Experiment settings: AE. HC_vs_MCI. Dataset vbm
-AUC-ROC: $ 51.32 \pm 0.65 $ 
-Accuracy: $ 26.18 \pm 8.74 $ 
-Sensitivity: $ 18.10 \pm 11.19 $ 
-Specificity: $ 91.05 \pm 11.05 $ 
-Significance ratio: $ inf \pm nan $ 
-hz_para_list: [10, 10, 10]
-
-
-
-Experiment settings: AE. MCI_vs_AD. Dataset vbm
-AUC-ROC: $ 61.46 \pm 1.05 $ 
-Accuracy: $ 55.11 \pm 3.49 $ 
-Sensitivity: $ 70.87 \pm 6.81 $ 
-Specificity: $ 49.74 \pm 6.94 $ 
-Significance ratio: $ 1.42 \pm 0.06 $ 
-hz_para_list: [10, 10, 10]
-
-
-
-Experiment settings: AE. HC_vs_AD. Dataset snp
-AUC-ROC: $ 56.05 \pm 3.42 $ 
-Accuracy: $ 61.27 \pm 5.22 $ 
-Sensitivity: $ 63.75 \pm 9.85 $ 
-Specificity: $ 54.47 \pm 9.78 $ 
-Significance ratio: $ 1.43 \pm 0.19 $ 
-hz_para_list: [10, 10, 10]
-
-
-
-Experiment settings: AE. HC_vs_MCI. Dataset snp
-AUC-ROC: $ 51.64 \pm 1.95 $ 
-Accuracy: $ 51.55 \pm 11.66 $ 
-Sensitivity: $ 50.52 \pm 14.86 $ 
-Specificity: $ 59.74 \pm 14.42 $ 
-Significance ratio: $ 1.30 \pm 0.16 $ 
-hz_para_list: [10, 10, 10]
-
-
-
-Experiment settings: AE. MCI_vs_AD. Dataset snp
-AUC-ROC: $ 54.60 \pm 2.27 $ 
-Accuracy: $ 49.46 \pm 8.34 $ 
-Sensitivity: $ 69.62 \pm 13.63 $ 
-Specificity: $ 42.59 \pm 15.70 $ 
-Significance ratio: $ 1.25 \pm 0.14 $ 
-hz_para_list: [10, 10, 10]
-
-
-
-Experiment settings: AE. HC_vs_AD. Dataset av45
-AUC-ROC: $ 72.67 \pm 0.81 $ 
-Accuracy: $ 76.20 \pm 2.57 $ 
-Sensitivity: $ 81.54 \pm 5.64 $ 
-Specificity: $ 61.58 \pm 6.57 $ 
-Significance ratio: $ 2.16 \pm 0.26 $ 
-hz_para_list: [20, 20, 20]
-
-
-
-Experiment settings: AE. HC_vs_MCI. Dataset av45
-AUC-ROC: $ 55.32 \pm 0.81 $ 
-Accuracy: $ 52.54 \pm 8.47 $ 
-Sensitivity: $ 51.08 \pm 10.93 $ 
-Specificity: $ 64.21 \pm 11.42 $ 
-Significance ratio: $ 1.50 \pm 0.23 $ 
-hz_para_list: [20, 20, 20]
-
-
-
-Experiment settings: AE. MCI_vs_AD. Dataset av45
-AUC-ROC: $ 66.45 \pm 0.99 $ 
-Accuracy: $ 56.28 \pm 2.88 $ 
-Sensitivity: $ 83.46 \pm 5.37 $ 
-Specificity: $ 47.02 \pm 5.61 $ 
-Significance ratio: $ 1.58 \pm 0.08 $ 
-hz_para_list: [20, 20, 20]
-
-
-
-Experiment settings: AE. HC_vs_AD. Dataset fdg
-AUC-ROC: $ 85.05 \pm 0.95 $ 
-Accuracy: $ 74.51 \pm 2.72 $ 
-Sensitivity: $ 70.48 \pm 4.88 $ 
-Specificity: $ 85.53 \pm 4.28 $ 
-Significance ratio: $ 5.18 \pm 1.10 $ 
-hz_para_list: [20, 20, 20]
-
-
-
-Experiment settings: AE. HC_vs_MCI. Dataset fdg
-AUC-ROC: $ 57.14 \pm 1.08 $ 
-Accuracy: $ 38.86 \pm 9.69 $ 
-Sensitivity: $ 33.21 \pm 12.25 $ 
-Specificity: $ 84.21 \pm 11.04 $ 
-Significance ratio: $ inf \pm nan $ 
-hz_para_list: [20, 20, 20]
-
-
-
-Experiment settings: AE. MCI_vs_AD. Dataset fdg
-AUC-ROC: $ 76.96 \pm 0.60 $ 
-Accuracy: $ 68.56 \pm 1.39 $ 
-Sensitivity: $ 76.73 \pm 2.81 $ 
-Specificity: $ 65.77 \pm 2.73 $ 
-Significance ratio: $ 2.25 \pm 0.09 $ 
-hz_para_list: [20, 20, 20]
-
-
-
-Experiment settings: AE. HC_vs_AD. Dataset vbm
-AUC-ROC: $ 64.46 \pm 1.04 $ 
-Accuracy: $ 65.21 \pm 7.10 $ 
-Sensitivity: $ 69.04 \pm 15.67 $ 
-Specificity: $ 54.74 \pm 16.55 $ 
-Significance ratio: $ 1.69 \pm 0.51 $ 
-hz_para_list: [20, 20, 20]
-
-
-
-Experiment settings: AE. HC_vs_MCI. Dataset vbm
-AUC-ROC: $ 52.19 \pm 0.91 $ 
-Accuracy: $ 30.70 \pm 12.12 $ 
-Sensitivity: $ 23.77 \pm 15.56 $ 
-Specificity: $ 86.32 \pm 15.69 $ 
-Significance ratio: $ inf \pm nan $ 
-hz_para_list: [20, 20, 20]
-
-
-
-Experiment settings: AE. MCI_vs_AD. Dataset vbm
-AUC-ROC: $ 61.93 \pm 0.58 $ 
-Accuracy: $ 53.84 \pm 5.74 $ 
-Sensitivity: $ 73.85 \pm 12.28 $ 
-Specificity: $ 47.02 \pm 11.82 $ 
-Significance ratio: $ 1.42 \pm 0.12 $ 
-hz_para_list: [20, 20, 20]
-
-
-
-Experiment settings: AE. HC_vs_AD. Dataset snp
-AUC-ROC: $ 56.09 \pm 3.65 $ 
-Accuracy: $ 63.17 \pm 5.55 $ 
-Sensitivity: $ 67.79 \pm 10.31 $ 
-Specificity: $ 50.53 \pm 9.76 $ 
-Significance ratio: $ 1.39 \pm 0.15 $ 
-hz_para_list: [20, 20, 20]
-
-
-
-Experiment settings: AE. HC_vs_MCI. Dataset snp
-AUC-ROC: $ 51.99 \pm 2.23 $ 
-Accuracy: $ 58.48 \pm 16.78 $ 
-Sensitivity: $ 59.41 \pm 21.57 $ 
-Specificity: $ 51.05 \pm 21.90 $ 
-Significance ratio: $ inf \pm nan $ 
-hz_para_list: [20, 20, 20]
-
-
-
-Experiment settings: AE. MCI_vs_AD. Dataset snp
-AUC-ROC: $ 54.21 \pm 2.16 $ 
-Accuracy: $ 52.62 \pm 7.68 $ 
-Sensitivity: $ 62.31 \pm 19.13 $ 
-Specificity: $ 49.31 \pm 16.73 $ 
-Significance ratio: $ 1.24 \pm 0.06 $ 
-hz_para_list: [20, 20, 20]
-
-
-
-Experiment settings: AE. HC_vs_AD. Dataset av45
-AUC-ROC: $ 74.17 \pm 1.21 $ 
-Accuracy: $ 74.23 \pm 3.78 $ 
-Sensitivity: $ 78.17 \pm 7.52 $ 
-Specificity: $ 63.42 \pm 6.81 $ 
-Significance ratio: $ 2.17 \pm 0.18 $ 
-hz_para_list: [20, 10, 10]
-
-
-
-Experiment settings: AE. HC_vs_MCI. Dataset av45
-AUC-ROC: $ 55.47 \pm 0.86 $ 
-Accuracy: $ 52.19 \pm 9.00 $ 
-Sensitivity: $ 50.89 \pm 11.49 $ 
-Specificity: $ 62.63 \pm 11.15 $ 
-Significance ratio: $ 1.39 \pm 0.13 $ 
-hz_para_list: [20, 10, 10]
-
-
-
-Experiment settings: AE. MCI_vs_AD. Dataset av45
-AUC-ROC: $ 67.62 \pm 1.25 $ 
-Accuracy: $ 56.75 \pm 3.47 $ 
-Sensitivity: $ 83.27 \pm 6.08 $ 
-Specificity: $ 47.70 \pm 6.61 $ 
-Significance ratio: $ 1.60 \pm 0.09 $ 
-hz_para_list: [20, 10, 10]
-
-
-
-Experiment settings: AE. HC_vs_AD. Dataset fdg
-AUC-ROC: $ 84.24 \pm 1.35 $ 
-Accuracy: $ 74.72 \pm 3.32 $ 
-Sensitivity: $ 71.25 \pm 5.50 $ 
-Specificity: $ 84.21 \pm 4.56 $ 
-Significance ratio: $ 4.97 \pm 1.66 $ 
-hz_para_list: [20, 10, 10]
-
-
-
-Experiment settings: AE. HC_vs_MCI. Dataset fdg
-AUC-ROC: $ 56.37 \pm 1.11 $ 
-Accuracy: $ 40.55 \pm 9.36 $ 
-Sensitivity: $ 35.57 \pm 12.09 $ 
-Specificity: $ 80.53 \pm 12.74 $ 
-Significance ratio: $ 2.23 \pm 0.77 $ 
-hz_para_list: [20, 10, 10]
-
-
-
-Experiment settings: AE. MCI_vs_AD. Dataset fdg
-AUC-ROC: $ 76.66 \pm 0.73 $ 
-Accuracy: $ 68.26 \pm 2.76 $ 
-Sensitivity: $ 77.02 \pm 4.70 $ 
-Specificity: $ 65.28 \pm 5.14 $ 
-Significance ratio: $ 2.25 \pm 0.21 $ 
-hz_para_list: [20, 10, 10]
-
-
-
-Experiment settings: AE. HC_vs_AD. Dataset vbm
-AUC-ROC: $ 63.78 \pm 1.45 $ 
-Accuracy: $ 62.75 \pm 8.74 $ 
-Sensitivity: $ 63.85 \pm 18.89 $ 
-Specificity: $ 59.74 \pm 19.59 $ 
-Significance ratio: $ 1.72 \pm 0.29 $ 
-hz_para_list: [20, 10, 10]
-
-
-
-Experiment settings: AE. HC_vs_MCI. Dataset vbm
-AUC-ROC: $ 51.64 \pm 0.98 $ 
-Accuracy: $ 32.86 \pm 9.26 $ 
-Sensitivity: $ 26.52 \pm 11.77 $ 
-Specificity: $ 83.68 \pm 11.03 $ 
-Significance ratio: $ inf \pm nan $ 
-hz_para_list: [20, 10, 10]
-
-
-
-Experiment settings: AE. MCI_vs_AD. Dataset vbm
-AUC-ROC: $ 61.77 \pm 0.68 $ 
-Accuracy: $ 51.59 \pm 6.57 $ 
-Sensitivity: $ 77.79 \pm 13.57 $ 
-Specificity: $ 42.66 \pm 13.43 $ 
-Significance ratio: $ 1.38 \pm 0.09 $ 
-hz_para_list: [20, 10, 10]
-
-
-
-Experiment settings: AE. HC_vs_AD. Dataset snp
-AUC-ROC: $ 55.72 \pm 2.88 $ 
-Accuracy: $ 59.37 \pm 10.17 $ 
-Sensitivity: $ 60.29 \pm 19.97 $ 
-Specificity: $ 56.84 \pm 17.30 $ 
-Significance ratio: $ inf \pm nan $ 
-hz_para_list: [20, 10, 10]
-
-
-
-Experiment settings: AE. HC_vs_MCI. Dataset snp
-AUC-ROC: $ 51.35 \pm 1.33 $ 
-Accuracy: $ 62.80 \pm 12.63 $ 
-Sensitivity: $ 64.98 \pm 16.22 $ 
-Specificity: $ 45.26 \pm 16.43 $ 
-Significance ratio: $ 1.20 \pm 0.07 $ 
-hz_para_list: [20, 10, 10]
-
-
-
-Experiment settings: AE. MCI_vs_AD. Dataset snp
-AUC-ROC: $ 54.68 \pm 2.30 $ 
-Accuracy: $ 51.10 \pm 7.69 $ 
-Sensitivity: $ 66.83 \pm 11.56 $ 
-Specificity: $ 45.74 \pm 14.08 $ 
-Significance ratio: $ 1.26 \pm 0.13 $ 
-hz_para_list: [20, 10, 10]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Experiment settings: AE. HC_vs_AD. Dataset av45
-AUC-ROC: $ 77.60 \pm 3.99 $ 
+ROC-AUC: $ 77.60 \pm 3.99 $ 
 Accuracy: $ 72.70 \pm 3.31 $ 
 Sensitivity: $ 81.83 \pm 7.85 $ 
 Specificity: $ 61.73 \pm 10.71 $ 
@@ -2037,7 +69,7 @@ hz_para_list: [110, 110, 10]
 
 
 Experiment settings: AE. HC_vs_MCI. Dataset av45
-AUC-ROC: $ 59.23 \pm 2.59 $ 
+ROC-AUC: $ 59.23 \pm 2.59 $ 
 Accuracy: $ 58.97 \pm 12.76 $ 
 Sensitivity: $ 59.11 \pm 21.23 $ 
 Specificity: $ 58.84 \pm 18.26 $ 
@@ -2047,7 +79,7 @@ hz_para_list: [110, 110, 10]
 
 
 Experiment settings: AE. MCI_vs_AD. Dataset av45
-AUC-ROC: $ 68.04 \pm 1.67 $ 
+ROC-AUC: $ 68.04 \pm 1.67 $ 
 Accuracy: $ 58.22 \pm 3.31 $ 
 Sensitivity: $ 80.19 \pm 6.07 $ 
 Specificity: $ 50.72 \pm 6.06 $ 
@@ -2056,38 +88,8 @@ hz_para_list: [110, 110, 10]
 
 
 
-Experiment settings: AE. HC_vs_AD. Dataset fdg
-AUC-ROC: $ 86.37 \pm 2.07 $ 
-Accuracy: $ 79.86 \pm 2.23 $ 
-Sensitivity: $ 80.10 \pm 6.72 $ 
-Specificity: $ 79.57 \pm 5.05 $ 
-Significance ratio: $ 4.10 \pm 0.73 $ 
-hz_para_list: [110, 110, 10]
-
-
-
-Experiment settings: AE. HC_vs_MCI. Dataset fdg
-AUC-ROC: $ 60.69 \pm 2.62 $ 
-Accuracy: $ 54.99 \pm 8.95 $ 
-Sensitivity: $ 51.38 \pm 15.62 $ 
-Specificity: $ 67.76 \pm 15.05 $ 
-Significance ratio: $ 1.71 \pm 0.26 $ 
-hz_para_list: [110, 110, 10]
-
-
-
-Experiment settings: AE. MCI_vs_AD. Dataset fdg
-AUC-ROC: $ 77.43 \pm 1.11 $ 
-Accuracy: $ 65.99 \pm 2.75 $ 
-Sensitivity: $ 83.17 \pm 4.49 $ 
-Specificity: $ 60.13 \pm 5.02 $ 
-Significance ratio: $ 2.11 \pm 0.19 $ 
-hz_para_list: [110, 110, 10]
-
-
-
 Experiment settings: AE. HC_vs_AD. Dataset vbm
-AUC-ROC: $ 67.52 \pm 3.38 $ 
+ROC-AUC: $ 67.52 \pm 3.38 $ 
 Accuracy: $ 65.48 \pm 2.53 $ 
 Sensitivity: $ 75.58 \pm 11.21 $ 
 Specificity: $ 53.48 \pm 13.79 $ 
@@ -2097,7 +99,7 @@ hz_para_list: [110, 110, 10]
 
 
 Experiment settings: AE. HC_vs_MCI. Dataset vbm
-AUC-ROC: $ 52.30 \pm 3.40 $ 
+ROC-AUC: $ 52.30 \pm 3.40 $ 
 Accuracy: $ 51.64 \pm 12.08 $ 
 Sensitivity: $ 49.48 \pm 20.71 $ 
 Specificity: $ 59.43 \pm 19.14 $ 
@@ -2107,7 +109,7 @@ hz_para_list: [110, 110, 10]
 
 
 Experiment settings: AE. MCI_vs_AD. Dataset vbm
-AUC-ROC: $ 64.73 \pm 0.72 $ 
+ROC-AUC: $ 64.73 \pm 0.72 $ 
 Accuracy: $ 55.53 \pm 4.39 $ 
 Sensitivity: $ 76.06 \pm 7.55 $ 
 Specificity: $ 48.52 \pm 8.37 $ 
@@ -2116,97 +118,1910 @@ hz_para_list: [110, 110, 10]
 
 
 
-Experiment settings: AE. HC_vs_AD. Dataset snp
-AUC-ROC: $ 55.87 \pm 3.89 $ 
-Accuracy: $ 57.87 \pm 2.66 $ 
-Sensitivity: $ 68.08 \pm 17.61 $ 
-Specificity: $ 45.12 \pm 18.93 $ 
-Significance ratio: $ 1.29 \pm 0.19 $ 
+Experiment settings: AE. HC_vs_AD. Dataset 3modalities
+ROC-AUC: $ 81.73 \pm 2.11 $ 
+Accuracy: $ 77.24 \pm 1.95 $ 
+Sensitivity: $ 84.13 \pm 4.11 $ 
+Specificity: $ 68.86 \pm 4.01 $ 
+Significance ratio: $ 2.74 \pm 0.31 $ 
 hz_para_list: [110, 110, 10]
 
 
 
-Experiment settings: AE. HC_vs_MCI. Dataset snp
-AUC-ROC: $ 52.60 \pm 2.08 $ 
-Accuracy: $ 52.10 \pm 16.47 $ 
-Sensitivity: $ 49.87 \pm 29.02 $ 
-Specificity: $ 59.71 \pm 28.99 $ 
-Significance ratio: $ 1.48 \pm 0.46 $ 
+Experiment settings: AE. HC_vs_MCI. Dataset 3modalities
+ROC-AUC: $ 59.82 \pm 2.99 $ 
+Accuracy: $ 58.20 \pm 6.09 $ 
+Sensitivity: $ 57.15 \pm 9.34 $ 
+Specificity: $ 62.05 \pm 7.55 $ 
+Significance ratio: $ 1.52 \pm 0.19 $ 
 hz_para_list: [110, 110, 10]
 
 
 
-Experiment settings: AE. MCI_vs_AD. Dataset snp
-AUC-ROC: $ 53.06 \pm 2.91 $ 
-Accuracy: $ 51.39 \pm 8.30 $ 
-Sensitivity: $ 62.12 \pm 11.64 $ 
-Specificity: $ 47.74 \pm 14.94 $ 
-Significance ratio: $ 1.23 \pm 0.15 $ 
+Experiment settings: AE. MCI_vs_AD. Dataset 3modalities
+ROC-AUC: $ 72.65 \pm 0.61 $ 
+Accuracy: $ 64.40 \pm 2.55 $ 
+Sensitivity: $ 79.52 \pm 4.08 $ 
+Specificity: $ 59.25 \pm 4.59 $ 
+Significance ratio: $ 1.97 \pm 0.13 $ 
 hz_para_list: [110, 110, 10]
-
-
-
-Experiment settings: AAE. Dataset av45
-AUC-ROC: $ 65.79 \pm 3.93 $ 
-Accuracy: $ 65.65 \pm 2.22 $ 
-Sensitivity: $ 76.73 \pm 11.71 $ 
-Specificity: $ 52.31 \pm 12.98 $ 
-
-
-
-Experiment settings: AAE. Dataset fdg
-AUC-ROC: $ 63.52 \pm 2.86 $ 
-Accuracy: $ 65.48 \pm 1.79 $ 
-Sensitivity: $ 80.19 \pm 9.49 $ 
-Specificity: $ 47.90 \pm 12.10 $ 
-
-
-
-Experiment settings: AAE. Dataset vbm
-AUC-ROC: $ 60.29 \pm 4.54 $ 
-Accuracy: $ 60.78 \pm 3.93 $ 
-Sensitivity: $ 61.35 \pm 15.76 $ 
-Specificity: $ 59.85 \pm 14.06 $ 
-
-
-
-Experiment settings: AAE. Dataset snp
-AUC-ROC: $ 53.67 \pm 2.25 $ 
-Accuracy: $ 56.24 \pm 3.07 $ 
-Sensitivity: $ 62.88 \pm 22.48 $ 
-Specificity: $ 48.16 \pm 22.10 $ 
 
 
 
 Experiment settings: CVAE. Dataset av45
-AUC-ROC: $ 67.53 \pm 4.77 $ 
+ROC-AUC: $ 67.53 \pm 4.77 $ 
 Accuracy: $ 66.08 \pm 3.24 $ 
 Sensitivity: $ 75.67 \pm 6.63 $ 
 Specificity: $ 54.43 \pm 8.42 $ 
 
 
 
+Experiment settings: AE. HC_vs_AD. Multimodal
+ROC-AUC: $ 82.49 \pm 2.03 $ 
+Accuracy: $ 78.41 \pm 1.55 $ 
+Sensitivity: $ 85.38 \pm 2.18 $ 
+Specificity: $ 69.93 \pm 3.15 $ 
+Significance ratio: $ 2.87 \pm 0.31 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: AE. HC_vs_MCI. Multimodal
+ROC-AUC: $ 59.65 \pm 2.97 $ 
+Accuracy: $ 58.67 \pm 5.20 $ 
+Sensitivity: $ 58.20 \pm 8.38 $ 
+Specificity: $ 60.39 \pm 7.41 $ 
+Significance ratio: $ 1.48 \pm 0.13 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: AE. MCI_vs_AD. Multimodal
+ROC-AUC: $ 73.63 \pm 0.43 $ 
+Accuracy: $ 63.62 \pm 1.48 $ 
+Sensitivity: $ 83.94 \pm 1.83 $ 
+Specificity: $ 56.69 \pm 2.46 $ 
+Significance ratio: $ 1.94 \pm 0.08 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: CVAE. Dataset av45
+ROC-AUC: $ 67.53 \pm 4.77 $ 
+Accuracy: $ 66.08 \pm 3.24 $ 
+Sensitivity: $ 75.67 \pm 6.63 $ 
+Specificity: $ 54.43 \pm 8.42 $ 
+
+
+
+Experiment settings: CVAE. Dataset av45
+ROC-AUC: $ 67.53 \pm 4.77 $ 
+Accuracy: $ 66.08 \pm 3.24 $ 
+Sensitivity: $ 75.67 \pm 6.63 $ 
+Specificity: $ 54.43 \pm 8.42 $ 
+
+
+
+Experiment settings: AE. HC_vs_AD. Multimodal
+ROC-AUC: $ 60.84 \pm 4.29 $ 
+Accuracy: $ 65.64 \pm 1.56 $ 
+Sensitivity: $ 85.96 \pm 7.65 $ 
+Specificity: $ 41.07 \pm 9.79 $ 
+Significance ratio: $ 1.48 \pm 0.16 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: AE. HC_vs_MCI. Multimodal
+ROC-AUC: $ 54.44 \pm 3.46 $ 
+Accuracy: $ 64.41 \pm 10.52 $ 
+Sensitivity: $ 71.54 \pm 18.14 $ 
+Specificity: $ 39.69 \pm 17.46 $ 
+Significance ratio: $ 1.21 \pm 0.09 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: AE. MCI_vs_AD. Multimodal
+ROC-AUC: $ 56.82 \pm 0.85 $ 
+Accuracy: $ 46.70 \pm 4.22 $ 
+Sensitivity: $ 84.13 \pm 8.15 $ 
+Specificity: $ 33.93 \pm 8.40 $ 
+Significance ratio: $ 1.28 \pm 0.05 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: AE. HC_vs_AD. Multimodal
+ROC-AUC: $ 60.84 \pm 4.29 $ 
+Accuracy: $ 65.64 \pm 1.56 $ 
+Sensitivity: $ 85.96 \pm 7.65 $ 
+Specificity: $ 41.07 \pm 9.79 $ 
+Significance ratio: $ 1.48 \pm 0.16 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: AE. HC_vs_MCI. Multimodal
+ROC-AUC: $ 54.44 \pm 3.46 $ 
+Accuracy: $ 64.41 \pm 10.52 $ 
+Sensitivity: $ 71.54 \pm 18.14 $ 
+Specificity: $ 39.69 \pm 17.46 $ 
+Significance ratio: $ 1.21 \pm 0.09 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: AE. MCI_vs_AD. Multimodal
+ROC-AUC: $ 56.82 \pm 0.85 $ 
+Accuracy: $ 46.70 \pm 4.22 $ 
+Sensitivity: $ 84.13 \pm 8.15 $ 
+Specificity: $ 33.93 \pm 8.40 $ 
+Significance ratio: $ 1.28 \pm 0.05 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: AE. HC_vs_AD. Multimodal
+ROC-AUC: $ 60.84 \pm 4.29 $ 
+Accuracy: $ 65.64 \pm 1.56 $ 
+Sensitivity: $ 85.96 \pm 7.65 $ 
+Specificity: $ 41.07 \pm 9.79 $ 
+Significance ratio: $ 1.48 \pm 0.16 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: AE. HC_vs_MCI. Multimodal
+ROC-AUC: $ 54.44 \pm 3.46 $ 
+Accuracy: $ 64.41 \pm 10.52 $ 
+Sensitivity: $ 71.54 \pm 18.14 $ 
+Specificity: $ 39.69 \pm 17.46 $ 
+Significance ratio: $ 1.21 \pm 0.09 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: AE. MCI_vs_AD. Multimodal
+ROC-AUC: $ 56.82 \pm 0.85 $ 
+Accuracy: $ 46.70 \pm 4.22 $ 
+Sensitivity: $ 84.13 \pm 8.15 $ 
+Specificity: $ 33.93 \pm 8.40 $ 
+Significance ratio: $ 1.28 \pm 0.05 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: CVAE. Dataset av45
+ROC-AUC: $ 67.53 \pm 4.77 $ 
+Accuracy: $ 66.08 \pm 3.24 $ 
+Sensitivity: $ 75.67 \pm 6.63 $ 
+Specificity: $ 54.43 \pm 8.42 $ 
+
+
+
+Experiment settings: CVAE. Dataset av45
+ROC-AUC: $ 67.53 \pm 4.77 $ 
+Accuracy: $ 66.08 \pm 3.24 $ 
+Sensitivity: $ 75.67 \pm 6.63 $ 
+Specificity: $ 54.43 \pm 8.42 $ 
+
+
+
+Experiment settings: CVAE. Dataset av45
+ROC-AUC: $ 67.53 \pm 4.77 $ 
+Accuracy: $ 66.08 \pm 3.24 $ 
+Sensitivity: $ 75.67 \pm 6.63 $ 
+Specificity: $ 54.43 \pm 8.42 $ 
+
+
+
+Experiment settings: CVAE. Dataset av45
+ROC-AUC: $ 67.53 \pm 4.77 $ 
+Accuracy: $ 66.08 \pm 3.24 $ 
+Sensitivity: $ 75.67 \pm 6.63 $ 
+Specificity: $ 54.43 \pm 8.42 $ 
+
+
+
+Experiment settings: CVAE. Dataset av45
+ROC-AUC: $ 67.75 \pm 3.40 $ 
+Accuracy: $ 65.06 \pm 2.73 $ 
+Sensitivity: $ 68.17 \pm 7.07 $ 
+Specificity: $ 61.28 \pm 7.91 $ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Experiment settings: CVAE. Dataset av45
+ROC-AUC: $ 67.75 \pm 3.40 $ 
+Accuracy: $ 65.06 \pm 2.73 $ 
+Sensitivity: $ 68.17 \pm 7.07 $ 
+Specificity: $ 61.28 \pm 7.91 $ 
+
+
+
 Experiment settings: CVAE. Dataset fdg
-AUC-ROC: $ 75.03 \pm 3.16 $ 
+ROC-AUC: $ 73.89 \pm 3.62 $ 
+Accuracy: $ 69.93 \pm 3.39 $ 
+Sensitivity: $ 67.12 \pm 8.82 $ 
+Specificity: $ 73.41 \pm 7.98 $ 
+
+
+
+Experiment settings: CVAE. Dataset fdg
+ROC-AUC: $ 75.03 \pm 3.16 $ 
 Accuracy: $ 71.29 \pm 2.24 $ 
 Sensitivity: $ 70.10 \pm 5.51 $ 
 Specificity: $ 72.68 \pm 7.45 $ 
 
 
 
-Experiment settings: CVAE. Dataset vbm
-AUC-ROC: $ 61.23 \pm 3.99 $ 
+Experiment settings: CVAE. Dataset fdg
+ROC-AUC: $ 62.76 \pm 5.14 $ 
+Accuracy: $ 65.84 \pm 3.42 $ 
+Sensitivity: $ 72.79 \pm 5.07 $ 
+Specificity: $ 57.41 \pm 9.44 $ 
+
+
+
+Experiment settings: CVAE. Dataset fdg
+ROC-AUC: $ 74.82 \pm 3.26 $ 
+Accuracy: $ 71.12 \pm 2.70 $ 
+Sensitivity: $ 70.00 \pm 6.94 $ 
+Specificity: $ 72.60 \pm 7.14 $ 
+
+
+
+Experiment settings: CVAE. Dataset fdg
+ROC-AUC: $ 60.96 \pm 3.67 $ 
+Accuracy: $ 64.95 \pm 2.82 $ 
+Sensitivity: $ 81.63 \pm 4.24 $ 
+Specificity: $ 44.97 \pm 6.18 $ 
+
+
+
+Experiment settings: CVAE. Dataset fdg
+ROC-AUC: $ 57.92 \pm 3.69 $ 
+Accuracy: $ 63.16 \pm 2.72 $ 
+Sensitivity: $ 86.44 \pm 3.11 $ 
+Specificity: $ 35.01 \pm 7.76 $ 
+
+
+
+Experiment settings: CVAE. Dataset av45
+ROC-AUC: $ 50.16 \pm 2.41 $ 
+Accuracy: $ 51.85 \pm 1.15 $ 
+Sensitivity: $ 18.17 \pm 0.52 $ 
+Specificity: $ 92.49 \pm 2.07 $ 
+
+
+
+Experiment settings: CVAE. Dataset av45
+ROC-AUC: $ 50.65 \pm 2.37 $ 
+Accuracy: $ 37.07 \pm 10.01 $ 
+Sensitivity: $ 23.38 \pm 17.64 $ 
+Specificity: $ 85.27 \pm 16.88 $ 
+
+
+
+Experiment settings: CVAE. Dataset av45
+ROC-AUC: $ 49.45 \pm 0.35 $ 
+Accuracy: $ 37.82 \pm 0.81 $ 
+Sensitivity: $ 82.40 \pm 0.97 $ 
+Specificity: $ 22.62 \pm 1.34 $ 
+
+
+
+
+
+
+
+
+Experiment settings: CVAE. Dataset av45
+ROC-AUC: $ 67.53 \pm 4.77 $ 
+Accuracy: $ 66.08 \pm 3.24 $ 
+Sensitivity: $ 75.67 \pm 6.63 $ 
+Specificity: $ 54.43 \pm 8.42 $ 
+
+
+
+Experiment settings: CVAE. Dataset av45
+ROC-AUC: $ 54.58 \pm 2.68 $ 
+Accuracy: $ 50.21 \pm 9.53 $ 
+Sensitivity: $ 45.67 \pm 15.60 $ 
+Specificity: $ 66.61 \pm 13.63 $ 
+
+
+
+Experiment settings: CVAE. Dataset av45
+ROC-AUC: $ 62.15 \pm 2.21 $ 
+Accuracy: $ 52.91 \pm 5.15 $ 
+Sensitivity: $ 75.96 \pm 12.10 $ 
+Specificity: $ 45.05 \pm 10.75 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_AD. Dataset av45
+ROC-AUC: $ 67.53 \pm 4.77 $ 
+Accuracy: $ 66.08 \pm 3.24 $ 
+Sensitivity: $ 75.67 \pm 6.63 $ 
+Specificity: $ 54.43 \pm 8.42 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_MCI. Dataset av45
+ROC-AUC: $ 54.58 \pm 2.68 $ 
+Accuracy: $ 50.21 \pm 9.53 $ 
+Sensitivity: $ 45.67 \pm 15.60 $ 
+Specificity: $ 66.61 \pm 13.63 $ 
+
+
+
+Experiment settings: CVAE. MCI_vs_AD. Dataset av45
+ROC-AUC: $ 62.15 \pm 2.21 $ 
+Accuracy: $ 52.91 \pm 5.15 $ 
+Sensitivity: $ 75.96 \pm 12.10 $ 
+Specificity: $ 45.05 \pm 10.75 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_AD. Dataset av45
+ROC-AUC: $ 67.53 \pm 4.77 $ 
+Accuracy: $ 66.08 \pm 3.24 $ 
+Sensitivity: $ 75.67 \pm 6.63 $ 
+Specificity: $ 54.43 \pm 8.42 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_MCI. Dataset av45
+ROC-AUC: $ 54.58 \pm 2.68 $ 
+Accuracy: $ 50.21 \pm 9.53 $ 
+Sensitivity: $ 45.67 \pm 15.60 $ 
+Specificity: $ 66.61 \pm 13.63 $ 
+
+
+
+Experiment settings: CVAE. MCI_vs_AD. Dataset av45
+ROC-AUC: $ 62.15 \pm 2.21 $ 
+Accuracy: $ 52.91 \pm 5.15 $ 
+Sensitivity: $ 75.96 \pm 12.10 $ 
+Specificity: $ 45.05 \pm 10.75 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_AD. Dataset fdg
+ROC-AUC: $ 75.03 \pm 3.16 $ 
+Accuracy: $ 71.29 \pm 2.24 $ 
+Sensitivity: $ 70.10 \pm 5.51 $ 
+Specificity: $ 72.68 \pm 7.45 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_MCI. Dataset fdg
+ROC-AUC: $ 55.30 \pm 2.71 $ 
+Accuracy: $ 49.48 \pm 8.75 $ 
+Sensitivity: $ 43.77 \pm 15.20 $ 
+Specificity: $ 69.77 \pm 15.13 $ 
+
+
+
+Experiment settings: CVAE. MCI_vs_AD. Dataset fdg
+ROC-AUC: $ 69.85 \pm 1.30 $ 
+Accuracy: $ 63.89 \pm 5.14 $ 
+Sensitivity: $ 70.48 \pm 9.71 $ 
+Specificity: $ 61.64 \pm 10.09 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_AD. Dataset vbm
+ROC-AUC: $ 61.23 \pm 3.99 $ 
 Accuracy: $ 61.68 \pm 2.29 $ 
 Sensitivity: $ 74.13 \pm 14.23 $ 
 Specificity: $ 46.88 \pm 17.00 $ 
 
 
 
-Experiment settings: CVAE. Dataset snp
-AUC-ROC: $ 56.34 \pm 1.93 $ 
-Accuracy: $ 58.33 \pm 2.70 $ 
-Sensitivity: $ 70.77 \pm 19.55 $ 
-Specificity: $ 43.41 \pm 18.49 $ 
+Experiment settings: CVAE. HC_vs_MCI. Dataset vbm
+ROC-AUC: $ 50.89 \pm 3.30 $ 
+Accuracy: $ 39.91 \pm 7.02 $ 
+Sensitivity: $ 28.72 \pm 12.06 $ 
+Specificity: $ 79.24 \pm 10.90 $ 
+
+
+
+Experiment settings: CVAE. MCI_vs_AD. Dataset vbm
+ROC-AUC: $ 59.54 \pm 1.11 $ 
+Accuracy: $ 51.54 \pm 3.13 $ 
+Sensitivity: $ 77.88 \pm 7.50 $ 
+Specificity: $ 42.56 \pm 6.63 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_AD. Dataset 3modalities
+ROC-AUC: $ 67.26 \pm 3.74 $ 
+Accuracy: $ 66.87 \pm 2.68 $ 
+Sensitivity: $ 77.21 \pm 5.44 $ 
+Specificity: $ 54.50 \pm 7.63 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_MCI. Dataset 3modalities
+ROC-AUC: $ 53.33 \pm 2.56 $ 
+Accuracy: $ 47.90 \pm 9.66 $ 
+Sensitivity: $ 42.20 \pm 16.01 $ 
+Specificity: $ 68.81 \pm 14.24 $ 
+
+
+
+Experiment settings: CVAE. MCI_vs_AD. Dataset 3modalities
+ROC-AUC: $ 63.08 \pm 1.62 $ 
+Accuracy: $ 54.23 \pm 2.49 $ 
+Sensitivity: $ 80.00 \pm 4.71 $ 
+Specificity: $ 45.44 \pm 4.38 $ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Experiment settings: CVAE. HC_vs_AD. Dataset av45
+ROC-AUC: $ 67.53 \pm 4.77 $ 
+Accuracy: $ 66.08 \pm 3.24 $ 
+Sensitivity: $ 75.67 \pm 6.63 $ 
+Specificity: $ 54.43 \pm 8.42 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_MCI. Dataset av45
+ROC-AUC: $ 54.58 \pm 2.68 $ 
+Accuracy: $ 50.21 \pm 9.53 $ 
+Sensitivity: $ 45.67 \pm 15.60 $ 
+Specificity: $ 66.61 \pm 13.63 $ 
+
+
+
+Experiment settings: CVAE. MCI_vs_AD. Dataset av45
+ROC-AUC: $ 62.15 \pm 2.21 $ 
+Accuracy: $ 52.91 \pm 5.15 $ 
+Sensitivity: $ 75.96 \pm 12.10 $ 
+Specificity: $ 45.05 \pm 10.75 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_AD. Dataset fdg
+ROC-AUC: $ 75.03 \pm 3.16 $ 
+Accuracy: $ 71.29 \pm 2.24 $ 
+Sensitivity: $ 70.10 \pm 5.51 $ 
+Specificity: $ 72.68 \pm 7.45 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_MCI. Dataset fdg
+ROC-AUC: $ 55.30 \pm 2.71 $ 
+Accuracy: $ 49.48 \pm 8.75 $ 
+Sensitivity: $ 43.77 \pm 15.20 $ 
+Specificity: $ 69.77 \pm 15.13 $ 
+
+
+
+Experiment settings: CVAE. MCI_vs_AD. Dataset fdg
+ROC-AUC: $ 69.85 \pm 1.30 $ 
+Accuracy: $ 63.89 \pm 5.14 $ 
+Sensitivity: $ 70.48 \pm 9.71 $ 
+Specificity: $ 61.64 \pm 10.09 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_AD. Dataset vbm
+ROC-AUC: $ 61.23 \pm 3.99 $ 
+Accuracy: $ 61.68 \pm 2.29 $ 
+Sensitivity: $ 74.13 \pm 14.23 $ 
+Specificity: $ 46.88 \pm 17.00 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_MCI. Dataset vbm
+ROC-AUC: $ 50.89 \pm 3.30 $ 
+Accuracy: $ 39.91 \pm 7.02 $ 
+Sensitivity: $ 28.72 \pm 12.06 $ 
+Specificity: $ 79.24 \pm 10.90 $ 
+
+
+
+Experiment settings: CVAE. MCI_vs_AD. Dataset vbm
+ROC-AUC: $ 59.54 \pm 1.11 $ 
+Accuracy: $ 51.54 \pm 3.13 $ 
+Sensitivity: $ 77.88 \pm 7.50 $ 
+Specificity: $ 42.56 \pm 6.63 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_AD. Dataset 3modalities
+ROC-AUC: $ 67.26 \pm 3.74 $ 
+Accuracy: $ 66.87 \pm 2.68 $ 
+Sensitivity: $ 77.21 \pm 5.44 $ 
+Specificity: $ 54.50 \pm 7.63 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_MCI. Dataset 3modalities
+ROC-AUC: $ 53.33 \pm 2.56 $ 
+Accuracy: $ 47.90 \pm 9.66 $ 
+Sensitivity: $ 42.20 \pm 16.01 $ 
+Specificity: $ 68.81 \pm 14.24 $ 
+
+
+
+Experiment settings: CVAE. MCI_vs_AD. Dataset 3modalities
+ROC-AUC: $ 63.08 \pm 1.62 $ 
+Accuracy: $ 54.23 \pm 2.49 $ 
+Sensitivity: $ 80.00 \pm 4.71 $ 
+Specificity: $ 45.44 \pm 4.38 $ 
+
+
+
+Experiment settings: AE. HC_vs_Patient. Dataset T1_volume Dataset resourse HCP
+ROC-AUC: $ 45.15 \pm 1.55 $ 
+Accuracy: $ 54.61 \pm 14.01 $ 
+Sensitivity: $ 43.08 \pm 37.72 $ 
+Specificity: $ 59.74 \pm 37.70 $ 
+Significance ratio: $ 1.44 \pm 0.53 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: AE. HC_vs_Patient. Dataset T1_volume Dataset resourse HCP
+ROC-AUC: $ 46.99 \pm 1.41 $ 
+Accuracy: $ 57.10 \pm 9.61 $ 
+Sensitivity: $ 39.04 \pm 28.26 $ 
+Specificity: $ 65.34 \pm 26.79 $ 
+Significance ratio: $ 1.72 \pm 1.24 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: AE. HC_vs_Patient. Dataset T1_volume Dataset resourse HCP
+ROC-AUC: $ 46.99 \pm 1.41 $ 
+Accuracy: $ 57.10 \pm 9.61 $ 
+Sensitivity: $ 39.04 \pm 28.26 $ 
+Specificity: $ 65.34 \pm 26.79 $ 
+Significance ratio: $ 1.72 \pm 1.24 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: AE. HC_vs_Patient. Dataset mean_FA Dataset resourse HCP
+ROC-AUC: $ 51.20 \pm 1.74 $ 
+Accuracy: $ 52.87 \pm 7.12 $ 
+Sensitivity: $ 53.08 \pm 17.20 $ 
+Specificity: $ 52.87 \pm 18.07 $ 
+Significance ratio: $ 1.17 \pm 0.16 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: AE. HC_vs_Patient. Dataset mean_MD Dataset resourse HCP
+ROC-AUC: $ 51.06 \pm 2.01 $ 
+Accuracy: $ 55.84 \pm 10.54 $ 
+Sensitivity: $ 46.15 \pm 24.99 $ 
+Specificity: $ 60.39 \pm 26.38 $ 
+Significance ratio: $ 1.25 \pm 0.18 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: AE. HC_vs_Patient. Dataset mean_L1 Dataset resourse HCP
+ROC-AUC: $ 52.45 \pm 1.61 $ 
+Accuracy: $ 58.46 \pm 5.23 $ 
+Sensitivity: $ 43.37 \pm 14.02 $ 
+Specificity: $ 65.43 \pm 13.84 $ 
+Significance ratio: $ 1.30 \pm 0.15 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: AE. HC_vs_Patient. Dataset mean_L2 Dataset resourse HCP
+ROC-AUC: $ 51.07 \pm 2.23 $ 
+Accuracy: $ 57.19 \pm 9.15 $ 
+Sensitivity: $ 42.79 \pm 21.13 $ 
+Specificity: $ 63.87 \pm 22.78 $ 
+Significance ratio: $ 1.26 \pm 0.16 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: AE. HC_vs_Patient. Dataset mean_L3 Dataset resourse HCP
+ROC-AUC: $ 50.70 \pm 1.79 $ 
+Accuracy: $ 58.59 \pm 5.14 $ 
+Sensitivity: $ 38.65 \pm 13.01 $ 
+Specificity: $ 67.63 \pm 13.13 $ 
+Significance ratio: $ 1.23 \pm 0.16 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: AE. HC_vs_Patient. Dataset min_BOLD Dataset resourse HCP
+ROC-AUC: $ 52.94 \pm 1.83 $ 
+Accuracy: $ 52.09 \pm 8.21 $ 
+Sensitivity: $ 59.81 \pm 18.91 $ 
+Specificity: $ 48.60 \pm 20.53 $ 
+Significance ratio: $ 1.23 \pm 0.20 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: AE. HC_vs_Patient. Dataset 25_percentile_BOLD Dataset resourse HCP
+ROC-AUC: $ 53.65 \pm 1.79 $ 
+Accuracy: $ 54.53 \pm 6.06 $ 
+Sensitivity: $ 55.77 \pm 14.29 $ 
+Specificity: $ 53.92 \pm 15.06 $ 
+Significance ratio: $ 1.25 \pm 0.13 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: AE. HC_vs_Patient. Dataset 50_percentile_BOLD Dataset resourse HCP
+ROC-AUC: $ 57.79 \pm 1.50 $ 
+Accuracy: $ 56.16 \pm 5.92 $ 
+Sensitivity: $ 65.77 \pm 10.88 $ 
+Specificity: $ 51.82 \pm 13.43 $ 
+Significance ratio: $ 1.41 \pm 0.17 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: CVAE. HC_vs_Patient. Dataset T1_volume Dataset resourse HCP
+ROC-AUC: $ 45.41 \pm 1.70 $ 
+Accuracy: $ 51.72 \pm 11.26 $ 
+Sensitivity: $ 51.92 \pm 30.38 $ 
+Specificity: $ 51.48 \pm 30.07 $ 
+
+
+
+Experiment settings: AE. HC_vs_Patient. Dataset 75_percentile_BOLD Dataset resourse HCP
+ROC-AUC: $ 54.34 \pm 1.78 $ 
+Accuracy: $ 56.32 \pm 4.84 $ 
+Sensitivity: $ 53.94 \pm 14.08 $ 
+Specificity: $ 57.40 \pm 13.17 $ 
+Significance ratio: $ 1.29 \pm 0.09 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: AE. HC_vs_Patient. Dataset max_BOLD Dataset resourse HCP
+ROC-AUC: $ 53.84 \pm 1.78 $ 
+Accuracy: $ 50.51 \pm 5.65 $ 
+Sensitivity: $ 69.81 \pm 13.89 $ 
+Specificity: $ 41.80 \pm 14.55 $ 
+Significance ratio: $ 1.23 \pm 0.15 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: AE. HC_vs_Patient. Dataset_resource HCP
+ROC-AUC: $ 48.62 \pm 2.74 $ 
+Accuracy: $ 55.49 \pm 9.45 $ 
+Sensitivity: $ 42.45 \pm 27.11 $ 
+Specificity: $ 61.41 \pm 25.87 $ 
+Significance ratio: $ 1.17 \pm 0.14 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+
+
+
+
+
+
+Experiment settings: AE. HC_vs_Patient. Dataset T1_volume Dataset resourse HCP
+ROC-AUC: $ 46.36 \pm 1.38 $ 
+Accuracy: $ 50.01 \pm 10.48 $ 
+Sensitivity: $ 56.18 \pm 28.05 $ 
+Specificity: $ 47.08 \pm 27.66 $ 
+Significance ratio: $ 1.30 \pm 0.48 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: AE. HC_vs_Patient. Dataset mean_T1_intensity Dataset resourse HCP
+ROC-AUC: $ 46.82 \pm 2.14 $ 
+Accuracy: $ 39.70 \pm 5.98 $ 
+Sensitivity: $ 85.10 \pm 13.92 $ 
+Specificity: $ 19.20 \pm 14.82 $ 
+Significance ratio: $ 1.06 \pm 0.05 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: AE. HC_vs_Patient. Dataset mean_FA Dataset resourse HCP
+ROC-AUC: $ 50.71 \pm 1.67 $ 
+Accuracy: $ 57.39 \pm 9.41 $ 
+Sensitivity: $ 39.51 \pm 25.13 $ 
+Specificity: $ 65.52 \pm 24.79 $ 
+Significance ratio: $ 1.22 \pm 0.16 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: AE. HC_vs_Patient. Dataset mean_MD Dataset resourse HCP
+ROC-AUC: $ 50.82 \pm 2.58 $ 
+Accuracy: $ 61.22 \pm 3.23 $ 
+Sensitivity: $ 32.65 \pm 10.19 $ 
+Specificity: $ 74.03 \pm 8.31 $ 
+Significance ratio: $ 1.27 \pm 0.15 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: AE. HC_vs_Patient. Dataset mean_L1 Dataset resourse HCP
+ROC-AUC: $ 52.26 \pm 1.64 $ 
+Accuracy: $ 57.60 \pm 5.44 $ 
+Sensitivity: $ 44.41 \pm 13.25 $ 
+Specificity: $ 63.61 \pm 13.73 $ 
+Significance ratio: $ 1.26 \pm 0.15 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: AE. HC_vs_Patient. Dataset mean_L2 Dataset resourse HCP
+ROC-AUC: $ 50.34 \pm 1.72 $ 
+Accuracy: $ 56.29 \pm 10.80 $ 
+Sensitivity: $ 43.53 \pm 25.54 $ 
+Specificity: $ 62.18 \pm 26.96 $ 
+Significance ratio: $ 1.25 \pm 0.17 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: AE. HC_vs_Patient. Dataset mean_L3 Dataset resourse HCP
+ROC-AUC: $ 50.36 \pm 1.90 $ 
+Accuracy: $ 59.81 \pm 7.49 $ 
+Sensitivity: $ 33.82 \pm 19.97 $ 
+Specificity: $ 71.55 \pm 19.48 $ 
+Significance ratio: $ 1.25 \pm 0.19 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: AE. HC_vs_Patient. Dataset min_BOLD Dataset resourse HCP
+ROC-AUC: $ 53.31 \pm 2.17 $ 
+Accuracy: $ 57.80 \pm 3.77 $ 
+Sensitivity: $ 45.49 \pm 11.96 $ 
+Specificity: $ 63.34 \pm 10.58 $ 
+Significance ratio: $ 1.25 \pm 0.09 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: AE. HC_vs_Patient. Dataset 25_percentile_BOLD Dataset resourse HCP
+ROC-AUC: $ 53.96 \pm 1.71 $ 
+Accuracy: $ 54.96 \pm 7.59 $ 
+Sensitivity: $ 56.18 \pm 17.61 $ 
+Specificity: $ 54.37 \pm 18.82 $ 
+Significance ratio: $ 1.29 \pm 0.16 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: AE. HC_vs_Patient. Dataset 50_percentile_BOLD Dataset resourse HCP
+ROC-AUC: $ 58.65 \pm 1.45 $ 
+Accuracy: $ 57.67 \pm 4.49 $ 
+Sensitivity: $ 62.25 \pm 10.93 $ 
+Specificity: $ 55.66 \pm 11.05 $ 
+Significance ratio: $ 1.43 \pm 0.13 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: AE. HC_vs_Patient. Dataset 75_percentile_BOLD Dataset resourse HCP
+ROC-AUC: $ 54.31 \pm 1.56 $ 
+Accuracy: $ 57.21 \pm 4.47 $ 
+Sensitivity: $ 52.55 \pm 10.90 $ 
+Specificity: $ 59.32 \pm 11.08 $ 
+Significance ratio: $ 1.31 \pm 0.11 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: AE. HC_vs_Patient. Dataset max_BOLD Dataset resourse HCP
+ROC-AUC: $ 53.85 \pm 1.93 $ 
+Accuracy: $ 51.80 \pm 5.77 $ 
+Sensitivity: $ 65.10 \pm 14.37 $ 
+Specificity: $ 45.86 \pm 14.70 $ 
+Significance ratio: $ 1.22 \pm 0.09 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Experiment settings: CVAE. HC_vs_Patient. Dataset T1_volume Dataset resourse HCP
+ROC-AUC: $ 45.15 \pm 1.53 $ 
+Accuracy: $ 54.03 \pm 12.54 $ 
+Sensitivity: $ 43.92 \pm 33.51 $ 
+Specificity: $ 58.58 \pm 33.28 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_Patient. Dataset T1_volume Dataset resourse HCP
+ROC-AUC: $ 45.15 \pm 1.53 $ 
+Accuracy: $ 54.03 \pm 12.54 $ 
+Sensitivity: $ 43.92 \pm 33.51 $ 
+Specificity: $ 58.58 \pm 33.28 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_Patient. Dataset mean_T1_intensity Dataset resourse HCP
+ROC-AUC: $ 48.22 \pm 1.46 $ 
+Accuracy: $ 44.12 \pm 12.95 $ 
+Sensitivity: $ 73.82 \pm 33.66 $ 
+Specificity: $ 30.83 \pm 34.02 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_Patient. Dataset mean_FA Dataset resourse HCP
+ROC-AUC: $ 50.34 \pm 2.04 $ 
+Accuracy: $ 58.83 \pm 7.85 $ 
+Sensitivity: $ 35.69 \pm 20.91 $ 
+Specificity: $ 69.31 \pm 20.59 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_Patient. Dataset mean_MD Dataset resourse HCP
+ROC-AUC: $ 51.01 \pm 2.06 $ 
+Accuracy: $ 59.42 \pm 7.06 $ 
+Sensitivity: $ 38.53 \pm 19.23 $ 
+Specificity: $ 68.90 \pm 18.59 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_Patient. Dataset mean_L1 Dataset resourse HCP
+ROC-AUC: $ 51.50 \pm 1.81 $ 
+Accuracy: $ 59.34 \pm 5.25 $ 
+Sensitivity: $ 38.24 \pm 12.95 $ 
+Specificity: $ 68.81 \pm 13.32 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_Patient. Dataset mean_L2 Dataset resourse HCP
+ROC-AUC: $ 50.81 \pm 2.19 $ 
+Accuracy: $ 58.39 \pm 7.48 $ 
+Sensitivity: $ 39.90 \pm 18.51 $ 
+Specificity: $ 66.78 \pm 18.89 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_Patient. Dataset mean_L3 Dataset resourse HCP
+ROC-AUC: $ 51.30 \pm 2.30 $ 
+Accuracy: $ 58.48 \pm 7.49 $ 
+Sensitivity: $ 38.92 \pm 20.28 $ 
+Specificity: $ 67.38 \pm 19.70 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_Patient. Dataset min_BOLD Dataset resourse HCP
+ROC-AUC: $ 53.19 \pm 1.65 $ 
+Accuracy: $ 49.64 \pm 6.82 $ 
+Sensitivity: $ 65.98 \pm 17.04 $ 
+Specificity: $ 42.33 \pm 17.27 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_Patient. Dataset 25_percentile_BOLD Dataset resourse HCP
+ROC-AUC: $ 53.23 \pm 2.18 $ 
+Accuracy: $ 54.34 \pm 5.47 $ 
+Sensitivity: $ 55.10 \pm 12.37 $ 
+Specificity: $ 54.01 \pm 13.09 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_Patient. Dataset 50_percentile_BOLD Dataset resourse HCP
+ROC-AUC: $ 59.07 \pm 1.88 $ 
+Accuracy: $ 60.74 \pm 3.39 $ 
+Sensitivity: $ 57.16 \pm 5.72 $ 
+Specificity: $ 62.39 \pm 7.16 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_Patient. Dataset 75_percentile_BOLD Dataset resourse HCP
+ROC-AUC: $ 53.27 \pm 1.79 $ 
+Accuracy: $ 56.77 \pm 6.62 $ 
+Sensitivity: $ 48.73 \pm 16.33 $ 
+Specificity: $ 60.45 \pm 16.66 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_Patient. Dataset max_BOLD Dataset resourse HCP
+ROC-AUC: $ 53.64 \pm 1.42 $ 
+Accuracy: $ 49.20 \pm 5.76 $ 
+Sensitivity: $ 70.10 \pm 13.76 $ 
+Specificity: $ 39.89 \pm 14.57 $ 
+
+
+
+Experiment settings: VAE. HC_vs_AD. Dataset av45 Dataset resourse ADNI
+ROC-AUC: $ 63.81 \pm 3.82 $ 
+Accuracy: $ 61.97 \pm 7.06 $ 
+Sensitivity: $ 59.04 \pm 12.41 $ 
+Specificity: $ 70.00 \pm 9.28 $ 
+
+
+
+Experiment settings: VAE. HC_vs_MCI. Dataset av45 Dataset resourse ADNI
+ROC-AUC: $ 55.65 \pm 3.57 $ 
+Accuracy: $ 46.94 \pm 11.60 $ 
+Sensitivity: $ 43.48 \pm 14.43 $ 
+Specificity: $ 74.74 \pm 11.66 $ 
+
+
+
+Experiment settings: VAE. MCI_vs_AD. Dataset av45 Dataset resourse ADNI
+ROC-AUC: $ 56.70 \pm 0.50 $ 
+Accuracy: $ 50.44 \pm 3.97 $ 
+Sensitivity: $ 71.73 \pm 8.35 $ 
+Specificity: $ 43.18 \pm 8.14 $ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Experiment settings: VAE. HC_vs_AD. Dataset av45 Dataset resourse ADNI
+ROC-AUC: $ 63.81 \pm 3.82 $ 
+Accuracy: $ 61.97 \pm 7.06 $ 
+Sensitivity: $ 59.04 \pm 12.41 $ 
+Specificity: $ 70.00 \pm 9.28 $ 
+
+
+
+Experiment settings: VAE. HC_vs_MCI. Dataset av45 Dataset resourse ADNI
+ROC-AUC: $ 55.65 \pm 3.57 $ 
+Accuracy: $ 46.94 \pm 11.60 $ 
+Sensitivity: $ 43.48 \pm 14.43 $ 
+Specificity: $ 74.74 \pm 11.66 $ 
+
+
+
+Experiment settings: VAE. MCI_vs_AD. Dataset av45 Dataset resourse ADNI
+ROC-AUC: $ 56.70 \pm 0.50 $ 
+Accuracy: $ 50.44 \pm 3.97 $ 
+Sensitivity: $ 71.73 \pm 8.35 $ 
+Specificity: $ 43.18 \pm 8.14 $ 
+
+
+
+Experiment settings: VAE. HC_vs_AD. Dataset fdg Dataset resourse ADNI
+ROC-AUC: $ 73.20 \pm 3.04 $ 
+Accuracy: $ 72.11 \pm 4.13 $ 
+Sensitivity: $ 72.79 \pm 7.25 $ 
+Specificity: $ 70.26 \pm 5.27 $ 
+
+
+
+Experiment settings: VAE. HC_vs_MCI. Dataset fdg Dataset resourse ADNI
+ROC-AUC: $ 57.49 \pm 3.17 $ 
+Accuracy: $ 51.34 \pm 4.51 $ 
+Sensitivity: $ 48.62 \pm 5.59 $ 
+Specificity: $ 73.16 \pm 5.74 $ 
+
+
+
+Experiment settings: VAE. MCI_vs_AD. Dataset fdg Dataset resourse ADNI
+ROC-AUC: $ 65.25 \pm 1.13 $ 
+Accuracy: $ 56.94 \pm 4.40 $ 
+Sensitivity: $ 71.63 \pm 8.89 $ 
+Specificity: $ 51.93 \pm 8.85 $ 
+
+
+
+Experiment settings: VAE. HC_vs_AD. Dataset vbm Dataset resourse ADNI
+ROC-AUC: $ 61.03 \pm 4.14 $ 
+Accuracy: $ 64.01 \pm 7.85 $ 
+Sensitivity: $ 65.87 \pm 13.59 $ 
+Specificity: $ 58.95 \pm 10.27 $ 
+
+
+
+Experiment settings: VAE. HC_vs_MCI. Dataset vbm Dataset resourse ADNI
+ROC-AUC: $ 53.88 \pm 4.81 $ 
+Accuracy: $ 52.97 \pm 16.69 $ 
+Sensitivity: $ 51.87 \pm 20.94 $ 
+Specificity: $ 61.84 \pm 18.54 $ 
+
+
+
+Experiment settings: VAE. MCI_vs_AD. Dataset vbm Dataset resourse ADNI
+ROC-AUC: $ 57.03 \pm 0.70 $ 
+Accuracy: $ 53.47 \pm 4.23 $ 
+Sensitivity: $ 67.88 \pm 8.57 $ 
+Specificity: $ 48.56 \pm 8.53 $ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Experiment settings: CVAE. HC_vs_AD. Dataset 3modalities Dataset resourse ADNI Epochs 100
+ROC-AUC: $ 81.75 \pm 5.59 $ 
+Accuracy: $ 73.31 \pm 6.40 $ 
+Sensitivity: $ 71.06 \pm 10.39 $ 
+Specificity: $ 79.47 \pm 9.10 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_MCI. Dataset 3modalities Dataset resourse ADNI Epochs 100
+ROC-AUC: $ 57.10 \pm 6.26 $ 
+Accuracy: $ 42.54 \pm 12.89 $ 
+Sensitivity: $ 37.80 \pm 15.83 $ 
+Specificity: $ 80.53 \pm 11.66 $ 
+
+
+
+Experiment settings: CVAE. MCI_vs_AD. Dataset 3modalities Dataset resourse ADNI Epochs 100
+ROC-AUC: $ 74.32 \pm 0.71 $ 
+Accuracy: $ 64.28 \pm 3.40 $ 
+Sensitivity: $ 75.19 \pm 6.62 $ 
+Specificity: $ 60.56 \pm 6.70 $ 
+
+
+
+Experiment settings: VAE. HC_vs_AD. Epochs 100. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 66.54 \pm 4.50 $ 
+Accuracy: $ 70.92 \pm 4.86 $ 
+Sensitivity: $ 75.48 \pm 10.89 $ 
+Specificity: $ 58.42 \pm 14.01 $ 
+
+
+
+Experiment settings: VAE. HC_vs_MCI. Epochs 100. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 57.75 \pm 4.54 $ 
+Accuracy: $ 62.01 \pm 10.22 $ 
+Sensitivity: $ 62.69 \pm 12.64 $ 
+Specificity: $ 56.58 \pm 11.06 $ 
+
+
+
+Experiment settings: VAE. MCI_vs_AD. Epochs 100. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 58.98 \pm 1.39 $ 
+Accuracy: $ 59.44 \pm 2.87 $ 
+Sensitivity: $ 59.52 \pm 4.46 $ 
+Specificity: $ 59.41 \pm 5.19 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_AD. Dataset 3modalities Dataset resourse ADNI Epochs 100
+ROC-AUC: $ 81.75 \pm 5.59 $ 
+Accuracy: $ 73.31 \pm 6.40 $ 
+Sensitivity: $ 71.06 \pm 10.39 $ 
+Specificity: $ 79.47 \pm 9.10 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_MCI. Dataset 3modalities Dataset resourse ADNI Epochs 100
+ROC-AUC: $ 57.10 \pm 6.26 $ 
+Accuracy: $ 42.54 \pm 12.89 $ 
+Sensitivity: $ 37.80 \pm 15.83 $ 
+Specificity: $ 80.53 \pm 11.66 $ 
+
+
+
+Experiment settings: CVAE. MCI_vs_AD. Dataset 3modalities Dataset resourse ADNI Epochs 100
+ROC-AUC: $ 74.32 \pm 0.71 $ 
+Accuracy: $ 64.28 \pm 3.40 $ 
+Sensitivity: $ 75.19 \pm 6.62 $ 
+Specificity: $ 60.56 \pm 6.70 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_AD. Dataset 3modalities Dataset resourse ADNI Epochs 200
+ROC-AUC: $ 84.74 \pm 5.40 $ 
+Accuracy: $ 80.21 \pm 6.87 $ 
+Sensitivity: $ 82.40 \pm 10.88 $ 
+Specificity: $ 74.21 \pm 7.61 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_MCI. Dataset 3modalities Dataset resourse ADNI Epochs 200
+ROC-AUC: $ 58.72 \pm 6.80 $ 
+Accuracy: $ 51.17 \pm 13.64 $ 
+Sensitivity: $ 48.52 \pm 16.56 $ 
+Specificity: $ 72.37 \pm 10.28 $ 
+
+
+
+Experiment settings: CVAE. MCI_vs_AD. Dataset 3modalities Dataset resourse ADNI Epochs 200
+ROC-AUC: $ 75.71 \pm 0.90 $ 
+Accuracy: $ 67.14 \pm 1.24 $ 
+Sensitivity: $ 75.67 \pm 3.97 $ 
+Specificity: $ 64.23 \pm 2.78 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_AD. Dataset 3modalities Dataset resourse ADNI Epochs 300
+ROC-AUC: $ 84.11 \pm 5.29 $ 
+Accuracy: $ 81.90 \pm 4.85 $ 
+Sensitivity: $ 86.06 \pm 6.62 $ 
+Specificity: $ 70.53 \pm 7.70 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_MCI. Dataset 3modalities Dataset resourse ADNI Epochs 300
+ROC-AUC: $ 58.40 \pm 6.35 $ 
+Accuracy: $ 47.55 \pm 14.25 $ 
+Sensitivity: $ 43.97 \pm 17.26 $ 
+Specificity: $ 76.32 \pm 10.91 $ 
+
+
+
+Experiment settings: CVAE. MCI_vs_AD. Dataset 3modalities Dataset resourse ADNI Epochs 300
+ROC-AUC: $ 75.73 \pm 0.66 $ 
+Accuracy: $ 67.97 \pm 2.37 $ 
+Sensitivity: $ 74.71 \pm 4.65 $ 
+Specificity: $ 65.67 \pm 4.46 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_AD. Dataset 3modalities Dataset resourse ADNI Epochs 400
+ROC-AUC: $ 84.04 \pm 5.18 $ 
+Accuracy: $ 80.35 \pm 6.35 $ 
+Sensitivity: $ 82.40 \pm 9.13 $ 
+Specificity: $ 74.74 \pm 5.55 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_MCI. Dataset 3modalities Dataset resourse ADNI Epochs 400
+ROC-AUC: $ 58.23 \pm 6.31 $ 
+Accuracy: $ 47.70 \pm 16.42 $ 
+Sensitivity: $ 43.97 \pm 19.78 $ 
+Specificity: $ 77.63 \pm 11.30 $ 
+
+
+
+Experiment settings: CVAE. MCI_vs_AD. Dataset 3modalities Dataset resourse ADNI Epochs 400
+ROC-AUC: $ 75.80 \pm 0.58 $ 
+Accuracy: $ 68.22 \pm 3.61 $ 
+Sensitivity: $ 75.58 \pm 6.62 $ 
+Specificity: $ 65.70 \pm 6.81 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_AD. Dataset 3modalities Dataset resourse ADNI Epochs 500
+ROC-AUC: $ 84.42 \pm 5.05 $ 
+Accuracy: $ 80.85 \pm 5.34 $ 
+Sensitivity: $ 82.98 \pm 7.72 $ 
+Specificity: $ 75.00 \pm 7.74 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_MCI. Dataset 3modalities Dataset resourse ADNI Epochs 500
+ROC-AUC: $ 58.47 \pm 6.15 $ 
+Accuracy: $ 47.99 \pm 13.05 $ 
+Sensitivity: $ 44.39 \pm 15.50 $ 
+Specificity: $ 76.84 \pm 7.70 $ 
+
+
+
+Experiment settings: CVAE. MCI_vs_AD. Dataset 3modalities Dataset resourse ADNI Epochs 500
+ROC-AUC: $ 76.09 \pm 0.59 $ 
+Accuracy: $ 67.73 \pm 3.09 $ 
+Sensitivity: $ 77.79 \pm 5.66 $ 
+Specificity: $ 64.30 \pm 5.83 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_AD. Dataset 3modalities Dataset resourse ADNI Epochs 600
+ROC-AUC: $ 84.44 \pm 4.77 $ 
+Accuracy: $ 80.77 \pm 6.09 $ 
+Sensitivity: $ 82.98 \pm 9.85 $ 
+Specificity: $ 74.74 \pm 8.90 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_MCI. Dataset 3modalities Dataset resourse ADNI Epochs 600
+ROC-AUC: $ 58.35 \pm 5.99 $ 
+Accuracy: $ 48.95 \pm 11.02 $ 
+Sensitivity: $ 45.70 \pm 13.02 $ 
+Specificity: $ 75.00 \pm 6.14 $ 
+
+
+
+Experiment settings: CVAE. MCI_vs_AD. Dataset 3modalities Dataset resourse ADNI Epochs 600
+ROC-AUC: $ 76.20 \pm 0.70 $ 
+Accuracy: $ 67.82 \pm 3.36 $ 
+Sensitivity: $ 77.02 \pm 5.90 $ 
+Specificity: $ 64.69 \pm 6.30 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_AD. Dataset 3modalities Dataset resourse ADNI Epochs 700
+ROC-AUC: $ 84.44 \pm 4.65 $ 
+Accuracy: $ 80.56 \pm 5.87 $ 
+Sensitivity: $ 82.69 \pm 9.50 $ 
+Specificity: $ 74.74 \pm 8.42 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_MCI. Dataset 3modalities Dataset resourse ADNI Epochs 700
+ROC-AUC: $ 58.16 \pm 5.84 $ 
+Accuracy: $ 47.73 \pm 11.65 $ 
+Sensitivity: $ 44.20 \pm 13.94 $ 
+Specificity: $ 76.05 \pm 7.85 $ 
+
+
+
+Experiment settings: CVAE. MCI_vs_AD. Dataset 3modalities Dataset resourse ADNI Epochs 700
+ROC-AUC: $ 76.27 \pm 0.73 $ 
+Accuracy: $ 66.65 \pm 3.86 $ 
+Sensitivity: $ 79.23 \pm 8.20 $ 
+Specificity: $ 62.36 \pm 7.79 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_AD. Dataset 3modalities Dataset resourse ADNI Epochs 800
+ROC-AUC: $ 84.30 \pm 4.61 $ 
+Accuracy: $ 81.76 \pm 4.05 $ 
+Sensitivity: $ 85.19 \pm 5.85 $ 
+Specificity: $ 72.37 \pm 7.56 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_MCI. Dataset 3modalities Dataset resourse ADNI Epochs 800
+ROC-AUC: $ 58.02 \pm 5.63 $ 
+Accuracy: $ 49.24 \pm 11.00 $ 
+Sensitivity: $ 46.26 \pm 13.18 $ 
+Specificity: $ 73.16 \pm 7.96 $ 
+
+
+
+Experiment settings: CVAE. MCI_vs_AD. Dataset 3modalities Dataset resourse ADNI Epochs 800
+ROC-AUC: $ 76.36 \pm 0.70 $ 
+Accuracy: $ 67.29 \pm 3.94 $ 
+Sensitivity: $ 78.65 \pm 6.77 $ 
+Specificity: $ 63.41 \pm 7.42 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_AD. Dataset 3modalities Dataset resourse ADNI Epochs 900
+ROC-AUC: $ 84.11 \pm 4.60 $ 
+Accuracy: $ 80.00 \pm 4.87 $ 
+Sensitivity: $ 82.02 \pm 7.22 $ 
+Specificity: $ 74.47 \pm 7.35 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_MCI. Dataset 3modalities Dataset resourse ADNI Epochs 900
+ROC-AUC: $ 57.81 \pm 5.49 $ 
+Accuracy: $ 49.01 \pm 12.41 $ 
+Sensitivity: $ 46.03 \pm 14.97 $ 
+Specificity: $ 72.89 \pm 9.34 $ 
+
+
+
+Experiment settings: CVAE. MCI_vs_AD. Dataset 3modalities Dataset resourse ADNI Epochs 900
+ROC-AUC: $ 76.31 \pm 0.67 $ 
+Accuracy: $ 66.94 \pm 3.49 $ 
+Sensitivity: $ 79.23 \pm 5.59 $ 
+Specificity: $ 62.75 \pm 6.40 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_AD. Dataset 3modalities Dataset resourse ADNI Epochs 1000
+ROC-AUC: $ 84.00 \pm 4.63 $ 
+Accuracy: $ 79.93 \pm 5.02 $ 
+Sensitivity: $ 81.83 \pm 7.89 $ 
+Specificity: $ 74.74 \pm 7.82 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_MCI. Dataset 3modalities Dataset resourse ADNI Epochs 1000
+ROC-AUC: $ 57.70 \pm 5.38 $ 
+Accuracy: $ 46.06 \pm 12.33 $ 
+Sensitivity: $ 42.36 \pm 14.89 $ 
+Specificity: $ 75.79 \pm 8.95 $ 
+
+
+
+Experiment settings: CVAE. MCI_vs_AD. Dataset 3modalities Dataset resourse ADNI Epochs 1000
+ROC-AUC: $ 76.26 \pm 0.66 $ 
+Accuracy: $ 66.19 \pm 3.63 $ 
+Sensitivity: $ 80.19 \pm 8.14 $ 
+Specificity: $ 61.41 \pm 7.50 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_AD. Dataset 3modalities Dataset resourse ADNI Epochs 1100
+ROC-AUC: $ 83.87 \pm 4.58 $ 
+Accuracy: $ 78.38 \pm 6.30 $ 
+Sensitivity: $ 78.56 \pm 9.95 $ 
+Specificity: $ 77.89 \pm 6.88 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_MCI. Dataset 3modalities Dataset resourse ADNI Epochs 1100
+ROC-AUC: $ 57.66 \pm 5.26 $ 
+Accuracy: $ 44.52 \pm 11.67 $ 
+Sensitivity: $ 40.49 \pm 14.26 $ 
+Specificity: $ 76.84 \pm 10.31 $ 
+
+
+
+Experiment settings: CVAE. MCI_vs_AD. Dataset 3modalities Dataset resourse ADNI Epochs 1100
+ROC-AUC: $ 76.20 \pm 0.67 $ 
+Accuracy: $ 64.91 \pm 4.01 $ 
+Sensitivity: $ 82.88 \pm 7.28 $ 
+Specificity: $ 58.79 \pm 7.68 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_AD. Dataset 3modalities Dataset resourse ADNI Epochs 1200
+ROC-AUC: $ 83.74 \pm 4.62 $ 
+Accuracy: $ 79.15 \pm 5.10 $ 
+Sensitivity: $ 80.58 \pm 7.43 $ 
+Specificity: $ 75.26 \pm 5.16 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_MCI. Dataset 3modalities Dataset resourse ADNI Epochs 1200
+ROC-AUC: $ 57.55 \pm 5.17 $ 
+Accuracy: $ 44.81 \pm 13.47 $ 
+Sensitivity: $ 40.92 \pm 16.58 $ 
+Specificity: $ 76.05 \pm 12.54 $ 
+
+
+
+Experiment settings: CVAE. MCI_vs_AD. Dataset 3modalities Dataset resourse ADNI Epochs 1200
+ROC-AUC: $ 76.17 \pm 0.63 $ 
+Accuracy: $ 65.43 \pm 3.90 $ 
+Sensitivity: $ 81.35 \pm 7.04 $ 
+Specificity: $ 60.00 \pm 7.47 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_AD. Dataset 3modalities Dataset resourse ADNI Epochs 1300
+ROC-AUC: $ 83.85 \pm 4.67 $ 
+Accuracy: $ 78.94 \pm 4.35 $ 
+Sensitivity: $ 80.00 \pm 6.67 $ 
+Specificity: $ 76.05 \pm 7.93 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_MCI. Dataset 3modalities Dataset resourse ADNI Epochs 1300
+ROC-AUC: $ 57.62 \pm 5.06 $ 
+Accuracy: $ 47.35 \pm 12.24 $ 
+Sensitivity: $ 44.13 \pm 15.03 $ 
+Specificity: $ 73.16 \pm 11.40 $ 
+
+
+
+Experiment settings: CVAE. MCI_vs_AD. Dataset 3modalities Dataset resourse ADNI Epochs 1300
+ROC-AUC: $ 76.15 \pm 0.58 $ 
+Accuracy: $ 65.67 \pm 3.52 $ 
+Sensitivity: $ 81.06 \pm 7.17 $ 
+Specificity: $ 60.43 \pm 7.01 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_AD. Dataset 3modalities Dataset resourse ADNI Epochs 1400
+ROC-AUC: $ 83.78 \pm 4.64 $ 
+Accuracy: $ 77.82 \pm 5.35 $ 
+Sensitivity: $ 77.69 \pm 8.53 $ 
+Specificity: $ 78.16 \pm 7.99 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_MCI. Dataset 3modalities Dataset resourse ADNI Epochs 1400
+ROC-AUC: $ 57.58 \pm 5.07 $ 
+Accuracy: $ 48.78 \pm 12.17 $ 
+Sensitivity: $ 45.90 \pm 14.89 $ 
+Specificity: $ 71.84 \pm 11.17 $ 
+
+
+
+Experiment settings: CVAE. MCI_vs_AD. Dataset 3modalities Dataset resourse ADNI Epochs 1400
+ROC-AUC: $ 76.06 \pm 0.61 $ 
+Accuracy: $ 66.41 \pm 5.00 $ 
+Sensitivity: $ 79.62 \pm 10.01 $ 
+Specificity: $ 61.90 \pm 9.99 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_AD. Dataset 3modalities Dataset resourse ADNI Epochs 1500
+ROC-AUC: $ 83.76 \pm 4.77 $ 
+Accuracy: $ 78.73 \pm 3.91 $ 
+Sensitivity: $ 79.62 \pm 5.38 $ 
+Specificity: $ 76.32 \pm 7.35 $ 
+
+
+
+Experiment settings: CVAE. HC_vs_MCI. Dataset 3modalities Dataset resourse ADNI Epochs 1500
+ROC-AUC: $ 57.52 \pm 5.09 $ 
+Accuracy: $ 51.66 \pm 10.14 $ 
+Sensitivity: $ 49.57 \pm 13.21 $ 
+Specificity: $ 68.42 \pm 16.39 $ 
+
+
+
+Experiment settings: CVAE. MCI_vs_AD. Dataset 3modalities Dataset resourse ADNI Epochs 1500
+ROC-AUC: $ 76.05 \pm 0.64 $ 
+Accuracy: $ 66.70 \pm 4.53 $ 
+Sensitivity: $ 79.04 \pm 9.29 $ 
+Specificity: $ 62.49 \pm 9.09 $ 
+
+
+
+Experiment settings: VAE. HC_vs_AD. Epochs 100. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 66.54 \pm 4.50 $ 
+Accuracy: $ 70.92 \pm 4.86 $ 
+Sensitivity: $ 75.48 \pm 10.89 $ 
+Specificity: $ 58.42 \pm 14.01 $ 
+
+
+
+Experiment settings: VAE. HC_vs_MCI. Epochs 100. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 57.75 \pm 4.54 $ 
+Accuracy: $ 62.01 \pm 10.22 $ 
+Sensitivity: $ 62.69 \pm 12.64 $ 
+Specificity: $ 56.58 \pm 11.06 $ 
+
+
+
+Experiment settings: VAE. MCI_vs_AD. Epochs 100. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 58.98 \pm 1.39 $ 
+Accuracy: $ 59.44 \pm 2.87 $ 
+Sensitivity: $ 59.52 \pm 4.46 $ 
+Specificity: $ 59.41 \pm 5.19 $ 
+
+
+
+Experiment settings: VAE. HC_vs_AD. Epochs 200. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 66.63 \pm 4.74 $ 
+Accuracy: $ 74.79 \pm 3.75 $ 
+Sensitivity: $ 84.62 \pm 8.04 $ 
+Specificity: $ 47.89 \pm 12.33 $ 
+
+
+
+Experiment settings: VAE. HC_vs_MCI. Epochs 200. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 57.09 \pm 4.63 $ 
+Accuracy: $ 56.53 \pm 12.51 $ 
+Sensitivity: $ 55.93 \pm 15.33 $ 
+Specificity: $ 61.32 \pm 11.17 $ 
+
+
+
+Experiment settings: VAE. MCI_vs_AD. Epochs 200. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 59.33 \pm 1.15 $ 
+Accuracy: $ 51.25 \pm 7.15 $ 
+Sensitivity: $ 75.87 \pm 14.88 $ 
+Specificity: $ 42.85 \pm 14.61 $ 
+
+
+
+Experiment settings: VAE. HC_vs_AD. Epochs 300. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 66.98 \pm 4.59 $ 
+Accuracy: $ 73.38 \pm 4.21 $ 
+Sensitivity: $ 80.19 \pm 6.66 $ 
+Specificity: $ 54.74 \pm 9.55 $ 
+
+
+
+Experiment settings: VAE. HC_vs_MCI. Epochs 300. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 56.56 \pm 4.41 $ 
+Accuracy: $ 55.31 \pm 11.10 $ 
+Sensitivity: $ 54.39 \pm 13.49 $ 
+Specificity: $ 62.63 \pm 9.02 $ 
+
+
+
+Experiment settings: VAE. MCI_vs_AD. Epochs 300. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 60.48 \pm 1.47 $ 
+Accuracy: $ 48.63 \pm 3.04 $ 
+Sensitivity: $ 86.15 \pm 2.36 $ 
+Specificity: $ 35.84 \pm 4.50 $ 
+
+
+
+Experiment settings: VAE. HC_vs_AD. Epochs 400. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 67.32 \pm 4.45 $ 
+Accuracy: $ 75.00 \pm 2.84 $ 
+Sensitivity: $ 83.27 \pm 5.49 $ 
+Specificity: $ 52.37 \pm 9.95 $ 
+
+
+
+Experiment settings: VAE. HC_vs_MCI. Epochs 400. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 56.25 \pm 4.19 $ 
+Accuracy: $ 64.81 \pm 9.64 $ 
+Sensitivity: $ 66.66 \pm 12.23 $ 
+Specificity: $ 50.00 \pm 12.95 $ 
+
+
+
+Experiment settings: VAE. MCI_vs_AD. Epochs 400. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 61.17 \pm 1.50 $ 
+Accuracy: $ 51.10 \pm 2.72 $ 
+Sensitivity: $ 83.08 \pm 5.51 $ 
+Specificity: $ 40.20 \pm 5.08 $ 
+
+
+
+Experiment settings: VAE. HC_vs_AD. Epochs 500. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 67.76 \pm 4.51 $ 
+Accuracy: $ 74.86 \pm 3.21 $ 
+Sensitivity: $ 82.31 \pm 5.79 $ 
+Specificity: $ 54.47 \pm 8.81 $ 
+
+
+
+Experiment settings: VAE. HC_vs_MCI. Epochs 500. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 56.19 \pm 4.19 $ 
+Accuracy: $ 63.62 \pm 11.09 $ 
+Sensitivity: $ 65.18 \pm 14.36 $ 
+Specificity: $ 51.05 \pm 16.32 $ 
+
+
+
+Experiment settings: VAE. MCI_vs_AD. Epochs 500. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 61.46 \pm 1.49 $ 
+Accuracy: $ 52.27 \pm 3.24 $ 
+Sensitivity: $ 83.37 \pm 8.18 $ 
+Specificity: $ 41.67 \pm 6.72 $ 
+
+
+
+Experiment settings: VAE. HC_vs_AD. Epochs 600. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 68.01 \pm 4.60 $ 
+Accuracy: $ 77.32 \pm 3.64 $ 
+Sensitivity: $ 87.12 \pm 5.44 $ 
+Specificity: $ 50.53 \pm 7.04 $ 
+
+
+
+Experiment settings: VAE. HC_vs_MCI. Epochs 600. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 56.41 \pm 4.05 $ 
+Accuracy: $ 64.17 \pm 10.51 $ 
+Sensitivity: $ 65.80 \pm 13.62 $ 
+Specificity: $ 51.05 \pm 15.80 $ 
+
+
+
+Experiment settings: VAE. MCI_vs_AD. Epochs 600. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 61.52 \pm 1.53 $ 
+Accuracy: $ 52.25 \pm 4.02 $ 
+Sensitivity: $ 84.42 \pm 7.23 $ 
+Specificity: $ 41.28 \pm 7.41 $ 
+
+
+
+Experiment settings: VAE. HC_vs_AD. Epochs 700. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 68.33 \pm 4.47 $ 
+Accuracy: $ 75.35 \pm 4.08 $ 
+Sensitivity: $ 82.69 \pm 6.10 $ 
+Specificity: $ 55.26 \pm 6.45 $ 
+
+
+
+Experiment settings: VAE. HC_vs_MCI. Epochs 700. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 56.69 \pm 3.90 $ 
+Accuracy: $ 64.20 \pm 12.21 $ 
+Sensitivity: $ 65.74 \pm 15.72 $ 
+Specificity: $ 51.84 \pm 17.18 $ 
+
+
+
+Experiment settings: VAE. MCI_vs_AD. Epochs 700. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 61.59 \pm 1.61 $ 
+Accuracy: $ 52.96 \pm 3.54 $ 
+Sensitivity: $ 83.37 \pm 6.61 $ 
+Specificity: $ 42.59 \pm 6.61 $ 
+
+
+
+Experiment settings: VAE. HC_vs_AD. Epochs 800. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 68.42 \pm 4.49 $ 
+Accuracy: $ 75.14 \pm 4.94 $ 
+Sensitivity: $ 81.73 \pm 9.52 $ 
+Specificity: $ 57.11 \pm 11.41 $ 
+
+
+
+Experiment settings: VAE. HC_vs_MCI. Epochs 800. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 56.81 \pm 3.85 $ 
+Accuracy: $ 64.75 \pm 11.66 $ 
+Sensitivity: $ 66.36 \pm 15.02 $ 
+Specificity: $ 51.84 \pm 16.73 $ 
+
+
+
+Experiment settings: VAE. MCI_vs_AD. Epochs 800. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 61.66 \pm 1.53 $ 
+Accuracy: $ 54.01 \pm 3.59 $ 
+Sensitivity: $ 80.67 \pm 6.75 $ 
+Specificity: $ 44.92 \pm 6.75 $ 
+
+
+
+Experiment settings: VAE. HC_vs_AD. Epochs 900. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 68.37 \pm 4.52 $ 
+Accuracy: $ 74.93 \pm 3.72 $ 
+Sensitivity: $ 81.63 \pm 6.13 $ 
+Specificity: $ 56.58 \pm 8.43 $ 
+
+
+
+Experiment settings: VAE. HC_vs_MCI. Epochs 900. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 56.98 \pm 3.84 $ 
+Accuracy: $ 60.82 \pm 16.83 $ 
+Sensitivity: $ 61.38 \pm 21.21 $ 
+Specificity: $ 56.32 \pm 19.20 $ 
+
+
+
+Experiment settings: VAE. MCI_vs_AD. Epochs 900. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 61.57 \pm 1.45 $ 
+Accuracy: $ 53.67 \pm 3.27 $ 
+Sensitivity: $ 81.54 \pm 6.96 $ 
+Specificity: $ 44.16 \pm 6.47 $ 
+
+
+
+Experiment settings: VAE. HC_vs_AD. Epochs 1000. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 68.52 \pm 4.52 $ 
+Accuracy: $ 75.42 \pm 4.18 $ 
+Sensitivity: $ 82.40 \pm 6.88 $ 
+Specificity: $ 56.32 \pm 8.50 $ 
+
+
+
+Experiment settings: VAE. HC_vs_MCI. Epochs 1000. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 57.08 \pm 3.88 $ 
+Accuracy: $ 59.83 \pm 15.66 $ 
+Sensitivity: $ 60.07 \pm 19.69 $ 
+Specificity: $ 57.89 \pm 17.73 $ 
+
+
+
+Experiment settings: VAE. MCI_vs_AD. Epochs 1000. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 61.71 \pm 1.48 $ 
+Accuracy: $ 53.74 \pm 3.35 $ 
+Sensitivity: $ 81.15 \pm 6.95 $ 
+Specificity: $ 44.39 \pm 6.58 $ 
+
+
+
+Experiment settings: VAE. HC_vs_AD. Epochs 1100. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 68.41 \pm 4.61 $ 
+Accuracy: $ 74.86 \pm 4.70 $ 
+Sensitivity: $ 81.15 \pm 7.79 $ 
+Specificity: $ 57.63 \pm 8.60 $ 
+
+
+
+Experiment settings: VAE. HC_vs_MCI. Epochs 1100. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 57.14 \pm 3.88 $ 
+Accuracy: $ 60.85 \pm 16.55 $ 
+Sensitivity: $ 61.41 \pm 21.01 $ 
+Specificity: $ 56.32 \pm 20.19 $ 
+
+
+
+Experiment settings: VAE. MCI_vs_AD. Epochs 1100. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 61.68 \pm 1.46 $ 
+Accuracy: $ 53.37 \pm 3.26 $ 
+Sensitivity: $ 81.54 \pm 6.50 $ 
+Specificity: $ 43.77 \pm 6.35 $ 
+
+
+
+Experiment settings: VAE. HC_vs_AD. Epochs 1200. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 68.52 \pm 4.61 $ 
+Accuracy: $ 75.07 \pm 4.41 $ 
+Sensitivity: $ 81.63 \pm 7.79 $ 
+Specificity: $ 57.11 \pm 10.26 $ 
+
+
+
+Experiment settings: VAE. HC_vs_MCI. Epochs 1200. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 57.25 \pm 3.92 $ 
+Accuracy: $ 63.09 \pm 15.41 $ 
+Sensitivity: $ 64.30 \pm 19.56 $ 
+Specificity: $ 53.42 \pm 19.20 $ 
+
+
+
+Experiment settings: VAE. MCI_vs_AD. Epochs 1200. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 61.67 \pm 1.44 $ 
+Accuracy: $ 53.96 \pm 2.88 $ 
+Sensitivity: $ 80.58 \pm 5.97 $ 
+Specificity: $ 44.89 \pm 5.62 $ 
+
+
+
+Experiment settings: VAE. HC_vs_AD. Epochs 1300. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 68.44 \pm 4.71 $ 
+Accuracy: $ 75.70 \pm 4.65 $ 
+Sensitivity: $ 83.27 \pm 7.48 $ 
+Specificity: $ 55.00 \pm 8.28 $ 
+
+
+
+Experiment settings: VAE. HC_vs_MCI. Epochs 1300. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 57.23 \pm 3.99 $ 
+Accuracy: $ 63.27 \pm 15.83 $ 
+Sensitivity: $ 64.46 \pm 19.93 $ 
+Specificity: $ 53.68 \pm 18.16 $ 
+
+
+
+Experiment settings: VAE. MCI_vs_AD. Epochs 1300. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 61.67 \pm 1.39 $ 
+Accuracy: $ 55.38 \pm 3.81 $ 
+Sensitivity: $ 77.12 \pm 8.83 $ 
+Specificity: $ 47.97 \pm 7.98 $ 
+
+
+
+Experiment settings: VAE. HC_vs_AD. Epochs 1400. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 68.48 \pm 4.68 $ 
+Accuracy: $ 75.07 \pm 5.36 $ 
+Sensitivity: $ 81.92 \pm 10.06 $ 
+Specificity: $ 56.32 \pm 11.72 $ 
+
+
+
+Experiment settings: VAE. HC_vs_MCI. Epochs 1400. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 57.32 \pm 3.98 $ 
+Accuracy: $ 62.83 \pm 15.71 $ 
+Sensitivity: $ 63.87 \pm 19.76 $ 
+Specificity: $ 54.47 \pm 18.00 $ 
+
+
+
+Experiment settings: VAE. MCI_vs_AD. Epochs 1400. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 61.69 \pm 1.41 $ 
+Accuracy: $ 54.35 \pm 4.20 $ 
+Sensitivity: $ 79.62 \pm 8.66 $ 
+Specificity: $ 45.74 \pm 8.43 $ 
+
+
+
+Experiment settings: VAE. HC_vs_AD. Epochs 1500. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 68.32 \pm 4.65 $ 
+Accuracy: $ 74.65 \pm 5.14 $ 
+Sensitivity: $ 81.06 \pm 9.19 $ 
+Specificity: $ 57.11 \pm 10.46 $ 
+
+
+
+Experiment settings: VAE. HC_vs_MCI. Epochs 1500. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 57.27 \pm 4.01 $ 
+Accuracy: $ 63.94 \pm 14.01 $ 
+Sensitivity: $ 65.31 \pm 17.55 $ 
+Specificity: $ 52.89 \pm 15.94 $ 
+
+
+
+Experiment settings: VAE. MCI_vs_AD. Epochs 1500. Dataset 3modalities Dataset_resourse ADNI
+ROC-AUC: $ 61.59 \pm 1.41 $ 
+Accuracy: $ 55.31 \pm 3.97 $ 
+Sensitivity: $ 77.31 \pm 8.37 $ 
+Specificity: $ 47.80 \pm 8.02 $ 
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

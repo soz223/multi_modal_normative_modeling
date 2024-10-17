@@ -11,7 +11,7 @@ import tensorflow as tf
 import pandas as pd
 import os
 import argparse
-from utils import COLUMNS_NAME, load_dataset, COLUMNS_NAME_SNP, COLUMNS_NAME_VBM
+from utils import COLUMNS_HCP, COLUMNS_NAME, load_dataset, COLUMNS_NAME_SNP, COLUMNS_NAME_VBM, COLUMNS_3MODALITIES
 from models import make_encoder_model_v111, make_decoder_model_v1, make_discriminator_model_v1
 import argparse
 
@@ -21,7 +21,7 @@ PROJECT_ROOT = Path.cwd()
 os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 
 
-def main(dataset_name, hz_para_list, base_lr=0.0001, max_lr=0.005):
+def main(dataset_name, hz_para_list, dataset_resourse, base_lr=0.0001, max_lr=0.005):
     """Train the normative method on the bootstrapped samples.
 
     The script also the scaler and the demographic data encoder.
@@ -30,8 +30,8 @@ def main(dataset_name, hz_para_list, base_lr=0.0001, max_lr=0.005):
     n_bootstrap = 10
     model_name = 'supervised_ae'
 
-    participants_path = PROJECT_ROOT / 'data' / 'y.csv'
-    freesurfer_path = PROJECT_ROOT / 'data' / (dataset_name + '.csv')
+    participants_path = PROJECT_ROOT / 'data' / dataset_resourse /  'y.csv'
+    freesurfer_path = PROJECT_ROOT / 'data' / dataset_resourse /  (dataset_name + '.csv')
 
     # ----------------------------------------------------------------------------
     bootstrap_dir = PROJECT_ROOT / 'outputs' / 'bootstrap_analysis'
@@ -58,16 +58,35 @@ def main(dataset_name, hz_para_list, base_lr=0.0001, max_lr=0.005):
         # Loading data
         dataset_df = load_dataset(participants_path, ids_path, freesurfer_path)
 
+        if dataset_resourse == 'ADNI':
+            if dataset_name == 'av45' or dataset_name == 'fdg':
+                columns_name = COLUMNS_NAME
+            elif dataset_name == 'snp':
+                columns_name = COLUMNS_NAME_SNP
+            elif dataset_name == 'vbm':
+                columns_name = COLUMNS_NAME_VBM
+            elif dataset_name == '3modalities':
+                columns_name = COLUMNS_3MODALITIES
+        elif dataset_resourse == 'HCP':
+            columns_name = [(lambda x: dataset_name + '_'+ str(x))(y) for y in list(range(132))]
+
+
+        if dataset_resourse == 'ADNI':
+            hc_label = 2
+        elif dataset_resourse == 'HCP':
+            hc_label = 1
+        else:
+            raise ValueError('Unknown dataset resource')
+
 
         # ----------------------------------------------------------------------------
-        dataset_df = dataset_df.loc[dataset_df['DIA'] == 2]      
-        x_data = dataset_df[COLUMNS_NAME].values
+        dataset_df = dataset_df.loc[dataset_df['DIA'] == hc_label]      
+        x_data = dataset_df[columns_name].values
         
+        # tiv = dataset_df['PTEDUCAT'].values
+        # tiv = tiv[:, np.newaxis]
 
-        tiv = dataset_df['PTEDUCAT'].values
-        tiv = tiv[:, np.newaxis]
-
-        x_data = (np.true_divide(x_data, tiv)).astype('float32')
+        # x_data = (np.true_divide(x_data, tiv)).astype('float32')
 
         scaler = RobustScaler()
         x_data_normalized = scaler.fit_transform(x_data)
@@ -273,9 +292,27 @@ if __name__ == "__main__":
                         dest='max_lr',
                         help='Max learning rate.',
                         type=float)
+    parser.add_argument('-R', '--dataset_resourse',
+                        dest='dataset_resourse',
+                        help='Dataset resourse to use for training test and evaluation.',
+                        type=str)
+
     args = parser.parse_args()
-    if args.dataset_name == 'snp':
-        COLUMNS_NAME = COLUMNS_NAME_SNP
-    elif args.dataset_name == 'vbm':
-        COLUMNS_NAME = COLUMNS_NAME_VBM
-    main(args.dataset_name, args.hz_para_list, args.base_lr, args.max_lr)
+
+
+
+
+    if args.dataset_resourse == None:
+        args.dataset_resourse = 'ADNI'
+    if args.dataset_name == None:
+        args.dataset_name = 'av45'
+    if args.hz_para_list == None:
+        args.hz_para_list = [110, 110, 10]
+    if args.base_lr == None:
+        args.base_lr = 0.0001
+    if args.max_lr == None:
+        args.max_lr = 0.005
+        
+
+    
+    main(args.dataset_name, args.hz_para_list, args.dataset_resourse, args.base_lr, args.max_lr)

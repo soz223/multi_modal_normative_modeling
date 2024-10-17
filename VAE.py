@@ -3,6 +3,10 @@ import torch
 import torch.nn.functional as F
 from torch.distributions import Normal
 from torch.nn import Parameter
+from torch import optim
+import numpy as np
+import pandas as pd
+
 
 
 def compute_ll(x, x_recon):
@@ -131,9 +135,6 @@ class VAE(nn.Module):
         losses = {'total': total,
                 'kl': kl,
                 'll': recon}
-        print('kl: ', kl)
-        print('ll: ', recon)
-        print('total: ', total)
         return losses
 
     def pred_latent(self, x, DEVICE):
@@ -156,3 +157,218 @@ class VAE(nn.Module):
         with torch.no_grad():
             x_pred = self.decode(torch.from_numpy(test_latent)).loc.cpu().detach().numpy()
         return x_pred
+    
+
+
+
+
+
+
+
+
+
+class VAE_multimodal(nn.Module):
+    def __init__(self, 
+                input_dim_list, 
+                hidden_dim, 
+                latent_dim, 
+                learning_rate=0.0001, 
+                modalities=3,
+                non_linear=False):
+        
+        super().__init__()
+        self.input_dim_list = input_dim_list
+        self.hidden_dim = hidden_dim + [latent_dim]
+        self.latent_dim = latent_dim
+        self.modalities = modalities
+        self.learning_rate = learning_rate
+
+        self.alpha_m_list = nn.ParameterList([nn.Parameter(torch.randn(1, requires_grad=True)) for i in range(modalities)])
+
+        self.encoder_list = nn.ModuleList([Encoder(input_dim=input_dim_list[i], hidden_dim=self.hidden_dim, non_linear=non_linear) for i in range(modalities)])
+        self.decoder_list = nn.ModuleList([Decoder(input_dim=input_dim_list[i], hidden_dim=self.hidden_dim, non_linear=non_linear) for i in range(modalities)])
+
+        self.optimizer_multimodal = optim.Adam(
+            [p for model in self.encoder_list for p in model.parameters()] +
+            [p for model in self.decoder_list for p in model.parameters()] +
+            list(self.alpha_m_list.parameters()),  
+            lr=self.learning_rate
+        )
+
+    def encode(self, x, m):
+        return self.encoder_list[m](x)
+
+    def reparameterise(self, mu, logvar):
+        std = torch.exp(0.5 * logvar)
+        eps = torch.randn_like(mu)
+        return mu + eps * std
+
+    def decode(self, z, m):
+        return self.decoder_list[m](z)
+    
+    def calc_kl(self, mu, logvar):
+        return -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp(), dim=1).mean(0)
+    
+    def calc_ll(self, x, x_recon):
+        return compute_ll(x, x_recon)
+
+    def forward(self, x, m):
+        self.zero_grad()
+        mu, logvar = self.encode(x, m)
+        z = self.reparameterise(mu, logvar)
+        x_recon = self.decode(z, m)
+        fwd_rtn = {'x_recon': x_recon,
+                   'mu': mu,
+                   'logvar': logvar}
+        return fwd_rtn
+
+    def forward_multimodal(self, xes, combine):
+        self.zero_grad()
+        mus_all = []
+        logvars_all = []
+        for modality in range(self.modalities):
+            mus, logvars = self.encode(xes[modality], modality)
+            mus_all.append(mus)
+            logvars_all.append(logvars)
+
+        mus = torch.stack(mus_all)
+        logvars = torch.stack(logvars_all)
+        variances = torch.exp(logvars)
+
+        mu_multimodal = None
+        variance_multimodal = None
+
+        if combine == 'poe':
+            # Product of Experts (PoE)
+            mu_multimodal = torch.sum(mus / variances, dim=0) / torch.sum(1 / variances, dim=0)
+            variance_multimodal = 1 / torch.sum(1 / variances, dim=0)
+            logvar_multimodal = torch.log(variance_multimodal)
+            z_multimodal = self.reparameterise(mu_multimodal, logvar_multimodal)
+
+        elif combine == 'gpoe':
+            # Generalized Product of Experts (gPoE)
+            alpha_m_tensors = [param for param in self.alpha_m_list]  # Extract tensors
+            alpha_m = torch.softmax(torch.stack(alpha_m_tensors), dim=0)  # Apply softmax and stack
+            alpha_m = alpha_m.reshape(alpha_m.shape[0], 1, 1)
+            mu_multimodal = torch.sum(mus * alpha_m / variances, dim=0) / torch.sum(alpha_m / variances, dim=0)
+            variance_multimodal = 1 / torch.sum(alpha_m / variances, dim=0)
+            logvar_multimodal = torch.log(variance_multimodal)
+            z_multimodal = self.reparameterise(mu_multimodal, logvar_multimodal)
+
+        elif combine == 'moe':
+            # Mixture of Experts (MoE)
+            # Weighted average of means
+            weights = torch.softmax(torch.stack([torch.ones_like(mu) for mu in mus]), dim=0)
+            mu_multimodal = torch.sum(mus * weights, dim=0)
+            # Weighted average of variances (assuming independence)
+            variance_multimodal = torch.sum(variances * weights, dim=0)
+            logvar_multimodal = torch.log(variance_multimodal)
+            z_multimodal = self.reparameterise(mu_multimodal, logvar_multimodal)
+
+        # logvar_multimodal = torch.log(variance_multimodal)
+        # z_multimodal = self.reparameterise(mu_multimodal, logvar_multimodal)
+
+        x_recons = []
+        for i in range(self.modalities):
+            x_recon = self.decode(z_multimodal, i)
+            x_recons.append(x_recon)
+
+        fwd_rtn = {'x_recons': x_recons,
+                   'mu_multimodal': mu_multimodal,
+                   'logvar_multimodal': logvar_multimodal}
+        return fwd_rtn
+
+    def loss_function_multimodal(self, xes, fwd_rtn):
+        losses_list = []
+        for i in range(self.modalities):
+            x_recon = fwd_rtn['x_recons'][i]
+            mu = fwd_rtn['mu_multimodal']
+            logvar = fwd_rtn['logvar_multimodal']
+
+            kl = self.calc_kl(mu, logvar)
+            recon = self.calc_ll(xes[i], x_recon)
+            total = kl - recon
+
+            losses = {'total': total,
+                      'kl': kl,
+                      'll': recon}
+            losses_list.append(losses)
+        return losses_list
+
+    def loss_function(self, x, fwd_rtn, m):
+        x_recon = fwd_rtn['x_recon']
+        mu = fwd_rtn['mu']
+        logvar = fwd_rtn['logvar']
+
+        kl = self.calc_kl(mu, logvar)
+        recon = self.calc_ll(x, x_recon)
+
+        total = kl - recon
+        losses = {'total': total,
+                  'kl': kl,
+                  'll': recon}
+        return losses
+
+    def pred_latent(self, x, DEVICE, m):
+        x = torch.FloatTensor(x.to_numpy()).to(DEVICE)
+        with torch.no_grad():
+            mu, logvar = self.encode(x, m)
+        latent = mu.cpu().detach().numpy()
+        latent_var = logvar.exp().cpu().detach().numpy()
+        return latent, latent_var
+
+    def pred_recon(self, xes, combine):
+        with torch.no_grad():
+            mus_all = []
+            logvars_all = []
+            for modality in range(self.modalities):
+                tensor_x = torch.tensor(xes[modality].values, dtype=torch.float32)
+                mus, logvars = self.encode(tensor_x, modality)
+                mus_all.append(mus)
+                logvars_all.append(logvars)
+
+            mus = torch.stack(mus_all)
+            logvars = torch.stack(logvars_all)
+            variances = torch.exp(logvars)
+
+            if combine == 'poe':
+                # Product of Experts (PoE)
+                mu_multimodal = torch.sum(mus / variances, dim=0) / torch.sum(1 / variances, dim=0)
+                variance_multimodal = 1 / torch.sum(1 / variances, dim=0)
+                logvar_multimodal = torch.log(variance_multimodal)
+                z_multimodal = self.reparameterise(mu_multimodal, logvar_multimodal)
+
+            elif combine == 'gpoe':
+                # Generalized Product of Experts (gPoE)
+                alpha_m_tensors = [param for param in self.alpha_m_list]  # Extract tensors
+                alpha_m = torch.softmax(torch.stack(alpha_m_tensors), dim=0)  # Apply softmax and stack
+                alpha_m = alpha_m.reshape(alpha_m.shape[0], 1, 1)
+                mu_multimodal = torch.sum(mus * alpha_m / variances, dim=0) / torch.sum(alpha_m / variances, dim=0)
+                variance_multimodal = 1 / torch.sum(alpha_m / variances, dim=0)
+                logvar_multimodal = torch.log(variance_multimodal)
+                z_multimodal = self.reparameterise(mu_multimodal, logvar_multimodal)
+
+            elif combine == 'moe':
+                # Mixture of Experts (MoE)
+                # Weighted average of means
+                weights = torch.softmax(torch.stack([torch.ones_like(mu) for mu in mus]), dim=0)
+                mu_multimodal = torch.sum(mus * weights, dim=0)
+                # Weighted average of variances (assuming independence)
+                variance_multimodal = torch.sum(variances * weights, dim=0)
+                logvar_multimodal = torch.log(variance_multimodal)
+                z_multimodal = self.reparameterise(mu_multimodal, logvar_multimodal)
+
+            x_recons = []
+            for i in range(self.modalities):
+                x_recon = self.decode(z_multimodal, i).loc.cpu().detach().numpy()
+                x_recons.append(x_recon)
+        return x_recons
+
+    def reconstruction_deviation_multimodal(self, xes, x_preds):
+        reconstruction_deviation_list = []
+        for m in range(self.modalities):
+            x = xes[m]
+            x_pred = x_preds[m]
+            reconstruction_deviation = np.sum((x - x_pred)**2, axis=1) / x.shape[1]
+            reconstruction_deviation_list.append(reconstruction_deviation)
+        return reconstruction_deviation_list

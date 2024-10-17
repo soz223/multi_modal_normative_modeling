@@ -18,7 +18,7 @@ from scipy import stats
 from sklearn.metrics import roc_curve, auc
 from tqdm import tqdm
 import tensorflow as tf
-from utils import COLUMNS_NAME, load_dataset, cliff_delta, COLUMNS_NAME_SNP, COLUMNS_NAME_VBM
+from utils import COLUMNS_HCP, COLUMNS_NAME, load_dataset, cliff_delta, COLUMNS_NAME_SNP, COLUMNS_NAME_VBM
 import os
 
 PROJECT_ROOT = Path.cwd()
@@ -143,7 +143,7 @@ def main(dataset_name, comb_label, hz_para_list):
         region_df.to_csv(analysis_dir / 'regions_analysis.csv', index=False)
 
         # ----------------------------------------------------------------------------
-        # Compute AUC-ROC for the bootstrap iteration
+        # Compute ROC-AUC for the bootstrap iteration
         # roc_auc, tpr = compute_classification_performance(reconstruction_error_df, clinical_df, disease_label)
         # roc_auc, tpr, accuracy, accuracy_in_hc, accuracy_in_ad, recall, specificity = compute_classification_performance
         roc_auc, tpr, accuracy, accuracy_in_hc, accuracy_in_ad, recall, specificity = compute_classification_performance(
@@ -185,13 +185,13 @@ def main(dataset_name, comb_label, hz_para_list):
 
     with open(result_baseline + 'result_baseline.txt', 'a') as f:
         f.write('Experiment settings: AAE. Dataset {}\n'.format(dataset_name))
-        f.write('AUC-ROC: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(auc_roc_list) * 100, np.std(auc_roc_list) * 100))
+        f.write('ROC-AUC: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(auc_roc_list) * 100, np.std(auc_roc_list) * 100))
         f.write('Accuracy: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(accuracy_list) * 100, np.std(accuracy_list) * 100))
         f.write('Sensitivity: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(sensitivity_list) * 100, np.std(sensitivity_list) * 100))
         f.write('Specificity: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(specificity_list) * 100, np.std(specificity_list) * 100))
         f.write('\n\n\n')
     #np.savetxt("aae_new_auc_and_std.csv", np.concatenate((auc_roc_list, [np.std(auc_roc_list)])), delimiter=",")
-    auc_roc_df = pd.DataFrame(columns=['AUC-ROC'], data=auc_roc_list)
+    auc_roc_df = pd.DataFrame(columns=['ROC-AUC'], data=auc_roc_list)
     auc_roc_df.to_csv(comparison_dir / 'auc_rocs.csv', index=False)
 
     # ----------------------------------------------------------------------------
@@ -217,7 +217,7 @@ def main(dataset_name, comb_label, hz_para_list):
     plt.ylabel('True Positive Rate')
     plt.xlabel('False Positive Rate')
     plt.legend(loc='lower right')
-    plt.savefig(comparison_dir / 'AUC-ROC.pdf', format='pdf')
+    plt.savefig(comparison_dir / 'ROC-AUC.pdf', format='pdf')
     plt.show()
     #plt.close()
     #plt.clf()

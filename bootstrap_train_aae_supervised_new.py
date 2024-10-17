@@ -9,7 +9,7 @@ from sklearn.preprocessing import RobustScaler, OneHotEncoder
 import numpy as np
 import tensorflow as tf
 import matplotlib.pyplot as plt
-from utils import COLUMNS_NAME, load_dataset, COLUMNS_NAME_SNP, COLUMNS_NAME_VBM
+from utils import COLUMNS_HCP, COLUMNS_NAME, load_dataset, COLUMNS_NAME_SNP, COLUMNS_NAME_VBM
 from models import make_encoder_model_v1, make_decoder_model_v1, make_discriminator_model_v1
 import torch
 from torch.distributions import Normal

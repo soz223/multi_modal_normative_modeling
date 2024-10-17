@@ -10,22 +10,41 @@ import tensorflow as tf
 from tensorflow import keras
 from tqdm import tqdm
 import copy
-from utils import COLUMNS_NAME, load_dataset, COLUMNS_NAME_SNP, COLUMNS_NAME_VBM
+from utils import COLUMNS_HCP, COLUMNS_NAME, load_dataset, COLUMNS_NAME_SNP, COLUMNS_NAME_VBM, COLUMNS_3MODALITIES
 
 PROJECT_ROOT = Path.cwd()
 
 
-def main(dataset_name):
+def main(dataset_name, dataset_resourse):
     """Make predictions using trained normative models."""
     # ----------------------------------------------------------------------------
     n_bootstrap = 10
     model_name = 'supervised_ae'
 
-    # participants_path = PROJECT_ROOT / 'data' / '[02]-imaging' / 'AV45' / 'AV45_cov.csv'
-    # freesurfer_path = PROJECT_ROOT / 'data' / '[02]-imaging' / 'AV45' / 'AV45_pheno_AAL.csv'
+    # participants_path = PROJECT_ROOT / 'data' / 'HCP' / '[02]-imaging' / 'AV45' / 'AV45_cov.csv'
+    # freesurfer_path = PROJECT_ROOT / 'data' / 'HCP' / '[02]-imaging' / 'AV45' / 'AV45_pheno_AAL.csv'
+    # columns_name = [(lambda x: dataset_name + '_'+ str(x))(y) for y in list(range(132))]
 
-    participants_path = PROJECT_ROOT / 'data' / 'y.csv'
-    freesurfer_path = PROJECT_ROOT / 'data' / (dataset_name + '.csv')
+    if dataset_resourse == 'ADNI':
+        if dataset_name == 'av45' or dataset_name == 'fdg':
+            columns_name = COLUMNS_NAME
+        elif dataset_name == 'snp':
+            columns_name = COLUMNS_NAME_SNP
+        elif dataset_name == 'vbm':
+            columns_name = COLUMNS_NAME_VBM
+        elif dataset_name == '3modalities':
+            columns_name = COLUMNS_3MODALITIES
+    elif dataset_resourse == 'HCP':
+        columns_name = [(lambda x: dataset_name + '_'+ str(x))(y) for y in list(range(132))]
+
+        
+    # participants_path = PROJECT_ROOT / 'data' / 'ADNI' / 'y.csv'
+    # freesurfer_path = PROJECT_ROOT / 'data' / 'ADNI' / (dataset_name + '.csv')
+
+    participants_path = PROJECT_ROOT / 'data' / dataset_resourse / 'y.csv'
+    freesurfer_path = PROJECT_ROOT / 'data' / dataset_resourse / (dataset_name + '.csv')
+
+
 
 
     # ----------------------------------------------------------------------------
@@ -56,12 +75,12 @@ def main(dataset_name):
         ids_path = ids_dir / test_ids_filename
         clinical_df = load_dataset(participants_path, ids_path, freesurfer_path)
         
-        x_dataset = clinical_df[COLUMNS_NAME].values
+        x_dataset = clinical_df[columns_name].values
 
-        tiv = clinical_df['PTEDUCAT'].values
-        tiv = tiv[:, np.newaxis]
+        # tiv = clinical_df['PTEDUCAT'].values
+        # tiv = tiv[:, np.newaxis]
 
-        x_dataset = (np.true_divide(x_dataset, tiv)).astype('float32')
+        # x_dataset = (np.true_divide(x_dataset, tiv)).astype('float32')
         # ----------------------------------------------------------------------------
         # print(bootstrap_model_dir)
         encoder = keras.models.load_model(bootstrap_model_dir / 'encoder.h5', compile=False)
@@ -101,14 +120,14 @@ def main(dataset_name):
         # ----------------------------------------------------------------------------
         x_normalized = scaler.transform(x_dataset)
         #x = np.concatenate((x_normalized, y_data), axis=1)
-        #COLUMNS_NAME.append(['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16',
+        #columns_name.append(['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16',
         #                     '17','18','19','20','21','22','23','24','25','26','27'])
-        #tmp = copy.copy(COLUMNS_NAME)
+        #tmp = copy.copy(columns_name)
         #tmp.extend(extended)
-        #print(COLUMNS_NAME)
-        normalized_df = pd.DataFrame(columns=['participant_id'] + COLUMNS_NAME)
+        #print(columns_name)
+        normalized_df = pd.DataFrame(columns=['participant_id'] + columns_name)
         normalized_df['participant_id'] = clinical_df['participant_id']
-        normalized_df[COLUMNS_NAME] = x_normalized
+        normalized_df[columns_name] = x_normalized
         normalized_df.to_csv(output_dataset_dir / 'normalized.csv', index=False)
 
         # ----------------------------------------------------------------------------
@@ -127,9 +146,13 @@ def main(dataset_name):
         #reconstruction = decoder(tf.concat([encoded,y_data], axis=1), training=False)
         reconstruction = decoder(tf.concat([encoded], axis=1), training=False)
 
-        reconstruction_df = pd.DataFrame(columns=['participant_id'] + COLUMNS_NAME)
+        reconstruction_df = pd.DataFrame(columns=['participant_id'] + columns_name)
         reconstruction_df['participant_id'] = clinical_df['participant_id']
-        reconstruction_df[COLUMNS_NAME] = reconstruction.numpy()
+        reconstruction_df[columns_name] = reconstruction.numpy()
+        print('reconstruction:', reconstruction)
+        print('reconstruction_df:', reconstruction_df)
+        reconstruction_df[columns_name] = reconstruction.numpy()
+
         reconstruction_df.to_csv(output_dataset_dir / 'reconstruction.csv', index=False)
 
         encoded_df = pd.DataFrame(columns=['participant_id'] + list(range(encoded.shape[1])))
@@ -160,9 +183,14 @@ if __name__ == "__main__":
     parser.add_argument('-D', '--dataset_name',
                         dest='dataset_name',
                         help='Dataset name to calculate deviations.')
+    parser.add_argument('-R', '--dataset_resourse',
+                        dest='dataset_resourse',
+                        help='Dataset resourse to calculate deviations.')
     args = parser.parse_args()
-    if args.dataset_name == 'snp':
-        COLUMNS_NAME = COLUMNS_NAME_SNP
-    elif args.dataset_name == 'vbm':
-        COLUMNS_NAME = COLUMNS_NAME_VBM
-    main(args.dataset_name)
+
+
+    if args.dataset_name == None:
+        args.dataset_name = 'av45'
+    if args.dataset_resourse == None:
+        args.dataset_resourse = 'ADNI'
+    main(args.dataset_name, args.dataset_resourse)

@@ -11,7 +11,7 @@ import tensorflow as tf
 import pandas as pd
 import os
 import argparse
-from utils import COLUMNS_NAME, load_dataset, COLUMNS_NAME_SNP, COLUMNS_NAME_VBM
+from utils import COLUMNS_HCP, COLUMNS_NAME, load_dataset, COLUMNS_NAME_SNP, COLUMNS_NAME_VBM, COLUMNS_3MODALITIES
 from models import make_encoder_model_v111, make_decoder_model_v1, make_discriminator_model_v1
 import argparse
 
@@ -30,8 +30,8 @@ def main(dataset_name, hz_para_list, base_lr=0.0001, max_lr=0.005):
     n_bootstrap = 10
     model_name = 'supervised_ae'
 
-    participants_path = PROJECT_ROOT / 'data' / 'y.csv'
-    freesurfer_path = PROJECT_ROOT / 'data' / (dataset_name + '.csv')
+    participants_path = PROJECT_ROOT / 'data' / 'HCP' / 'y.csv'
+    freesurfer_path = PROJECT_ROOT / 'data' / 'HCP' / (dataset_name + '.csv')
 
     # ----------------------------------------------------------------------------
     bootstrap_dir = PROJECT_ROOT / 'outputs' / 'bootstrap_analysis'
@@ -47,12 +47,7 @@ def main(dataset_name, hz_para_list, base_lr=0.0001, max_lr=0.005):
     np.random.seed(random_seed)
     rn.seed(random_seed)
 
-    modals = ['av45', 'fdg', 'vbm', 'snp']
-    
-
     for i_bootstrap in range(n_bootstrap):
-
-
         ids_filename = 'cleaned_bootstrap_{:03d}.csv'.format(i_bootstrap)
         ids_path = ids_dir / ids_filename
 
@@ -63,10 +58,12 @@ def main(dataset_name, hz_para_list, base_lr=0.0001, max_lr=0.005):
         # Loading data
         dataset_df = load_dataset(participants_path, ids_path, freesurfer_path)
 
+        columns_name = [(lambda x: dataset_name + '_'+ str(x))(y) for y in list(range(132))]
+
 
         # ----------------------------------------------------------------------------
-        dataset_df = dataset_df.loc[dataset_df['DIA'] == 2]      
-        x_data = dataset_df[COLUMNS_NAME].values
+        dataset_df = dataset_df.loc[dataset_df['DIA'] == 1]      
+        x_data = dataset_df[columns_name].values
         
 
         tiv = dataset_df['PTEDUCAT'].values
@@ -137,10 +134,16 @@ def main(dataset_name, hz_para_list, base_lr=0.0001, max_lr=0.005):
         def generator_loss(fake_output):
             return cross_entropy(tf.ones_like(fake_output), fake_output)
 
+        # -------------------------------------------------------------------------------------------------------------
+        # Define optimizers
+        # base_lr = 0.0001
+        # max_lr = 0.005
 
         step_size = 2 * np.ceil(n_samples / batch_size)
 
         ae_optimizer = tf.keras.optimizers.Adam(lr=base_lr)
+        #dc_optimizer = tf.keras.optimizers.Adam(lr=base_lr)
+        #gen_optimizer = tf.keras.optimizers.Adam(lr=base_lr)
 
         # -------------------------------------------------------------------------------------------------------------
         # Training function
@@ -158,24 +161,38 @@ def main(dataset_name, hz_para_list, base_lr=0.0001, max_lr=0.005):
             ae_grads = ae_tape.gradient(ae_loss, encoder.trainable_variables + decoder.trainable_variables)
             ae_optimizer.apply_gradients(zip(ae_grads, encoder.trainable_variables + decoder.trainable_variables))
 
-            return ae_loss
-        
-        # training function for multi modal autoencoder
-        @tf.function
-        def train_step_multimodal(batch_xes):
             # -------------------------------------------------------------------------------------------------------------
-            # Autoencoder
-            for batch_x in batch_xes:
-                with tf.GradientTape() as ae_tape:
-                    encoder_output = encoder(batch_x, training=True)
-                    decoder_output = decoder(tf.concat(encoder_output, axis=1), training=True)
+            # Discriminator
+            # with tf.GradientTape() as dc_tape:
+            #     real_distribution = tf.random.normal([batch_x.shape[0], z_dim], mean=0.0, stddev=1.0)
+            #     encoder_output = encoder(batch_x, training=True)
 
-                    # Autoencoder loss
-                    ae_loss = mse(batch_x, decoder_output)
+            #     dc_real = discriminator(real_distribution, training=True)
+            #     dc_fake = discriminator(encoder_output, training=True)
 
-                ae_grads = ae_tape.gradient(ae_loss, encoder.trainable_variables + decoder.trainable_variables)
-                ae_optimizer.apply_gradients(zip(ae_grads, encoder.trainable_variables + decoder.trainable_variables))
+            #     # Discriminator Loss
+            #     dc_loss = discriminator_loss(dc_real, dc_fake)
 
+            #     # Discriminator Acc
+            #     dc_acc = accuracy(tf.concat([tf.ones_like(dc_real), tf.zeros_like(dc_fake)], axis=0),
+            #                       tf.concat([dc_real, dc_fake], axis=0))
+
+            # dc_grads = dc_tape.gradient(dc_loss, discriminator.trainable_variables)
+            # dc_optimizer.apply_gradients(zip(dc_grads, discriminator.trainable_variables))
+
+            # # -------------------------------------------------------------------------------------------------------------
+            # # Generator (Encoder)
+            # with tf.GradientTape() as gen_tape:
+            #     encoder_output = encoder(batch_x, training=True)
+            #     dc_fake = discriminator(encoder_output, training=True)
+
+            #     # Generator loss
+            #     gen_loss = generator_loss(dc_fake)
+
+            # gen_grads = gen_tape.gradient(gen_loss, encoder.trainable_variables)
+            # gen_optimizer.apply_gradients(zip(gen_grads, encoder.trainable_variables))
+
+            #return ae_loss, dc_loss, dc_acc, gen_loss
             return ae_loss
 
         # -------------------------------------------------------------------------------------------------------------
@@ -188,7 +205,9 @@ def main(dataset_name, hz_para_list, base_lr=0.0001, max_lr=0.005):
             start = time.time()
 
             epoch_ae_loss_avg = tf.metrics.Mean()
-
+            #epoch_dc_loss_avg = tf.metrics.Mean()
+            #epoch_dc_acc_avg = tf.metrics.Mean()
+            #epoch_gen_loss_avg = tf.metrics.Mean()
 
             for _, (batch_x, batch_y) in enumerate(train_dataset):
                 global_step = global_step + 1
@@ -196,21 +215,35 @@ def main(dataset_name, hz_para_list, base_lr=0.0001, max_lr=0.005):
                 x_lr = np.abs(global_step / step_size - 2 * cycle + 1)
                 clr = base_lr + (max_lr - base_lr) * max(0, 1 - x_lr) * scale_fn(cycle)
                 ae_optimizer.lr = clr
+                #dc_optimizer.lr = clr
+                #gen_optimizer.lr = clr
+                
+                #batch_x = tf.concat([batch_x, batch_y], axis=1)
+                #print(batch_x.shape, batch_y.shape)
+                #ae_loss, dc_loss, dc_acc, gen_loss = train_step(batch_x, batch_y)
                 ae_loss = train_step(batch_x, batch_y)
 
                 epoch_ae_loss_avg(ae_loss)
+                #epoch_dc_loss_avg(dc_loss)
+                #epoch_dc_acc_avg(dc_acc)
+                #epoch_gen_loss_avg(gen_loss)
 
             epoch_time = time.time() - start
 
+            #print('{:4d}: TIME: {:.2f} ETA: {:.2f} AE_LOSS: {:.4f} DC_LOSS: {:.4f} DC_ACC: {:.4f} GEN_LOSS: {:.4f}' \
             print('{:4d}: TIME: {:.2f} ETA: {:.2f} AE_LOSS: {:.4f}' \
                   .format(epoch, epoch_time,
                           epoch_time * (n_epochs - epoch),
                           epoch_ae_loss_avg.result(),
+                          #epoch_dc_loss_avg.result(),
+                          #epoch_dc_acc_avg.result(),
+                          #epoch_gen_loss_avg.result()
                           ))
 
         # Save models
         encoder.save(bootstrap_model_dir / 'encoder.h5')
         decoder.save(bootstrap_model_dir / 'decoder.h5')
+        #discriminator.save(bootstrap_model_dir / 'discriminator.h5')
 
         # Save scaler
         joblib.dump(scaler, bootstrap_model_dir / 'scaler.joblib')
@@ -243,8 +276,27 @@ if __name__ == "__main__":
                         help='Max learning rate.',
                         type=float)
     args = parser.parse_args()
+
+
+
+
+    if args.dataset_name == None:
+        args.dataset_name = 'T1_volume'
+    if args.hz_para_list == None:
+        args.hz_para_list = [110, 110, 10]
+    if args.base_lr == None:
+        args.base_lr = 0.0001
+    if args.max_lr == None:
+        args.max_lr = 0.005
+        
     if args.dataset_name == 'snp':
         COLUMNS_NAME = COLUMNS_NAME_SNP
     elif args.dataset_name == 'vbm':
         COLUMNS_NAME = COLUMNS_NAME_VBM
+    elif args.dataset_name == '3modalities':
+        COLUMNS_NAME = COLUMNS_3MODALITIES
+
+
+
+    
     main(args.dataset_name, args.hz_para_list, args.base_lr, args.max_lr)

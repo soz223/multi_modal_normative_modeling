@@ -10,7 +10,7 @@ from sklearn.preprocessing import RobustScaler
 import numpy as np
 import tensorflow as tf
 
-from utils import COLUMNS_NAME, load_dataset, COLUMNS_NAME_SNP, COLUMNS_NAME_VBM
+from utils import COLUMNS_HCP, COLUMNS_NAME, load_dataset, COLUMNS_NAME_SNP, COLUMNS_NAME_VBM, COLUMNS_3MODALITIES, COLUMNS_NAME_AAL116
 #from models import make_encoder_model_v1, make_decoder_model_v1, make_discriminator_model_v1
 from utils_vae import plot_losses, MyDataset_labels, Logger
 import torch
@@ -25,7 +25,7 @@ import argparse
 PROJECT_ROOT = Path.cwd()
 
 
-def main(dataset_name):
+def main(dataset_name, dataset_resourse, epochs):
     """Train the normative method on the bootstrapped samples.
 
     The script also the scaler and the demographic data encoder.
@@ -34,10 +34,9 @@ def main(dataset_name):
     n_bootstrap = 10
     model_name = 'supervised_cvae'
 
-    # Set the path of the participants file
-    participants_path = PROJECT_ROOT / 'data' / 'y.csv'
-    # dataset_name to str
-    freesurfer_path = PROJECT_ROOT / 'data' / (dataset_name + '.csv')
+
+    participants_path = PROJECT_ROOT / 'data' / dataset_resourse /  'y.csv'
+    freesurfer_path = PROJECT_ROOT / 'data' / dataset_resourse /  (dataset_name + '.csv')
 
 
   # ----------------------------------------------------------------------------
@@ -67,14 +66,39 @@ def main(dataset_name):
 
         # ----------------------------------------------------------------------------
 
-        dataset_df = dataset_df.loc[dataset_df['DIA'] == 2]      
-        train_data = dataset_df[COLUMNS_NAME].values
+        if dataset_resourse == 'ADNI':
+            if dataset_name == 'av45' or dataset_name == 'fdg':
+                columns_name = COLUMNS_NAME
+            elif dataset_name == 'snp':
+                columns_name = COLUMNS_NAME_SNP
+            elif dataset_name == 'vbm':
+                columns_name = COLUMNS_NAME_VBM
+            elif dataset_name == '3modalities':
+                columns_name = COLUMNS_3MODALITIES
+        elif dataset_resourse == 'HCP':
+            columns_name = [(lambda x: dataset_name + '_'+ str(x))(y) for y in list(range(132))]
+        elif dataset_resourse == 'ADHD':
+            columns_name = COLUMNS_NAME_AAL116
+
+
+        if dataset_resourse == 'ADNI':
+            hc_label = 2
+        elif dataset_resourse == 'HCP':
+            hc_label = 1
+        elif dataset_resourse == 'ADHD':
+            hc_label = 1
+        else:
+            raise ValueError('Unknown dataset resource')
+
+
+        dataset_df = dataset_df.loc[dataset_df['DIA'] == hc_label]      
+        train_data = dataset_df[columns_name].values
         
 
-        tiv = dataset_df['PTEDUCAT'].values
-        tiv = tiv[:, np.newaxis]
+        # tiv = dataset_df['PTEDUCAT'].values
+        # tiv = tiv[:, np.newaxis]
 
-        train_data = (np.true_divide(train_data, tiv)).astype('float32')
+        # train_data = (np.true_divide(train_data, tiv)).astype('float32')
 
         scaler = RobustScaler()
         train_data = scaler.fit_transform(train_data)
@@ -82,7 +106,7 @@ def main(dataset_name):
         
         train_covariates = dataset_df[['DIA','PTGENDER', 'AGE']]
         train_covariates.DIA[train_covariates.DIA == 0] = 0       #
-        train_covariates['ICV'] =tiv  #
+        # train_covariates['ICV'] =tiv  #
         
         bin_labels = list(range(0,27))                          
         AGE_bins_train, bin_edges = pd.qcut(train_covariates['AGE'].rank(method="first"), q=27, retbins=True, labels=bin_labels)
@@ -95,12 +119,13 @@ def main(dataset_name):
         #one_hot_AGE_test = np.eye(10)[AGE_bins_test.values]
         one_hot_PTGENDER = np.eye(2)[PTGENDER_bins_train.values]
         
-        bin_labels = list(range(0,3))      
-        ICV_bins_train, bin_edges = pd.qcut(train_covariates['ICV'], q=3,  retbins=True, labels=bin_labels, duplicates='drop')
-        #ICV_bins_test = pd.cut(test_covariates['ICV'], bins=bin_edges, labels=bin_labels)
-        #one_hot_ICV_test = np.eye(10)[ICV_bins_test.values]
-        ICV_bins_train.fillna(0, inplace = True)
-        one_hot_ICV_train = np.eye(10)[ICV_bins_train.values]
+        # bin_labels = list(range(0,3))      
+        # ICV_bins_train, bin_edges = pd.qcut(train_covariates['ICV'], q=3,  retbins=True, labels=bin_labels, duplicates='drop')
+        # #ICV_bins_test = pd.cut(test_covariates['ICV'], bins=bin_edges, labels=bin_labels)
+        # #one_hot_ICV_test = np.eye(10)[ICV_bins_test.values]
+        # ICV_bins_train.fillna(0, inplace = True)
+        # one_hot_ICV_train = np.eye(10)[ICV_bins_train.values]
+
         # ----------------------------------------------------------------------------
         #AGE = dataset_df['AGE'].values[:, np.newaxis].astype('float32')
         #enc_AGE = OneHotEncoder(sparse=False)
@@ -129,7 +154,8 @@ def main(dataset_name):
         DEVICE = torch.device("cuda:1" if use_cuda else "cpu")
         
         input_dim = train_data.shape[1]
-        one_hot_covariates_train = np.concatenate((one_hot_AGE, one_hot_PTGENDER, one_hot_ICV_train), axis=1).astype('float32')
+        # one_hot_covariates_train = np.concatenate((one_hot_AGE, one_hot_PTGENDER, one_hot_ICV_train), axis=1).astype('float32')
+        one_hot_covariates_train = np.concatenate((one_hot_AGE, one_hot_PTGENDER), axis=1).astype('float32')
         c_dim = one_hot_covariates_train.shape[1]
         train_dataset = MyDataset_labels(train_data.to_numpy(), one_hot_covariates_train)    
         #train_dataset = MyDataset(train_data)
@@ -223,7 +249,8 @@ def main(dataset_name):
         # -------------------------------------------------------------------------------------------------------------
         # Training loop
         global_step = 0
-        n_epochs = 200
+        # n_epochs = 200
+        n_epochs = epochs
         gamma = 0.98
         scale_fn = lambda x: gamma ** x
         base_lr = 0.0001
@@ -325,11 +352,25 @@ if __name__ == "__main__":
                         dest='dataset_name',
                         help='Dataset to use for training test and evaluation.',
                         type=str)
+    
+    parser.add_argument('-R', '--dataset_resourse',
+                        dest='dataset_resourse',
+                        help='Dataset resourse to use for training test and evaluation.',
+                        type=str)
+    
+    parser.add_argument('-E', '--epochs',
+                        dest='epochs',
+                        help='Number of epochs to train the model.',
+                        type=int)
+
     args = parser.parse_args()
 
-    if args.dataset_name == 'snp':
-        COLUMNS_NAME = COLUMNS_NAME_SNP
-    elif args.dataset_name == 'vbm':
-        COLUMNS_NAME = COLUMNS_NAME_VBM
+    if args.dataset_name == None:
+        args.dataset_name = 'av45'
+    if args.dataset_resourse == None:
+        args.dataset_resourse = 'ADNI'
+    if args.epochs == None:
+        args.epochs = 200
 
-    main(args.dataset_name)
+
+    main(args.dataset_name, args.dataset_resourse, args.epochs)
