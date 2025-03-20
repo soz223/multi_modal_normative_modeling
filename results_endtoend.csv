@@ -1,0 +1,27 @@
+Namespace(dataset_resourse='ADNI', hz_para_list=[110, 110, 10], combine='MoE', procedure='UCA-MoE', epochs=200, n_splits=5, oversample_percentage=1, model='cVAE_multimodal', single_modality=None, base_learning_rate=0.0001, max_learning_rate=0.005, learning_rate_classifier=0.001, margin=1, weightcontrastive=1, weight_kl=1, weight_rec=1, dropout=0.5, layers=[128, 64, 32])
+accuracy $0.801 \pm 0.062$
+auroc $0.751 \pm 0.057$
+sensitivity $0.558 \pm 0.114$
+specificity $0.943 \pm 0.017$
+f1_score $0.663 \pm 0.086$
+
+
+
+Namespace(dataset_resourse='ADNI', hz_para_list=[110, 110, 10], combine='MoE', procedure='UCA-MoE', epochs=200, n_splits=5, oversample_percentage=1, model='cVAE_multimodal', single_modality=None, base_learning_rate=0.0001, max_learning_rate=0.005, learning_rate_classifier=0.001, margin=1, weightcontrastive=1, weight_kl=1, weight_rec=1, dropout=0.5, layers=[128, 64, 32])
+accuracy $0.801 \pm 0.062$
+auroc $0.751 \pm 0.057$
+sensitivity $0.558 \pm 0.114$
+specificity $0.943 \pm 0.017$
+f1_score $0.663 \pm 0.086$
+
+
+
+Namespace(dataset_resourse='ADNI', hz_para_list=[110, 110, 10], combine='MoE', procedure='SE-MoE', epochs=200, n_splits=5, oversample_percentage=1, model='cVAE_multimodal', single_modality=None, base_learning_rate=0.0001, max_learning_rate=0.005, learning_rate_classifier=0.001, margin=1, weightcontrastive=1, weight_kl=1, weight_rec=1, dropout=0.5, layers=[128, 64, 32])
+accuracy $0.777 \pm 0.011$
+auroc $0.773 \pm 0.014$
+sensitivity $0.738 \pm 0.063$
+specificity $0.807 \pm 0.055$
+f1_score $0.698 \pm 0.031$
+
+
+

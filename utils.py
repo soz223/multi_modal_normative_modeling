@@ -5,7 +5,93 @@ import warnings
 import pandas as pd
 import numpy as np
 
+from sklearn.model_selection import KFold
+from sklearn.model_selection import train_test_split
+from pathlib import Path
+import pandas as pd
+import numpy as np
+
+
 PROJECT_ROOT = Path.cwd()
+
+
+# use whole dataset to generate kfold ids
+def generate_kfold_ids_endtoend(HC_group, other_group, oversample_percentage=1, n_splits=5, random_state=42):
+    kf = KFold(n_splits=n_splits, shuffle=True, random_state=random_state)
+    kfold_dir = PROJECT_ROOT / 'outputs' / 'kfold_analysis_endtoend'
+    kfold_dir.mkdir(parents=True, exist_ok=True)
+
+    all_group = pd.concat([HC_group, other_group])
+    for fold, (train_idx, test_idx) in enumerate(kf.split(all_group)):
+        train_ids = all_group.iloc[train_idx]['IID']
+        test_ids = all_group.iloc[test_idx]['IID']
+
+        oversample_size = int(len(train_ids) * (oversample_percentage))
+        train_ids_oversampled = np.random.choice(train_ids, size=oversample_size, replace=True)
+        train_ids = pd.Series(train_ids_oversampled)
+        # name the train_ids column as IID
+        train_ids = pd.DataFrame(train_ids)
+        train_ids.columns = ['IID']
+
+        train_ids_path = kfold_dir / f'train_ids_{fold:03d}.csv'
+        test_ids_path = kfold_dir / f'test_ids_{fold:03d}.csv'
+
+        train_ids.to_csv(train_ids_path, index=False)
+        test_ids.to_csv(test_ids_path, index=False)
+
+        print(f'Fold {fold} - Train IDs saved to: {train_ids_path}, Test IDs saved to: {test_ids_path}')
+
+
+
+
+
+# The following are the implementations of train, test, and analyze functions with necessary adjustments
+
+def generate_kfold_ids_with_unigroup(HC_group, other_group, oversample_percentage=1, n_splits=5):
+    kf = KFold(n_splits=n_splits, shuffle=True, random_state=42)
+    kfold_dir = PROJECT_ROOT / 'outputs' / 'kfold_analysis'
+    kfold_dir.mkdir(parents=True, exist_ok=True)
+
+    for fold, (train_idx, test_idx) in enumerate(kf.split(HC_group)):
+        train_ids = HC_group.iloc[train_idx]['IID']
+        test_ids_hc = HC_group.iloc[test_idx]['IID']
+
+        oversample_size = int(len(train_ids) * oversample_percentage)
+        train_ids_oversampled = np.random.choice(train_ids, size=oversample_size, replace=True)
+        train_ids = pd.DataFrame({'IID': train_ids_oversampled})
+
+        test_ids_other = other_group['IID']
+        test_ids = pd.concat([test_ids_hc, test_ids_other])
+
+        train_ids_path = kfold_dir / f'train_ids_{fold:03d}.csv'
+        test_ids_path = kfold_dir / f'test_ids_{fold:03d}.csv'
+
+        train_ids.to_csv(train_ids_path, index=False)
+        test_ids.to_csv(test_ids_path, index=False)
+
+
+def generate_kfold_ids(HC_group, other_group, oversample_percentage=1, n_splits=5):
+    kf = KFold(n_splits=n_splits, shuffle=True, random_state=42)
+    kfold_dir = PROJECT_ROOT / 'outputs' / 'kfold_analysis'
+    kfold_dir.mkdir(parents=True, exist_ok=True)
+    full_group = pd.concat([HC_group, other_group])
+
+    for fold, (train_idx, test_idx) in enumerate(kf.split(full_group)):
+        train_ids = full_group.iloc[train_idx]['IID']
+        test_ids = full_group.iloc[test_idx]['IID']
+
+
+        oversample_size = int(len(train_ids) * oversample_percentage)
+        train_ids_oversampled = np.random.choice(train_ids, size=oversample_size, replace=True)
+        train_ids = pd.DataFrame({'IID': train_ids_oversampled})
+
+
+        train_ids_path = kfold_dir / f'train_ids_{fold:03d}.csv'
+        test_ids_path = kfold_dir / f'test_ids_{fold:03d}.csv'
+
+        train_ids.to_csv(train_ids_path, index=False)
+        test_ids.to_csv(test_ids_path, index=False)
+
 
 
 def cliff_delta(X, Y):
@@ -28,7 +114,7 @@ def load_dataset(demographic_path, ids_path, freesurfer_path):
 
     # do nothing. nothing demographic data is introduced
     demographic_data = load_demographic_data(demographic_path, ids_path)
-    print("demographic_data aaaaaaaaaaaaaaaaaaaa", demographic_data)
+    # print("demographic_data aaaaaaaaaaaaaaaaaaaa", demographic_data)
 
     freesurfer_df = pd.read_csv(freesurfer_path)
 
@@ -73,9 +159,10 @@ def load_demographic_data(demographic_path, ids_path):
         
 
         dataset_df = pd.merge(ids_df, demographic_df, on='IID')
-        print('ids_df cccccccccccccccccccc', ids_df)
-        print("demographic_df cccccccccccccccc", demographic_df)
-        print("dataset_df cccccccccccccccc", dataset_df)
+        # print('ids_df cccccccccccccccccccc', ids_df)
+        # print('demographic_df path cccccccccccccccccccc', demographic_path)
+        # print("demographic_df cccccccccccccccc", demographic_df)
+        # print("dataset_df cccccccccccccccc", dataset_df)
         return dataset_df
 
 
@@ -608,308 +695,79 @@ COLUMNS_NAME_SNP = ['rs4575098',
 'rs429358',
 ]
 
-# COLUMNS_NAME = [ 'LH_Vis_1',
-#                 'LH_Vis_2',
-#                 'LH_Vis_3',
-#                 'LH_Vis_4',
-#                 'LH_Vis_5',
-#                 'LH_Vis_6',
-#                 'LH_Vis_7',
-#                 'LH_Vis_8',
-#                 'LH_Vis_9',
-#                 'LH_SomMot_1',
-#                 'LH_SomMot_2',
-#                 'LH_SomMot_3',
-#                 'LH_SomMot_4',
-#                 'LH_SomMot_5',
-#                 'LH_SomMot_6',
-#                 'LH_DorsAttn_Post_1',
-#                 'LH_DorsAttn_Post_2',
-#                 'LH_DorsAttn_Post_3',
-#                 'LH_DorsAttn_Post_4',
-#                 'LH_DorsAttn_Post_5',
-#                 'LH_DorsAttn_Post_6',
-#                 'LH_DorsAttn_FEF_1',
-#                 'LH_DorsAttn_FEF_2',
-#                 'LH_SalVentAttn_ParOper_1',
-#                 'LH_SalVentAttn_FrOper_1',
-#                 'LH_SalVentAttn_FrOper_2',
-#                 'LH_SalVentAttn_PFCl_1',
-#                 'LH_SalVentAttn_Med_1',
-#                 'LH_SalVentAttn_Med_2',
-#                 'LH_SalVentAttn_Med_3',
-#                 'LH_Limbic_OFC_1',
-#                 'LH_Limbic_TempPole_1',
-#                 'LH_Limbic_TempPole_2',
-#                 'LH_Cont_Par_1',
-#                 'LH_Cont_PFCl_1',
-#                 'LH_Cont_pCun_1',
-#                 'LH_Cont_Cing_1',
-#                 'LH_Default_Temp_1',
-#                 'LH_Default_Temp_2',
-#                 'LH_Default_Temp_3',
-#                 'LH_Default_Temp_4',
-#                 'LH_Default_PFC_1',
-#                 'LH_Default_PFC_2',
-#                 'LH_Default_PFC_3',
-#                 'LH_Default_PFC_4',
-#                 'LH_Default_PFC_5',
-#                 'LH_Default_PFC_6',
-#                 'LH_Default_PFC_7',
-#                 'LH_Default_PCC_1',
-#                 'LH_Default_PCC_2',
-#                 'RH_Vis_1',
-#                 'RH_Vis_2',
-#                 'RH_Vis_3',
-#                 'RH_Vis_4',
-#                 'RH_Vis_5',
-#                 'RH_Vis_6',
-#                 'RH_Vis_7',
-#                 'RH_Vis_8',
-#                 'RH_SomMot_1',
-#                 'RH_SomMot_2',
-#                 'RH_SomMot_3',
-#                 'RH_SomMot_4',
-#                 'RH_SomMot_5',
-#                 'RH_SomMot_6',
-#                 'RH_SomMot_7',
-#                 'RH_SomMot_8',
-#                 'RH_DorsAttn_Post_1',
-#                 'RH_DorsAttn_Post_2',
-#                 'RH_DorsAttn_Post_3',
-#                 'RH_DorsAttn_Post_4',
-#                 'RH_DorsAttn_Post_5',
-#                 'RH_DorsAttn_FEF_1',
-#                 'RH_DorsAttn_FEF_2',
-#                 'RH_SalVentAttn_TempOccPar_1',
-#                 'RH_SalVentAttn_TempOccPar_2',
-#                 'RH_SalVentAttn_FrOper_1',
-#                 'RH_SalVentAttn_Med_1',
-#                 'RH_SalVentAttn_Med_2',
-#                 'RH_Limbic_OFC_1',
-#                 'RH_Limbic_TempPole_1',
-#                 'RH_Cont_Par_1',
-#                 'RH_Cont_Par_2',
-#                 'RH_Cont_PFCl_1',
-#                 'RH_Cont_PFCl_2',
-#                 'RH_Cont_PFCl_3',
-#                 'RH_Cont_PFCl_4',
-#                 'RH_Cont_PFCmp_1',
-#                 'RH_Cont_PFCmp_2',
-#                 'RH_Cont_PFCmp_3',
-#                 'RH_Default_Par_1',
-#                 'RH_Default_Temp_1',
-#                 'RH_Default_Temp_2',
-#                 'RH_Default_Temp_3',
-#                 'RH_Default_PFCv_1',
-#                 'RH_Default_PFCv_2',
-#                 'RH_Default_PFCm_1',
-#                 'RH_Default_PFCm_2',
-#                 'RH_Default_PFCm_3',
-#                 'RH_Default_PCC_1',
-#                 'RH_Default_PCC_2' ]
+COLUMNS_NAME_PPMI = [f'{i}' for i in range(3485)]
 
-# COLUMNS_NAME = ['Left Lateral Ventricle',
-#                 'Left Inf Lat Vent',
-#                 'Left Cerebellum White Matter',
-#                 'Left Cerebellum Cortex',
-#                 'Left Thalamus Proper',
-#                 'Left Caudate',
-#                 'Left Putamen',
-#                 'Left Pallidum',
-#                 'rd Ventricle',
-#                 'th Ventricle',
-#                 'Brain Stem',
-#                 'Left Hippocampus',
-#                 'Left Amygdala',
-#                 'CSF',
-#                 'Left Accumbens area',
-#                 'Left VentralDC',
-#                 'Right Lateral Ventricle',
-#                 'Right Inf Lat Vent',
-#                 'Right Cerebellum White Matter',
-#                 'Right Cerebellum Cortex',
-#                 'Right Thalamus Proper',
-#                 'Right Caudate',
-#                 'Right Putamen',
-#                 'Right Pallidum',
-#                 'Right Hippocampus',
-#                 'Right Amygdala',
-#                 'Right Accumbens area',
-#                 'Right VentralDC',
-#                 'CC Posterior',
-#                 'CC Mid Posterior',
-#                 'CC Central',
-#                 'CC Mid Anterior',
-#                 'CC Anterior',
-#                 'lh bankssts volume',
-#                 'lh caudalanteriorcingulate volume',
-#                 'lh caudalmiddlefrontal volume',
-#                 'lh cuneus volume',
-#                 'lh entorhinal volume',
-#                 'lh fusiform volume',
-#                 'lh inferiorparietal volume',
-#                 'lh inferiortemporal volume',
-#                 'lh isthmuscingulate volume',
-#                 'lh lateraloccipital volume',
-#                 'lh lateralorbitofrontal volume',
-#                 'lh lingual volume',
-#                 'lh medialorbitofrontal volume',
-#                 'lh middletemporal volume',
-#                 'lh parahippocampal volume',
-#                 'lh paracentral volume',
-#                 'lh parsopercularis volume',
-#                 'lh parsorbitalis volume',
-#                 'lh parstriangularis volume',
-#                 'lh pericalcarine volume',
-#                 'lh postcentral volume',
-#                 'lh posteriorcingulate volume',
-#                 'lh precentral volume',
-#                 'lh precuneus volume',
-#                 'lh rostralanteriorcingulate volume',
-#                 'lh rostralmiddlefrontal volume',
-#                 'lh superiorfrontal volume',
-#                 'lh superiorparietal volume',
-#                 'lh superiortemporal volume',
-#                 'lh supramarginal volume',
-#                 'lh frontalpole volume',
-#                 'lh temporalpole volume',
-#                 'lh transversetemporal volume',
-#                 'lh insula volume',
-#                 'rh bankssts volume',
-#                 'rh caudalanteriorcingulate volume',
-#                 'rh caudalmiddlefrontal volume',
-#                 'rh cuneus volume',
-#                 'rh entorhinal volume',
-#                 'rh fusiform volume',
-#                 'rh inferiorparietal volume',
-#                 'rh inferiortemporal volume',
-#                 'rh isthmuscingulate volume',
-#                 'rh lateraloccipital volume',
-#                 'rh lateralorbitofrontal volume',
-#                 'rh lingual volume',
-#                 'rh medialorbitofrontal volume',
-#                 'rh middletemporal volume',
-#                 'rh parahippocampal volume',
-#                 'rh paracentral volume',
-#                 'rh parsopercularis volume',
-#                 'rh parsorbitalis volume',
-#                 'rh parstriangularis volume',
-#                 'rh pericalcarine volume',
-#                 'rh postcentral volume',
-#                 'rh posteriorcingulate volume',
-#                 'rh precentral volume',
-#                 'rh precuneus volume',
-#                 'rh rostralanteriorcingulate volume',
-#                 'rh rostralmiddlefrontal volume',
-#                 'rh superiorfrontal volume',
-#                 'rh superiorparietal volume',
-#                 'rh superiortemporal volume',
-#                 'rh supramarginal volume',
-#                 'rh frontalpole volume',
-#                 'rh temporalpole volume',
-#                 'rh transversetemporal volume',
-#                 'rh insula volume']
+def get_column_name(dataset_resourse, dataset_name):
+    if dataset_resourse == 'ADNI':
+        if dataset_name == 'av45' or dataset_name == 'fdg':
+            columns_name = COLUMNS_NAME
+        elif dataset_name == 'snp':
+            columns_name = COLUMNS_NAME_SNP
+        elif dataset_name == 'vbm':
+            columns_name = COLUMNS_NAME_VBM
+    elif dataset_resourse == 'HCP':
+        columns_name = [(lambda x: dataset_name + '_'+ str(x))(y) for y in list(range(132))]
+    elif dataset_resourse == 'ADHD' or dataset_resourse == 'HCPimage':
+        columns_name = COLUMNS_NAME_AAL116
+    elif dataset_resourse == 'PPMI':
+        columns_name = COLUMNS_NAME_PPMI
+
+    # if dataset_name is early_fusion_modalities_{dataset_resourse}, 
+    # then the column name is the union of all columns in dataset_names,
+    # respectively each dataset_name's columns_name with a _{dataset_name} suffix.
+    if dataset_name.startswith('early_fusion_modalities'):
+        dataset_names = get_datasets_name(dataset_resourse)
+        columns_name = []
+        for dataset_name in dataset_names:
+            columns_name_of_one = []
+            columns_name_of_one += get_column_name(dataset_resourse, dataset_name)
+            columns_name_of_one = [(lambda x:  str(x) + '_'+ dataset_name)(y) for y in columns_name_of_one]
+            columns_name += columns_name_of_one
+        
+
+    return columns_name
 
 
-# COLUMNS_NAME = ['Left-Lateral-Ventricle',
-#                 'Left-Inf-Lat-Vent',
-#                 'Left-Cerebellum-White-Matter',
-#                 'Left-Cerebellum-Cortex',
-#                 'Left-Thalamus-Proper',
-#                 'Left-Caudate',
-#                 'Left-Putamen',
-#                 'Left-Pallidum',
-#                 '3rd-Ventricle',
-#                 '4th-Ventricle',
-#                 'Brain-Stem',
-#                 'Left-Hippocampus',
-#                 'Left-Amygdala',
-#                 'CSF',
-#                 'Left-Accumbens-area',
-#                 'Left-VentralDC',
-#                 'Right-Lateral-Ventricle',
-#                 'Right-Inf-Lat-Vent',
-#                 'Right-Cerebellum-White-Matter',
-#                 'Right-Cerebellum-Cortex',
-#                 'Right-Thalamus-Proper',
-#                 'Right-Caudate',
-#                 'Right-Putamen',
-#                 'Right-Pallidum',
-#                 'Right-Hippocampus',
-#                 'Right-Amygdala',
-#                 'Right-Accumbens-area',
-#                 'Right-VentralDC',
-#                 'CC_Posterior',
-#                 'CC_Mid_Posterior',
-#                 'CC_Central',
-#                 'CC_Mid_Anterior',
-#                 'CC_Anterior',
-#                 'lh_bankssts_volume',
-#                 'lh_caudalanteriorcingulate_volume',
-#                 'lh_caudalmiddlefrontal_volume',
-#                 'lh_cuneus_volume',
-#                 'lh_entorhinal_volume',
-#                 'lh_fusiform_volume',
-#                 'lh_inferiorparietal_volume',
-#                 'lh_inferiortemporal_volume',
-#                 'lh_isthmuscingulate_volume',
-#                 'lh_lateraloccipital_volume',
-#                 'lh_lateralorbitofrontal_volume',
-#                 'lh_lingual_volume',
-#                 'lh_medialorbitofrontal_volume',
-#                 'lh_middletemporal_volume',
-#                 'lh_parahippocampal_volume',
-#                 'lh_paracentral_volume',
-#                 'lh_parsopercularis_volume',
-#                 'lh_parsorbitalis_volume',
-#                 'lh_parstriangularis_volume',
-#                 'lh_pericalcarine_volume',
-#                 'lh_postcentral_volume',
-#                 'lh_posteriorcingulate_volume',
-#                 'lh_precentral_volume',
-#                 'lh_precuneus_volume',
-#                 'lh_rostralanteriorcingulate_volume',
-#                 'lh_rostralmiddlefrontal_volume',
-#                 'lh_superiorfrontal_volume',
-#                 'lh_superiorparietal_volume',
-#                 'lh_superiortemporal_volume',
-#                 'lh_supramarginal_volume',
-#                 'lh_frontalpole_volume',
-#                 'lh_temporalpole_volume',
-#                 'lh_transversetemporal_volume',
-#                 'lh_insula_volume',
-#                 'rh_bankssts_volume',
-#                 'rh_caudalanteriorcingulate_volume',
-#                 'rh_caudalmiddlefrontal_volume',
-#                 'rh_cuneus_volume',
-#                 'rh_entorhinal_volume',
-#                 'rh_fusiform_volume',
-#                 'rh_inferiorparietal_volume',
-#                 'rh_inferiortemporal_volume',
-#                 'rh_isthmuscingulate_volume',
-#                 'rh_lateraloccipital_volume',
-#                 'rh_lateralorbitofrontal_volume',
-#                 'rh_lingual_volume',
-#                 'rh_medialorbitofrontal_volume',
-#                 'rh_middletemporal_volume',
-#                 'rh_parahippocampal_volume',
-#                 'rh_paracentral_volume',
-#                 'rh_parsopercularis_volume',
-#                 'rh_parsorbitalis_volume',
-#                 'rh_parstriangularis_volume',
-#                 'rh_pericalcarine_volume',
-#                 'rh_postcentral_volume',
-#                 'rh_posteriorcingulate_volume',
-#                 'rh_precentral_volume',
-#                 'rh_precuneus_volume',
-#                 'rh_rostralanteriorcingulate_volume',
-#                 'rh_rostralmiddlefrontal_volume',
-#                 'rh_superiorfrontal_volume',
-#                 'rh_superiorparietal_volume',
-#                 'rh_superiortemporal_volume',
-#                 'rh_supramarginal_volume',
-#                 'rh_frontalpole_volume',
-#                 'rh_temporalpole_volume',
-#                 'rh_transversetemporal_volume',
-#                 'rh_insula_volume']
+
+def get_datasets_name(dataset_resourse, procedure='SE-PoE'):
+    if procedure.startswith('SM'):
+        single_modality = procedure.split('-')[-1]
+        dataset_names = [single_modality]
+        return dataset_names
+    if dataset_resourse == 'ADNI':    
+        dataset_names = ['av45', 'vbm', 'fdg']
+    elif dataset_resourse == 'HCP':
+        dataset_names = ['T1_volume', 'mean_T1_intensity', 'mean_FA', 'mean_MD', 'mean_L1', 'mean_L2', 'mean_L3', 'min_BOLD', '25_percentile_BOLD', '50_percentile_BOLD', '75_percentile_BOLD', 'max_BOLD']
+    elif dataset_resourse == 'ADHD':
+        dataset_names = ['fMRI', 'sMRI']
+    elif dataset_resourse == 'PPMI':
+        dataset_names = ['PPMI_new_modal1_upper_tri', 'PPMI_new_modal2_upper_tri', 'PPMI_new_modal3_upper_tri']
+    elif dataset_resourse == 'HCPimage':
+        dataset_names = ['T1w_sMRI', 'T2w_sMRI', 'fMRI']
+    else:
+        raise ValueError('Unknown dataset: {}'.format(dataset_resourse))
+    
+    if procedure.startswith('UCA'):
+        # add a dataset, which is the union of all datasets in dataset_names
+        dataset_names.append(f'early_fusion_modalities_{dataset_resourse}')
+    
+    return dataset_names
+
+
+
+
+def get_hc_label(dataset_resourse):
+
+    if dataset_resourse == 'ADNI':
+        hc_label = 2
+    elif dataset_resourse == 'HCP':
+        hc_label = 1
+    elif dataset_resourse == 'ADHD':
+        hc_label = 2
+    elif dataset_resourse == 'PPMI':
+        hc_label = 1
+    elif dataset_resourse == 'HCPimage':
+        hc_label = 1
+    else:
+        raise ValueError('Unknown dataset resource')
+    return hc_label

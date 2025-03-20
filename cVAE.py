@@ -1123,15 +1123,6 @@ class cVAE_multimodal(nn.Module):
     
     def mixture_of_product_of_experts(self, mus, variances):
         return MoPoE()(mus, variances)
-    
-    def mmJSD(self, mus, variances):
-        return MoPoE()(mus, variances)
-    
-    def mmVAEPlus(self, mus, variances):
-        return MoPoE()(mus, variances)
-    
-    def MVTCAE(self, mus, variances):
-        return MoPoE()(mus, variances)
 
     def encode(self, x, c, m):
         return self.encoder_list[m](x, c)
@@ -1154,6 +1145,8 @@ class cVAE_multimodal(nn.Module):
         # if mus and variances are only single modality, then return them
         if mus.shape[0] == 1:
             return mus[0], variances[0]
+        # print('mus:', mus)
+        # print('mus shape:', mus.shape)
         # combine to lower case string
         combine = combine.lower()
         if combine == 'poe':
@@ -1217,6 +1210,8 @@ class cVAE_multimodal(nn.Module):
     def reconstruction_deviation_multimodal(self, xes, x_preds):
         return [np.sum((xes[m] - x_preds[m])**2, axis=1)/xes[m].shape[1] for m in range(self.modalities)]
 
+    # def reconstruction_deviation_multimodal(self, xes, x_preds):
+        # return [(xes[m] - x_preds[m])**2 / xes[m].shape[1] for m in range(self.modalities)]
 
 class cVAE_multimodal_endtoend(nn.Module):
     def __init__(self, 
@@ -2006,3 +2001,207 @@ class mmVAEPlus(nn.Module):
     def reconstruction_deviation_multimodal(self, xes, x_preds):
         return [np.sum((xes[m] - x_preds[m]) ** 2, axis=1) / xes[m].shape[1] for m in range(self.modalities)]
     
+class Classifier(nn.Module):
+    def __init__(self, latent_dim, classifier_layers, dropout_rate, num_classes=2):
+        super().__init__()
+        layers = []
+        layer_sizes = [latent_dim] + classifier_layers
+        for i in range(len(layer_sizes)-1):
+            layers.append(nn.Linear(layer_sizes[i], layer_sizes[i+1]))
+            layers.append(nn.BatchNorm1d(layer_sizes[i+1]))
+            layers.append(nn.ReLU())
+            layers.append(nn.Dropout(dropout_rate))
+        layers.append(nn.Linear(layer_sizes[-1], num_classes))
+        self.classifier = nn.Sequential(*layers)
+
+    def forward(self, z):
+        return self.classifier(z)
+    
+
+class cVAE_multimodal_endtoend(nn.Module):
+    def __init__(self,
+                 input_dim_list,
+                 hidden_dim,
+                 latent_dim,
+                 c_dim,
+                 learning_rate=0.0001,
+                 modalities=3,
+                 non_linear=False,
+                 classifier_layers=[128, 64],
+                 dropout_rate=0.5,
+                 num_classes=2):
+        super().__init__()
+        self.input_dim_list = input_dim_list
+        self.hidden_dim = hidden_dim + [latent_dim]
+        self.latent_dim = latent_dim
+        self.c_dim = c_dim
+        self.modalities = modalities
+        self.learning_rate = learning_rate
+        self.non_linear = non_linear
+        self.num_classes = num_classes
+        
+
+        # 编码器列表（共享）
+        self.encoder_list = nn.ModuleList([Encoder(input_dim=input_dim_list[i], hidden_dim=self.hidden_dim, c_dim=c_dim, non_linear=non_linear) for i in range(modalities)])
+
+        # 健康解码器列表
+        self.decoder_list_health = nn.ModuleList([Decoder(input_dim=input_dim_list[i], hidden_dim=self.hidden_dim, c_dim=c_dim, non_linear=non_linear) for i in range(modalities)])
+        # 疾病解码器列表
+        self.decoder_list_disease = nn.ModuleList([Decoder(input_dim=input_dim_list[i], hidden_dim=self.hidden_dim, c_dim=c_dim, non_linear=non_linear) for i in range(modalities)])
+
+        # 分类器
+        self.classifier = Classifier(latent_dim, classifier_layers, dropout_rate, num_classes)
+
+        # 优化器
+        self.optimizer = optim.Adam(
+            [p for model in self.encoder_list for p in model.parameters()] +
+            [p for model in self.decoder_list_health for p in model.parameters()] +
+            [p for model in self.decoder_list_disease for p in model.parameters()] +
+            list(self.classifier.parameters()),
+            lr=self.learning_rate
+        )
+
+    def encode(self, xes, cs):
+        # xes: 每个模态的输入数据列表
+        # cs: 每个模态的协变量列表
+        mus_all = []
+        logvars_all = []
+        for i in range(self.modalities):
+            mu, logvar = self.encoder_list[i](xes[i], cs[i])
+            mus_all.append(mu)
+            logvars_all.append(logvar)
+        # 堆叠模态
+        mus = torch.stack(mus_all)
+        logvars = torch.stack(logvars_all)
+        return mus, logvars
+
+    def reparameterise(self, mu, logvar):
+        std = torch.exp(0.5*logvar)
+        eps = torch.randn_like(mu)
+        return mu + eps*std
+
+    def combine_latent(self, mus, logvars):
+        # 使用专家的乘积（Product of Experts）组合潜在变量
+        variances = torch.exp(logvars)
+        T = 1 / variances
+        mu_combined = torch.sum(mus * T, dim=0) / torch.sum(T, dim=0)
+        var_combined = 1 / torch.sum(T, dim=0)
+        logvar_combined = torch.log(var_combined)
+        return mu_combined, logvar_combined
+
+    def decode(self, z, cs, group):
+        # group: 'health' 或 'disease'
+        x_recons = []
+        if group == 'health':
+            decoder_list = self.decoder_list_health
+        elif group == 'disease':
+            decoder_list = self.decoder_list_disease
+        else:
+            raise ValueError("group must be 'health' or 'disease'")
+        for i in range(self.modalities):
+            x_recon = decoder_list[i](z, cs[i])
+            x_recons.append(x_recon)
+        return x_recons
+
+    def forward(self, xes, cs):
+        # xes: 每个模态的输入数据列表
+        # cs: 每个模态的协变量列表
+        mus, logvars = self.encode(xes, cs)
+        mu_combined, logvar_combined = self.combine_latent(mus, logvars)
+        z = self.reparameterise(mu_combined, logvar_combined)
+        # 使用两个解码器进行重建
+        x_recons_health = self.decode(z, cs, group='health')
+        x_recons_disease = self.decode(z, cs, group='disease')
+        # 分类器
+        logits = self.classifier(z)
+        return {
+            'x_recons_health': x_recons_health,
+            'x_recons_disease': x_recons_disease,
+            'mu': mu_combined,
+            'logvar': logvar_combined,
+            'logits': logits
+        }
+
+    def calc_kl(self, mu, logvar):
+        return -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp(), dim=1).mean()
+
+    def calc_recon_loss(self, x, x_recon):
+        # x: 原始数据张量
+        # x_recon: 解码器的输出（Normal 分布）
+        recon_loss = -x_recon.log_prob(x).sum(dim=1).mean()
+        return recon_loss
+
+    def compute_deviation(self, x, x_recon):
+        # x: 原始数据张量
+        # x_recon: 解码器的输出（Normal 分布）
+        deviation = ((x - x_recon.mean)**2).mean(dim=1)
+        return deviation
+
+    def loss_function(self, xes, fwd_rtn, labels, margin=1.0, weightcontrastive=0.1, weight_kl=0.1, weight_rec=0.1):
+        # xes: 每个模态的原始数据张量列表
+        # fwd_rtn: forward 方法的输出字典
+        # labels: 类别标签张量
+        # margin: 对比损失的边距
+        # alpha: 对比损失的权重
+
+        recon_loss_health = 0
+        recon_loss_disease = 0
+        deviations_health = []
+        deviations_disease = []
+
+        for i in range(self.modalities):
+            x = xes[i]
+            x_recon_health = fwd_rtn['x_recons_health'][i]
+            x_recon_disease = fwd_rtn['x_recons_disease'][i]
+
+            # 重构损失
+            recon_loss_h = self.calc_recon_loss(x, x_recon_health)
+            recon_loss_d = self.calc_recon_loss(x, x_recon_disease)
+            recon_loss_health += recon_loss_h
+            recon_loss_disease += recon_loss_d
+
+            # 计算偏差
+            deviation_h = self.compute_deviation(x, x_recon_health)
+            deviation_d = self.compute_deviation(x, x_recon_disease)
+            deviations_health.append(deviation_h)
+            deviations_disease.append(deviation_d)
+
+        # 堆叠模态的偏差，并计算每个样本的平均偏差
+        deviation_health = torch.stack(deviations_health).mean(dim=0)
+        deviation_disease = torch.stack(deviations_disease).mean(dim=0)
+
+        # 对比损失
+        # 对于健康样本（标签为 0），希望 deviation_health < deviation_disease + margin
+        # 对于疾病样本（标签为 1），希望 deviation_disease < deviation_health + margin
+        contrastive_loss = torch.mean(
+            (1 - labels) * F.relu(margin + deviation_health - deviation_disease) +
+            labels * F.relu(margin + deviation_disease - deviation_health)
+        )
+
+        # KL 散度
+        kl_loss = self.calc_kl(fwd_rtn['mu'], fwd_rtn['logvar'])
+
+        # 分类损失
+        classification_loss = F.cross_entropy(fwd_rtn['logits'], labels)
+
+        # 总损失
+        # total_loss = recon_loss_health + recon_loss_disease + kl_loss + classification_loss + alpha * contrastive_loss
+        total_loss = weight_rec * (recon_loss_health + recon_loss_disease) + weight_kl * kl_loss + classification_loss + weightcontrastive * contrastive_loss
+
+        losses = {
+            'total_loss': total_loss,
+            'recon_loss_health': recon_loss_health,
+            'recon_loss_disease': recon_loss_disease,
+            'kl_loss': kl_loss,
+            'classification_loss': classification_loss,
+            'contrastive_loss': contrastive_loss
+        }
+
+        return losses
+
+    def predict(self, xes, cs):
+        with torch.no_grad():
+            mus, logvars = self.encode(xes, cs)
+            mu_combined, logvar_combined = self.combine_latent(mus, logvars)
+            logits = self.classifier(mu_combined)
+            return logits

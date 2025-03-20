@@ -1,0 +1,5 @@
+Accuracy: 0.5000
+Sensitivity (Recall for class 1): 0.2982
+Specificity (Recall for class 0): 0.7091
+F1-Score: 0.3778
+AUROC: 0.5582

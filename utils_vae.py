@@ -42,6 +42,43 @@ class MyDataset_labels(Dataset):
     def __len__(self):
         return self.N
 
+
+class MyDataset_labels_endtoend(Dataset):
+    def __init__(self, data, covariates, diagnosis_labels, transform=None):
+        self.data = data
+        self.covariates = covariates
+        self.diagnosis_labels = diagnosis_labels
+        
+        if isinstance(data, list) or isinstance(data, tuple):
+            self.data = [torch.from_numpy(d).float() if isinstance(d, np.ndarray) else d for d in self.data]
+            self.N = len(self.data[0])
+            self.shape = np.shape(self.data[0])
+        elif isinstance(data, np.ndarray):
+            self.data = torch.from_numpy(self.data).float()
+            self.N = len(self.data)
+            self.shape = np.shape(self.data)
+        
+        self.covariates = torch.from_numpy(self.covariates).float()
+        self.diagnosis_labels = torch.from_numpy(self.diagnosis_labels).long()
+        self.transform = transform
+
+    def __getitem__(self, index):
+        if isinstance(self.data, list):
+            x = [d[index] for d in self.data]
+        else:
+            x = self.data[index]
+        
+        if self.transform:
+            x = self.transform(x)
+        
+        cov = self.covariates[index]
+        diagnosis = self.diagnosis_labels[index]
+        
+        return x, cov, diagnosis
+
+    def __len__(self):
+        return self.N
+
 class MyDataset(Dataset):
     def __init__(self, data, indices = False, transform=None):
         self.data = data

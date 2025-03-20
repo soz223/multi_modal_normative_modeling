@@ -22,7 +22,7 @@ from numpy import interp, linspace
 from sklearn.model_selection import train_test_split
 
 
-from utils import COLUMNS_HCP, COLUMNS_NAME, load_dataset, cliff_delta, COLUMNS_NAME_SNP, COLUMNS_NAME_VBM, COLUMNS_3MODALITIES, COLUMNS_NAME_AAL116
+from utils import COLUMNS_HCP, COLUMNS_NAME, load_dataset, cliff_delta, COLUMNS_NAME_SNP, COLUMNS_NAME_VBM, COLUMNS_3MODALITIES, COLUMNS_NAME_AAL116, get_column_name, get_datasets_name, get_hc_label
 from sklearn.model_selection import KFold
 
 PROJECT_ROOT = Path.cwd()
@@ -36,7 +36,8 @@ def compute_classification_thresholds(reconstruction_error_df, clinical_df, dise
     error_hc = reconstruction_error_df.loc[clinical_df['DIA'] == hc_label]['Reconstruction error']
     error_patient = reconstruction_error_df.loc[clinical_df['DIA'] == disease_label]['Reconstruction error']
 
-    labels = list(np.zeros_like(error_hc)) + list(np.ones_like(error_patient))
+    # labels = list(np.zeros_like(error_hc)) + list(np.ones_like(error_patient))
+    labels = list(np.ones_like(error_hc)) + list(np.zeros_like(error_patient))
     predictions = list(error_hc) + list(error_patient)
     fpr, tpr, thresholds = roc_curve(labels, predictions)
     roc_auc = auc(fpr, tpr)
@@ -96,7 +97,7 @@ def find_best_threshold_by_eer(labels, predictions):
     eer_threshold = thresholds[np.nanargmin(np.absolute((fnr - fpr)))]
     return eer_threshold
 
-def compute_classification_performance(reconstruction_error_df, clinical_df, disease_label, hc_label, optimal_threshold=None, method='roc'):
+def compute_classification_performance(reconstruction_error_df, clinical_df, disease_label, hc_label, args, optimal_threshold=None, method='roc'):
     """Calculate the AUCs and accuracy of the normative model."""
 
     # print('reconstruction_error_df:', reconstruction_error_df)
@@ -106,7 +107,12 @@ def compute_classification_performance(reconstruction_error_df, clinical_df, dis
     error_hc = reconstruction_error_df.loc[clinical_df['DIA'] == hc_label]['Reconstruction error']
     error_patient = reconstruction_error_df.loc[clinical_df['DIA'] == disease_label]['Reconstruction error']
 
-    labels = list(np.zeros_like(error_hc)) + list(np.ones_like(error_patient))
+    if args.training_class == 'nm':
+        labels = list(np.zeros_like(error_hc)) + list(np.ones_like(error_patient))
+    elif args.training_class == 'dm':
+        labels = list(np.ones_like(error_hc)) + list(np.zeros_like(error_patient))
+    # labels = list(np.zeros_like(error_hc)) + list(np.ones_like(error_patient))
+    # labels = list(np.ones_like(error_hc)) + list(np.zeros_like(error_patient))
     predictions = list(error_hc) + list(error_patient)
 
     fpr, tpr, thresholds = roc_curve(labels, predictions)
@@ -146,11 +152,13 @@ def compute_classification_performance(reconstruction_error_df, clinical_df, dis
     return roc_auc, accuracy, recall, specificity, significance_ratio
 
 
-def main(hz_para_list, hc_label, disease_label, combine, dataset_resourse, procedure, epochs, oversample_percentage, method='roc', n_splits=5):
+# results = main(args)
+
+def main(args):
     """Perform the group analysis."""
     model_name = 'supervised_cvae'
 
-    participants_path = PROJECT_ROOT / 'data' / dataset_resourse / 'y.csv'
+    participants_path = PROJECT_ROOT / 'data' / args.dataset_resourse / 'y.csv'
     outputs_dir = PROJECT_ROOT / 'outputs'
     kfold_dir = outputs_dir / 'kfold_analysis'
     model_dir = kfold_dir / model_name
@@ -162,29 +170,14 @@ def main(hz_para_list, hc_label, disease_label, combine, dataset_resourse, proce
     specificity_list = []
     significance_ratio_list = []
 
-    if dataset_resourse == 'ADNI':
-        if procedure.startswith('SingleModality'):
-            dataset_names = ['av45']
-        elif procedure.startswith('SE'):
-            dataset_names = ['av45', 'vbm', 'fdg']
-        elif procedure.startswith('UCA'):
-            dataset_names = ['av45', 'vbm', 'fdg', '3modalities']
-        else:
-            raise ValueError('Unknown procedure: {}'.format(procedure))
-    elif dataset_resourse == 'HCP':
-        dataset_names = ['T1_volume', 'mean_T1_intensity', 'mean_FA', 'mean_MD', 'mean_L1', 'mean_L2', 'mean_L3', 'min_BOLD', '25_percentile_BOLD', '50_percentile_BOLD', '75_percentile_BOLD', 'max_BOLD']
-    elif dataset_resourse == 'ADHD':
-        dataset_names = ['sMRI', 'fMRI']
-    else:
-        raise ValueError('Unknown dataset: {}'.format(dataset_resourse))
+    dataset_names = get_datasets_name(args.dataset_resourse, args.procedure)
 
-    if combine is None:
-        raise ValueError(f'Unknown procedure: {procedure}')
+    if args.combine is None:
+        raise ValueError(f'Unknown procedure: {args.procedure}')
 
-    
-    kf = KFold(n_splits=n_splits, shuffle=True, random_state=42)
+    kf = KFold(n_splits=args.n_splits, shuffle=True, random_state=42)
     ids_df = pd.read_csv(participants_path)
-    HC_group = ids_df[ids_df['DIA'] == hc_label]
+    HC_group = ids_df[ids_df['DIA'] == args.hc_label]
 
     for fold, (train_idx, test_idx) in enumerate(kf.split(HC_group)):
 
@@ -197,21 +190,9 @@ def main(hz_para_list, hc_label, disease_label, combine, dataset_resourse, proce
         reconstruction_error_df_list = []
 
         for dataset_name in dataset_names:
-            if dataset_resourse == 'ADNI':
-                if dataset_name == 'av45' or dataset_name == 'fdg':
-                    columns_name = COLUMNS_NAME
-                elif dataset_name == 'snp':
-                    columns_name = COLUMNS_NAME_SNP
-                elif dataset_name == 'vbm':
-                    columns_name = COLUMNS_NAME_VBM
-                elif dataset_name == '3modalities':
-                    columns_name = COLUMNS_3MODALITIES
-            elif dataset_resourse == 'HCP':
-                columns_name = [(lambda x: dataset_name + '_'+ str(x))(y) for y in list(range(132))]
-            elif dataset_resourse == 'ADHD':
-                columns_name = COLUMNS_NAME_AAL116
+            columns_name = get_column_name(args.dataset_resourse, dataset_name)
 
-            freesurfer_path = PROJECT_ROOT / 'data' / dataset_resourse / (dataset_name + '.csv')
+            freesurfer_path = PROJECT_ROOT / 'data' / args.dataset_resourse / (dataset_name + '.csv')
 
             # what does this do is, it loads the dataset and then sets the index to participant_id, and only filter those from the test_ids
             test_dataset_df = load_dataset(participants_path, test_ids_path, freesurfer_path)
@@ -226,45 +207,20 @@ def main(hz_para_list, hc_label, disease_label, combine, dataset_resourse, proce
         reconstruction_error_df_averaged = reconstruction_error_df_list[0]
         for i in range(1, len(reconstruction_error_df_list)):
             reconstruction_error_df_averaged += reconstruction_error_df_list[i]
-            # print('reconstruction_error_df_averaged:', reconstruction_error_df_averaged)
         reconstruction_error_df_averaged /= len(reconstruction_error_df_list)
 
-        # print('reconstruction_error_df_averaged:', reconstruction_error_df_averaged)
-
-        # print('reconstruction_error_df_list:', reconstruction_error_df_list[0].shape)
-        # print('reconstruction_error_df_list:', reconstruction_error_df_list[1].shape)
-        
-
-
         test_ids = test_dataset_df.index
-
-        # print('test_ids:', test_ids)
-
-        # # seperate 20% of test data for validation, randomly, using 42 as seed
-        # test_dataset_df, validation_dataset_df = train_test_split(test_dataset_df, test_size=0, random_state=42)
-
-        # reconstruction_error_df_averaged_test = reconstruction_error_df_averaged.loc[test_dataset_df.index]
         reconstruction_error_df_averaged_test = reconstruction_error_df_averaged
 
-        # reconstruction_error_df_averaged_validation = reconstruction_error_df_averaged.loc[validation_dataset_df.index]
-        # roc_auc, accuracy, optimal_threshold = compute_classification_thresholds(reconstruction_error_df_averaged_validation, validation_dataset_df, disease_label, hc_label)
-
-        # print('optimal_threshold:', optimal_threshold)
-
-        print('reconstruction_error_df_averaged_test:', reconstruction_error_df_averaged_test)
-
-        # roc_auc, accuracy, recall, specificity, significance_ratio = compute_classification_performance(reconstruction_error_df_averaged, test_dataset_df, disease_label, hc_label)
-        roc_auc, accuracy, recall, specificity, significance_ratio = compute_classification_performance(reconstruction_error_df_averaged_test, test_dataset_df, disease_label, hc_label, method='roc')
+        roc_auc, accuracy, recall, specificity, significance_ratio = compute_classification_performance(reconstruction_error_df_averaged_test, test_dataset_df, args.disease_label, args.hc_label, args, method='roc')
         auc_roc_list.append(roc_auc)
         accuracy_list.append(accuracy)
         sensitivity_list.append(recall)
         specificity_list.append(specificity)
         significance_ratio_list.append(significance_ratio)
 
-
-
     (kfold_dir / dataset_name).mkdir(exist_ok=True)
-    comparison_dir = kfold_dir / dataset_name / ('{:02d}_vs_{:02d}'.format(hc_label, disease_label))
+    comparison_dir = kfold_dir / dataset_name / ('{:02d}_vs_{:02d}'.format(args.hc_label, args.disease_label))
     comparison_dir.mkdir(exist_ok=True)
 
     auc_roc_list = np.array(auc_roc_list)
@@ -273,23 +229,25 @@ def main(hz_para_list, hc_label, disease_label, combine, dataset_resourse, proce
     specificity_list = np.array(specificity_list)
     significance_ratio_list = auc_roc_list / (1 - auc_roc_list)
 
-    if hc_label == 2 and disease_label == 0:
-        compare_name = 'HC_vs_AD'
-    elif hc_label == 2 and disease_label == 1:
-        compare_name = 'HC_vs_MCI'
-    elif hc_label == 1 and disease_label == 0:
-        compare_name = 'MCI_vs_AD'
+    compare_name = f"{args.dataset_resourse}: {args.hc_label} vs {args.disease_label}"
 
+    # if no directory exists, create it
+    if not os.path.exists(result_baseline):
+        os.makedirs(result_baseline)
+    # if no directory exists, create it
+    if not os.path.exists(comparison_dir):
+        os.makedirs(comparison_dir)
     
+
     with open(result_baseline + 'result_multimodal.txt', 'a') as f:
         # f.write('Experiment settings: CVAE. {}. Procedure {} Epochs {} Oversample percentage {}\n'.format(compare_name, 'SE-'+('MoE' if combine == 'moe' else 'PoE'), procedure, epochs, oversample_percentage))
-        f.write('Experiment settings: CVAE. {}. Procedure {} Epochs {} Oversample percentage {}\n args.Model {}\n'.format(compare_name, procedure, epochs, oversample_percentage, args.model))
+        f.write('Experiment settings: CVAE. {}. Procedure {} Epochs {} Oversample percentage {}\n args.Model {} args.hz_para_list {}\n'.format(compare_name, args.procedure, args.epochs, args.oversample_percentage, args.model, args.hz_para_list))
         f.write('ROC-AUC: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(auc_roc_list) * 100, np.std(auc_roc_list) * 100))
         f.write('Accuracy: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(accuracy_list) * 100, np.std(accuracy_list) * 100))
         f.write('Sensitivity: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(sensitivity_list) * 100, np.std(sensitivity_list) * 100))
         f.write('Specificity: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(specificity_list) * 100, np.std(specificity_list) * 100))
         f.write('Significance ratio: $ {:0.2f} \pm {:0.2f} $ \n'.format(np.mean(significance_ratio_list), np.std(significance_ratio_list)))
-        f.write('hz_para_list: ' + str(hz_para_list) + '\n')
+        f.write('hz_para_list: ' + str(args.hz_para_list) + '\n')
         # for i in range(len(auc_roc_list)):
         #     f.write('Fold {}: ROC-AUC: {:0.2f} Accuracy: {:0.2f} Sensitivity: {:0.2f} Specificity: {:0.2f} Significance ratio: {:0.2f}\n'.format(i, auc_roc_list[i] * 100, accuracy_list[i] * 100, sensitivity_list[i] * 100, specificity_list[i] * 100, significance_ratio_list[i]))
         f.write('\n\n\n')  
@@ -302,7 +260,6 @@ def main(hz_para_list, hc_label, disease_label, combine, dataset_resourse, proce
            np.mean(sensitivity_list), np.std(sensitivity_list), \
            np.mean(specificity_list), np.std(specificity_list), \
            np.mean(significance_ratio_list), np.std(significance_ratio_list)
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
@@ -346,6 +303,13 @@ if __name__ == "__main__":
                         dest='model',
                         help='Model to use for training the data.',
                         type=str)
+    
+    # an argument called training_class, which is the class to train the model, default is nm, which is the normative modeling,another option is dm, which is the disease modeling
+    parser.add_argument('-TrainingClass', '--training_class',
+                        dest='training_class',
+                        default='nm',
+                        help='Class to train the model.',
+                        type=str)
 
 
     args = parser.parse_args()
@@ -366,6 +330,8 @@ if __name__ == "__main__":
     elif args.dataset_resourse == 'HCP':
         hc_patient_comb_list = [[1, 0]]
     elif args.dataset_resourse == 'ADHD':
+        hc_patient_comb_list = [[2, 0], [2, 1], [1, 0]]
+    elif args.dataset_resourse == 'PPMI':
         hc_patient_comb_list = [[1, 0]]
 
     mean_auc_roc_list = []
@@ -382,7 +348,11 @@ if __name__ == "__main__":
     # find_threshold_methods = ['roc', 'f1', 'pr', 'cost', 'eer']
 
     for hc_patient_comb in hc_patient_comb_list:
-        mean_auc_roc, std_auc_roc, mean_accuracy, std_accuracy, mean_recall, std_recall, mean_specificity, std_specificity, mean_significance_ratio, std_significance_ratio = main(args.hz_para_list, hc_patient_comb[0], hc_patient_comb[1], args.combine, args.dataset_resourse, args.procedure, args.epochs, args.oversample_percentage, args.n_splits)
+        # results = main(args, args.hz_para_list, hc_patient_comb[0], hc_patient_comb[1], args.combine, args.dataset_resourse, args.procedure, args.epochs, args.oversample_percentage, args.n_splits)
+        args.hc_label = hc_patient_comb[0]
+        args.disease_label = hc_patient_comb[1]
+        results = main(args)
+        mean_auc_roc, std_auc_roc, mean_accuracy, std_accuracy, mean_recall, std_recall, mean_specificity, std_specificity, mean_significance_ratio, std_significance_ratio = results
 
         mean_auc_roc_list.append(mean_auc_roc)
         std_auc_roc_list.append(std_auc_roc)
