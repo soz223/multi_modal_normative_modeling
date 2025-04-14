@@ -114,7 +114,6 @@ def load_dataset(demographic_path, ids_path, freesurfer_path):
 
     # do nothing. nothing demographic data is introduced
     demographic_data = load_demographic_data(demographic_path, ids_path)
-    # print("demographic_data aaaaaaaaaaaaaaaaaaaa", demographic_data)
 
     freesurfer_df = pd.read_csv(freesurfer_path)
 
@@ -734,6 +733,8 @@ def get_datasets_name(dataset_resourse, procedure='SE-PoE'):
         single_modality = procedure.split('-')[-1]
         dataset_names = [single_modality]
         return dataset_names
+    
+    
     if dataset_resourse == 'ADNI':    
         dataset_names = ['av45', 'vbm', 'fdg']
     elif dataset_resourse == 'HCP':
@@ -763,7 +764,7 @@ def get_hc_label(dataset_resourse):
     elif dataset_resourse == 'HCP':
         hc_label = 1
     elif dataset_resourse == 'ADHD':
-        hc_label = 2
+        hc_label = 1
     elif dataset_resourse == 'PPMI':
         hc_label = 1
     elif dataset_resourse == 'HCPimage':

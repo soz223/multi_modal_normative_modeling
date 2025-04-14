@@ -31,3 +31,135 @@ hz_para_list: [110, 110, 10]
 
 
 
+Experiment settings: CVAE. ADNI: 2 vs 0. Procedure SE-MoE Epochs 200 Oversample percentage 1
+ args.Model cVAE_multimodal args.hz_para_list [110, 110, 10]
+ROC-AUC: $ 82.04 \pm 5.90 $ 
+Accuracy: $ 76.08 \pm 6.99 $ 
+Sensitivity: $ 81.80 \pm 7.25 $ 
+Specificity: $ 73.26 \pm 12.51 $ 
+Significance ratio: $ 5.20 \pm 1.96 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: CVAE. ADNI: 2 vs 1. Procedure SE-MoE Epochs 200 Oversample percentage 1
+ args.Model cVAE_multimodal args.hz_para_list [110, 110, 10]
+ROC-AUC: $ 57.63 \pm 3.03 $ 
+Accuracy: $ 59.93 \pm 5.97 $ 
+Sensitivity: $ 60.58 \pm 24.14 $ 
+Specificity: $ 59.48 \pm 23.43 $ 
+Significance ratio: $ 1.37 \pm 0.18 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: CVAE. ADNI: 1 vs 0. Procedure SE-MoE Epochs 200 Oversample percentage 1
+ args.Model cVAE_multimodal args.hz_para_list [110, 110, 10]
+ROC-AUC: $ 74.95 \pm 9.38 $ 
+Accuracy: $ 69.48 \pm 4.12 $ 
+Sensitivity: $ 78.91 \pm 16.16 $ 
+Specificity: $ 66.01 \pm 7.31 $ 
+Significance ratio: $ 3.65 \pm 1.87 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: CVAE. ADNI: 2 vs 0. Procedure SE-MoE Epochs 200 Oversample percentage 1
+ args.Model cVAE_multimodal args.hz_para_list [110, 110, 10]
+ROC-AUC: $ 81.59 \pm 8.39 $ 
+Accuracy: $ 81.17 \pm 5.18 $ 
+Sensitivity: $ 80.56 \pm 17.29 $ 
+Specificity: $ 80.74 \pm 13.42 $ 
+Significance ratio: $ 5.65 \pm 3.34 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: CVAE. ADNI: 2 vs 1. Procedure SE-MoE Epochs 200 Oversample percentage 1
+ args.Model cVAE_multimodal args.hz_para_list [110, 110, 10]
+ROC-AUC: $ 59.67 \pm 3.91 $ 
+Accuracy: $ 62.81 \pm 4.66 $ 
+Sensitivity: $ 56.92 \pm 15.28 $ 
+Specificity: $ 70.62 \pm 13.14 $ 
+Significance ratio: $ 1.50 \pm 0.23 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: CVAE. ADNI: 1 vs 0. Procedure SE-MoE Epochs 200 Oversample percentage 1
+ args.Model cVAE_multimodal args.hz_para_list [110, 110, 10]
+ROC-AUC: $ 74.37 \pm 11.90 $ 
+Accuracy: $ 72.92 \pm 9.05 $ 
+Sensitivity: $ 80.88 \pm 14.54 $ 
+Specificity: $ 69.94 \pm 14.23 $ 
+Significance ratio: $ 4.06 \pm 2.92 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: CVAE. ADNI: 2 vs 0. Procedure SE-MoE Epochs 200 Oversample percentage 1
+ args.Model cVAE_multimodal args.hz_para_list [110, 110, 10]
+ROC-AUC: $ 81.59 \pm 8.39 $ 
+Accuracy: $ 81.17 \pm 5.18 $ 
+Sensitivity: $ 80.56 \pm 17.29 $ 
+Specificity: $ 80.74 \pm 13.42 $ 
+Significance ratio: $ 5.65 \pm 3.34 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: CVAE. ADNI: 2 vs 1. Procedure SE-MoE Epochs 200 Oversample percentage 1
+ args.Model cVAE_multimodal args.hz_para_list [110, 110, 10]
+ROC-AUC: $ 59.67 \pm 3.91 $ 
+Accuracy: $ 62.81 \pm 4.66 $ 
+Sensitivity: $ 56.92 \pm 15.28 $ 
+Specificity: $ 70.62 \pm 13.14 $ 
+Significance ratio: $ 1.50 \pm 0.23 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: CVAE. ADNI: 1 vs 0. Procedure SE-MoE Epochs 200 Oversample percentage 1
+ args.Model cVAE_multimodal args.hz_para_list [110, 110, 10]
+ROC-AUC: $ 74.37 \pm 11.90 $ 
+Accuracy: $ 72.92 \pm 9.05 $ 
+Sensitivity: $ 80.88 \pm 14.54 $ 
+Specificity: $ 69.94 \pm 14.23 $ 
+Significance ratio: $ 4.06 \pm 2.92 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: CVAE. ADNI: 2 vs 0. Procedure UCA-gPoE Epochs 200 Oversample percentage 1
+ args.Model cVAE_multimodal args.hz_para_list [110, 110, 10]
+ROC-AUC: $ 80.84 \pm 6.93 $ 
+Accuracy: $ 79.24 \pm 4.56 $ 
+Sensitivity: $ 81.22 \pm 20.43 $ 
+Specificity: $ 79.46 \pm 13.65 $ 
+Significance ratio: $ 4.83 \pm 1.77 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: CVAE. ADNI: 2 vs 1. Procedure UCA-gPoE Epochs 200 Oversample percentage 1
+ args.Model cVAE_multimodal args.hz_para_list [110, 110, 10]
+ROC-AUC: $ 57.33 \pm 5.05 $ 
+Accuracy: $ 64.20 \pm 5.53 $ 
+Sensitivity: $ 62.75 \pm 16.35 $ 
+Specificity: $ 63.75 \pm 18.14 $ 
+Significance ratio: $ 1.38 \pm 0.32 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: CVAE. ADNI: 1 vs 0. Procedure UCA-gPoE Epochs 200 Oversample percentage 1
+ args.Model cVAE_multimodal args.hz_para_list [110, 110, 10]
+ROC-AUC: $ 71.69 \pm 8.68 $ 
+Accuracy: $ 68.58 \pm 6.10 $ 
+Sensitivity: $ 81.48 \pm 19.47 $ 
+Specificity: $ 64.34 \pm 12.11 $ 
+Significance ratio: $ 2.87 \pm 1.17 $ 
+hz_para_list: [110, 110, 10]
+
+
+

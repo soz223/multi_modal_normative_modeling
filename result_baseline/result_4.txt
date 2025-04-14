@@ -8,3 +8,43 @@ hz_para_list: [110, 110, 10]
 
 
 
+Experiment settings: CVAE. HC vs AD, HC vs MCI, MCI vs AD. Procedure SE-MoE Epochs 200 Oversample percentage 1
+ROC-AUC: $ 71.54 \pm 6.10 $ 
+Accuracy: $ 68.50 \pm 5.69 $ 
+Sensitivity: $ 73.76 \pm 15.85 $ 
+Specificity: $ 66.25 \pm 14.42 $ 
+Significance ratio: $ 3.41 \pm 1.34 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: CVAE. HC vs AD, HC vs MCI, MCI vs AD. Procedure SE-MoE Epochs 200 Oversample percentage 1
+ROC-AUC: $ 71.88 \pm 8.07 $ 
+Accuracy: $ 72.30 \pm 6.30 $ 
+Sensitivity: $ 72.79 \pm 15.70 $ 
+Specificity: $ 73.77 \pm 13.60 $ 
+Significance ratio: $ 3.74 \pm 2.16 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: CVAE. HC vs AD, HC vs MCI, MCI vs AD. Procedure SE-MoE Epochs 200 Oversample percentage 1
+ROC-AUC: $ 71.88 \pm 8.07 $ 
+Accuracy: $ 72.30 \pm 6.30 $ 
+Sensitivity: $ 72.79 \pm 15.70 $ 
+Specificity: $ 73.77 \pm 13.60 $ 
+Significance ratio: $ 3.74 \pm 2.16 $ 
+hz_para_list: [110, 110, 10]
+
+
+
+Experiment settings: CVAE. HC vs AD, HC vs MCI, MCI vs AD. Procedure UCA-gPoE Epochs 200 Oversample percentage 1
+ROC-AUC: $ 69.95 \pm 6.89 $ 
+Accuracy: $ 70.68 \pm 5.40 $ 
+Sensitivity: $ 75.15 \pm 18.75 $ 
+Specificity: $ 69.18 \pm 14.63 $ 
+Significance ratio: $ 3.03 \pm 1.09 $ 
+hz_para_list: [110, 110, 10]
+
+
+

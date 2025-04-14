@@ -2205,3 +2205,143 @@ class cVAE_multimodal_endtoend(nn.Module):
             mu_combined, logvar_combined = self.combine_latent(mus, logvars)
             logits = self.classifier(mu_combined)
             return logits
+        
+
+
+class cVAE_multimodal_regression(nn.Module):
+    def __init__(self, 
+                 input_dim_list, 
+                 hidden_dim, 
+                 latent_dim,
+                 c_dim, 
+                 learning_rate=0.0001, 
+                 modalities=3,
+                 non_linear=False):
+        super().__init__()
+
+        self.input_dim_list = input_dim_list
+        self.hidden_dim = hidden_dim + [latent_dim]
+        self.latent_dim = latent_dim
+        self.c_dim = c_dim
+        self.modalities = modalities
+        self.learning_rate = learning_rate
+        self.non_linear = non_linear
+
+        self.encoder_list = nn.ModuleList([
+            Encoder(input_dim=input_dim_list[i], hidden_dim=self.hidden_dim, c_dim=c_dim, non_linear=non_linear)
+            for i in range(modalities)
+        ])
+
+        self.decoder_list = nn.ModuleList([
+            Decoder(input_dim=input_dim_list[i], hidden_dim=self.hidden_dim, c_dim=c_dim, non_linear=non_linear)
+            for i in range(modalities)
+        ])
+
+        self.alpha_m_list = nn.ParameterList([
+            nn.Parameter(torch.randn(1, requires_grad=True)) for _ in range(modalities)
+        ])
+
+        # Regression head: simple MLP
+        self.regressor = nn.Sequential(
+            # nn.Linear(input_dim, 128),
+            nn.Linear(sum(input_dim_list), 128),  # Concatenate all modalities
+            nn.ReLU(),
+            nn.Linear(128, 64),
+            nn.ReLU(),
+            nn.Linear(64, 1)
+        )
+
+
+        self.mse_loss = nn.MSELoss()
+
+        self.optimizer1 = torch.optim.Adam(
+            list(self.encoder_list.parameters()) +
+            list(self.decoder_list.parameters()) +
+            list(self.regressor.parameters()) +
+            list(self.alpha_m_list.parameters()),
+            lr=self.learning_rate
+        )
+
+    def product_of_experts(self, mus, variances):
+        return ProductOfExperts()(mus, variances)
+
+    def mixture_of_experts(self, mus, variances):
+        return MixtureOfExperts()(mus, variances)
+
+    def mixture_of_product_of_experts(self, mus, variances):
+        return MoPoE()(mus, variances)
+
+    def encode(self, x, c, m):
+        return self.encoder_list[m](x, c)
+
+    def reparameterise(self, mu, logvar):
+        std = torch.exp(0.5 * logvar)
+        eps = torch.randn_like(mu)
+        return mu + eps * std
+
+    def decode(self, z, c, m):
+        return self.decoder_list[m](z, c)
+
+    def calc_kl(self, mu, logvar):
+        return -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp(), dim=1).mean(0)
+
+    def calc_ll(self, x, x_recon):
+        return compute_ll(x, x_recon)
+
+    def combine_latent(self, mus, variances, combine):
+        if mus.shape[0] == 1:
+            return mus[0], variances[0]
+        combine = combine.lower()
+        if combine == 'poe':
+            return self.product_of_experts(mus, variances)
+        elif combine == 'gpoe':
+            alpha_m = torch.softmax(torch.stack([param for param in self.alpha_m_list]), dim=0).reshape(self.modalities, 1, 1)
+            mu = torch.sum(mus * alpha_m / variances, dim=0) / torch.sum(alpha_m / variances, dim=0)
+            var = 1 / torch.sum(alpha_m / variances, dim=0)
+            return mu, var
+        elif combine == 'moe':
+            return self.mixture_of_experts(mus, variances)
+        elif combine == 'mopoe':
+            return self.mixture_of_product_of_experts(mus, variances)
+        else:
+            raise ValueError(f"Invalid combine strategy: {combine}")
+
+    def forward_multimodal(self, xes, cs, combine):
+        mus_all, logvars_all = zip(*[self.encode(xes[i], cs[i], i) for i in range(self.modalities)])
+        mus = torch.stack(mus_all)
+        logvars = torch.stack(logvars_all)
+        variances = torch.exp(logvars)
+
+        mu_multimodal, variance_multimodal = self.combine_latent(mus, variances, combine)
+        logvar_multimodal = torch.log(variance_multimodal)
+        z_multimodal = self.reparameterise(mu_multimodal, logvar_multimodal)
+
+        x_recons = [self.decode(z_multimodal, cs[i], i) for i in range(self.modalities)]
+        recon_diffs = [xes[i] - x_recons[i].loc for i in range(self.modalities)]
+        recon_concat = torch.cat(recon_diffs, dim=1)
+
+        fi_pred = self.regressor(recon_concat)
+
+        return {
+            'x_recons': x_recons,
+            'mu_multimodal': mu_multimodal,
+            'logvar_multimodal': logvar_multimodal,
+            'fi_pred': fi_pred
+        }
+
+    def loss_function_multimodal(self, xes, fwd_rtn, true_fi, lambda_reg=1.0):
+        losses = {'total': 0, 'kl': 0, 'll': 0, 'regression': 0}
+
+        for i in range(self.modalities):
+            kl = self.calc_kl(fwd_rtn['mu_multimodal'], fwd_rtn['logvar_multimodal'])
+            recon = self.calc_ll(xes[i], fwd_rtn['x_recons'][i])
+            total = kl - recon
+            losses['total'] += total
+            losses['kl'] += kl
+            losses['ll'] += recon
+
+        regression_loss = self.mse_loss(fwd_rtn['fi_pred'].squeeze(), true_fi.squeeze())
+        losses['regression'] = regression_loss
+        losses['total'] += lambda_reg * regression_loss
+
+        return losses

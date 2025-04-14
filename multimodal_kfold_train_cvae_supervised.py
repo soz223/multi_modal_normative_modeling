@@ -220,6 +220,7 @@ if __name__ == "__main__":
                         dest='dataset_resourse',
                         help='Dataset to use for training test and evaluation.',
                         type=str)
+    
     parser.add_argument('-H', '--hz_para_list',
                         dest='hz_para_list',
                         nargs='+',
@@ -244,7 +245,7 @@ if __name__ == "__main__":
     parser.add_argument('-K', '--n_splits',
                         dest='n_splits',
                         help='Number of splits for k-fold cross-validation.',
-                        type=int, default=5)
+                        type=int, default=10)
 
     parser.add_argument('-O', '--oversample_percentage',
                         dest='oversample_percentage',
@@ -287,7 +288,7 @@ if __name__ == "__main__":
     if args.hz_para_list is None:
         args.hz_para_list = [110, 110, 10]
     if args.procedure is None:
-        args.procedure = 'SE-gPoE'
+        args.procedure = 'UCA-gPoE'
     if args.combine is None:
         args.combine = args.procedure.split('-')[1]
     if args.dataset_resourse is None:
