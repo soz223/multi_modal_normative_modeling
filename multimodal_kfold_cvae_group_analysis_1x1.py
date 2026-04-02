@@ -36,6 +36,7 @@ deviation_dir = PROJECT_ROOT / 'deviation'
 
 
 
+
 def compute_classification_thresholds(reconstruction_error_df, clinical_df, disease_label, hc_label):
     """ Calculate the AUCs and accuracy of the normative model."""
     error_hc = reconstruction_error_df.loc[clinical_df['DIA'] == hc_label]['Reconstruction error']

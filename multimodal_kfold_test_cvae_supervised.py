@@ -23,6 +23,7 @@ from cVAE import cVAE_multimodal_endtoend, cVAE_multimodal
 import warnings
 warnings.filterwarnings("ignore", category=pd.errors.PerformanceWarning)
 
+
 PROJECT_ROOT = Path.cwd()
 DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 

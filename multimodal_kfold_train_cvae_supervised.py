@@ -21,6 +21,7 @@ from os.path import join
 from utils_vae import plot_losses, Logger, MyDataset
 import argparse
 
+
 PROJECT_ROOT = Path.cwd()
 def main(args):
     """Train the normative method using k-fold cross-validation."""

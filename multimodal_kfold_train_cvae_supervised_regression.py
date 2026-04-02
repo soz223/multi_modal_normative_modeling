@@ -27,6 +27,7 @@ class MyDataset_labels_with_fi(MyDataset):
     def __getitem__(self, idx):
         return self.data[idx], self.covariates[idx], self.fi[idx]
 
+
 def evaluate_regression(y_true, y_pred):
     rmse = np.sqrt(mean_squared_error(y_true, y_pred))
     mae = mean_absolute_error(y_true, y_pred)
